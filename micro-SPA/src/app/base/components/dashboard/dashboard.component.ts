@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from '../../../_models/Device';
 import { ActivatedRoute } from '@angular/router';
+import { SocketService } from '../../../_services/socket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,12 +9,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  devices: Device[];
-  displayedColumns: string[] = ['id', 'name', 'macAddress', 'created', 'lastActivated', 'kind', 'isActive', 'isArchival'];
+  newMessage: string;
+  messageList: string[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private socketService: SocketService) { }
 
   ngOnInit() {
-    // this.devices = this.activatedRoute.snapshot.data.devices;
+    this.socketService
+      .getMessages()
+      .subscribe((message: string) => {
+        if (this.messageList.length > 10) {
+          this.messageList.splice(0, this.messageList.length);
+        }
+        this.messageList.push(message);
+      });
   }
 }

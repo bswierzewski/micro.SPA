@@ -21,6 +21,7 @@ import { LocatorListComponent } from './base/components/locators/locator-list/lo
 import { ScannerDetailComponent } from './base/components/scanners/scanner-detail/scanner-detail.component';
 import { ScannerListComponent } from './base/components/scanners/scanner-list/scanner-list.component';
 import { DashboardComponent } from './base/components/dashboard/dashboard.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { LocatorListResolver } from './_resolvers/locator-list.resolver';
 import { ScannerListResolver } from './_resolvers/scanner-list.resolver';
@@ -31,6 +32,8 @@ import { DeviceListResolver } from './_resolvers/device-list.resolver';
 export function tokenGetter() {
    return localStorage.getItem('token');
 }
+
+const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
 
 @NgModule({
    declarations: [
@@ -58,7 +61,8 @@ export function tokenGetter() {
             blacklistedRoutes: ['localhost:5001/api/auth'],
          }
       }),
-      MatTableModule
+      MatTableModule,
+      SocketIoModule.forRoot(config)
    ],
    providers: [
       ErrorInterceptorProvider,
