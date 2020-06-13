@@ -1,11 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/dashboard']">Micro</a>
+    <a class="navbar-brand">Micro</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="router-link-active">
-        <a class=" nav-link" [routerLink]="['/dashboard']">Tablica</a>
-      </li>
       <li class="nav-item" routerLinkActive="router-link-active">
         <a class="nav-link" [routerLink]="['/scanners']">Skanery</a>
       </li>
@@ -20,9 +17,7 @@
       </a>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Edycja profilu</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Administracja</a>
+        <a class="dropdown-item" [routerLink]="['/admin']"><i class="fa fa-cog"></i> Administracja</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Wyloguj</a>
       </div>

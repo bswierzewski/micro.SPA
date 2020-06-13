@@ -9,25 +9,23 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
-import { NavComponent } from './base/nav/nav.component';
 import { AuthService } from './_services/auth.service';
-import { LoginComponent } from './login/login.component';
-import { BaseComponent } from './base/base.component';
 import { ErrorInterceptorProvider } from './_services/error.interceprot';
 import { AlertifyService } from './_services/alertify.service';
 import { appRoutes } from './routes';
-import { LocatorDetailComponent } from './base/components/locators/locator-detail/locator-detail.component';
-import { LocatorListComponent } from './base/components/locators/locator-list/locator-list.component';
-import { ScannerDetailComponent } from './base/components/scanners/scanner-detail/scanner-detail.component';
-import { ScannerListComponent } from './base/components/scanners/scanner-list/scanner-list.component';
-import { DashboardComponent } from './base/components/dashboard/dashboard.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { AdminBaseComponent } from './admin/admin-base.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { AuthBaseComponent } from './auth/auth-base.component';
+import { DashboardBaseComponent } from './dashboard/dashboard-base.component';
+import { DashboardNavComponent } from './dashboard/dashboard-nav/dashboard-nav.component';
+import { LocatorListComponent } from './dashboard/components/locators/locator-list/locator-list.component';
+import { LocatorDetailComponent } from './dashboard/components/locators/locator-detail/locator-detail.component';
+import { ScannerListComponent } from './dashboard/components/scanners/scanner-list/scanner-list.component';
+import { ScannerDetailComponent } from './dashboard/components/scanners/scanner-detail/scanner-detail.component';
 
-import { LocatorListResolver } from './_resolvers/locator-list.resolver';
-import { ScannerListResolver } from './_resolvers/scanner-list.resolver';
-import { ScannerDetailResolver } from './_resolvers/scanner-detail.resolver';
-import { LocatorDetailResolver } from './_resolvers/locator-detail.resolver';
-import { DeviceListResolver } from './_resolvers/device-list.resolver';
+
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -38,14 +36,16 @@ const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
 @NgModule({
    declarations: [
       AppComponent,
-      NavComponent,
-      DashboardComponent,
+      AdminNavComponent,
+      AdminBaseComponent,
+      AuthBaseComponent,
       LoginComponent,
-      BaseComponent,
-      LocatorDetailComponent,
+      DashboardNavComponent,
+      DashboardBaseComponent,
       LocatorListComponent,
-      ScannerDetailComponent,
+      LocatorDetailComponent,
       ScannerListComponent,
+      ScannerDetailComponent,
    ],
    imports: [
       BrowserModule,
@@ -56,9 +56,7 @@ const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {
-            tokenGetter,
-            whitelistedDomains: ['localhost:5000'],
-            blacklistedRoutes: ['localhost:5001/api/auth'],
+            tokenGetter
          }
       }),
       MatTableModule,
@@ -67,12 +65,7 @@ const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
    providers: [
       ErrorInterceptorProvider,
       AuthService,
-      AlertifyService,
-      LocatorListResolver,
-      LocatorDetailResolver,
-      ScannerListResolver,
-      ScannerDetailResolver,
-      DeviceListResolver
+      AlertifyService
    ],
    bootstrap: [
       AppComponent

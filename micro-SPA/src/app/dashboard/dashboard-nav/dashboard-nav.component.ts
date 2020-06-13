@@ -4,11 +4,11 @@ import { AlertifyService } from '../../_services/alertify.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  selector: 'app-dashboard-nav',
+  templateUrl: './dashboard-nav.component.html',
+  styleUrls: ['./dashboard-nav.component.css']
 })
-export class NavComponent implements OnInit {
+export class DashboardNavComponent implements OnInit {
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {

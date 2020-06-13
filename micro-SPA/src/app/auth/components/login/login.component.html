@@ -3,17 +3,14 @@
     <div class="row justify-content-center align-items-center" style="height:100vh">
       <div class="col-6">
         <div class="card">
-          <div class="card-header">
-            Zaloguj się
-          </div>
           <div class="card-body">
             <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
               <div class="form-group">
-                <input class="form-control" type="text" placeholder="Username" name="username" required
+                <input class="form-control btn-lg" type="text" placeholder="Username" name="username" required
                   [(ngModel)]="model.username">
               </div>
               <div class="form-group">
-                <input class="form-control" type="password" placeholder="Password" name="password" required
+                <input class="form-control btn-lg" type="password" placeholder="Password" name="password" required
                   [(ngModel)]="model.password">
               </div>
               <button [disabled]="!loginForm.valid" class="btn btn-block btn-success btn-lg mr-2"
