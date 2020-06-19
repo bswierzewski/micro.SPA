@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LocatorListComponent } from './locator-list.component';
+import { PanelListComponent } from './panel-list.component';
 
-describe('LocatorListComponent', () => {
-  let component: LocatorListComponent;
-  let fixture: ComponentFixture<LocatorListComponent>;
+describe('PanelListComponent', () => {
+  let component: PanelListComponent;
+  let fixture: ComponentFixture<PanelListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocatorListComponent ]
+      declarations: [ PanelListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocatorListComponent);
+    fixture = TestBed.createComponent(PanelListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

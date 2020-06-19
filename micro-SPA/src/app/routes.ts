@@ -3,11 +3,11 @@ import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './auth/components/login/login.component';
 import { DashboardBaseComponent } from './dashboard/dashboard-base.component';
 import { AdminBaseComponent } from './admin/admin-base.component';
-import { LocatorListComponent } from './dashboard/components/locators/locator-list/locator-list.component';
-import { LocatorDetailComponent } from './dashboard/components/locators/locator-detail/locator-detail.component';
-import { ScannerListComponent } from './dashboard/components/scanners/scanner-list/scanner-list.component';
-import { ScannerDetailComponent } from './dashboard/components/scanners/scanner-detail/scanner-detail.component';
 import { AuthBaseComponent } from './auth/auth-base.component';
+import { PanelListComponent } from './dashboard/components/panels/panel-list/panel-list.component';
+import { PanelDetailComponent } from './dashboard/components/panels/panel-detail/panel-detail.component';
+import { DeviceListComponent } from './dashboard/components/devices/device-list/device-list.component';
+import { DeviceDetailComponent } from './dashboard/components/devices/device-detail/device-detail.component';
 
 export const appRoutes: Routes = [
     {
@@ -23,10 +23,10 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         component: DashboardBaseComponent,
         children: [
-            { path: 'locators', component: LocatorListComponent },
-            { path: 'locators/:id', component: LocatorDetailComponent },
-            { path: 'scanners', component: ScannerListComponent },
-            { path: 'scanners/:id', component: ScannerDetailComponent },
+            { path: 'panels', component: PanelListComponent },
+            { path: 'panels/:id', component: PanelDetailComponent },
+            { path: 'devices', component: DeviceListComponent },
+            { path: 'devices/:id', component: DeviceDetailComponent },
         ]
     },
     {

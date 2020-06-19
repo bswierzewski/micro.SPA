@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.alertify.error(`Error: Service not respond`);
       }
     }, () => {
-      this.router.navigate(['/locators']);
+      this.router.navigate(['/panels']);
     });
   }
 }

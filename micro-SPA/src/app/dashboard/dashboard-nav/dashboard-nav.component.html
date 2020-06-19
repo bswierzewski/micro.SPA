@@ -4,16 +4,15 @@
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="router-link-active">
-        <a class="nav-link" [routerLink]="['/scanners']">Skanery</a>
+        <a class="nav-link" [routerLink]="['/panels']">Tablica</a>
       </li>
       <li class="nav-item" routerLinkActive="router-link-active">
-        <a class="nav-link" [routerLink]="['/locators']">Lokalizatory</a>
+        <a class="nav-link" [routerLink]="['/devices']">Urządzenia</a>
       </li>
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
-      <a class="dropdown-toggle text-light" dropdownToggle>
-        Witaj {{ authService.decodedToken?.unique_name | titlecase }}
+      <a class="text-light fa fa-bars" dropdownToggle>
       </a>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>

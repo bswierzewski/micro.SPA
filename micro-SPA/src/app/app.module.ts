@@ -20,12 +20,10 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { AuthBaseComponent } from './auth/auth-base.component';
 import { DashboardBaseComponent } from './dashboard/dashboard-base.component';
 import { DashboardNavComponent } from './dashboard/dashboard-nav/dashboard-nav.component';
-import { LocatorListComponent } from './dashboard/components/locators/locator-list/locator-list.component';
-import { LocatorDetailComponent } from './dashboard/components/locators/locator-detail/locator-detail.component';
-import { ScannerListComponent } from './dashboard/components/scanners/scanner-list/scanner-list.component';
-import { ScannerDetailComponent } from './dashboard/components/scanners/scanner-detail/scanner-detail.component';
-
-
+import { PanelListComponent } from './dashboard/components/panels/panel-list/panel-list.component';
+import { PanelDetailComponent } from './dashboard/components/panels/panel-detail/panel-detail.component';
+import { DeviceListComponent } from './dashboard/components/devices/device-list/device-list.component';
+import { DeviceDetailComponent } from './dashboard/components/devices/device-detail/device-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -42,10 +40,10 @@ const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
       LoginComponent,
       DashboardNavComponent,
       DashboardBaseComponent,
-      LocatorListComponent,
-      LocatorDetailComponent,
-      ScannerListComponent,
-      ScannerDetailComponent,
+      PanelListComponent,
+      PanelDetailComponent,
+      DeviceListComponent,
+      DeviceDetailComponent
    ],
    imports: [
       BrowserModule,

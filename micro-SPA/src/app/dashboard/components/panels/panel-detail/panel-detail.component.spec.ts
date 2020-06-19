@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LocatorDetailComponent } from './locator-detail.component';
+import { PanelDetailComponent } from './panel-detail.component';
 
-describe('LocatorDetailComponent', () => {
-  let component: LocatorDetailComponent;
-  let fixture: ComponentFixture<LocatorDetailComponent>;
+describe('PanelDetailComponent', () => {
+  let component: PanelDetailComponent;
+  let fixture: ComponentFixture<PanelDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocatorDetailComponent ]
+      declarations: [ PanelDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocatorDetailComponent);
+    fixture = TestBed.createComponent(PanelDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
