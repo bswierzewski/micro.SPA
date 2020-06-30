@@ -1,4 +1,6 @@
 export class Message {
-    id: string;
-    body: string;
+    time: string;
+    name: string;
+    address: string;
+    rssi: string;
 }

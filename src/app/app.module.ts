@@ -13,7 +13,6 @@ import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceprot';
 import { AlertifyService } from './_services/alertify.service';
 import { appRoutes } from './routes';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { AdminBaseComponent } from './admin/admin-base.component';
 import { LoginComponent } from './auth/components/login/login.component';
@@ -30,8 +29,6 @@ import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 export function tokenGetter() {
    return localStorage.getItem('token');
 }
-
-const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
 
 @NgModule({
    declarations: [
@@ -61,8 +58,7 @@ const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
             tokenGetter
          }
       }),
-      MatTableModule,
-      SocketIoModule.forRoot(config)
+      MatTableModule
    ],
    providers: [
       ErrorInterceptorProvider,
