@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/_services/device.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-device-list',
@@ -8,17 +9,20 @@ import { DeviceService } from 'src/app/_services/device.service';
 })
 export class DeviceListComponent implements OnInit {
 
-  model: any;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  devices = [
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+  ];
 
-  constructor(private deviceService: DeviceService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.deviceService.getDevices().subscribe(next => {
-      this.model = next;
-    }, error => {
-      console.log(error);
-    });
-  }
+  ngOnInit() { }
 
 }
+

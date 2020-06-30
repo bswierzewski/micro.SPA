@@ -10,6 +10,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class PanelComponent {
 
+  textButton = 'Subscribe';
+
   constructor() { }
 
   columns = [
@@ -23,9 +25,8 @@ export class PanelComponent {
   dataSource = ELEMENT_DATA;
 
   toogleButton(button: any) {
-    button.subscribe = !button.subscribe;
+    button.subscribe = !button.subscribe;    
   }
-
 }
 
 
