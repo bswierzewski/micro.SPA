@@ -11,11 +11,11 @@
       </li>
     </ul>
 
-    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+    <div  class="dropdown" dropdown>
       <a class="text-light fa fa-bars" dropdownToggle>
       </a>
 
-      <div class="dropdown-menu mt-3" *dropdownMenu>
+      <div class="dropdown-menu mt-2" *dropdownMenu>
         <a class="dropdown-item" [routerLink]="['/admin']"><i class="fa fa-cog"></i> Administracja</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Wyloguj</a>

@@ -24,6 +24,8 @@ import { DeviceListComponent } from './dashboard/components/device/device-list/d
 import { DeviceDetailComponent } from './dashboard/components/device/device-detail/device-detail.component';
 import { HomeComponent } from './dashboard/components/home/home.component'
 import { PanelComponent } from './dashboard/components/panel/panel.component';
+import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
+import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -43,7 +45,9 @@ const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
       DeviceListComponent,
       DeviceDetailComponent,
       HomeComponent,
-      PanelComponent
+      PanelComponent,
+      AdminSidebarComponent,
+      AdminBoardComponent
    ],
    imports: [
       BrowserModule,
