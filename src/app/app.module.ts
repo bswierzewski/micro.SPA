@@ -20,10 +20,10 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { AuthBaseComponent } from './auth/auth-base.component';
 import { DashboardBaseComponent } from './dashboard/dashboard-base.component';
 import { DashboardNavComponent } from './dashboard/dashboard-nav/dashboard-nav.component';
-import { PanelListComponent } from './dashboard/components/panels/panel-list/panel-list.component';
-import { PanelDetailComponent } from './dashboard/components/panels/panel-detail/panel-detail.component';
-import { DeviceListComponent } from './dashboard/components/devices/device-list/device-list.component';
-import { DeviceDetailComponent } from './dashboard/components/devices/device-detail/device-detail.component';
+import { DeviceListComponent } from './dashboard/components/device/device-list/device-list.component';
+import { DeviceDetailComponent } from './dashboard/components/device/device-detail/device-detail.component';
+import { HomeComponent } from './dashboard/components/home/home.component'
+import { PanelComponent } from './dashboard/components/panel/panel.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -40,10 +40,10 @@ const config: SocketIoConfig = { url: 'http://socket.micro.io', options: {} };
       LoginComponent,
       DashboardNavComponent,
       DashboardBaseComponent,
-      PanelListComponent,
-      PanelDetailComponent,
       DeviceListComponent,
-      DeviceDetailComponent
+      DeviceDetailComponent,
+      HomeComponent,
+      PanelComponent
    ],
    imports: [
       BrowserModule,

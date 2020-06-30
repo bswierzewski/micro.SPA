@@ -4,10 +4,10 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { DashboardBaseComponent } from './dashboard/dashboard-base.component';
 import { AdminBaseComponent } from './admin/admin-base.component';
 import { AuthBaseComponent } from './auth/auth-base.component';
-import { PanelListComponent } from './dashboard/components/panels/panel-list/panel-list.component';
-import { PanelDetailComponent } from './dashboard/components/panels/panel-detail/panel-detail.component';
-import { DeviceListComponent } from './dashboard/components/devices/device-list/device-list.component';
-import { DeviceDetailComponent } from './dashboard/components/devices/device-detail/device-detail.component';
+import { DeviceListComponent } from './dashboard/components/device/device-list/device-list.component';
+import { DeviceDetailComponent } from './dashboard/components/device/device-detail/device-detail.component';
+import { HomeComponent } from './dashboard/components/home/home.component'
+import { PanelComponent } from './dashboard/components/panel/panel.component';
 
 export const appRoutes: Routes = [
     {
@@ -20,11 +20,11 @@ export const appRoutes: Routes = [
     {
         path: '',
         runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         component: DashboardBaseComponent,
         children: [
-            { path: 'panels', component: PanelListComponent },
-            { path: 'panels/:id', component: PanelDetailComponent },
+            { path: 'home', component: HomeComponent },
+            { path: 'panel', component: PanelComponent },
             { path: 'devices', component: DeviceListComponent },
             { path: 'devices/:id', component: DeviceDetailComponent },
         ]
@@ -32,7 +32,7 @@ export const appRoutes: Routes = [
     {
         path: 'admin',
         runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         component: AdminBaseComponent,
         children: []
     },
