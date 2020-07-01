@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs';
 import { SocketService } from 'src/app/_services/socket.service';
 import { Message } from 'src/app/_models/Message';
 
@@ -12,26 +11,32 @@ export class HomeComponent implements OnInit {
 
   constructor(private socketService: SocketService) { }
 
-  messages: Message[] = [];
-  dataSource;
+  tables = {};
 
   ngOnInit(): void {
-    this.socketService.sendMessage();
+    // Subscrice pattern,
+    // * - all channels
+    this.socketService.psubscribe('*');
+
+    // Get all messages
     this.socketService
-      .getMessages()
+      .getPMessages()
       .subscribe((message: string) => {
-        var json = JSON.parse(message) as Message;
-        this.messages = [...this.messages, { address: json.address, name: json.name, rssi: json.rssi, time: json.time }];
-        this.dataSource = this.messages;
+
+        const json = JSON.parse(message) as Message;
+
+        json.time = new Date().toLocaleTimeString();
+
+        if (this.tables[json.name] === undefined) {
+          this.tables[json.name] = [];
+        }
+
+        this.tables[json.name].unshift(json);
+
+        if (this.tables[json.name].length > 10) {
+          this.tables[json.name].pop();
+        }
       });
   }
-  columns = [
-    { columnDef: 'time', header: '#', cell: (element: any) => `${element.time}` },
-    { columnDef: 'name', header: 'Name', cell: (element: any) => `${element.name}` },
-    { columnDef: 'address', header: 'MacAddress', cell: (element: any) => `${element.address}` },
-    { columnDef: 'rssi', header: 'Rssi', cell: (element: any) => `${element.rssi}` },
-  ];
-
-  displayedColumnsRegistration = this.columns.map(c => c.columnDef);
 }
 

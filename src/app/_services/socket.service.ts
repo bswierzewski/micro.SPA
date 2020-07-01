@@ -1,25 +1,47 @@
 import * as io from 'socket.io-client';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
-  private url = 'http://socket.micro.io';
   private socket;
 
   constructor() {
-    this.socket = io(this.url);
+    this.socket = io(environment.socketUrl, {
+      transports: ['polling']
+    });
   }
 
-  public sendMessage() {
-    this.socket.emit('psubscribe', '*');
+  public subscribe(channel: string) {
+    this.socket.emit('subscribe', channel);
+  }
+
+  public unsubscribe(channel: string) {
+    this.socket.emit('unsubscribe', channel);
+  }
+
+  public psubscribe(pattern: string) {
+    this.socket.emit('psubscribe', pattern);
+  }
+
+  public punsubscribe(pattern: string) {
+    this.socket.emit('punsubscribe', pattern);
   }
 
   public getMessages = () => {
-    return Observable.create((observer) => {
-      this.socket.on('pmessage', (message) => {
+    return new Observable<string>(observer => {
+      this.socket.on('message', message => {
+        observer.next(message);
+      });
+    });
+  }
+
+  public getPMessages = () => {
+    return new Observable<string>(observer => {
+      this.socket.on('pmessage', message => {
         observer.next(message);
       });
     });
