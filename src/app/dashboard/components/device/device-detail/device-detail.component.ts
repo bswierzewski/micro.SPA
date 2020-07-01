@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeviceDetailComponent implements OnInit {
 
+  device = { name: 'one', id: 1 };
+
   constructor() { }
 
   ngOnInit() {

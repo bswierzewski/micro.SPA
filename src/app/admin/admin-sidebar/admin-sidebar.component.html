@@ -1,1 +1,5 @@
-<p>admin-sidebar works!</p>
+<div class="list-group" (click)="onButtonGroupClick($event)">
+  <a class="list-group-item list-group-item-action active" [routerLink]="['/admin']">Panel</a>
+  <a class="list-group-item list-group-item-action" [routerLink]="['/admin/devices']">Urządzenia</a>
+  <a class="list-group-item list-group-item-action" [routerLink]="['/admin/versions']">Wersje</a>
+</div>

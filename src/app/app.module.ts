@@ -7,6 +7,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatTableModule } from '@angular/material/table';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
@@ -25,6 +26,9 @@ import { HomeComponent } from './dashboard/components/home/home.component'
 import { PanelComponent } from './dashboard/components/panel/panel.component';
 import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
+import { AdminPanelComponent } from './admin/components/admin-panel/admin-panel.component';
+import { AdminDeviceComponent } from './admin/components/admin-device/admin-device.component';
+import { AdminVersionComponent } from './admin/components/admin-version/admin-version.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -44,7 +48,10 @@ export function tokenGetter() {
       HomeComponent,
       PanelComponent,
       AdminSidebarComponent,
-      AdminBoardComponent
+      AdminBoardComponent,
+      AdminPanelComponent,
+      AdminDeviceComponent,
+      AdminVersionComponent
    ],
    imports: [
       BrowserModule,
@@ -58,7 +65,8 @@ export function tokenGetter() {
             tokenGetter
          }
       }),
-      MatTableModule
+      MatTableModule,
+      TabsModule.forRoot(),
    ],
    providers: [
       ErrorInterceptorProvider,

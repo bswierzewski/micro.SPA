@@ -1,3 +1,36 @@
-<p>
-  device-detail works!
-</p>
+<div class="container">
+  <div class="row mt-4 mr-2 ml-2">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <img
+            src="https://botland.com.pl/61345-thickbox_default/esp32-wifi-bt-42-platforma-z-modulem-esp-wroom-32-zgodny-z-esp32-devkit.jpg"
+            alt="">
+        </div>
+        <div class="card-footer">
+          <p class="card-text">Nazwa : {{device.id}}</p>
+        </div>
+        <div class="card-footer">
+          <p class="card-text">Adres MAC : {{device.name}}</p>
+        </div>
+        <div class="card-footer">
+          <p class="card-text">Wersja : {{device.name}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Historia">
+            <p>Historia urządzenia</p>
+          </tab>
+          <tab heading="Informacje">
+            <p>Panel z informacjami</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+
+</div>

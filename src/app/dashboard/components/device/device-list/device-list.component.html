@@ -3,12 +3,14 @@
 
     <div *ngFor="let device of devices" class="col-sm-3">
       <div class="card mb-3">
-        <div class="card-header">image</div>
-        <div class="card-body">
-          <p class="card-text">{{device}}</p>
+        <div class="card-body text-center">
+          <img
+            src="https://botland.com.pl/61345-thickbox_default/esp32-wifi-bt-42-platforma-z-modulem-esp-wroom-32-zgodny-z-esp32-devkit.jpg"
+            alt="">
+          <p class="card-text">{{device.name}}</p>
         </div>
         <div class="card-footer">
-          <button class="btn btn-success btn-block">
+          <button class="btn btn-success btn-block" [routerLink]="['/devices/', device.id]">
             Details
           </button>
         </div>

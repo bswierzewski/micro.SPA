@@ -8,6 +8,9 @@ import { DeviceListComponent } from './dashboard/components/device/device-list/d
 import { DeviceDetailComponent } from './dashboard/components/device/device-detail/device-detail.component';
 import { HomeComponent } from './dashboard/components/home/home.component'
 import { PanelComponent } from './dashboard/components/panel/panel.component';
+import { AdminPanelComponent } from './admin/components/admin-panel/admin-panel.component';
+import { AdminDeviceComponent } from './admin/components/admin-device/admin-device.component';
+import { AdminVersionComponent } from './admin/components/admin-version/admin-version.component';
 
 export const appRoutes: Routes = [
     {
@@ -34,7 +37,11 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         //canActivate: [AuthGuard],
         component: AdminBaseComponent,
-        children: []
+        children: [
+            { path: '', component: AdminPanelComponent },
+            { path: 'devices', component: AdminDeviceComponent },
+            { path: 'versions', component: AdminVersionComponent },
+        ]
     },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
