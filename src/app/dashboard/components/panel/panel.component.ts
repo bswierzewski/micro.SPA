@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/_services/socket.service';
 import { Message } from 'src/app/_models/Message';
-import { of } from 'rxjs';
 import { Device } from 'src/app/_models/Device';
 
 @Component({

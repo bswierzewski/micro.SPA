@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  authUrl: 'http://auth.micro.io/api/',
-  deviceUrl: 'http://device.micro.io/api/',
+  authUrl: 'http://localhost:80/api/',
+  deviceUrl: 'http://localhost:82/api/',
   socketUrl: 'http://socket.micro.io/'
 };
 
