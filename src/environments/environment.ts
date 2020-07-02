@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   authUrl: 'http://localhost:80/api/',
+  updateDeviceUrl: 'http://localhost:81/api/',
   deviceUrl: 'http://localhost:82/api/',
   socketUrl: 'http://socket.micro.io/'
 };
