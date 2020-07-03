@@ -1,36 +1,44 @@
 <div class="container">
   <div class="row mt-4 mr-2 ml-2">
     <div class="col-sm-3">
-      <div class="card">
+      <div class="card text-white bg-dark">
         <div class="card-body">
           <img
             src="https://botland.com.pl/61345-thickbox_default/esp32-wifi-bt-42-platforma-z-modulem-esp-wroom-32-zgodny-z-esp32-devkit.jpg"
-            alt="">
+            alt=""
+          />
         </div>
         <div class="card-footer">
-          <p class="card-text">Nazwa : {{device.id}}</p>
+          <p class="card-text">Nazwa : {{ device.id }}</p>
         </div>
         <div class="card-footer">
-          <p class="card-text">Adres MAC : {{device.name}}</p>
+          <p class="card-text">Adres MAC : {{ device.name }}</p>
         </div>
         <div class="card-footer">
-          <p class="card-text">Wersja : {{device.name}}</p>
+          <p class="card-text">Wersja : {{ device.name }}</p>
         </div>
       </div>
     </div>
 
     <div class="col-sm-9">
-      <div class="tab-panel">
-        <tabset class="member-tabset">
-          <tab heading="Historia">
-            <p>Historia urządzenia</p>
-          </tab>
-          <tab heading="Informacje">
-            <p>Panel z informacjami</p>
-          </tab>
-        </tabset>
+      <div class="card text-white bg-dark">
+        <div class="card-header">
+          <ul class="nav nav-pills nav-button-color">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="pill" href="#nav-home" role="tab">Panel z informacjami</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-profile" role="tab">Historia urządzenia</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel">Panel jakiś tam</div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel">...</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
 </div>

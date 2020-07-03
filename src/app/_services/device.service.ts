@@ -8,7 +8,7 @@ import { Device } from '../_models/Device';
   providedIn: 'root'
 })
 export class DeviceService {
-  baseUrl = environment.deviceUrl;
+  baseUrl = environment.deviceUrl + 'devices/';
 
   constructor(private http: HttpClient) { }
 
@@ -17,22 +17,6 @@ export class DeviceService {
   }
 
   getDevices(): Observable<Device[]> {
-    return this.http.get<Device[]>(this.baseUrl + 'devices/');
-  }
-
-  getLocator(id): Observable<Device> {
-    return this.http.get<Device>(this.baseUrl + 'devices/locators/' + id);
-  }
-
-  getLocators(): Observable<Device[]> {
-    return this.http.get<Device[]>(this.baseUrl + 'devices/locators');
-  }
-
-  getScanner(id): Observable<Device> {
-    return this.http.get<Device>(this.baseUrl + 'devices/scanners/' + id);
-  }
-
-  getScanners(): Observable<Device[]> {
-    return this.http.get<Device[]>(this.baseUrl + 'devices/scanners');
+    return this.http.get<Device[]>(this.baseUrl);
   }
 }

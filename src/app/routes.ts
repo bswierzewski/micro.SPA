@@ -9,8 +9,10 @@ import { DeviceDetailComponent } from './dashboard/components/device/device-deta
 import { HomeComponent } from './dashboard/components/home/home.component'
 import { PanelComponent } from './dashboard/components/panel/panel.component';
 import { AdminPanelComponent } from './admin/components/admin-panel/admin-panel.component';
-import { AdminDeviceComponent } from './admin/components/admin-device/admin-device.component';
-import { AdminVersionComponent } from './admin/components/admin-version/admin-version.component';
+import { AdminVersionListComponent } from './admin/components/version/admin-version-list/admin-version-list.component';
+import { AdminVersionAddComponent } from './admin/components/version/admin-version-add/admin-version-add.component';
+import { AdminDeviceDetailComponent } from './admin/components/device/admin-device-detail/admin-device-detail.component';
+import { AdminDeviceListComponent } from './admin/components/device/admin-device-list/admin-device-list.component';
 
 export const appRoutes: Routes = [
     {
@@ -26,7 +28,7 @@ export const appRoutes: Routes = [
         //canActivate: [AuthGuard],
         component: DashboardBaseComponent,
         children: [
-            { path: 'home', component: HomeComponent },
+            { path: '', component: HomeComponent },
             { path: 'panel', component: PanelComponent },
             { path: 'devices', component: DeviceListComponent },
             { path: 'devices/:id', component: DeviceDetailComponent },
@@ -39,8 +41,10 @@ export const appRoutes: Routes = [
         component: AdminBaseComponent,
         children: [
             { path: '', component: AdminPanelComponent },
-            { path: 'devices', component: AdminDeviceComponent },
-            { path: 'versions', component: AdminVersionComponent },
+            { path: 'devices', component: AdminDeviceListComponent },
+            { path: 'devices/:id', component: AdminDeviceDetailComponent },
+            { path: 'versions', component: AdminVersionListComponent },
+            { path: 'versions/add', component: AdminVersionAddComponent },
         ]
     },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },

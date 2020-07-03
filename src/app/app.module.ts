@@ -24,11 +24,12 @@ import { DeviceListComponent } from './dashboard/components/device/device-list/d
 import { DeviceDetailComponent } from './dashboard/components/device/device-detail/device-detail.component';
 import { HomeComponent } from './dashboard/components/home/home.component'
 import { PanelComponent } from './dashboard/components/panel/panel.component';
-import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { AdminPanelComponent } from './admin/components/admin-panel/admin-panel.component';
-import { AdminDeviceComponent } from './admin/components/admin-device/admin-device.component';
-import { AdminVersionComponent } from './admin/components/admin-version/admin-version.component';
+import { AdminVersionAddComponent } from './admin/components/version/admin-version-add/admin-version-add.component';
+import { AdminVersionListComponent } from './admin/components/version/admin-version-list/admin-version-list.component';
+import { AdminDeviceListComponent } from './admin/components/device/admin-device-list/admin-device-list.component';
+import { AdminDeviceDetailComponent } from './admin/components/device/admin-device-detail/admin-device-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -47,11 +48,12 @@ export function tokenGetter() {
       DeviceDetailComponent,
       HomeComponent,
       PanelComponent,
-      AdminSidebarComponent,
       AdminBoardComponent,
       AdminPanelComponent,
-      AdminDeviceComponent,
-      AdminVersionComponent
+      AdminVersionAddComponent,
+      AdminVersionListComponent,
+      AdminDeviceListComponent,
+      AdminDeviceDetailComponent
    ],
    imports: [
       BrowserModule,

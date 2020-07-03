@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row m-4">
+  
+      <div *ngFor="let device of devices" class="col-md-3">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body text-center">
+            <img
+              src="{{device.photoUrl}}"
+              alt="">            
+          </div>
+          <div class="card-footer text-center">
+            <div class="card-text">{{device.name}}</div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-success btn-block" [routerLink]="['/admin/devices/', device.id]">
+              Szczegóły
+            </button>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  

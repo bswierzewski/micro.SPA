@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminVersionComponent } from './admin-version.component';
+import { AdminVersionListComponent } from './admin-version-list.component';
 
-describe('AdminVersionComponent', () => {
-  let component: AdminVersionComponent;
-  let fixture: ComponentFixture<AdminVersionComponent>;
+describe('AdminVersionListComponent', () => {
+  let component: AdminVersionListComponent;
+  let fixture: ComponentFixture<AdminVersionListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminVersionComponent ]
+      declarations: [ AdminVersionListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminVersionComponent);
+    fixture = TestBed.createComponent(AdminVersionListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/_services/socket.service';
 import { Message } from 'src/app/_models/Message';
 import { Device } from 'src/app/_models/Device';
+import { DeviceService } from 'src/app/_services/device.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-panel',
@@ -14,13 +16,7 @@ export class PanelComponent implements OnInit {
   devices: Device[] = [];
   tables = {};
 
-  ELEMENT_DATA: Device[] = [
-    { name: '1', address: 'Hydrogen', subscribe: false },
-    { name: '2', address: 'Helium', subscribe: false },
-    { name: '3', address: 'Lithium', subscribe: false },
-  ];
-
-  constructor(private socketService: SocketService) { }
+  constructor(private socketService: SocketService, private deviceService: DeviceService, private alertify: AlertifyService) { }
 
   toogleButton(button: any) {
     button.subscribe = !button.subscribe;
@@ -34,7 +30,14 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.devices = this.ELEMENT_DATA;
+    this.deviceService.getDevices().subscribe(
+      data => {
+        this.devices = data;
+      },
+      error => {
+        this.alertify.error(error);
+      }
+    )
 
     // Get all messages
     this.socketService
