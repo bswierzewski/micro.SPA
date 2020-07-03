@@ -25,7 +25,7 @@ export const appRoutes: Routes = [
     {
         path: '',
         runGuardsAndResolvers: 'always',
-        //canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         component: DashboardBaseComponent,
         children: [
             { path: '', component: HomeComponent },
@@ -37,7 +37,7 @@ export const appRoutes: Routes = [
     {
         path: 'admin',
         runGuardsAndResolvers: 'always',
-        //canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         component: AdminBaseComponent,
         children: [
             { path: '', component: AdminPanelComponent },
@@ -47,5 +47,5 @@ export const appRoutes: Routes = [
             { path: 'versions/add', component: AdminVersionAddComponent },
         ]
     },
-    { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

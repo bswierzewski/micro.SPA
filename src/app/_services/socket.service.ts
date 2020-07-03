@@ -9,10 +9,16 @@ import { environment } from 'src/environments/environment';
 export class SocketService {
   private socket;
 
-  constructor() {
+  constructor() { }
+
+  public connectSocket() {
     this.socket = io(environment.socketUrl, {
       transports: ['polling']
     });
+  }
+
+  public disconnectSocket() {
+    this.socket.disconnect();
   }
 
   public subscribe(channel: string) {

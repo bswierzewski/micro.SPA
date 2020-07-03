@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { SocketService } from 'src/app/_services/socket.service';
 import { Message } from 'src/app/_models/Message';
 
@@ -7,13 +7,16 @@ import { Message } from 'src/app/_models/Message';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnDestroy, AfterViewInit {
 
   constructor(private socketService: SocketService) { }
 
   tables = {};
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+
+    this.socketService.connectSocket();
+
     // Subscrice pattern,
     // * - all channels
     this.socketService.psubscribe('*');
@@ -37,6 +40,10 @@ export class HomeComponent implements OnInit {
           this.tables[json.name].pop();
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.socketService.disconnectSocket();
   }
 }
 

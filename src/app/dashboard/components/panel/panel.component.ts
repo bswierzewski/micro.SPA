@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { SocketService } from 'src/app/_services/socket.service';
 import { Message } from 'src/app/_models/Message';
 import { Device } from 'src/app/_models/Device';
@@ -10,7 +10,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.css']
 })
-export class PanelComponent implements OnInit {
+export class PanelComponent implements OnDestroy, AfterViewInit {
 
   textButton = 'Subscribe';
   devices: Device[] = [];
@@ -28,8 +28,7 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-
+  ngAfterViewInit(): void {
     this.deviceService.getDevices().subscribe(
       data => {
         this.devices = data;
@@ -37,8 +36,9 @@ export class PanelComponent implements OnInit {
       error => {
         this.alertify.error(error);
       }
-    )
+    );
 
+    this.socketService.connectSocket();
     // Get all messages
     this.socketService
       .getMessages()
@@ -58,6 +58,10 @@ export class PanelComponent implements OnInit {
           this.tables[json.name].pop();
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.socketService.disconnectSocket();
   }
 
   subscribe(name: string) {
