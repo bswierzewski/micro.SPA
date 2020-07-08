@@ -18,6 +18,8 @@
       <th scope="col">Nazwa pliku</th>
       <th scope="col">Utworzono</th>
       <th scope="col">Numeracja</th>
+      <th scope="col">Rodzaj</th>
+      <th scope="col">Typ</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +30,8 @@
       <td scope="row">
         {{ version.major }}-{{ version.minor }}-{{ version.patch }}
       </td>
+      <td scope="row">{{ version.deviceKind }}</td>
+      <td scope="row">{{ version.deviceType }}</td>
     </tr>
   </tbody>
 </table>

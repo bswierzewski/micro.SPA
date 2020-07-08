@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UpdateDeviceService } from 'src/app/_services/updateDevice.service';
 import { NgForm } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { DeviceService } from 'src/app/_services/device.service';
+import { DeviceType } from 'src/app/_models/DeviceType';
+import { DeviceKind } from 'src/app/_models/DeviceKind';
 
 @Component({
   selector: 'app-admin-version-add',
@@ -10,13 +13,30 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 })
 export class AdminVersionAddComponent implements OnInit {
   fileToUpload: File = null;
+  types: DeviceType[] = [];
+  kinds: DeviceKind[] = [];
 
   constructor(
     private updateDeviceService: UpdateDeviceService,
-    private alertify: AlertifyService
-  ) {}
+    private alertify: AlertifyService,
+    private deviceService: DeviceService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.deviceService.getKinds().subscribe(data => {
+      this.kinds = data;
+      console.log(this.kinds);
+    }, error => {
+      this.alertify.error(error);
+    });
+
+    this.deviceService.getTypes().subscribe(data => {
+      this.types = data;
+      console.log(this.types);
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 
   clearForm(formVersion: NgForm) {
     formVersion.resetForm();
@@ -29,7 +49,10 @@ export class AdminVersionAddComponent implements OnInit {
         form.value.major,
         form.value.minor,
         form.value.patch,
-        this.fileToUpload
+        form.value.name,
+        this.fileToUpload,
+        form.value.kind,
+        form.value.type,
       )
       .subscribe(
         () => {

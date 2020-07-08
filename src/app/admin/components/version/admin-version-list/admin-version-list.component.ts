@@ -18,10 +18,11 @@ export class AdminVersionListComponent implements OnInit {
   ngOnInit(): void {
     this.versionService.getAllVersions().subscribe(
       next => {
+        console.log(next);
         this.versions = next;
       },
       error => {
-        if(error.status !== 404){
+        if (error.status !== 404) {
           this.alertify.error(error);
         }
       }
