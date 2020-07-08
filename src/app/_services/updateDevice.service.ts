@@ -7,21 +7,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UpdateDeviceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  baseUrl: string = environment.updateDeviceUrl + 'update';
+  baseUrl: string = environment.updateDeviceUrl + 'version';
 
   uploadVersion(
     major: number,
     minor: number,
     patch: number,
-    fileToUpload: File
+    name: string,
+    fileToUpload: File,
+    kind: number = null,
+    type: number = null
   ): Observable<any> {
     const formData: FormData = new FormData();
 
     formData.append('Major', major.toString());
     formData.append('Minor', minor.toString());
     formData.append('Patch', patch.toString());
+    formData.append('KindId', kind?.toString());
+    formData.append('TypeId', type?.toString());
+    formData.append('Name', name);
     formData.append('File', fileToUpload);
 
     return this.http.post(this.baseUrl + '/upload', formData);
