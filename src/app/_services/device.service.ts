@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Device } from '../_models/Device';
 import { DeviceType } from '../_models/DeviceType';
 import { DeviceKind } from '../_models/DeviceKind';
+import { AddDevice } from '../_models/AddDevice';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class DeviceService {
     return this.http.get<Device[]>(this.deviceUrl);
   }
 
+  addDevice(device: AddDevice): Observable<any> {
+    return this.http.post(this.deviceUrl + 'add', device);
+  }
+
   getTypes(): Observable<DeviceType[]> {
     return this.http.get<DeviceType[]>(this.typeUrl);
   }
@@ -36,7 +41,7 @@ export class DeviceService {
     return this.http.get<DeviceKind[]>(this.kindUrl);
   }
 
-  addKind(type: DeviceKind): Observable<any> {
-    return this.http.post(this.kindUrl + 'add', type);
+  addKind(kind: DeviceKind): Observable<any> {
+    return this.http.post(this.kindUrl + 'add', kind);
   }
 }

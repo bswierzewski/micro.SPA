@@ -3,24 +3,23 @@
     <a class="navbar-brand" [routerLink]="['/']">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/1200px-Bootstrap_logo.svg.png"
-        width="30"
-        height="30"
-        class="d-inline-block align-top"
-        alt=""
-      />
+        width="30" height="30" class="d-inline-block align-top" alt="" />
       Micro
     </a>
 
     <ul class="navbar-nav mr-auto">
-      <li
-        class="nav-item"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <a class="nav-link" [routerLink]="['/admin/']">Panel</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/admin/devices']">Urządzenia</a>
+      <li class="nav-item dropdown" routerLinkActive="active">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">
+          Urządzenia
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/admin/devices']">Lista</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/admin/device/add']">Dodaj</a>
+        </div>
       </li>
       <li class="nav-item dropdown" routerLinkActive="active">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">
@@ -29,13 +28,13 @@
         <div class="dropdown-menu">
           <a class="dropdown-item" [routerLink]="['/admin/versions']">Aktualne</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['/admin/versions/add']">Dodaj</a>          
+          <a class="dropdown-item" [routerLink]="['/admin/versions/add']">Dodaj</a>
         </div>
       </li>
     </ul>
 
     <div class="dropdown" dropdown>
-        <a class="text-light fa fa-bars" dropdownToggle> </a>
+      <a class="text-light fa fa-bars" dropdownToggle> </a>
 
       <div class="dropdown-menu mt-2" *dropdownMenu>
         <a class="dropdown-item"><i class="fa fa-sign-out"></i> Wyloguj</a>

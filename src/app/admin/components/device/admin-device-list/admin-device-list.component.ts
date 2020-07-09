@@ -16,14 +16,14 @@ export class AdminDeviceListComponent implements OnInit {
   constructor(private router: Router, private deviceService: DeviceService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.deviceService.getTypes().subscribe(
+    this.deviceService.getDevices().subscribe(
       data => {
-        console.log(data);
+        this.devices = data;
       },
       error => {
         this.alertify.error(error);
       }
-    )
+    );
   }
 
 }

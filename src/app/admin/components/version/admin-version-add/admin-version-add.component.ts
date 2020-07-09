@@ -15,6 +15,10 @@ export class AdminVersionAddComponent implements OnInit {
   fileToUpload: File = null;
   types: DeviceType[] = [];
   kinds: DeviceKind[] = [];
+  versionForm = {
+    kind: 0,
+    type: 0,
+  };
 
   constructor(
     private updateDeviceService: UpdateDeviceService,
@@ -36,6 +40,8 @@ export class AdminVersionAddComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+
+    console.log(this.versionForm);
   }
 
   clearForm(formVersion: NgForm) {

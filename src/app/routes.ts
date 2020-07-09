@@ -13,6 +13,7 @@ import { AdminVersionListComponent } from './admin/components/version/admin-vers
 import { AdminVersionAddComponent } from './admin/components/version/admin-version-add/admin-version-add.component';
 import { AdminDeviceDetailComponent } from './admin/components/device/admin-device-detail/admin-device-detail.component';
 import { AdminDeviceListComponent } from './admin/components/device/admin-device-list/admin-device-list.component';
+import { AdminDeviceAddComponent } from './admin/components/device/admin-device-add/admin-device-add.component';
 
 export const appRoutes: Routes = [
     {
@@ -41,8 +42,9 @@ export const appRoutes: Routes = [
         component: AdminBaseComponent,
         children: [
             { path: '', component: AdminPanelComponent },
-            { path: 'devices', component: AdminDeviceListComponent },
+            { path: 'devices', component: AdminDeviceListComponent, },
             { path: 'devices/:id', component: AdminDeviceDetailComponent },
+            { path: 'device/add', component: AdminDeviceAddComponent },
             { path: 'versions', component: AdminVersionListComponent },
             { path: 'versions/add', component: AdminVersionAddComponent },
         ]
