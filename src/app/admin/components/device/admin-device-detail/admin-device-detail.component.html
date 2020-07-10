@@ -3,16 +3,24 @@
     <div class="col-sm-3">
       <div class="card text-white bg-dark">
         <div class="card-body">
-          <img src="{{device?.photoUrl}}" alt="" />
-        </div>
-        <div class="card-footer">
-          <p class="card-text">Rodzaj : {{ device?.kind }}</p>
+          <img src="{{ device?.photoUrl }}" alt="" />
         </div>
         <div class="card-footer">
           <p class="card-text">Adres MAC : {{ device?.macAddress }}</p>
         </div>
         <div class="card-footer">
-          <p class="card-text">Data utworzenia: {{ device?.created | date:'medium' }}</p>
+          <p class="card-text">Nazwa : {{ device?.macAddress }}</p>
+        </div>
+        <div class="card-footer">
+          <p class="card-text">Rodzaj : {{ device?.kind }}</p>
+        </div>
+        <div class="card-footer">
+          <p class="card-text">Typ : {{ device?.kind }}</p>
+        </div>
+        <div class="card-footer">
+          <p class="card-text">
+            Data utworzenia: {{ device?.created | date: "medium" }}
+          </p>
         </div>
         <div class="card-footer">
           <p class="card-text">Aktualna wersja: {{ device?.versionId }}</p>
@@ -26,24 +34,92 @@
           <div class="card-text">Ustawienia</div>
         </div>
         <div class="card-body">
-
-        </div>
-        <div class="card-header">
-          <div class="card-text">Wersja</div>
-        </div>
-        <div class="card-body">
-          <form #versionForm="ngForm">
-            <div class="form-row">
+          <form #settingForm="ngForm">
+            <div class="form-row mb-3">
+              <div class="col">               
+                <label for="">Nazwa:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nazwa..."
+                />
+              </div>
+            </div>
+            <div class="form-row mb-3">
+              <div class="col-6">
+                <label for="">Typ:</label>
+                <input type="text" class="form-control" placeholder="Typ..." />
+              </div>
+              <div class="col-6">
+                
+                <label for="">Rodzaj:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Rodzaj..."
+                />
+              </div>
+            </div>
+            <div class="form-row mb-3">              
               <div class="col-8">
-                <select class="form-control" [ngModel]="null" name="version" ngModel required>
-                  <option selected disabled [value]="null">Wybierz wersję...</option>
-                  <option *ngFor="let version of versions" [value]="version.versionId">
-                    {{version.major}}-{{version.minor}}-{{version.patch}}</option>
+                <label for="">Wersja:</label>
+                <select
+                  class="form-control"
+                  [ngModel]="null"
+                  name="version"
+                  ngModel
+                >
+                  <option selected disabled [value]="null"
+                    >Wybierz wersję...</option
+                  >
+                  <option
+                    *ngFor="let version of versions"
+                    [value]="version.versionId"
+                  >
+                    {{ version.major }}-{{ version.minor }}-{{
+                      version.patch
+                    }}</option
+                  >
                 </select>
               </div>
-              <div class="col-4">
-                <button class="btn btn-success btn-block" [disabled]="!versionForm.valid"
-                  (click)="setDevice(versionForm.value.version)">Ustaw</button>
+              <div class="col-4">               
+                <label for="radioVersion">Typ aktualizacji:</label>
+                  <div
+                  id="radioVersion"                 
+                    class="btn-group btn-group-toggle btn-block"
+                    data-toggle="buttons"
+                  >
+                    <label class="btn btn-secondary active">
+                      <input
+                      #withoutUpdate
+                        type="radio"
+                        name="options"
+                        id="option2"
+                        autocomplete="off"
+                      />
+                      Brak
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input
+                        type="radio"
+                        name="options"
+                        id="option1"
+                        autocomplete="off"
+                        checked
+                      />
+                      Automatyczna
+                    </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row mb-3">
+              <div class="col">
+                <button
+                  class="btn btn-success btn-block"
+                  [disabled]="!settingForm.valid"
+                >
+                  Zatwierdź
+                </button>
               </div>
             </div>
           </form>

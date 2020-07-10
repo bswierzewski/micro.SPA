@@ -9,23 +9,23 @@
           <form #deviceForm="ngForm">
             <div class="form-row mb-3">
               <div class="col">
-                <input type="text" class="form-control" placeholder="Nazwa" name="name" ngModel required />
-              </div>
-            </div>
-            <div class="form-row mb-3">
-              <div class="col">
                 <input type="text" class="form-control" placeholder="Adres MAC" name="macAddress" ngModel required />
               </div>
             </div>
             <div class="form-row mb-3">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Nazwa" name="name" ngModel/>
+              </div>
+            </div>
+            <div class="form-row mb-3">
               <div class="col-6">
-                <select required [ngModel]="null" ngModel name="typeId" class="custom-select">
+                <select [ngModel]="null" ngModel name="typeId" class="custom-select">
                   <option [value]="null" disabled>Wybierz typ...</option>
                   <option *ngFor="let type of types" [value]="type.id">{{type.type}}</option>
                 </select>
               </div>
               <div class="col-6">
-                <select required [ngModel]="null" ngModel name="kindId" class="custom-select">
+                <select [ngModel]="null" ngModel name="kindId" class="custom-select">
                   <option [value]="null" disabled>Wybierz rodzaj...</option>
                   <option *ngFor="let kind of kinds" [value]="kind.id">{{kind.kind}}</option>
                 </select>

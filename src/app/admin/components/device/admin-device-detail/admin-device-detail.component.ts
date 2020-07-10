@@ -23,22 +23,22 @@ export class AdminDeviceDetailComponent implements OnInit {
     private alertify: AlertifyService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.deviceService.getDevice(params.id).subscribe(
-        data => {
-          this.device = data;
-        },
-        error => {
-          this.alertify.error(error);
-        }
-      )
-    });
+    // this.route.params.subscribe(params => {
+    //   this.deviceService.getDevice(params.id).subscribe(
+    //     data => {
+    //       this.device = data;
+    //     },
+    //     error => {
+    //       this.alertify.error(error);
+    //     }
+    //   )
+    // });
 
-    this.versionService.getAllVersions().subscribe(
-      data => {
-        this.versions = data;
-      }
-    );
+    // this.versionService.getAllVersions().subscribe(
+    //   data => {
+    //     this.versions = data;
+    //   }
+    // );
   }
 
   setDevice(versionId: number): void {
