@@ -16,9 +16,9 @@
           Urządzenia
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/admin/devices']">Lista</a>
+          <a class="dropdown-item" [routerLink]="['/admin/devices']"><i class="fa fa-bars"></i> Lista</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['/admin/device/add']">Dodaj</a>
+          <a class="dropdown-item" [routerLink]="['/admin/device/add']"><i class="fa fa-plus-circle"></i> Dodaj</a>
         </div>
       </li>
       <li class="nav-item dropdown" routerLinkActive="active">
@@ -26,17 +26,17 @@
           Wersje
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/admin/versions']">Aktualne</a>
+          <a class="dropdown-item" [routerLink]="['/admin/versions']"><i class="fa fa-bars"></i> Lista</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['/admin/versions/add']">Dodaj</a>
+          <a class="dropdown-item" [routerLink]="['/admin/versions/add']"><i class="fa fa-plus-circle"></i> Dodaj</a>
         </div>
       </li>
     </ul>
 
     <div class="dropdown" dropdown>
-      <a class="text-light fa fa-bars" dropdownToggle> </a>
+      <a class="text-light fa fa-bars menuSize" dropdownToggle> </a>
 
-      <div class="dropdown-menu mt-2" *dropdownMenu>
+      <div class="dropdown-menu menuMargin" *dropdownMenu>
         <a class="dropdown-item"><i class="fa fa-sign-out"></i> Wyloguj</a>
       </div>
     </div>

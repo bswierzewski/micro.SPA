@@ -1,3 +1,7 @@
 img {
-    max-width: 100%;
-  }
+  max-width: 100%;
+}
+
+.disableHover {
+  pointer-events: none;
+}

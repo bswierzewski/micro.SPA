@@ -15,6 +15,7 @@ export class PanelComponent implements OnDestroy, AfterViewInit {
   textButton = 'Subscribe';
   devices: Device[] = [];
   tables = {};
+  knowsDevices = {};
 
   constructor(private socketService: SocketService, private deviceService: DeviceService, private alertify: AlertifyService) { }
 
@@ -29,6 +30,9 @@ export class PanelComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+    this.knowsDevices = this.deviceService.getLocatrosName();
+
     this.deviceService.getDevices().subscribe(
       data => {
         this.devices = data;
@@ -47,6 +51,10 @@ export class PanelComponent implements OnDestroy, AfterViewInit {
         const json = JSON.parse(message) as Message;
 
         json.time = new Date().toLocaleTimeString();
+
+        if (this.knowsDevices[json.address] !== undefined) {
+          json.address = this.knowsDevices[json.address];
+        }
 
         if (this.tables[json.name] === undefined) {
           this.tables[json.name] = [];
