@@ -31,9 +31,8 @@ import { AdminDeviceListComponent } from './admin/components/device/admin-device
 import { AdminDeviceDetailComponent } from './admin/components/device/admin-device-detail/admin-device-detail.component';
 import { AdminDeviceAddComponent } from './admin/components/device/admin-device-add/admin-device-add.component';
 import { KindsComponent } from './dashboard/kinds/kinds.component';
-import { ComponentsComponent } from './dashboard/components/components.component';
-import { CategoryListComponent } from './dashboard/categories/category-list/category-list.component';
-import { CategoryDetailComponent } from './dashboard/categories/category-detail/category-detail.component';
+import { ComponentsComponent } from './dashboard/categories/components/components.component';
+import { CategoriesComponent } from './dashboard/categories/categories.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -60,8 +59,7 @@ export function tokenGetter() {
       AdminDeviceAddComponent,
       KindsComponent,
       ComponentsComponent,
-      CategoryListComponent,
-      CategoryDetailComponent
+      CategoriesComponent
    ],
    imports: [
       BrowserModule,

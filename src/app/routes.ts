@@ -14,10 +14,9 @@ import { AdminVersionAddComponent } from './admin/components/version/admin-versi
 import { AdminDeviceDetailComponent } from './admin/components/device/admin-device-detail/admin-device-detail.component';
 import { AdminDeviceListComponent } from './admin/components/device/admin-device-list/admin-device-list.component';
 import { AdminDeviceAddComponent } from './admin/components/device/admin-device-add/admin-device-add.component';
-import { ComponentsComponent } from './dashboard/components/components.component';
+import { ComponentsComponent } from './dashboard/categories/components/components.component';
 import { KindsComponent } from './dashboard/kinds/kinds.component';
-import { CategoryDetailComponent } from './dashboard/categories/category-detail/category-detail.component';
-import { CategoryListComponent } from './dashboard/categories/category-list/category-list.component';
+import { CategoriesComponent } from './dashboard/categories/categories.component';
 
 export const appRoutes: Routes = [
     {
@@ -35,9 +34,8 @@ export const appRoutes: Routes = [
         children: [
             { path: '', component: HomeComponent },
             { path: 'panel', component: PanelComponent },
-            { path: 'components', component: ComponentsComponent },
-            { path: 'categories', component: CategoryListComponent },
-            { path: 'categories/:id', component: CategoryDetailComponent },
+            { path: 'categories/:id', component: ComponentsComponent },
+            { path: 'categories', component: CategoriesComponent },
             { path: 'kinds', component: KindsComponent },
             { path: 'devices', component: DeviceListComponent },
             { path: 'devices/:id', component: DeviceDetailComponent },
