@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceService } from 'src/app/_services/device.service';
-import { of } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-device-list',
@@ -21,8 +19,9 @@ export class DeviceListComponent implements OnInit {
     { name: 'eight', id: 8 },
   ];
 
-  constructor(private router: Router) { }
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe( params => console.log(params) );
+   }
 
   ngOnInit() { }
 }
-

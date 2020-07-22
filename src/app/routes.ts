@@ -37,6 +37,7 @@ export const appRoutes: Routes = [
             { path: 'categories/:id', component: ComponentsComponent },
             { path: 'categories', component: CategoriesComponent },
             { path: 'kinds', component: KindsComponent },
+            { path: 'devices/:type/:id', component: DeviceListComponent },
             { path: 'devices', component: DeviceListComponent },
             { path: 'devices/:id', component: DeviceDetailComponent },
         ]
