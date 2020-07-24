@@ -8,6 +8,9 @@ img {
   
   .hoverCard:hover {
     cursor: pointer;
-    border: solid 1px wheat;  
-    padding: 5px;
+    border: solid 1px wheat;
+  }
+
+  .fas {
+    font-size: 4vw;
   }

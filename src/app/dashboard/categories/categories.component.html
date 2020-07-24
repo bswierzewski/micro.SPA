@@ -4,9 +4,7 @@
       <div *ngFor="let category of categories" class="col-sm-3">
         <div class="card text-white bg-dark mb-3 hoverCard text-center" [routerLink]="['/categories/', category.Id]">
           <div class="card-body">
-            <img
-              src="https://botland.com.pl/61345-thickbox_default/esp32-wifi-bt-42-platforma-z-modulem-esp-wroom-32-zgodny-z-esp32-devkit.jpg"
-              alt="">
+            <i class="{{category.FontAwesome}}"></i>
           </div>
           <div class="card-footer">
             <div class="card-text">{{category.Name | uppercase}}</div>
