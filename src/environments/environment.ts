@@ -3,11 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  authUrl: 'http://auth.localhost/api/',
-  updateDeviceUrl: 'http://update.localhost/api/',
-  deviceUrl: 'http://device.localhost/api/',
-  socketUrl: 'http://socket.localhost/'
+  production: false
 };
 
 /*

@@ -1,0 +1,24 @@
+mat-toolbar {
+  justify-content: center;
+  margin: 0 0 10px 0;
+  padding: 0 12vw;
+
+  .logo {
+    margin: 5px;
+    width: 160px;
+  }
+
+  a,
+  button {
+    align-self: center;
+  }
+
+  .nav-layout {
+    display: flex;
+    width: 95vw;
+  }
+
+  .example-spacer {
+    flex: 1;
+  }
+}
