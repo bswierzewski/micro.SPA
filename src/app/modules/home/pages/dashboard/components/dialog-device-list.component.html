@@ -1,0 +1,32 @@
+<h2 class="example-h2">Checkbox configuration</h2>
+
+<section class="example-section">
+  <div *ngFor="let item of data.checkboxes">
+    <mat-checkbox class="example-margin">{{ item.name }}</mat-checkbox>
+  </div>
+
+  <mat-checkbox class="example-margin">Indeterminate</mat-checkbox>
+  <mat-checkbox class="example-margin">Checked</mat-checkbox>
+  <mat-checkbox class="example-margin">Indeterminate</mat-checkbox>
+  <mat-checkbox class="example-margin">Checked</mat-checkbox>
+  <mat-checkbox class="example-margin">Indeterminate</mat-checkbox>
+</section>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Favorite food</mat-label>
+  <input
+    matInput
+    [(ngModel)]="data.name"
+    placeholder="Ex. Pizza"
+    value="Sushi"
+  />
+</mat-form-field>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="null">
+    Clear
+  </button>
+  <button mat-button (click)="onOkClick()" cdkFocusInitial>
+    Filter
+  </button>
+</div>

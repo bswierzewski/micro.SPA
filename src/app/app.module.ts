@@ -13,6 +13,7 @@ import { DeviceListComponent } from './modules/home/pages/device/device-list/dev
 import { DeviceDetailComponent } from './modules/home/pages/device/device-detail/device-detail.component';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { DashboardComponent } from './modules/home/pages/dashboard/dashboard.component';
+import { DialogDeviceListComponent } from './modules/home/pages/dashboard/components/dialog-device-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DashboardComponent } from './modules/home/pages/dashboard/dashboard.com
     DeviceDetailComponent,
     HomeComponent,
     DashboardComponent,
+    DialogDeviceListComponent,
   ],
   imports: [
     BrowserModule,

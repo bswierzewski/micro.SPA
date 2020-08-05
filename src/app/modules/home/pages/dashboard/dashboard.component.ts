@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogDeviceListComponent } from './components/dialog-device-list.component';
 
+export interface DialogData {
+  checkboxes: [];
+  name: string;
+}
 export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
   symbol: string;
-}
-
-export interface Devices {
-  name: string;
-  address: string;
-  action: any;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -26,26 +26,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
 ];
 
-const DEVICES_DATA: Devices[] = [
-  { name: 'John', address: 'AJDHFUAJFK', action: null },
-  { name: 'John', address: 'AJDHFUAJFK', action: null },
-  { name: 'John', address: 'AJDHFUAJFK', action: null },
-  { name: 'John', address: 'AJDHFUAJFK', action: null },
-];
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedDevicesColumns: string[] = ['name', 'address', 'subscribe'];
   dataSource = ELEMENT_DATA;
-  dataSourceDevices = DEVICES_DATA;
-  constructor() { }
 
-  ngOnInit(): void {
+  animal: string;
+  name: string;
+
+  constructor(public dialog: MatDialog) {}
+
+  ngOnInit(): void {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogDeviceListComponent, {
+      data: {
+        checkboxes: [
+          { name: 'Jeden', checked: true },
+          { name: 'Dwa', checked: true },
+          { name: 'Trzy', checked: true },
+          { name: 'Cztery', checked: false },
+          { name: 'Pięć', checked: true },
+          { name: 'Sześć', checked: true },
+          { name: 'Siedem', checked: true },
+        ],
+        name: 'ups',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
   }
-
 }
