@@ -1,11 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeviceListComponent } from './components/dialog-device-list.component';
+import { DialogDataModel } from './components/DialogDataModel';
 
-export interface DialogData {
-  checkboxes: [];
-  name: string;
-}
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -34,33 +31,53 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-
+  devicesChips: string[];
   animal: string;
   name: string;
 
+  data: DialogDataModel = {
+    devices: [
+      { name: 'Jeden', isSubscribe: false },
+      { name: 'Dwa', isSubscribe: true },
+      { name: 'Trzy', isSubscribe: true },
+      { name: 'Cztery', isSubscribe: false },
+      { name: 'Pięć', isSubscribe: true },
+      { name: 'Sześć', isSubscribe: true },
+      { name: 'Siedem', isSubscribe: true },
+    ],
+  };
+
   constructor(public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.refreshChips();
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogDeviceListComponent, {
-      data: {
-        checkboxes: [
-          { name: 'Jeden', checked: true },
-          { name: 'Dwa', checked: true },
-          { name: 'Trzy', checked: true },
-          { name: 'Cztery', checked: false },
-          { name: 'Pięć', checked: true },
-          { name: 'Sześć', checked: true },
-          { name: 'Siedem', checked: true },
-        ],
-        name: 'ups',
-      },
+      data: this.data,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
+      if (result !== undefined) {
+        this.data = result;
+        this.refreshChips();
+      }
     });
+  }
+
+  remove(devicesChips: string): void {
+    const index = this.data.devices.findIndex((x) => x.name === devicesChips);
+
+    if (index >= 0) {
+      this.data.devices[index].isSubscribe = false;
+      this.refreshChips();
+    }
+  }
+
+  refreshChips(): void {
+    this.devicesChips = this.data.devices
+      .filter((x) => x.isSubscribe === true)
+      .map<string>((x) => x.name);
   }
 }

@@ -1,32 +1,18 @@
-<h2 class="example-h2">Checkbox configuration</h2>
+<h2 class="example-h2">Devices to subscribe</h2>
 
 <section class="example-section">
-  <div *ngFor="let item of data.checkboxes">
-    <mat-checkbox class="example-margin">{{ item.name }}</mat-checkbox>
+  <div *ngFor="let item of data.devices">
+    <mat-checkbox class="example-margin" [(ngModel)]="item.isSubscribe">{{
+      item.name
+    }}</mat-checkbox>
   </div>
-
-  <mat-checkbox class="example-margin">Indeterminate</mat-checkbox>
-  <mat-checkbox class="example-margin">Checked</mat-checkbox>
-  <mat-checkbox class="example-margin">Indeterminate</mat-checkbox>
-  <mat-checkbox class="example-margin">Checked</mat-checkbox>
-  <mat-checkbox class="example-margin">Indeterminate</mat-checkbox>
 </section>
 
-<mat-form-field class="example-full-width">
-  <mat-label>Favorite food</mat-label>
-  <input
-    matInput
-    [(ngModel)]="data.name"
-    placeholder="Ex. Pizza"
-    value="Sushi"
-  />
-</mat-form-field>
-
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="null">
+  <button mat-button (click)="ClearClick()">
     Clear
   </button>
-  <button mat-button (click)="onOkClick()" cdkFocusInitial>
+  <button mat-button (click)="OkClick()" cdkFocusInitial>
     Filter
   </button>
 </div>

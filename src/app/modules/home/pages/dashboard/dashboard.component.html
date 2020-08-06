@@ -3,20 +3,23 @@
     <div class="devices">
       <div class="devices__chips__row">
         <div class="devices__chips">
-          <mat-card class="devices__chips__card">
-            <mat-chip-list>
-              <mat-chip>Chips 1</mat-chip>
-              <mat-chip>Chips 2</mat-chip>
-              <mat-chip>Chips 3</mat-chip>
-              <mat-chip>Chips 4</mat-chip>
-              <mat-chip>Chips 5</mat-chip>
-              <mat-chip>Chips 6</mat-chip>
-              <mat-chip>Chips 6</mat-chip>
-              <mat-chip>Chips 6</mat-chip>
-              <mat-chip>Chips 6</mat-chip>
-              <mat-chip>Chips 6</mat-chip>
-              <mat-chip>Chips 6</mat-chip>
-              <mat-chip>Chips 6</mat-chip>
+          <mat-card class="devices__chips__card mat-elevation-z8">
+            <div *ngIf="devicesChips.length <= 0" class="subscribe">
+              <mat-chip color="accent" selected (click)="openDialog()">
+                Please subscribe any devices
+                <mat-icon class="chips_icon">check</mat-icon></mat-chip
+              >
+            </div>
+            <mat-chip-list *ngIf="devicesChips.length > 0">
+              <mat-chip
+                color="primary"
+                selected
+                [removable]="true"
+                (click)="remove(deviceName)"
+                *ngFor="let deviceName of devicesChips"
+                >{{ deviceName }}
+                <mat-icon class="chips_icon">cancel</mat-icon>
+              </mat-chip>
             </mat-chip-list>
           </mat-card>
         </div>
@@ -33,10 +36,10 @@
 
   <div class="wrapper__tables">
     <div class="table__content" *ngFor="let item of [].constructor(5)">
-      <mat-card class="card_table">
+      <mat-card class="card_table mat-elevation-z8">
         <mat-card-title class="card_table_title">Devices name</mat-card-title>
         <mat-card-content>
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
             <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
