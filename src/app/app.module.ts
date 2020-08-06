@@ -14,6 +14,7 @@ import { DeviceDetailComponent } from './modules/home/pages/device/device-detail
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { DashboardComponent } from './modules/home/pages/dashboard/dashboard.component';
 import { DialogDeviceListComponent } from './modules/home/pages/dashboard/components/dialog-device-list.component';
+import { HomeSideNavbarComponent } from './modules/home/components/home-side-navbar/home-side-navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { DialogDeviceListComponent } from './modules/home/pages/dashboard/compon
     HomeComponent,
     DashboardComponent,
     DialogDeviceListComponent,
+    HomeSideNavbarComponent,
   ],
   imports: [
     BrowserModule,

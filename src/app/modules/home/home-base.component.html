@@ -1,1 +1,11 @@
-<app-dashboard></app-dashboard>
+<app-home-navbar></app-home-navbar>
+<mat-drawer-container>
+  <mat-drawer #drawer mode="over">
+    <app-home-side-navbar></app-home-side-navbar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="container">
+      <app-dashboard></app-dashboard>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

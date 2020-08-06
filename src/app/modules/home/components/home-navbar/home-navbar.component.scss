@@ -1,6 +1,5 @@
 mat-toolbar {
   justify-content: center;
-  margin: 0 0 10px 0;
   padding: 0 12vw;
 
   .logo {
@@ -15,10 +14,22 @@ mat-toolbar {
 
   .nav-layout {
     display: flex;
-    width: 95vw;
+    width: 85vw;
   }
 
   .example-spacer {
     flex: 1;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .mobile {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .desktop {
+    display: none;
   }
 }

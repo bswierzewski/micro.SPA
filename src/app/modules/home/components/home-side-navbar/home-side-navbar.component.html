@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <mat-nav-list>
+    <a mat-list-item color="primary" routerLink="/home">
+      <mat-icon matListIcon>home</mat-icon>Home
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/dashboard">
+      <mat-icon matListIcon>dashboard</mat-icon>Dashboard
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/devices">
+      <mat-icon matListIcon>perm_device_information</mat-icon>
+      Devices
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/devices">
+      <mat-icon matListIcon>admin_panel_settings</mat-icon>Admin
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/devices">
+      <mat-icon matListIcon>exit_to_app</mat-icon>Logout
+    </a>
+    <a mat-list-item (click)="openSideNavbar()"
+      ><mat-icon matListIcon>cancel</mat-icon>Close</a
+    >
+    <mat-divider></mat-divider>
+  </mat-nav-list>
+</div>
