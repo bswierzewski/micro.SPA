@@ -16,6 +16,9 @@ import { DashboardComponent } from './modules/home/pages/dashboard/dashboard.com
 import { DialogDeviceListComponent } from './modules/home/pages/dashboard/components/dialog-device-list.component';
 import { HomeSideNavbarComponent } from './modules/home/components/home-side-navbar/home-side-navbar.component';
 
+import { AppRoutes } from './routes';
+import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,7 @@ import { HomeSideNavbarComponent } from './modules/home/components/home-side-nav
     HomeSideNavbarComponent,
   ],
   imports: [
+    RouterModule.forRoot(AppRoutes),
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
