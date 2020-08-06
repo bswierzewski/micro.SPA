@@ -7,7 +7,7 @@
             <div *ngIf="devicesChips.length <= 0" class="subscribe">
               <mat-chip color="accent" selected (click)="openDialog()">
                 Please subscribe any devices
-                <mat-icon class="chips_icon">check</mat-icon></mat-chip
+                <mat-icon class="chips_icon">playlist_add</mat-icon></mat-chip
               >
             </div>
             <mat-chip-list *ngIf="devicesChips.length > 0">
@@ -27,7 +27,7 @@
       <div class="devices__expander__row">
         <div class="devices__expander">
           <button (click)="openDialog()" mat-fab color="primary">
-            <mat-icon>check</mat-icon>
+            <mat-icon>list</mat-icon>
           </button>
         </div>
       </div>
