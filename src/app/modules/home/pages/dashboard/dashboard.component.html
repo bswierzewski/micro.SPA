@@ -1,9 +1,9 @@
 <div class="wrapper">
   <div class="wrapper_devices">
     <div class="devices">
-      <div class="devices__chips__row">
-        <div class="devices__chips">
-          <mat-card class="devices__chips__card mat-elevation-z8">
+      <div class="devices_chips_row">
+        <div class="devices_chips">
+          <mat-card class="devices_chips_card mat-elevation-z4">
             <div *ngIf="devicesChips.length <= 0" class="subscribe">
               <mat-chip color="accent" selected (click)="openDialog()">
                 Please subscribe any devices
@@ -24,8 +24,8 @@
           </mat-card>
         </div>
       </div>
-      <div class="devices__expander__row">
-        <div class="devices__expander">
+      <div class="devices_expander_row">
+        <div class="devices_expander">
           <button (click)="openDialog()" mat-fab color="primary">
             <mat-icon>list</mat-icon>
           </button>
@@ -34,9 +34,9 @@
     </div>
   </div>
 
-  <div class="wrapper__tables">
-    <div class="table__content" *ngFor="let item of [].constructor(5)">
-      <mat-card class="card_table mat-elevation-z8">
+  <div class="wrapper_tables">
+    <div class="table_content" *ngFor="let item of [].constructor(5)">
+      <mat-card class="card_table mat-elevation-z4">
         <mat-card-title class="card_table_title">Devices name</mat-card-title>
         <mat-card-content>
           <table mat-table [dataSource]="dataSource">

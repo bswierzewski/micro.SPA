@@ -6,30 +6,32 @@ table {
   display: grid;
   grid-template-rows: auto auto;
 
-  &__tables {
+  &_tables {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
-}
 
-.devices {
-  padding-bottom: 10px;
-  display: grid;
-  grid-template-rows: auto auto;
+  &_devices {
+    .devices {
+      padding-bottom: 10px;
+      display: grid;
+      grid-template-rows: auto auto;
 
-  &__expander {
-    margin-top: -30px;
-  }
+      &_expander {
+        margin-top: -30px;
+      }
 
-  &__expander__row {
-    margin: auto;
-  }
+      &_expander_row {
+        margin: auto;
+      }
 
-  &__chips__card {
-    padding-bottom: 35px;
-    display: flex;
-    justify-content: center;
+      &_chips_card {
+        padding-bottom: 35px;
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 }
 
