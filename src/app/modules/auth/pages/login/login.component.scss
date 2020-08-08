@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 * {
   padding: 0;
   margin: 0;
@@ -111,7 +113,7 @@ form {
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: #3f51b5;
+    background-color: $brand-color;
     transition: 0.4s;
     right: 50%;
   }
@@ -122,7 +124,7 @@ form {
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: #3f51b5;
+    background-color: $brand-color;
     transition: 0.4s;
     left: 50%;
   }
@@ -146,7 +148,7 @@ form {
 
   >.i {
     >i {
-      color: #3f51b5;
+      color: $brand-color;
     }
   }
 }
@@ -164,7 +166,7 @@ a {
   transition: 0.3s;
 
   &:hover {
-    color: #3f51b5;
+    color: $brand-color;
   }
 }
 
@@ -175,7 +177,7 @@ a {
   border-radius: 25px;
   outline: none;
   border: none;
-  background: #3f51b5;
+  background: $brand-color;
   background-size: 200%;
   font-size: 1.2rem;
   color: #fff;

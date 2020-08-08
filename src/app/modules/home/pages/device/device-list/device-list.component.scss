@@ -4,8 +4,6 @@
   grid-gap: 15px;
 
   &_filter {
-    background-color: red;
-
     mat-card-content {
       margin-bottom: -10px;
 
@@ -28,6 +26,12 @@
 
         mat-card {
           padding-bottom: 6px;
+
+          .card_icon {
+            font-size: 5rem;
+            line-height: 5rem;
+          }
+
           mat-card-footer {
             padding: 5px;
             overflow-wrap: break-word;
