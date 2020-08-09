@@ -18,4 +18,8 @@ export class DeviceListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  cardClick(item: any): void {
+    console.log(item);
+  }
 }

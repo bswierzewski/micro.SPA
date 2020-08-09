@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
   <div class="mobile">
     <div class="nav-layout">
-      <a mat-button><img class="logo" src="./assets/img/logo-white.svg" /></a>
+      <a mat-button routerLink="/home"
+        ><img class="logo" src="./assets/img/logo-white.svg"
+      /></a>
       <span class="example-spacer"></span>
       <button mat-icon-button (click)="openSideNavbar()">
         <mat-icon>menu</mat-icon>
@@ -10,7 +12,9 @@
   </div>
   <div class="desktop">
     <div class="nav-layout">
-      <a mat-button><img class="logo" src="./assets/img/logo-white.svg" /></a>
+      <a mat-button routerLink="/home"
+        ><img class="logo" src="./assets/img/logo-white.svg"
+      /></a>
       <a mat-button routerLink="/home"> <mat-icon>home</mat-icon> Home </a>
       <a mat-button routerLink="/dashboard">
         <mat-icon>dashboard</mat-icon> Dashboard

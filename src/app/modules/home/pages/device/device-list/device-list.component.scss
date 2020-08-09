@@ -1,3 +1,5 @@
+@import "variables";
+
 .wrapper {
   display: grid;
   grid-template-rows: auto auto;
@@ -25,7 +27,11 @@
         text-align: center;
 
         mat-card {
-          padding-bottom: 6px;
+          padding-bottom: 4px;
+
+          &:focus {
+            outline: none;
+          }
 
           .card_icon {
             font-size: 5rem;
@@ -33,10 +39,13 @@
           }
 
           mat-card-footer {
-            padding: 5px;
-            overflow-wrap: break-word;
-            margin-top: 6px;
             text-align: center;
+
+            .h2 {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
         }
 
