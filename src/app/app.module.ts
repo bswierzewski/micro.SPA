@@ -18,6 +18,16 @@ import { HomeSideNavbarComponent } from './modules/home/components/home-side-nav
 
 import { AppRoutes } from './routes';
 import { RouterModule } from '@angular/router';
+import { AdminNavbarComponent } from './modules/admin/components/admin-navbar/admin-navbar.component';
+import { AdminSideNavbarComponent } from './modules/admin/components/admin-side-navbar/admin-side-navbar.component';
+import { AdminVersionComponent } from './modules/admin/pages/admin-version/admin-version.component';
+import { AdminDeviceComponent } from './modules/admin/pages/admin-device/admin-device.component';
+import { AdminDeviceDetailComponent } from './modules/admin/pages/device/admin-device-detail/admin-device-detail.component';
+import { AdminDeviceListComponent } from './modules/admin/pages/device/admin-device-list/admin-device-list.component';
+import { AdminVersionListComponent } from './modules/admin/pages/version/admin-version-list/admin-version-list.component';
+import { AdminVersionCreateComponent } from './modules/admin/pages/version/admin-version-create/admin-version-create.component';
+import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin-version-detail/admin-version-detail.component';
+import { AdminDeviceCreateComponent } from './modules/admin/pages/device/admin-device-create/admin-device-create.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +42,16 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     DialogDeviceListComponent,
     HomeSideNavbarComponent,
+    AdminNavbarComponent,
+    AdminSideNavbarComponent,
+    AdminVersionComponent,
+    AdminDeviceComponent,
+    AdminDeviceDetailComponent,
+    AdminDeviceListComponent,
+    AdminVersionListComponent,
+    AdminVersionCreateComponent,
+    AdminVersionDetailComponent,
+    AdminDeviceCreateComponent,
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),
