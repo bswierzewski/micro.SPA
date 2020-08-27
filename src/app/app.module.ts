@@ -20,8 +20,6 @@ import { AppRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { AdminNavbarComponent } from './modules/admin/components/admin-navbar/admin-navbar.component';
 import { AdminSideNavbarComponent } from './modules/admin/components/admin-side-navbar/admin-side-navbar.component';
-import { AdminVersionComponent } from './modules/admin/pages/admin-version/admin-version.component';
-import { AdminDeviceComponent } from './modules/admin/pages/admin-device/admin-device.component';
 import { AdminDeviceDetailComponent } from './modules/admin/pages/device/admin-device-detail/admin-device-detail.component';
 import { AdminDeviceListComponent } from './modules/admin/pages/device/admin-device-list/admin-device-list.component';
 import { AdminVersionListComponent } from './modules/admin/pages/version/admin-version-list/admin-version-list.component';
@@ -44,8 +42,6 @@ import { AdminDeviceCreateComponent } from './modules/admin/pages/device/admin-d
     HomeSideNavbarComponent,
     AdminNavbarComponent,
     AdminSideNavbarComponent,
-    AdminVersionComponent,
-    AdminDeviceComponent,
     AdminDeviceDetailComponent,
     AdminDeviceListComponent,
     AdminVersionListComponent,
