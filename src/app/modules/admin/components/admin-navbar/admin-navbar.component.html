@@ -1,1 +1,36 @@
-<p>admin-navbar works!</p>
+<mat-toolbar color="primary">
+  <div class="mobile">
+    <div class="nav-layout">
+      <a mat-button routerLink="/home"
+        ><img class="logo" src="./assets/img/logo-white.svg"
+      /></a>
+      <span class="example-spacer"></span>
+      <button mat-icon-button (click)="openSideNavbar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="desktop">
+    <div class="nav-layout">
+      <a mat-button routerLink="/home"
+        ><img class="logo" src="./assets/img/logo-white.svg"
+      /></a>
+      <a mat-button routerLink="/admin/devices">
+        <mat-icon>perm_device_information</mat-icon> Devices
+      </a>
+      <a mat-button routerLink="/admin/versions">
+        <mat-icon>swap_vertical_circle</mat-icon> Versions
+      </a>
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

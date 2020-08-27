@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
+import { SideNavbarService } from '../_services/side-navbar-service.service';
 
 @Component({
   selector: 'app-admin-base',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-base.component.scss'],
 })
 export class AdminBaseComponent implements OnInit {
-  constructor() {}
-
+  @ViewChild(MatDrawer) matDrawer: MatDrawer;
+  constructor(private sideNavbarService: SideNavbarService) {
+    this.sideNavbarService.toggleSideNavbar.subscribe(() => {
+      this.matDrawer.toggle();
+    });
+  }
   ngOnInit(): void {}
 }
