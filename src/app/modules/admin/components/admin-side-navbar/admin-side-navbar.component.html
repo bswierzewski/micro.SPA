@@ -1,5 +1,9 @@
 <div class="wrapper">
+  <div class="logo-wrapper" (click)="openSideNavbar()">
+    <img class="logo" src="./assets/img/logo-white.svg" />
+  </div>
   <mat-nav-list (click)="openSideNavbar()">
+    <mat-divider></mat-divider>
     <a mat-list-item routerLink="/portal">
       <mat-icon matListIcon>home</mat-icon>Portal
     </a>
