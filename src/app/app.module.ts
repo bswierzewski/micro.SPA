@@ -20,8 +20,8 @@ import { AdminVersionListComponent } from './modules/admin/pages/version/admin-v
 import { AdminVersionCreateComponent } from './modules/admin/pages/version/admin-version-create/admin-version-create.component';
 import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin-version-detail/admin-version-detail.component';
 import { AdminDeviceCreateComponent } from './modules/admin/pages/device/admin-device-create/admin-device-create.component';
-import { NavbarComponent } from './modules/base/components/navbar/navbar.component';
-import { SidebarComponent } from './modules/base/components/sidebar/sidebar.component';
+import { NavbarComponent } from './modules/base/components/navigation/navbar/navbar.component';
+import { SidebarComponent } from './modules/base/components/navigation/sidebar/sidebar.component';
 import { BaseComponent } from './modules/base/base.component';
 
 @NgModule({

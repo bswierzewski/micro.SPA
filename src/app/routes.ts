@@ -11,8 +11,8 @@ import { AdminDeviceListComponent } from './modules/admin/pages/device/admin-dev
 import { AdminDeviceDetailComponent } from './modules/admin/pages/device/admin-device-detail/admin-device-detail.component';
 import { AdminVersionListComponent } from './modules/admin/pages/version/admin-version-list/admin-version-list.component';
 import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin-version-detail/admin-version-detail.component';
-import { NavMenuItem } from './modules/base/components/navbar/Models/NavMenuItem';
-import { SideMenuItem } from './modules/base/components/sidebar/Models/SideMenuItem';
+import { SidebarData } from './modules/base/components/navigation/data/SidebarData';
+import { NavbarData } from './modules/base/components/navigation/data/NavbarData';
 
 export const AppRoutes: Routes = [
   {
@@ -33,30 +33,9 @@ export const AppRoutes: Routes = [
       { path: 'devices/:id', component: DeviceDetailComponent },
     ],
     data: {
-      navMenuItems: [
-        { path: '/home', title: 'Home', icon: 'home' },
-        { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
-        { path: '/devices', title: 'Devices', icon: 'perm_device_information' },
-      ] as NavMenuItem[],
-      navExpandedMenuItems: [
-        { path: '/admin', title: 'Admin', icon: 'admin_panel_settings' },
-        {
-          path: '',
-          title: 'Logout',
-          icon: 'exit_to_app',
-        },
-      ] as NavMenuItem[],
-      sideMenuItems: [
-        { path: '/home', title: 'Home', icon: 'home' },
-        { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
-        { path: '/devices', title: 'Devices', icon: 'perm_device_information' },
-        { path: '/admin', title: 'Admin', icon: 'admin_panel_settings' },
-        {
-          path: '',
-          title: 'Logout',
-          icon: 'exit_to_app',
-        },
-      ] as SideMenuItem[],
+      navMenuItems: NavbarData.home.HomeNavMenuItems,
+      navExpandedMenuItems: NavbarData.home.HomeNavExpandedMenuItems,
+      sideMenuItems: SidebarData.HomeNavMenuItems,
     },
   },
   {
@@ -74,44 +53,9 @@ export const AppRoutes: Routes = [
       { path: 'versions/:id', component: AdminVersionDetailComponent },
     ],
     data: {
-      navMenuItems: [
-        {
-          path: '/admin/devices',
-          title: 'Devices',
-          icon: 'perm_device_information',
-        },
-        {
-          path: '/admin/versions',
-          title: 'Versions',
-          icon: 'swap_vertical_circle',
-        },
-      ] as NavMenuItem[],
-      navExpandedMenuItems: [
-        { path: '/home', title: 'Home', icon: 'home' },
-        {
-          path: '',
-          title: 'Logout',
-          icon: 'exit_to_app',
-        },
-      ] as NavMenuItem[],
-      sideMenuItems: [
-        { path: '/portal', title: 'Portal', icon: 'home' },
-        {
-          path: '/admin/devices',
-          title: 'Devices',
-          icon: 'perm_device_information',
-        },
-        {
-          path: '/admin/versions',
-          title: 'Versions',
-          icon: 'admin_panel_settings',
-        },
-        {
-          path: '',
-          title: 'Logout',
-          icon: 'exit_to_app',
-        },
-      ] as SideMenuItem[],
+      navMenuItems: NavbarData.admin.AdminNavMenuItems,
+      navExpandedMenuItems: NavbarData.admin.AdminNavExpandedMenuItems,
+      sideMenuItems: SidebarData.AdminNavMenuItems,
     },
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
