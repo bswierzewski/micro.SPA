@@ -1,11 +1,11 @@
-<app-admin-navbar></app-admin-navbar>
-<mat-drawer-container autosize>
-  <mat-drawer #drawer mode="over">
-    <app-admin-side-navbar></app-admin-side-navbar>
-  </mat-drawer>
-  <mat-drawer-content>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over" fixedInViewport="true">
+    <app-admin-side-navbar></app-admin-side-navbar
+  ></mat-sidenav>
+  <mat-sidenav-content>
+    <app-admin-navbar></app-admin-navbar>
     <main>
       <router-outlet></router-outlet>
     </main>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>
