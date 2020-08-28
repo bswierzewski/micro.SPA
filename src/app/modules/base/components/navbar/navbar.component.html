@@ -15,21 +15,22 @@
       <a mat-button routerLink="/home"
         ><img class="logo" src="./assets/img/logo-white.svg"
       /></a>
-      <a mat-button routerLink="/admin/devices">
-        <mat-icon>perm_device_information</mat-icon> Devices
-      </a>
-      <a mat-button routerLink="/admin/versions">
-        <mat-icon>swap_vertical_circle</mat-icon> Versions
-      </a>
+      <div *ngFor="let navMenuItem of navMenuItems">
+        <a mat-button routerLink="{{ navMenuItem.path }}">
+          <mat-icon>{{ navMenuItem.icon }}</mat-icon> {{ navMenuItem.title }}
+        </a>
+      </div>
       <span class="example-spacer"></span>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>exit_to_app</mat-icon>
-          <span>Logout</span>
-        </button>
+        <div *ngFor="let navExpandedMenuItem of navExpandedMenuItems">
+          <button mat-menu-item routerLink="{{ navExpandedMenuItem.path }}">
+            <mat-icon>{{ navExpandedMenuItem.icon }}</mat-icon>
+            <span>{{ navExpandedMenuItem.title }}</span>
+          </button>
+        </div>
       </mat-menu>
     </div>
   </div>

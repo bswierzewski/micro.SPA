@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <div class="logo-wrapper" (click)="openSideNavbar()">
+    <img class="logo" src="./assets/img/logo-white.svg" />
+  </div>
+  <mat-nav-list (click)="openSideNavbar()">
+    <mat-divider></mat-divider>
+    <div *ngFor="let sideMenuItem of sideMenuItems">
+      <a mat-list-item routerLink="{{ sideMenuItem.path }}">
+        <mat-icon matListIcon>{{ sideMenuItem.icon }}</mat-icon
+        >{{ sideMenuItem.title }}
+      </a>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-nav-list>
+</div>
