@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+  tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
+  }
+}
+
+.cell-button:not(:last-child) {
+  margin-right: 5px;
+}

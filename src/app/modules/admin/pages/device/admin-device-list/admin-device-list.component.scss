@@ -1,0 +1,22 @@
+.wrapper {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 5fr;
+}
+
+.container {
+  display: grid;
+  grid-auto-rows: minmax(min-content, max-content);
+}
+
+.tab-icon {
+  padding-right: 8px;
+}
+
+table {
+  width: 100%;
+  tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
+  }
+}
