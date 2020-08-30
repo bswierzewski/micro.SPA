@@ -27,9 +27,7 @@
             <mat-icon class="example-tab-icon">analytics</mat-icon>
             Information
           </ng-template>
-          <div class="tab-container">
-            Content 2
-          </div>
+          <div class="tab-container">Content 2</div>
         </mat-tab>
 
         <mat-tab>
@@ -38,7 +36,11 @@
             History
           </ng-template>
           <div class="tab-container">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              class="mat-elevation-z8 table-full-width"
+            >
               <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 

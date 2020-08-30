@@ -10,3 +10,11 @@ body {
 .btn-shadow {
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
 }
+
+.table-full-width {
+  width: 100%;
+  tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
+  }
+}
