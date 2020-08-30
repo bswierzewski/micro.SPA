@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-version-detail',
   templateUrl: './admin-version-detail.component.html',
-  styleUrls: ['./admin-version-detail.component.scss']
+  styleUrls: ['./admin-version-detail.component.scss'],
 })
 export class AdminVersionDetailComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(route: ActivatedRoute) {
+    console.log(route.snapshot.data);
   }
 
+  ngOnInit(): void {}
 }

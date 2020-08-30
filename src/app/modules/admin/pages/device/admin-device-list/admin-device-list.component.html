@@ -44,9 +44,14 @@
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element">
-                <button class="cell-button" mat-mini-fab color="primary">
+                <a
+                  [routerLink]="['/admin/devices/' + element.position]"
+                  class="cell-button"
+                  mat-mini-fab
+                  color="primary"
+                >
                   <mat-icon>settings</mat-icon>
-                </button>
+                </a>
               </td>
             </ng-container>
 
@@ -98,9 +103,14 @@
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element">
-                <button class="cell-button" mat-mini-fab color="accent">
+                <a
+                  [routerLink]="['/admin/devices/create']"
+                  class="cell-button"
+                  mat-mini-fab
+                  color="accent"
+                >
                   <mat-icon>add</mat-icon>
-                </button>
+                </a>
               </td>
             </ng-container>
 
