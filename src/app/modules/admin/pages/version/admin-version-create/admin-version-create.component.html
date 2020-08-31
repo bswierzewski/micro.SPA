@@ -1,29 +1,27 @@
-<form class="wrapper">
+<form
+  #versionCreateForm="ngForm"
+  class="wrapper mat-elevation-z4"
+  (ngSubmit)="onSubmit(versionCreateForm)"
+>
   <mat-form-field appearance="outline">
     <mat-label>Legacy form field</mat-label>
-    <input matInput placeholder="Placeholder" />
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
+    <input matInput placeholder="Placeholder" ngModel name="legacy" />
   </mat-form-field>
 
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
+      <input matInput placeholder="Placeholder" ngModel name="standard" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Standard form field</mat-label>
       <input matInput placeholder="Placeholder" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
     </mat-form-field>
   </div>
   <mat-form-field appearance="outline">
     <mat-label>Outline form field</mat-label>
     <input matInput placeholder="Placeholder" />
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
   </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
 </form>

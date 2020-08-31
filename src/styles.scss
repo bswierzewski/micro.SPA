@@ -1,3 +1,5 @@
+@import "variables";
+
 body {
   margin: 0;
   padding: 0;
@@ -16,5 +18,12 @@ body {
   tr td:last-child {
     width: 1%;
     white-space: nowrap;
+  }
+}
+
+.table-brand-header {
+  th {
+    background-color: $brand-color;
+    color: #ffffff;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-version-detail',
@@ -12,4 +13,9 @@ export class AdminVersionDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onSubmit(value: NgForm) {
+    console.log(value.form.value);
+    value.resetForm();
+  }
 }
