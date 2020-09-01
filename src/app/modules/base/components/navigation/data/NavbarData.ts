@@ -13,6 +13,11 @@ export let NavbarData = {
         title: 'Versions',
         icon: 'swap_vertical_circle',
       },
+      {
+        path: '/admin/devices_information',
+        title: 'Information',
+        icon: 'settings',
+      },
     ] as NavMenuItem[],
     AdminNavExpandedMenuItems: [
       { path: '/home', title: 'Home', icon: 'home' },

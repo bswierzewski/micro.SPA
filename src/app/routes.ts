@@ -13,6 +13,7 @@ import { AdminVersionListComponent } from './modules/admin/pages/version/admin-v
 import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin-version-detail/admin-version-detail.component';
 import { SidebarData } from './modules/base/components/navigation/data/SidebarData';
 import { NavbarData } from './modules/base/components/navigation/data/NavbarData';
+import { AdminDeviceInformationComponent } from './modules/admin/pages/information/admin-device-information/admin-device-information.component';
 
 export const AppRoutes: Routes = [
   {
@@ -48,6 +49,10 @@ export const AppRoutes: Routes = [
       { path: 'devices', component: AdminDeviceListComponent },
       { path: 'devices/create', component: AdminDeviceCreateComponent },
       { path: 'devices/:id', component: AdminDeviceDetailComponent },
+      {
+        path: 'devices_information',
+        component: AdminDeviceInformationComponent,
+      },
       { path: 'versions', component: AdminVersionListComponent },
       { path: 'versions/create', component: AdminVersionCreateComponent },
       { path: 'versions/:id', component: AdminVersionDetailComponent },

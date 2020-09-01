@@ -13,6 +13,11 @@ export let SidebarData = {
       title: 'Versions',
       icon: 'admin_panel_settings',
     },
+    {
+      path: '/admin/devices_information',
+      title: 'Information',
+      icon: 'settings',
+    },
     { path: '', title: 'Logout', icon: 'exit_to_app' },
   ] as SideMenuItem[],
 
