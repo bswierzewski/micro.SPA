@@ -1,1 +1,5 @@
-<p>admin-category-list works!</p>
+<mat-selection-list class="selection_list" #shoes [multiple]="false">
+  <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+    {{ shoe }}
+  </mat-list-option>
+</mat-selection-list>

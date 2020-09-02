@@ -12,6 +12,16 @@ export class AdminKindListComponent implements OnInit {
     'Loafers',
     'Moccasins',
     'Sneakers',
+    'Boots',
+    'Clogs',
+    'Loafers',
+    'Moccasins',
+    'Sneakers',
+    'Boots',
+    'Clogs',
+    'Loafers',
+    'Moccasins',
+    'Sneakers',
   ];
   constructor() {}
 

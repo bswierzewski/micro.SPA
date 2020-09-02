@@ -1,1 +1,46 @@
-<p>admin-category-create works!</p>
+<form #versionCreateForm="ngForm" class="wrapper">
+  <mat-form-field appearance="outline">
+    <mat-label>Legacy form field</mat-label>
+    <input matInput placeholder="Placeholder" ngModel name="legacy" />
+  </mat-form-field>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Standard form field</mat-label>
+      <input matInput placeholder="Placeholder" ngModel name="standard" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Standard form field</mat-label>
+      <input matInput placeholder="Placeholder" />
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Outline form field</mat-label>
+    <input matInput placeholder="Placeholder" />
+  </mat-form-field>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Components </mat-panel-title>
+      <mat-panel-description>
+        {{
+          selectedComponents?.length > 1
+            ? (selectedComponents | slice: 0:1) +
+              " (+" +
+              (selectedComponents?.length - 1) +
+              " other)"
+            : selectedComponents
+        }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-selection-list name="components" [(ngModel)]="selectedComponents">
+      <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+        {{ shoe }}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-expansion-panel>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>

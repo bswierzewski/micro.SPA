@@ -1,13 +1,12 @@
 .wrapper {
   display: flex;
-  flex-wrap: wrap;
-}
+  flex-flow: row wrap;
 
-.one {
-  min-width: 200px;
-  flex: 1;
-}
+  .left {
+    flex: 1;
+  }
 
-.two {
-  flex: 3;
+  .right {
+    flex: 4;
+  }
 }

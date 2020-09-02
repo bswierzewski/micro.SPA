@@ -1,1 +1,23 @@
-<p>admin-kind-create works!</p>
+<form #versionCreateForm="ngForm" class="wrapper">
+  <mat-form-field appearance="outline">
+    <mat-label>Legacy form field</mat-label>
+    <input matInput placeholder="Placeholder" ngModel name="legacy" />
+  </mat-form-field>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Standard form field</mat-label>
+      <input matInput placeholder="Placeholder" ngModel name="standard" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Standard form field</mat-label>
+      <input matInput placeholder="Placeholder" />
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Outline form field</mat-label>
+    <input matInput placeholder="Placeholder" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
