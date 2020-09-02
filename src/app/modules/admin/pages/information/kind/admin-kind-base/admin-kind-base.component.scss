@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.one {
+  min-width: 200px;
+  flex: 1;
+}
+
+.two {
+  flex: 3;
+}
