@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
 
 @Component({
   selector: 'app-admin-component-list',
@@ -6,14 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-component-list.component.scss'],
 })
 export class AdminComponentListComponent implements OnInit {
-  typesOfShoes: string[] = [
-    'Boots',
-    'Clogs',
-    'Loafers',
-    'Moccasins',
-    'Sneakers',
-  ];
-  constructor() {}
+  components: string[] = [];
+  constructor(private deviceInformationService: DeviceInformationService) {
+    this.components = deviceInformationService.components;
+  }
 
   ngOnInit(): void {}
 }

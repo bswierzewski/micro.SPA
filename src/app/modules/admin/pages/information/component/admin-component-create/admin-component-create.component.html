@@ -1,22 +1,16 @@
-<form #versionCreateForm="ngForm" class="wrapper">
+<form
+  #componentCreateForm="ngForm"
+  class="wrapper"
+  (submit)="onSubmit(componentCreateForm)"
+>
   <mat-form-field appearance="outline">
-    <mat-label>Legacy form field</mat-label>
-    <input matInput placeholder="Placeholder" ngModel name="legacy" />
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" ngModel name="name" required />
   </mat-form-field>
 
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" ngModel name="standard" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" />
-    </mat-form-field>
-  </div>
   <mat-form-field appearance="outline">
-    <mat-label>Outline form field</mat-label>
-    <input matInput placeholder="Placeholder" />
+    <mat-label>Fontawesome</mat-label>
+    <input matInput placeholder="Fontawesome" ngModel name="fontawesome" />
   </mat-form-field>
 
   <mat-expansion-panel
@@ -29,15 +23,18 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-selection-list
-      name="components"
-      [(ngModel)]="selectedComponent"
+      name="category"
+      ngModel
+      [(ngModel)]="selectedCategory"
       [multiple]="false"
     >
-      <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-        {{ shoe }}
+      <mat-list-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
       </mat-list-option>
     </mat-selection-list>
   </mat-expansion-panel>
 
-  <button mat-raised-button color="primary" type="submit">Submit</button>
+  <button class="submit_button" mat-raised-button color="primary" type="submit">
+    Submit
+  </button>
 </form>

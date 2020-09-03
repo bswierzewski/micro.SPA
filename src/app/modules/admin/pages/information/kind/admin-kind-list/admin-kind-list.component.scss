@@ -4,3 +4,19 @@ mat-list-option[aria-selected="true"] {
   background: $brand-color;
   color: #ffffff;
 }
+
+.list_option {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.list_option_button {
+  margin: 5px;
+}
+.button_clear_wrapper {
+  margin: 15px;
+}
+.clear_button {
+  width: 100%;
+}

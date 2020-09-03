@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
 
 @Component({
   selector: 'app-admin-component-create',
@@ -6,23 +8,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-component-create.component.scss'],
 })
 export class AdminComponentCreateComponent implements OnInit {
-  typesOfShoes: string[] = [
-    'Boots',
-    'Clogs',
-    'Loafers',
-    'Moccasins',
-    'Sneakers',
-  ];
-  selectedComponent: any = null;
+  categories: string[] = [];
+  selectedCategory: any = null;
   panelOpenState: any;
-  constructor() {}
+  constructor(private deviceInformationService: DeviceInformationService) {
+    this.categories = deviceInformationService.categories;
+  }
 
   ngOnInit(): void {}
 
-  getCategoryiesFieldHeader(): string {
-    if (this.selectedComponent === null) {
-      return 'Choose components';
+  onSubmit(form: NgForm): void {
+    if (form.invalid) {
+      return;
     }
-    return this.selectedComponent;
+
+    this.deviceInformationService.addComponents(form.value.name);
+
+    form.resetForm();
+  }
+
+  getCategoryiesFieldHeader(): string {
+    if (this.selectedCategory === null) {
+      return 'Choose category';
+    }
+    return this.selectedCategory;
   }
 }

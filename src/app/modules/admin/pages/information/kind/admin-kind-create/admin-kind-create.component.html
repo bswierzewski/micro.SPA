@@ -1,23 +1,22 @@
-<form #versionCreateForm="ngForm" class="wrapper">
+<form
+  #kindCreateForm="ngForm"
+  class="wrapper"
+  (submit)="onSubmit(kindCreateForm)"
+>
   <mat-form-field appearance="outline">
-    <mat-label>Legacy form field</mat-label>
-    <input matInput placeholder="Placeholder" ngModel name="legacy" />
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" ngModel name="name" required />
   </mat-form-field>
 
   <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" ngModel name="standard" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" />
-    </mat-form-field>
+    <button
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="kindCreateForm.resetForm()"
+    >
+      Clear
+    </button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
   </div>
-  <mat-form-field appearance="outline">
-    <mat-label>Outline form field</mat-label>
-    <input matInput placeholder="Placeholder" />
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" type="submit">Submit</button>
 </form>

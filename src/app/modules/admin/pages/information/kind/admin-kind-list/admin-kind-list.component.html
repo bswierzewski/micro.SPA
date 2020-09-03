@@ -1,5 +1,26 @@
-<mat-selection-list class="selection_list" #shoes [multiple]="false">
-  <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-    {{ shoe }}
+<div class="button_clear_wrapper">
+  <button class="clear_button" mat-raised-button color="primary">
+    Clear selection
+  </button>
+</div>
+<mat-selection-list
+  class="selection_list"
+  #shoes
+  [multiple]="false"
+  [(ngModel)]="selectionList"
+>
+  <mat-list-option *ngFor="let kind of kinds" [value]="kind">
+    <div class="list_option">
+      {{ kind }}
+      <button
+        class="list_option_button mat-elevation-z4"
+        mat-mini-fab
+        color="warn"
+        (click)="onRemoveCLick(kind)"
+      >
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+    <mat-icon mat-list-icon>folder</mat-icon>
   </mat-list-option>
 </mat-selection-list>

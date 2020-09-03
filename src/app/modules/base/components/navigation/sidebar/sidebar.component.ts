@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SideNavbarService } from '../../../../_services/side-navbar-service.service';
+import { SideNavbarService } from '../../../../_services/side-navbar.service';
 import { ActivatedRoute } from '@angular/router';
 import { SideMenuItem } from './Models/SideMenuItem';
 
