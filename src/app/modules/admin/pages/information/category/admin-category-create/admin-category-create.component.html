@@ -23,17 +23,9 @@
     (closed)="panelOpenState = false"
   >
     <mat-expansion-panel-header>
-      <mat-panel-title> Components </mat-panel-title>
-      <mat-panel-description>
-        {{
-          selectedComponents?.length > 1
-            ? (selectedComponents | slice: 0:1) +
-              " (+" +
-              (selectedComponents?.length - 1) +
-              " other)"
-            : selectedComponents
-        }}
-      </mat-panel-description>
+      <mat-panel-title>
+        {{ getComponentsFieldHeader() }}
+      </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-selection-list name="components" [(ngModel)]="selectedComponents">
       <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">

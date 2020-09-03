@@ -14,9 +14,23 @@ export class AdminCategoryCreateComponent implements OnInit {
     'Moccasins',
     'Sneakers',
   ];
-  selectedComponents: any;
+  selectedComponents: any = [];
   panelOpenState: any;
   constructor() {}
 
   ngOnInit(): void {}
+
+  getComponentsFieldHeader(): string {
+    if (this.selectedComponents?.length === 0) {
+      return 'Choose components';
+    }
+
+    if (this.selectedComponents?.length === 1) {
+      return this.selectedComponents;
+    }
+
+    return `${this.selectedComponents?.slice(0, 1)} (+${
+      this.selectedComponents?.length - 1
+    } other)`;
+  }
 }
