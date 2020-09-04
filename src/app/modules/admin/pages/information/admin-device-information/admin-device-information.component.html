@@ -7,10 +7,8 @@
             [dataSource]="getDataSource('kind')"
             class="left mat-elevation-z4"
           ></app-admin-device-information-list>
-          <div class="right">
-            <app-admin-kind-create></app-admin-kind-create>
-            <app-admin-device-information-button></app-admin-device-information-button>
-          </div>
+
+          <app-admin-kind-create class="right"></app-admin-kind-create>
         </div>
       </mat-tab>
       <mat-tab label="Category">
@@ -19,10 +17,7 @@
             [dataSource]="getDataSource('category')"
             class="left mat-elevation-z4"
           ></app-admin-device-information-list>
-          <div class="right">
-            <app-admin-category-create></app-admin-category-create>
-            <app-admin-device-information-button></app-admin-device-information-button>
-          </div>
+          <app-admin-category-create class="right"></app-admin-category-create>
         </div>
       </mat-tab>
       <mat-tab label="Component">
@@ -31,10 +26,9 @@
             [dataSource]="getDataSource('component')"
             class="left mat-elevation-z4"
           ></app-admin-device-information-list>
-          <div class="right">
-            <app-admin-component-create></app-admin-component-create>
-            <app-admin-device-information-button></app-admin-device-information-button>
-          </div>
+          <app-admin-component-create
+            class="right"
+          ></app-admin-component-create>
         </div>
       </mat-tab>
     </mat-tab-group>

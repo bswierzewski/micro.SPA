@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
 import { AdminDeviceInformationListService } from '../../admin-device-information-list/admin-device-information-list.service';
-import { AdminDeviceInformationButtonService } from '../../admin-device-information-button/admin-device-information-button.service';
 
 @Component({
   selector: 'app-admin-component-create',
@@ -15,8 +14,7 @@ export class AdminComponentCreateComponent implements OnInit {
   panelOpenState: any;
   constructor(
     private deviceInformationService: DeviceInformationService,
-    private adminDeviceInformationListService: AdminDeviceInformationListService,
-    private adminDeviceInformationButtonService: AdminDeviceInformationButtonService
+    private adminDeviceInformationListService: AdminDeviceInformationListService
   ) {
     this.categories = deviceInformationService.categories;
   }

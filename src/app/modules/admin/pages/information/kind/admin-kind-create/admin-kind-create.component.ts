@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
 import { AdminDeviceInformationListService } from '../../admin-device-information-list/admin-device-information-list.service';
-import { AdminDeviceInformationButtonService } from '../../admin-device-information-button/admin-device-information-button.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -12,8 +11,7 @@ import { NgForm } from '@angular/forms';
 export class AdminKindCreateComponent implements OnInit {
   constructor(
     private deviceInformationService: DeviceInformationService,
-    private adminDeviceInformationListService: AdminDeviceInformationListService,
-    private adminDeviceInformationButtonService: AdminDeviceInformationButtonService
+    private adminDeviceInformationListService: AdminDeviceInformationListService
   ) {}
 
   ngOnInit(): void {}

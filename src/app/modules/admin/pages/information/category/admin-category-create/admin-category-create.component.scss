@@ -9,3 +9,7 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 10px;
 }
+
+mat-expansion-panel {
+  margin-bottom: 30px;
+}

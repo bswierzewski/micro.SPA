@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
 import { AdminDeviceInformationListService } from '../../admin-device-information-list/admin-device-information-list.service';
-import { AdminDeviceInformationButtonService } from '../../admin-device-information-button/admin-device-information-button.service';
 
 @Component({
   selector: 'app-admin-category-create',
@@ -16,15 +15,12 @@ export class AdminCategoryCreateComponent implements OnInit {
 
   constructor(
     private deviceInformationService: DeviceInformationService,
-    private adminDeviceInformationListService: AdminDeviceInformationListService,
-    private adminDeviceInformationButtonService: AdminDeviceInformationButtonService
+    private adminDeviceInformationListService: AdminDeviceInformationListService
   ) {
     this.components = deviceInformationService.components;
   }
 
-  ngOnInit(): void {
-    this.adminDeviceInformationButtonService.submit.subscribe(() => {});
-  }
+  ngOnInit(): void {}
 
   onClearClick(): void {
     this.adminDeviceInformationListService.clear.next();
