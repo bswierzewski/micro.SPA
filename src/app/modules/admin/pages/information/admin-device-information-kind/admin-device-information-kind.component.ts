@@ -3,11 +3,11 @@ import { DeviceInformationService } from 'src/app/modules/_services/device-infor
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-admin-kind-create',
-  templateUrl: './admin-kind-create.component.html',
-  styleUrls: ['./admin-kind-create.component.scss'],
+  selector: 'app-admin-device-information-kind',
+  templateUrl: './admin-device-information-kind.component.html',
+  styleUrls: ['./admin-device-information-kind.component.scss'],
 })
-export class AdminKindCreateComponent implements OnInit {
+export class AdminDeviceInformationKindComponent implements OnInit {
   kinds: string[] = ['1', '2', '3'];
   selectedKinds: string[] = [];
   constructor(private deviceInformationService: DeviceInformationService) {}

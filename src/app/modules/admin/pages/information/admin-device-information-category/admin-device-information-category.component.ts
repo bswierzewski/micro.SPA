@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
 @Component({
-  selector: 'app-admin-category-create',
-  templateUrl: './admin-category-create.component.html',
-  styleUrls: ['./admin-category-create.component.scss'],
+  selector: 'app-admin-device-information-category',
+  templateUrl: './admin-device-information-category.component.html',
+  styleUrls: ['./admin-device-information-category.component.scss'],
 })
-export class AdminCategoryCreateComponent implements OnInit {
+export class AdminDeviceInformationCategoryComponent implements OnInit {
   categories: string[] = ['1', '2', '3', '4'];
   components: string[] = ['1', '2', '3', '4'];
   selectedComponents: any = [];

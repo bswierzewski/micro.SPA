@@ -18,9 +18,9 @@ import { NavbarComponent } from './modules/base/components/navigation/navbar/nav
 import { SidebarComponent } from './modules/base/components/navigation/sidebar/sidebar.component';
 import { BaseComponent } from './modules/base/base.component';
 
-import { AdminComponentCreateComponent } from './modules/admin/pages/information/component/admin-component-create/admin-component-create.component';
-import { AdminKindCreateComponent } from './modules/admin/pages/information/kind/admin-kind-create/admin-kind-create.component';
-import { AdminCategoryCreateComponent } from './modules/admin/pages/information/category/admin-category-create/admin-category-create.component';
+import { AdminDeviceInformationComponentComponent } from './modules/admin/pages/information/admin-device-information-component/admin-device-information-component.component';
+import { AdminDeviceInformationKindComponent } from './modules/admin/pages/information/admin-device-information-kind/admin-device-information-kind.component';
+import { AdminDeviceInformationCategoryComponent } from './modules/admin/pages/information/admin-device-information-category/admin-device-information-category.component';
 import { AdminDeviceInformationComponent } from './modules/admin/pages/information/admin-device-information/admin-device-information.component';
 import { AdminDeviceDetailComponent } from './modules/admin/pages/device/admin-device-detail/admin-device-detail.component';
 import { AdminDeviceListComponent } from './modules/admin/pages/device/admin-device-list/admin-device-list.component';
@@ -47,9 +47,9 @@ import { AdminDeviceCreateComponent } from './modules/admin/pages/device/admin-d
     NavbarComponent,
     SidebarComponent,
     BaseComponent,
-    AdminCategoryCreateComponent,
-    AdminKindCreateComponent,
-    AdminComponentCreateComponent,
+    AdminDeviceInformationCategoryComponent,
+    AdminDeviceInformationKindComponent,
+    AdminDeviceInformationComponentComponent,
     AdminDeviceInformationComponent,
   ],
   imports: [

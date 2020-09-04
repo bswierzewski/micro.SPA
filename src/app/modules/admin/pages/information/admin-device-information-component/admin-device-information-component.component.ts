@@ -3,11 +3,11 @@ import { NgForm } from '@angular/forms';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
 
 @Component({
-  selector: 'app-admin-component-create',
-  templateUrl: './admin-component-create.component.html',
-  styleUrls: ['./admin-component-create.component.scss'],
+  selector: 'app-admin-device-information-component',
+  templateUrl: './admin-device-information-component.component.html',
+  styleUrls: ['./admin-device-information-component.component.scss'],
 })
-export class AdminComponentCreateComponent implements OnInit {
+export class AdminDeviceInformationComponentComponent implements OnInit {
   categories: string[] = ['Jeden', 'dwa', 'trzy'];
   components: string[] = ['Jeden', 'dwa', 'trzy'];
   selectedCategory: any = null;
