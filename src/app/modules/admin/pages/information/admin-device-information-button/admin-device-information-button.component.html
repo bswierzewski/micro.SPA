@@ -1,8 +1,19 @@
 <div class="row">
-  <button mat-raised-button class="mat-elevation-z4" type="button">
+  <button
+    mat-raised-button
+    class="mat-elevation-z4"
+    type="button"
+    (click)="clearClick()"
+  >
     Clear
   </button>
-  <button mat-raised-button class="mat-elevation-z4" color="warn" type="button">
+  <button
+    mat-raised-button
+    class="mat-elevation-z4"
+    color="warn"
+    type="button"
+    (click)="resetClick()"
+  >
     Reset
   </button>
   <button
@@ -10,6 +21,7 @@
     class="mat-elevation-z4"
     color="primary"
     type="submit"
+    (click)="submitClick()"
   >
     Submit
   </button>
