@@ -1,30 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
-import { AdminDeviceInformationListService } from '../../admin-device-information-list/admin-device-information-list.service';
-
 @Component({
   selector: 'app-admin-category-create',
   templateUrl: './admin-category-create.component.html',
   styleUrls: ['./admin-category-create.component.scss'],
 })
 export class AdminCategoryCreateComponent implements OnInit {
-  components: string[] = [];
+  categories: string[] = ['1', '2', '3', '4'];
+  components: string[] = ['1', '2', '3', '4'];
   selectedComponents: any = [];
+  selectedCategories: any = [];
   panelOpenState: any;
 
-  constructor(
-    private deviceInformationService: DeviceInformationService,
-    private adminDeviceInformationListService: AdminDeviceInformationListService
-  ) {
-    this.components = deviceInformationService.components;
-  }
+  constructor(private deviceInformationService: DeviceInformationService) {}
 
   ngOnInit(): void {}
-
-  onClearClick(): void {
-    this.adminDeviceInformationListService.clear.next();
-  }
 
   onSubmitClick(form: NgForm): void {
     if (form.invalid) {

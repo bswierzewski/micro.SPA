@@ -15,7 +15,7 @@ export class AdminDeviceInformationListComponent implements OnInit {
   constructor(
     adminDeviceInformationListService: AdminDeviceInformationListService
   ) {
-    adminDeviceInformationListService.clear.subscribe(() => {
+    adminDeviceInformationListService.clear$.subscribe(() => {
       this.selectionList = null;
     });
   }

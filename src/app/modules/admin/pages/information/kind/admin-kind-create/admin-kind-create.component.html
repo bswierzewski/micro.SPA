@@ -1,32 +1,54 @@
-<form
-  #kindCreateForm="ngForm"
-  class="wrapper"
-  (submit)="onSubmitClick(kindCreateForm)"
->
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" ngModel name="name" required />
-  </mat-form-field>
+<div class="content_wrapper">
+  <mat-selection-list
+    class="selection_list left"
+    [multiple]="false"
+    [(ngModel)]="selectedKinds"
+  >
+    <mat-list-option *ngFor="let kind of kinds" [value]="kind">
+      <div class="list_option">
+        {{ kind }}
+        <button
+          class="list_option_button mat-elevation-z4"
+          mat-mini-fab
+          color="warn"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <mat-icon mat-list-icon>developer_board</mat-icon>
+    </mat-list-option>
+  </mat-selection-list>
 
-  <div class="row">
-    <button mat-raised-button class="mat-elevation-z4" type="button">
-      Clear
-    </button>
-    <button
-      mat-raised-button
-      class="mat-elevation-z4"
-      color="warn"
-      type="button"
-    >
-      Reset
-    </button>
-    <button
-      mat-raised-button
-      class="mat-elevation-z4"
-      color="primary"
-      type="submit"
-    >
-      Submit
-    </button>
-  </div>
-</form>
+  <form
+    #kindCreateForm="ngForm"
+    class="wrapper right"
+    (submit)="onSubmitClick(kindCreateForm)"
+  >
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" ngModel name="name" required />
+    </mat-form-field>
+
+    <div class="row">
+      <button mat-raised-button class="mat-elevation-z4" type="button">
+        Clear
+      </button>
+      <button
+        mat-raised-button
+        class="mat-elevation-z4"
+        color="warn"
+        type="button"
+      >
+        Reset
+      </button>
+      <button
+        mat-raised-button
+        class="mat-elevation-z4"
+        color="primary"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

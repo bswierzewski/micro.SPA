@@ -28,7 +28,6 @@ import { AdminVersionListComponent } from './modules/admin/pages/version/admin-v
 import { AdminVersionCreateComponent } from './modules/admin/pages/version/admin-version-create/admin-version-create.component';
 import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin-version-detail/admin-version-detail.component';
 import { AdminDeviceCreateComponent } from './modules/admin/pages/device/admin-device-create/admin-device-create.component';
-import { AdminDeviceInformationListComponent } from './modules/admin/pages/information/admin-device-information-list/admin-device-information-list.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,6 @@ import { AdminDeviceInformationListComponent } from './modules/admin/pages/infor
     AdminKindCreateComponent,
     AdminComponentCreateComponent,
     AdminDeviceInformationComponent,
-    AdminDeviceInformationListComponent,
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),

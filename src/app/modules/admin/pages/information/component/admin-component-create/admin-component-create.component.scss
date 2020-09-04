@@ -1,5 +1,18 @@
 @import "variables";
 
+.content_wrapper {
+  display: flex;
+  flex-flow: row wrap;
+
+  .left {
+    flex: 1;
+  }
+
+  .right {
+    flex: 4;
+  }
+}
+
 .wrapper {
   display: grid;
   grid-gap: 10px;
@@ -19,4 +32,14 @@ mat-list-option[aria-selected="true"] {
 
 mat-expansion-panel {
   margin-bottom: 30px;
+}
+
+.list_option {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.list_option_button {
+  margin: 5px;
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
-import { AdminDeviceInformationListService } from '../../admin-device-information-list/admin-device-information-list.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,16 +8,13 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./admin-kind-create.component.scss'],
 })
 export class AdminKindCreateComponent implements OnInit {
-  constructor(
-    private deviceInformationService: DeviceInformationService,
-    private adminDeviceInformationListService: AdminDeviceInformationListService
-  ) {}
+  kinds: string[] = ['1', '2', '3'];
+  selectedKinds: string[] = [];
+  constructor(private deviceInformationService: DeviceInformationService) {}
 
   ngOnInit(): void {}
 
-  onClearClick(): void {
-    this.adminDeviceInformationListService.clear.next();
-  }
+  onClearClick(): void {}
 
   onSubmitClick(form: NgForm): void {
     if (form.invalid) {

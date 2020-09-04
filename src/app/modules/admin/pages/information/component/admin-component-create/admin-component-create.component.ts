@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DeviceInformationService } from 'src/app/modules/_services/device-information.service';
-import { AdminDeviceInformationListService } from '../../admin-device-information-list/admin-device-information-list.service';
 
 @Component({
   selector: 'app-admin-component-create',
@@ -9,21 +8,16 @@ import { AdminDeviceInformationListService } from '../../admin-device-informatio
   styleUrls: ['./admin-component-create.component.scss'],
 })
 export class AdminComponentCreateComponent implements OnInit {
-  categories: string[] = [];
+  categories: string[] = ['Jeden', 'dwa', 'trzy'];
+  components: string[] = ['Jeden', 'dwa', 'trzy'];
   selectedCategory: any = null;
+  selectedComponents: any = null;
   panelOpenState: any;
-  constructor(
-    private deviceInformationService: DeviceInformationService,
-    private adminDeviceInformationListService: AdminDeviceInformationListService
-  ) {
-    this.categories = deviceInformationService.categories;
-  }
+  constructor(private deviceInformationService: DeviceInformationService) {}
 
   ngOnInit(): void {}
 
-  onClearClick(): void {
-    this.adminDeviceInformationListService.clear.next();
-  }
+  onClearClick(): void {}
 
   onSubmitClick(form: NgForm): void {
     if (form.invalid) {
