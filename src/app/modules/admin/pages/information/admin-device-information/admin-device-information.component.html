@@ -2,13 +2,40 @@
   <div class="mat-elevation-z4">
     <mat-tab-group backgroundColor="primary">
       <mat-tab label="Kind">
-        <app-admin-kind-base></app-admin-kind-base>
+        <div class="content_wrapper">
+          <app-admin-device-information-list
+            [dataSource]="getDataSource('kind')"
+            class="left mat-elevation-z4"
+          ></app-admin-device-information-list>
+          <div class="right">
+            <app-admin-kind-create></app-admin-kind-create>
+            <app-admin-device-information-button></app-admin-device-information-button>
+          </div>
+        </div>
       </mat-tab>
       <mat-tab label="Category">
-        <app-admin-category-base></app-admin-category-base>
+        <div class="content_wrapper">
+          <app-admin-device-information-list
+            [dataSource]="getDataSource('category')"
+            class="left mat-elevation-z4"
+          ></app-admin-device-information-list>
+          <div class="right">
+            <app-admin-category-create></app-admin-category-create>
+            <app-admin-device-information-button></app-admin-device-information-button>
+          </div>
+        </div>
       </mat-tab>
       <mat-tab label="Component">
-        <app-admin-component-base></app-admin-component-base>
+        <div class="content_wrapper">
+          <app-admin-device-information-list
+            [dataSource]="getDataSource('component')"
+            class="left mat-elevation-z4"
+          ></app-admin-device-information-list>
+          <div class="right">
+            <app-admin-component-create></app-admin-component-create>
+            <app-admin-device-information-button></app-admin-device-information-button>
+          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>

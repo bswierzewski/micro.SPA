@@ -1,7 +1,7 @@
 <form
-  #versionCreateForm="ngForm"
+  #categoryCreateForm="ngForm"
   class="wrapper"
-  (submit)="onSubmit(versionCreateForm)"
+  (submit)="onSubmitClick(categoryCreateForm)"
 >
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
@@ -28,8 +28,4 @@
       </mat-list-option>
     </mat-selection-list>
   </mat-expansion-panel>
-
-  <button class="submit_button" mat-raised-button color="primary" type="submit">
-    Submit
-  </button>
 </form>

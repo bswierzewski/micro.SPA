@@ -1,22 +1,10 @@
 <form
   #kindCreateForm="ngForm"
   class="wrapper"
-  (submit)="onSubmit(kindCreateForm)"
+  (submit)="onSubmitClick(kindCreateForm)"
 >
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input matInput placeholder="Name" ngModel name="name" required />
   </mat-form-field>
-
-  <div class="row">
-    <button
-      mat-raised-button
-      color="warn"
-      type="button"
-      (click)="kindCreateForm.resetForm()"
-    >
-      Clear
-    </button>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-  </div>
 </form>

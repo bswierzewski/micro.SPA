@@ -1,7 +1,7 @@
 <form
   #componentCreateForm="ngForm"
   class="wrapper"
-  (submit)="onSubmit(componentCreateForm)"
+  (submit)="onSubmitClick(componentCreateForm)"
 >
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
@@ -33,8 +33,4 @@
       </mat-list-option>
     </mat-selection-list>
   </mat-expansion-panel>
-
-  <button class="submit_button" mat-raised-button color="primary" type="submit">
-    Submit
-  </button>
 </form>
