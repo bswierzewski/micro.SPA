@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DeviceInformationService } from 'src/app/modules/_services/device-information/device-information.service';
+import { CategoryInformationService } from 'src/app/modules/_services/device-information/category-information.service';
+import { ComponentInformationService } from 'src/app/modules/_services/device-information/component-information.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,12 +13,12 @@ export class AdminDeviceInformationComponentComponent implements OnInit {
   categories$: Observable<string[]>;
   components$: Observable<string[]>;
   selectedCategory: any = null;
-  selectedComponents: any = null;
+  selectedComponent: any = null;
   panelOpenState: any;
-  constructor(private deviceInformationService: DeviceInformationService) {
-    this.categories$ = deviceInformationService.categoryService.categories$;
-    this.components$ = deviceInformationService.componentService.components$;
-  }
+  constructor(
+    private categoriesInformationService: CategoryInformationService,
+    private componentInformationService: ComponentInformationService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -26,19 +27,21 @@ export class AdminDeviceInformationComponentComponent implements OnInit {
       return;
     }
 
-    this.deviceInformationService.componentService.addComponents(
-      form.value.name
-    );
+    this.componentInformationService.addComponent(form.value.name);
 
     form.resetForm();
   }
 
   onClearClick(): void {
-    console.log('Clear ' + this.constructor.name);
+    this.selectedComponent = null;
   }
 
   onResetClick(): void {
     console.log('Reset ' + this.constructor.name);
+  }
+
+  onRemoveClick(item: string): void {
+    this.componentInformationService.removeComponent(item);
   }
 
   getCategoryiesFieldHeader(): string {

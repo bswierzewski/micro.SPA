@@ -5,8 +5,6 @@ import { DashboardComponent } from './modules/home/pages/dashboard/dashboard.com
 import { DeviceListComponent } from './modules/home/pages/device/device-list/device-list.component';
 import { DeviceDetailComponent } from './modules/home/pages/device/device-detail/device-detail.component';
 import { BaseComponent } from './modules/base/base.component';
-import { AdminVersionCreateComponent } from './modules/admin/pages/version/admin-version-create/admin-version-create.component';
-import { AdminDeviceCreateComponent } from './modules/admin/pages/device/admin-device-create/admin-device-create.component';
 import { AdminDeviceListComponent } from './modules/admin/pages/device/admin-device-list/admin-device-list.component';
 import { AdminDeviceDetailComponent } from './modules/admin/pages/device/admin-device-detail/admin-device-detail.component';
 import { AdminVersionListComponent } from './modules/admin/pages/version/admin-version-list/admin-version-list.component';
@@ -47,15 +45,31 @@ export const AppRoutes: Routes = [
     children: [
       { path: '', component: AdminDeviceListComponent },
       { path: 'devices', component: AdminDeviceListComponent },
-      { path: 'devices/create', component: AdminDeviceCreateComponent },
-      { path: 'devices/:id', component: AdminDeviceDetailComponent },
+      {
+        path: 'devices/create',
+        component: AdminDeviceDetailComponent,
+        data: { isCreatedMode: true },
+      },
+      {
+        path: 'devices/:id',
+        component: AdminDeviceDetailComponent,
+        data: { isCreatedMode: false },
+      },
       {
         path: 'devices_information',
         component: AdminDeviceInformationComponent,
       },
       { path: 'versions', component: AdminVersionListComponent },
-      { path: 'versions/create', component: AdminVersionCreateComponent },
-      { path: 'versions/:id', component: AdminVersionDetailComponent },
+      {
+        path: 'versions/create',
+        component: AdminVersionDetailComponent,
+        data: { isCreatedMode: true },
+      },
+      {
+        path: 'versions/:id',
+        component: AdminVersionDetailComponent,
+        data: { isCreatedMode: false },
+      },
     ],
     data: {
       navMenuItems: NavbarData.admin.AdminNavMenuItems,

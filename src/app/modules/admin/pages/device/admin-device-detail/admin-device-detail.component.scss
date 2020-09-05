@@ -1,0 +1,22 @@
+@import "variables";
+
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+  padding: 30px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
+
+.header {
+  background-color: $brand-color;
+  color: #ffffff;
+  height: auto;
+  font-size: 2em;
+  text-align: center;
+  padding: 10px;
+}
