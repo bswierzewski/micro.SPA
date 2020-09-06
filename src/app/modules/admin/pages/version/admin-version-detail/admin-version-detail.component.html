@@ -5,24 +5,49 @@
   (ngSubmit)="onSubmitClick(versionDetailForm)"
 >
   <mat-form-field appearance="outline">
-    <mat-label>Legacy form field</mat-label>
-    <input matInput placeholder="Placeholder" ngModel name="legacy" />
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" ngModel name="name" />
   </mat-form-field>
 
   <div class="row">
     <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" ngModel name="standard" />
+      <mat-label>Major</mat-label>
+      <input matInput placeholder="Major" ngModel name="major" />
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" />
+      <mat-label>Minor</mat-label>
+      <input matInput placeholder="Minor" ngModel name="minor" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Patch</mat-label>
+      <input matInput placeholder="Patch" ngModel name="patch" />
     </mat-form-field>
   </div>
   <mat-form-field appearance="outline">
-    <mat-label>Outline form field</mat-label>
-    <input matInput placeholder="Placeholder" />
+    <mat-label>Kind</mat-label>
+    <input matInput placeholder="Kind" ngModel name="kind" />
   </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Kind</mat-label>
+    <input matInput placeholder="Kind" ngModel name="kind" />
+  </mat-form-field>
+
+  <label class="file mat-elevation-z4">
+    <input type="file" id="file" style="display: none" #file />
+    <div class="cutom-file">
+      <div class="text-file">Text file</div>
+      <button
+        class="file-button"
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="file.click()"
+      >
+        {{ getSubmitButtonName() }}
+      </button>
+    </div>
+  </label>
 
   <button mat-raised-button color="primary" type="submit">
     {{ getSubmitButtonName() }}
