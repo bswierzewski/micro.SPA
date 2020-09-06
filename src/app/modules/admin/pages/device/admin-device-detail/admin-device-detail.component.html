@@ -5,25 +5,63 @@
   (ngSubmit)="onSubmitClick(versionDetailForm)"
 >
   <mat-form-field appearance="outline">
-    <mat-label>Legacy form field</mat-label>
-    <input matInput placeholder="Placeholder" ngModel name="legacy" />
+    <mat-label>MacAddress</mat-label>
+    <input matInput placeholder="MacAddress" ngModel name="macAddress" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" ngModel name="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Photo Url</mat-label>
+    <input matInput placeholder="Photo Url" ngModel name="photoUrl" />
   </mat-form-field>
 
   <div class="row">
     <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" ngModel name="standard" />
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of ['foods', 'food2']" [value]="food">
+          {{ food }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
+
     <mat-form-field appearance="outline">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder" />
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of ['foods', 'food2']" [value]="food">
+          {{ food }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
-  <mat-form-field appearance="outline">
-    <mat-label>Outline form field</mat-label>
-    <input matInput placeholder="Placeholder" />
-  </mat-form-field>
-
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of ['foods', 'food2']" [value]="food">
+          {{ food }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of ['foods', 'food2']" [value]="food">
+          {{ food }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="button_group">
+      <mat-button-toggle-group aria-label="Font Style">
+        <mat-button-toggle value="bold">Auto</mat-button-toggle>
+        <mat-button-toggle value="italic">Specific</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
   <button mat-raised-button color="primary" type="submit">
     {{ getSubmitButtonName() }}
   </button>
