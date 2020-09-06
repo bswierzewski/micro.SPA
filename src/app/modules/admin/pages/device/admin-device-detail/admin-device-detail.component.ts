@@ -9,23 +9,33 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminDeviceDetailComponent implements OnInit {
   isCreatedMode = false;
+  group: any;
+  selectedVersion: any;
+  kinds$: any;
+  categories$: any;
+  components$: any;
 
   constructor(route: ActivatedRoute) {
     this.isCreatedMode = route.snapshot.data.isCreatedMode;
+    this.group = 'auto';
   }
 
   ngOnInit(): void {}
 
-  onSubmitClick(value: NgForm): void {
-    console.log(value.form.value);
-    value.resetForm();
+  onSubmitClick(form: NgForm): void {
+    console.log(this.selectedVersion);
+    this.selectedVersion = null;
   }
 
   getHeader(): string {
-    return '';
+    return this.isCreatedMode ? 'Create new device' : 'Update device';
   }
 
   getSubmitButtonName(): string {
     return this.isCreatedMode ? 'Create' : 'Update';
+  }
+
+  isAutoUpdate(): boolean {
+    return this.group === 'auto';
   }
 }
