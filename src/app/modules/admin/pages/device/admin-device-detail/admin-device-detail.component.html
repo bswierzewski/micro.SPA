@@ -55,12 +55,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="button_group">
-      <mat-button-toggle-group aria-label="Font Style">
-        <mat-button-toggle value="bold">Auto</mat-button-toggle>
-        <mat-button-toggle value="italic">Specific</mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
+    <mat-button-toggle-group aria-label="Font Style" class="button_group">
+      <mat-button-toggle class="flex_item" value="bold">Auto</mat-button-toggle>
+      <mat-button-toggle class="flex_item" value="italic"
+        >Specific</mat-button-toggle
+      >
+    </mat-button-toggle-group>
   </div>
   <button mat-raised-button color="primary" type="submit">
     {{ getSubmitButtonName() }}
