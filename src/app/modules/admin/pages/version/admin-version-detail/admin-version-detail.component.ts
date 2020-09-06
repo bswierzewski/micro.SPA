@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminVersionDetailComponent implements OnInit {
   isCreatedMode = false;
+  fileToUpload: File = null;
 
   constructor(route: ActivatedRoute) {
     this.isCreatedMode = route.snapshot.data.isCreatedMode;
@@ -21,11 +22,19 @@ export class AdminVersionDetailComponent implements OnInit {
     value.resetForm();
   }
 
+  handleFileInput(files: FileList): void {
+    this.fileToUpload = files.item(0);
+  }
+
   getHeader(): string {
     return '';
   }
 
   getSubmitButtonName(): string {
     return this.isCreatedMode ? 'Create' : 'Update';
+  }
+
+  getInputFileText(): string {
+    return this.fileToUpload ? this.fileToUpload.name : 'Choose file';
   }
 }

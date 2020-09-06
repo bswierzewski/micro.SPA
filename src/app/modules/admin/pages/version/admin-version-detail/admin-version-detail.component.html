@@ -34,9 +34,15 @@
   </mat-form-field>
 
   <label class="file mat-elevation-z4">
-    <input type="file" id="file" style="display: none" #file />
+    <input
+      type="file"
+      id="file"
+      style="display: none"
+      #file
+      (change)="handleFileInput($event.target.files)"
+    />
     <div class="cutom-file">
-      <div class="text-file">Text file</div>
+      <div class="text-file">{{ getInputFileText() }}</div>
       <button
         class="file-button"
         mat-raised-button
@@ -44,7 +50,7 @@
         type="button"
         (click)="file.click()"
       >
-        {{ getSubmitButtonName() }}
+        Browse
       </button>
     </div>
   </label>
