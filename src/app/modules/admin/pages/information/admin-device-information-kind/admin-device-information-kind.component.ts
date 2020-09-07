@@ -17,7 +17,10 @@ export class AdminDeviceInformationKindComponent implements OnInit {
     private kindInformationService: KindInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<Kind>
   ) {
-    adminDeviceInformationService.listSource$ = of(['5', '6']);
+    adminDeviceInformationService.dataSource$ = of([
+      { id: 3, name: '3', cos: 1 },
+      { id: 4, name: '4', cos: 1 },
+    ]);
   }
 
   ngOnInit(): void {}

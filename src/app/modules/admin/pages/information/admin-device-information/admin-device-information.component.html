@@ -5,25 +5,35 @@
         mat-tab-link
         [routerLink]="tabItem.Path"
         *ngFor="let tabItem of tabItems"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [active]="rla.isActive"
       >
         {{ tabItem.Name }}
       </a>
     </nav>
     <div class="content_wrapper">
       <div class="left mat-elevation-z4">
-        <mat-selection-list class="selection_list" [multiple]="false">
+        <mat-selection-list
+          class="selection_list"
+          [multiple]="false"
+          #lists
+          (selectionChange)="onSelectionChange()"
+          [(ngModel)]="selectedItems"
+        >
           <mat-list-option
             *ngFor="
-              let category of adminDeviceInformationService?.listSource$ | async
+              let item of adminDeviceInformationService?.dataSource$ | async
             "
-            [value]="category"
+            [value]="item"
           >
             <div class="list_option">
-              {{ category }}
+              {{ item.name }}
               <button
                 class="list_option_button mat-elevation-z4"
                 mat-mini-fab
                 color="warn"
+                (click)="onRemoveClick(item)"
               >
                 <mat-icon>remove</mat-icon>
               </button>
@@ -36,7 +46,12 @@
         <router-outlet></router-outlet>
 
         <div class="row_button">
-          <button mat-raised-button class="mat-elevation-z4" type="button">
+          <button
+            mat-raised-button
+            class="mat-elevation-z4"
+            type="button"
+            (click)="onClearClick()"
+          >
             Clear
           </button>
           <button
@@ -44,6 +59,7 @@
             class="mat-elevation-z4"
             color="warn"
             type="button"
+            (click)="onResetClick()"
           >
             Reset
           </button>
@@ -52,11 +68,11 @@
             class="mat-elevation-z4"
             color="primary"
             type="submit"
+            (click)="onSubmitClick()"
           >
             Submit
           </button>
         </div>
-        <div class="fill_free_space"></div>
       </div>
     </div>
   </div>

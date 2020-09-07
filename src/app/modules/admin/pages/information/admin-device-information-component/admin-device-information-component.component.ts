@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { CategoryInformationService } from 'src/app/modules/_services/device-information/category-information.service';
 import { ComponentInformationService } from 'src/app/modules/_services/device-information/component-information.service';
 import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
+import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -20,10 +21,10 @@ export class AdminDeviceInformationComponentComponent implements OnInit {
     private categoriesInformationService: CategoryInformationService,
     private componentInformationService: ComponentInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<
-      Component
+      DeviceComponent
     >
   ) {
-    adminDeviceInformationService.listSource$ = of(['3', '4']);
+    adminDeviceInformationService.dataSource$ = of([{ name: 'Hej', cos: 23 }]);
   }
 
   ngOnInit(): void {}

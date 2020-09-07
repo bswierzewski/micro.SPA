@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminDeviceInformationService } from './admin-device-information.service';
-import { of } from 'rxjs';
+import { MatListOption } from '@angular/material/list';
 
 @Component({
   selector: 'app-admin-device-information',
@@ -8,6 +8,7 @@ import { of } from 'rxjs';
   styleUrls: ['./admin-device-information.component.scss'],
 })
 export class AdminDeviceInformationComponent implements OnInit {
+  selectedItems: any;
   tabItems = [
     { Path: '/admin/devices_information/kind', Name: 'Kind' },
     { Path: '/admin/devices_information/category', Name: 'Category' },
@@ -18,4 +19,27 @@ export class AdminDeviceInformationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  onSelectionChange(): void {
+    this.adminDeviceInformationService.selectionChangeSubject$.next(
+      this.selectedItems
+    );
+  }
+
+  onRemoveClick(item: any): void {
+    this.adminDeviceInformationService.removeSubject$.next(item);
+  }
+
+  onClearClick(): void {
+    this.selectedItems = null;
+    this.adminDeviceInformationService.clearSubject$.next();
+  }
+
+  onResetClick(): void {
+    this.adminDeviceInformationService.resetSubject$.next();
+  }
+
+  onSubmitClick(): void {
+    this.adminDeviceInformationService.submitSubject$.next();
+  }
 }

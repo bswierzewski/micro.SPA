@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CategoryInformationService } from 'src/app/modules/_services/device-information/category-information.service';
 import { ComponentInformationService } from 'src/app/modules/_services/device-information/component-information.service';
 import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription, BehaviorSubject } from 'rxjs';
 import { Category } from 'src/app/modules/models/device-information/Category';
 @Component({
   selector: 'app-admin-device-information-category',
   templateUrl: './admin-device-information-category.component.html',
   styleUrls: ['./admin-device-information-category.component.scss'],
 })
-export class AdminDeviceInformationCategoryComponent implements OnInit {
+export class AdminDeviceInformationCategoryComponent
+  implements OnInit, OnDestroy {
   categories$: Observable<string[]>;
   components$: Observable<string[]>;
+  selectionChangeSubscription: Subscription;
   selectedComponents: any = [];
   selectedCategory: any = null;
   panelOpenState: any;
@@ -24,10 +26,23 @@ export class AdminDeviceInformationCategoryComponent implements OnInit {
       Category
     >
   ) {
-    adminDeviceInformationService.listSource$ = of(['1', '2']);
+    adminDeviceInformationService.dataSource$ = of([
+      { id: 1, name: '1', cos: 1 },
+      { id: 2, name: '2', cos: 2 },
+    ]);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectionChangeSubscription = this.adminDeviceInformationService.selectionChangeSubject$.subscribe(
+      (data) => {
+        console.log(data);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.selectionChangeSubscription.unsubscribe();
+  }
 
   onSubmitClick(form: NgForm): void {
     if (form.invalid) {
