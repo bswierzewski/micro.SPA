@@ -12,6 +12,9 @@ import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin
 import { SidebarData } from './modules/base/components/navigation/data/SidebarData';
 import { NavbarData } from './modules/base/components/navigation/data/NavbarData';
 import { AdminDeviceInformationComponent } from './modules/admin/pages/information/admin-device-information/admin-device-information.component';
+import { AdminDeviceInformationKindComponent } from './modules/admin/pages/information/admin-device-information-kind/admin-device-information-kind.component';
+import { AdminDeviceInformationCategoryComponent } from './modules/admin/pages/information/admin-device-information-category/admin-device-information-category.component';
+import { AdminDeviceInformationComponentComponent } from './modules/admin/pages/information/admin-device-information-component/admin-device-information-component.component';
 
 export const AppRoutes: Routes = [
   {
@@ -58,6 +61,17 @@ export const AppRoutes: Routes = [
       {
         path: 'devices_information',
         component: AdminDeviceInformationComponent,
+        children: [
+          { path: 'kind', component: AdminDeviceInformationKindComponent },
+          {
+            path: 'category',
+            component: AdminDeviceInformationCategoryComponent,
+          },
+          {
+            path: 'component',
+            component: AdminDeviceInformationComponentComponent,
+          },
+        ],
       },
       { path: 'versions', component: AdminVersionListComponent },
       {

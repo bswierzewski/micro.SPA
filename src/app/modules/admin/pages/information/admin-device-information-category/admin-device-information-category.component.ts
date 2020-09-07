@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CategoryInformationService } from 'src/app/modules/_services/device-information/category-information.service';
 import { ComponentInformationService } from 'src/app/modules/_services/device-information/component-information.service';
-import { Observable } from 'rxjs';
+import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
+import { Observable, of } from 'rxjs';
+import { Category } from 'src/app/modules/models/device-information/Category';
 @Component({
   selector: 'app-admin-device-information-category',
   templateUrl: './admin-device-information-category.component.html',
@@ -17,8 +19,13 @@ export class AdminDeviceInformationCategoryComponent implements OnInit {
 
   constructor(
     private categoriesInformationService: CategoryInformationService,
-    private componentInformationService: ComponentInformationService
-  ) {}
+    private componentInformationService: ComponentInformationService,
+    private adminDeviceInformationService: AdminDeviceInformationService<
+      Category
+    >
+  ) {
+    adminDeviceInformationService.listSource$ = of(['1', '2']);
+  }
 
   ngOnInit(): void {}
 

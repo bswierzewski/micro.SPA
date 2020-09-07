@@ -1,97 +1,39 @@
-<div class="content_wrapper">
-  <div class="left mat-elevation-z4">
+<form
+  #componentCreateForm="ngForm"
+  class="wrapper"
+  (submit)="onSubmitClick(componentCreateForm)"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" ngModel name="name" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fontawesome</mat-label>
+    <input matInput placeholder="Fontawesome" ngModel name="fontawesome" />
+  </mat-form-field>
+
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ getCategoryiesFieldHeader() }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
     <mat-selection-list
-      class="selection_list"
+      name="category"
+      ngModel
+      [(ngModel)]="selectedCategory"
       [multiple]="false"
-      [(ngModel)]="selectedComponent"
     >
       <mat-list-option
-        *ngFor="let component of components$ | async"
-        [value]="component"
+        *ngFor="let category of categories$ | async"
+        [value]="category"
       >
-        <div class="list_option">
-          {{ component }}
-          <button
-            class="list_option_button mat-elevation-z4"
-            mat-mini-fab
-            color="warn"
-            (click)="onRemoveClick(component)"
-          >
-            <mat-icon>remove</mat-icon>
-          </button>
-        </div>
-        <mat-icon mat-list-icon>developer_board</mat-icon>
+        {{ category }}
       </mat-list-option>
     </mat-selection-list>
-  </div>
-  <div class="right">
-    <form
-      #componentCreateForm="ngForm"
-      class="wrapper"
-      (submit)="onSubmitClick(componentCreateForm)"
-    >
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Name" ngModel name="name" required />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Fontawesome</mat-label>
-        <input matInput placeholder="Fontawesome" ngModel name="fontawesome" />
-      </mat-form-field>
-
-      <mat-expansion-panel
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-      >
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ getCategoryiesFieldHeader() }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-selection-list
-          name="category"
-          ngModel
-          [(ngModel)]="selectedCategory"
-          [multiple]="false"
-        >
-          <mat-list-option
-            *ngFor="let category of categories$ | async"
-            [value]="category"
-          >
-            {{ category }}
-          </mat-list-option>
-        </mat-selection-list>
-      </mat-expansion-panel>
-
-      <div class="row">
-        <button
-          mat-raised-button
-          class="mat-elevation-z4"
-          type="button"
-          (click)="onClearClick()"
-        >
-          Clear
-        </button>
-        <button
-          mat-raised-button
-          class="mat-elevation-z4"
-          color="warn"
-          type="button"
-          (click)="onResetClick()"
-        >
-          Reset
-        </button>
-        <button
-          mat-raised-button
-          class="mat-elevation-z4"
-          color="primary"
-          type="submit"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
-    <div class="fill_free_space"></div>
-  </div>
-</div>
+  </mat-expansion-panel>
+</form>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { KindInformationService } from 'src/app/modules/_services/device-information/kind-information.service';
+import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { Kind } from 'src/app/modules/models/device-information/Kind';
 
 @Component({
   selector: 'app-admin-device-information-kind',
@@ -11,7 +13,12 @@ import { Observable } from 'rxjs';
 export class AdminDeviceInformationKindComponent implements OnInit {
   kinds$: Observable<string[]>;
   selectedItem: any = null;
-  constructor(private kindInformationService: KindInformationService) {}
+  constructor(
+    private kindInformationService: KindInformationService,
+    private adminDeviceInformationService: AdminDeviceInformationService<Kind>
+  ) {
+    adminDeviceInformationService.listSource$ = of(['5', '6']);
+  }
 
   ngOnInit(): void {}
 

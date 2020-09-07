@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CategoryInformationService } from 'src/app/modules/_services/device-information/category-information.service';
 import { ComponentInformationService } from 'src/app/modules/_services/device-information/component-information.service';
-import { Observable } from 'rxjs';
+import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-admin-device-information-component',
@@ -17,8 +18,13 @@ export class AdminDeviceInformationComponentComponent implements OnInit {
   panelOpenState: any;
   constructor(
     private categoriesInformationService: CategoryInformationService,
-    private componentInformationService: ComponentInformationService
-  ) {}
+    private componentInformationService: ComponentInformationService,
+    private adminDeviceInformationService: AdminDeviceInformationService<
+      Component
+    >
+  ) {
+    adminDeviceInformationService.listSource$ = of(['3', '4']);
+  }
 
   ngOnInit(): void {}
 
