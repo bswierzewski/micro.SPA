@@ -25,10 +25,6 @@
   grid-gap: 10px;
 }
 
-mat-expansion-panel {
-  margin-bottom: 30px;
-}
-
 .selection_list {
   mat-list-option[aria-selected="true"] {
     background: $brand-color;

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Kind } from 'src/app/modules/models/device-information/Kind';
@@ -8,6 +8,10 @@ import { Kind } from 'src/app/modules/models/device-information/Kind';
 })
 export class KindInformationService {
   constructor(private http: HttpClient) {}
+
+  getKinds(): Observable<Kind[]> {
+    return of([]);
+  }
 
   addKind(name: string): void {
     return;

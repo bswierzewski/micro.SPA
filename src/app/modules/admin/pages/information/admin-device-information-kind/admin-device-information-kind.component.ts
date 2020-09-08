@@ -13,23 +13,27 @@ import { takeWhile } from 'rxjs/operators';
 })
 export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   isAlive = true;
-  kinds$: Observable<string[]>;
+  kinds$: Observable<Kind[]>;
   selectedItem: any = null;
   constructor(
     private kindInformationService: KindInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<Kind>
   ) {
-    adminDeviceInformationService.dataSource$ = of([
-      { id: 3, name: '3', cos: 1 },
-      { id: 4, name: '4', cos: 1 },
-    ]);
+    this.kinds$ = kindInformationService.getKinds();
+    adminDeviceInformationService.dataSource$ = kindInformationService.getKinds();
   }
 
   ngOnInit(): void {
     this.adminDeviceInformationService.selectionChangeSubject$
       .pipe(takeWhile(() => this.isAlive))
       .subscribe((data) => {
-        console.log(data);
+        this.selectionChange(data);
+      });
+
+    this.adminDeviceInformationService.removeSubject$
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((data) => {
+        this.removeClick(data);
       });
   }
 
@@ -37,29 +41,25 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     this.isAlive = false;
   }
 
-  onSelectionChange(): any {
-    console.log(this.selectedItem);
+  // Method to subscribe subject
+  removeClick(data: Kind): void {
+    console.log(data);
+  }
+
+  selectionChange(data: Kind): void {
+    console.log(data);
+  }
+
+  // Click event
+  onClearClick(): void {
+    this.adminDeviceInformationService.clearSubject$.next();
+  }
+
+  onResetClick(form: NgForm): void {
+    console.log(form.value);
   }
 
   onSubmitClick(form: NgForm): void {
-    if (form.invalid) {
-      return;
-    }
-
-    this.kindInformationService.addKind(form.value.name);
-
-    form.resetForm();
-  }
-
-  onClearClick(): void {
-    this.selectedItem = null;
-  }
-
-  onResetClick(): void {
-    console.log('Reset ' + this.constructor.name);
-  }
-
-  onRemoveClick(item: string): void {
-    this.kindInformationService.removeKind(item);
+    console.log(form.value);
   }
 }

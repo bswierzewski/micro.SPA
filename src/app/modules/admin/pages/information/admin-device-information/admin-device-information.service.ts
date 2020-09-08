@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IAdminDeviceInformation } from './IAdminDeviceInformation';
 
 @Injectable({
@@ -7,13 +7,9 @@ import { IAdminDeviceInformation } from './IAdminDeviceInformation';
 })
 export class AdminDeviceInformationService<T extends IAdminDeviceInformation> {
   dataSource$: Observable<T[]>;
-  removeSubject$: BehaviorSubject<void> = new BehaviorSubject(null);
-  clearSubject$: BehaviorSubject<void> = new BehaviorSubject(null);
-  resetSubject$: BehaviorSubject<void> = new BehaviorSubject(null);
-  submitSubject$: BehaviorSubject<void> = new BehaviorSubject(null);
-  selectionChangeSubject$: BehaviorSubject<T> = new BehaviorSubject(null);
+  removeSubject$: Subject<any> = new Subject();
+  clearSubject$: Subject<any> = new Subject();
+  selectionChangeSubject$: Subject<T> = new Subject();
 
-  constructor() {
-    console.log('Create new instance');
-  }
+  constructor() {}
 }

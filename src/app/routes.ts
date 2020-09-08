@@ -9,8 +9,8 @@ import { AdminDeviceListComponent } from './modules/admin/pages/device/admin-dev
 import { AdminDeviceDetailComponent } from './modules/admin/pages/device/admin-device-detail/admin-device-detail.component';
 import { AdminVersionListComponent } from './modules/admin/pages/version/admin-version-list/admin-version-list.component';
 import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin-version-detail/admin-version-detail.component';
-import { SidebarData } from './modules/base/components/navigation/data/SidebarData';
-import { NavbarData } from './modules/base/components/navigation/data/NavbarData';
+import { SidebarData } from './modules/base/components/navigation/sidebar/SidebarData';
+import { NavbarData } from './modules/base/components/navigation/navbar/NavbarData';
 import { AdminDeviceInformationComponent } from './modules/admin/pages/information/admin-device-information/admin-device-information.component';
 import { AdminDeviceInformationKindComponent } from './modules/admin/pages/information/admin-device-information-kind/admin-device-information-kind.component';
 import { AdminDeviceInformationCategoryComponent } from './modules/admin/pages/information/admin-device-information-category/admin-device-information-category.component';

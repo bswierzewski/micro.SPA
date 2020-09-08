@@ -14,7 +14,7 @@ export let SidebarData = {
       icon: 'admin_panel_settings',
     },
     {
-      path: '/admin/devices_information',
+      path: '/admin/devices_information/kind',
       title: 'Information',
       icon: 'settings',
     },

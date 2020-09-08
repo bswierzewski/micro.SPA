@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminDeviceInformationService } from './admin-device-information.service';
-import { MatListOption } from '@angular/material/list';
 
 @Component({
   selector: 'app-admin-device-information',
@@ -18,7 +17,11 @@ export class AdminDeviceInformationComponent implements OnInit {
     public adminDeviceInformationService: AdminDeviceInformationService<any>
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminDeviceInformationService.clearSubject$.subscribe(() => {
+      this.selectedItems = null;
+    });
+  }
 
   onSelectionChange(): void {
     this.adminDeviceInformationService.selectionChangeSubject$.next(
@@ -28,18 +31,5 @@ export class AdminDeviceInformationComponent implements OnInit {
 
   onRemoveClick(item: any): void {
     this.adminDeviceInformationService.removeSubject$.next(item);
-  }
-
-  onClearClick(): void {
-    this.selectedItems = null;
-    this.adminDeviceInformationService.clearSubject$.next();
-  }
-
-  onResetClick(): void {
-    this.adminDeviceInformationService.resetSubject$.next();
-  }
-
-  onSubmitClick(): void {
-    this.adminDeviceInformationService.submitSubject$.next();
   }
 }

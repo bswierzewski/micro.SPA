@@ -27,3 +27,14 @@ body {
     color: #ffffff;
   }
 }
+
+.row_button {
+  display: flex;
+  flex-flow: row wrap;
+  grid-gap: 30px;
+  margin: 30px;
+
+  button {
+    flex: 1;
+  }
+}
