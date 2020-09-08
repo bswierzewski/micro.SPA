@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KindInformationService } from 'src/app/modules/_services/device-information/kind-information.service';
 import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
 import { NgForm } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { Kind } from 'src/app/modules/models/device-information/Kind';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-device-information-kind',
   templateUrl: './admin-device-information-kind.component.html',
   styleUrls: ['./admin-device-information-kind.component.scss'],
 })
-export class AdminDeviceInformationKindComponent implements OnInit {
+export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
+  isAlive = true;
   kinds$: Observable<string[]>;
   selectedItem: any = null;
   constructor(
@@ -23,7 +25,17 @@ export class AdminDeviceInformationKindComponent implements OnInit {
     ]);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminDeviceInformationService.selectionChangeSubject$
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.isAlive = false;
+  }
 
   onSelectionChange(): any {
     console.log(this.selectedItem);

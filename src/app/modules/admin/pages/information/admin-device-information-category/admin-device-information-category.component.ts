@@ -3,7 +3,8 @@ import { NgForm } from '@angular/forms';
 import { CategoryInformationService } from 'src/app/modules/_services/device-information/category-information.service';
 import { ComponentInformationService } from 'src/app/modules/_services/device-information/component-information.service';
 import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
-import { Observable, of, Subscription, BehaviorSubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 import { Category } from 'src/app/modules/models/device-information/Category';
 @Component({
   selector: 'app-admin-device-information-category',
@@ -12,9 +13,9 @@ import { Category } from 'src/app/modules/models/device-information/Category';
 })
 export class AdminDeviceInformationCategoryComponent
   implements OnInit, OnDestroy {
+  isAlive = true;
   categories$: Observable<string[]>;
   components$: Observable<string[]>;
-  selectionChangeSubscription: Subscription;
   selectedComponents: any = [];
   selectedCategory: any = null;
   panelOpenState: any;
@@ -33,15 +34,15 @@ export class AdminDeviceInformationCategoryComponent
   }
 
   ngOnInit(): void {
-    this.selectionChangeSubscription = this.adminDeviceInformationService.selectionChangeSubject$.subscribe(
-      (data) => {
+    this.adminDeviceInformationService.selectionChangeSubject$
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((data) => {
         console.log(data);
-      }
-    );
+      });
   }
 
   ngOnDestroy(): void {
-    this.selectionChangeSubscription.unsubscribe();
+    this.isAlive = false;
   }
 
   onSubmitClick(form: NgForm): void {
