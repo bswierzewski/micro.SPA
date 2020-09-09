@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KindInformationService } from 'src/app/modules/_services/device-information/kind-information.service';
 import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
 import { NgForm } from '@angular/forms';
-import { Observable, of } from 'rxjs';
 import { Kind } from 'src/app/modules/models/device-information/Kind';
 import { takeWhile } from 'rxjs/operators';
 
@@ -13,13 +12,11 @@ import { takeWhile } from 'rxjs/operators';
 })
 export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   isAlive = true;
-  kinds$: Observable<Kind[]>;
-  selectedItem: any = null;
+  selectedItem: any;
   constructor(
     private kindInformationService: KindInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<Kind>
   ) {
-    this.kinds$ = kindInformationService.getKinds();
     adminDeviceInformationService.dataSource$ = kindInformationService.getKinds();
   }
 

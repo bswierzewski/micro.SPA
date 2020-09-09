@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Kind } from 'src/app/modules/models/device-information/Kind';
@@ -8,19 +8,19 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class KindInformationService {
-  baseUrl = environment.baseUrl;
+  kindsUrl = environment.baseUrl + '/kinds';
 
   constructor(private http: HttpClient) {}
 
   getKinds(): Observable<Kind[]> {
-    return of([]);
+    return this.http.get<Kind[]>(this.kindsUrl);
   }
 
-  addKind(name: string): void {
-    return;
+  addKind(kind: Kind): Observable<Kind[]> {
+    return this.http.post<Kind[]>(this.kindsUrl, kind);
   }
 
-  removeKind(name: string): void {
-    return;
+  removeKind(id: number): Observable<Kind[]> {
+    return this.http.delete<Kind[]>(this.kindsUrl + `/${id}`);
   }
 }
