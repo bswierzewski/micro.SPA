@@ -33,7 +33,7 @@
                 class="list_option_button mat-elevation-z4"
                 mat-mini-fab
                 color="warn"
-                (click)="onRemoveClick(item)"
+                (click)="onRemoveClick(item); $event.stopPropagation()"
               >
                 <mat-icon>remove</mat-icon>
               </button>

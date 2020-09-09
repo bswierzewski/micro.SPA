@@ -58,7 +58,7 @@ export class AdminDeviceInformationCategoryComponent
 
   // Method to subscribe subject
   removeClick(data: Category): void {
-    this.categoriesInformationService.removeCategory(data);
+    console.log(data);
   }
 
   selectionChange(data: Category): void {
