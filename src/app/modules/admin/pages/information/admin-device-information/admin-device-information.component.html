@@ -22,9 +22,7 @@
           [(ngModel)]="selectedItems"
         >
           <mat-list-option
-            *ngFor="
-              let item of adminDeviceInformationService?.dataSource | async
-            "
+            *ngFor="let item of adminDeviceInformationService?.dataSource"
             [value]="item"
           >
             <div class="list_option">

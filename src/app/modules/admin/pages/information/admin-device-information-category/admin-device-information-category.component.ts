@@ -6,6 +6,7 @@ import { AdminDeviceInformationService } from '../admin-device-information/admin
 import { takeWhile } from 'rxjs/operators';
 import { Category } from 'src/app/modules/models/device-information/Category';
 import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
+import { AlertService } from 'src/app/modules/_services/alert.service';
 @Component({
   selector: 'app-admin-device-information-category',
   templateUrl: './admin-device-information-category.component.html',
@@ -16,9 +17,8 @@ export class AdminDeviceInformationCategoryComponent
   isAlive = true;
   panelOpenState: any;
 
-  categories: Category[];
   components: DeviceComponent[];
-  selectedComponents: any = [];
+  selectedComponents: DeviceComponent[] = [];
   selectedCategory: any = null;
 
   constructor(
@@ -26,8 +26,23 @@ export class AdminDeviceInformationCategoryComponent
     private deviceComponentInformationService: DeviceComponentInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<
       Category
-    >
-  ) {}
+    >,
+    private alertService: AlertService
+  ) {
+    this.categoriesInformationService.getCategories().subscribe(
+      (data) => {
+        this.adminDeviceInformationService.dataSource = data;
+      },
+      (error) => {
+        alertService.error(error);
+      }
+    );
+    this.deviceComponentInformationService
+      .getDeviceComponents()
+      .subscribe((data) => {
+        this.components = data;
+      });
+  }
 
   ngOnInit(): void {
     this.adminDeviceInformationService.selectionChangeSubject$
@@ -49,7 +64,12 @@ export class AdminDeviceInformationCategoryComponent
 
   // Method to subscribe subject
   removeClick(data: Category): void {
-    console.log(data);
+    this.alertService.confirm('Are you sure?', () => {
+      this.categoriesInformationService.removeCategory(data.id).subscribe();
+      this.adminDeviceInformationService.dataSource = this.adminDeviceInformationService.dataSource.filter(
+        (x) => x.id !== data.id
+      );
+    });
   }
 
   selectionChange(data: Category): void {
@@ -66,7 +86,23 @@ export class AdminDeviceInformationCategoryComponent
   }
 
   onSubmitClick(form: NgForm): void {
-    this.categoriesInformationService.addCategory(form.value.name);
+    if (form.valid) {
+      const newCategory: Category = {
+        id: 11,
+        name: form.value.name,
+        iconName: form.value.icon,
+        deviceComponents: form.value.components.map((x) => x.id),
+      };
+
+      this.categoriesInformationService.addCategory(newCategory).subscribe(
+        (next) => {
+          this.adminDeviceInformationService.dataSource.push(next);
+        },
+        (error) => {
+          this.alertService.error(error);
+        }
+      );
+    }
   }
 
   getComponentsFieldHeader(): string {
@@ -78,10 +114,10 @@ export class AdminDeviceInformationCategoryComponent
     }
 
     if (this.selectedComponents?.length === 1) {
-      return this.selectedComponents;
+      return this.selectedComponents[0]?.name;
     }
 
-    return `${this.selectedComponents?.slice(0, 1)} (+${
+    return `${this.selectedComponents[0]?.name} (+${
       this.selectedComponents?.length - 1
     } other)`;
   }

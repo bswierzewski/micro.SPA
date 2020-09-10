@@ -4,5 +4,5 @@ export interface Category extends IAdminDeviceInformation {
   id: number;
   name: string;
   iconName: string;
-  deviceComponents: DeviceComponent[];
+  deviceComponents: number[];
 }

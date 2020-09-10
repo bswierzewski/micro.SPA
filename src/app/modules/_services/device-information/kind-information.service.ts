@@ -16,11 +16,11 @@ export class KindInformationService {
     return this.http.get<Kind[]>(this.kindsUrl);
   }
 
-  addKind(kind: Kind): Observable<Kind[]> {
-    return this.http.post<Kind[]>(this.kindsUrl, kind);
+  addKind(kind: Kind): Observable<any> {
+    return this.http.post(this.kindsUrl, kind);
   }
 
-  removeKind(id: number): Observable<Kind[]> {
-    return this.http.delete<Kind[]>(this.kindsUrl + `/${id}`);
+  removeKind(id: number): Observable<any> {
+    return this.http.delete(this.kindsUrl + `/${id}`);
   }
 }

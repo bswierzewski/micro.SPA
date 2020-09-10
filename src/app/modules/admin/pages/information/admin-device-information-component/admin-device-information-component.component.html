@@ -6,8 +6,8 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Fontawesome</mat-label>
-      <input matInput placeholder="Fontawesome" ngModel name="fontawesome" />
+      <mat-label>Icon</mat-label>
+      <input matInput placeholder="Icon" ngModel name="icon" />
     </mat-form-field>
 
     <mat-expansion-panel
@@ -25,11 +25,8 @@
         [(ngModel)]="selectedCategory"
         [multiple]="false"
       >
-        <mat-list-option
-          *ngFor="let category of categories | async"
-          [value]="category"
-        >
-          {{ category }}
+        <mat-list-option *ngFor="let category of categories" [value]="category">
+          {{ category.name }}
         </mat-list-option>
       </mat-selection-list>
     </mat-expansion-panel>

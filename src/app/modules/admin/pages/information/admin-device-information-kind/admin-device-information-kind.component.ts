@@ -13,11 +13,11 @@ import { AlertService } from 'src/app/modules/_services/alert.service';
 })
 export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   isAlive = true;
-  selectedItem: any;
+  kindName: any;
   constructor(
     private kindInformationService: KindInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<Kind>,
-    private alterService: AlertService
+    private alertService: AlertService
   ) {
     kindInformationService.getKinds().subscribe((data) => {
       adminDeviceInformationService.dataSource = data;
@@ -44,13 +44,16 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
 
   // Method to subscribe subject
   removeClick(data: Kind): void {
-    this.alterService.confirm('Really?', () => {
-      console.log(data);
+    this.alertService.confirm('Are you sure?', () => {
+      this.kindInformationService.removeKind(data.id).subscribe();
+      this.adminDeviceInformationService.dataSource = this.adminDeviceInformationService.dataSource.filter(
+        (x) => x.id !== data.id
+      );
     });
   }
 
   selectionChange(data: Kind): void {
-    console.log(data);
+    this.kindName = data[0].name;
   }
 
   // Click event
@@ -59,12 +62,30 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   }
 
   onResetClick(form: NgForm): void {
-    this.alterService.confirm('Really?', () => {
-      console.log(form.value);
-    });
+    form.resetForm();
   }
 
   onSubmitClick(form: NgForm): void {
-    console.log(form.value);
+    if (form.valid) {
+      const newKind: Kind = {
+        id:
+          Math.max(
+            ...this.adminDeviceInformationService.dataSource.map((o) => o.id)
+          ) + 1,
+        name: form.value.name,
+        created: new Date(),
+        photoUrl: '',
+      };
+
+      this.kindInformationService.addKind(newKind).subscribe(
+        (next) => {
+          this.adminDeviceInformationService.dataSource.push(next);
+          form.resetForm();
+        },
+        (error) => {
+          this.alertService.error(error);
+        }
+      );
+    }
   }
 }

@@ -6,6 +6,7 @@ import { AdminDeviceInformationService } from '../admin-device-information/admin
 import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
 import { takeWhile } from 'rxjs/operators';
 import { Category } from 'src/app/modules/models/device-information/Category';
+import { AlertService } from 'src/app/modules/_services/alert.service';
 
 @Component({
   selector: 'app-admin-device-information-component',
@@ -15,18 +16,39 @@ import { Category } from 'src/app/modules/models/device-information/Category';
 export class AdminDeviceInformationComponentComponent
   implements OnInit, OnDestroy {
   isAlive = true;
+  panelOpenState: any;
+
   categories: Category[];
   components: DeviceComponent[];
-  selectedCategory: any = null;
+  selectedCategory: Category = null;
   selectedComponent: any = null;
-  panelOpenState: any;
+
   constructor(
     private categoriesInformationService: CategoryInformationService,
     private deviceComponentInformationService: DeviceComponentInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<
       DeviceComponent
-    >
-  ) {}
+    >,
+    private alertService: AlertService
+  ) {
+    deviceComponentInformationService.getDeviceComponents().subscribe(
+      (data) => {
+        this.adminDeviceInformationService.dataSource = data;
+      },
+      (error) => {
+        alertService.error(error);
+      }
+    );
+
+    categoriesInformationService.getCategories().subscribe(
+      (data) => {
+        this.categories = data;
+      },
+      (error) => {
+        alertService.error(error);
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.adminDeviceInformationService.selectionChangeSubject$
@@ -48,12 +70,17 @@ export class AdminDeviceInformationComponentComponent
 
   // Method to subscribe subject
   removeClick(data: DeviceComponent): void {
-    console.log(data);
+    this.alertService.confirm('Are you sure?', () => {
+      this.deviceComponentInformationService
+        .removeDeviceComponent(data.id)
+        .subscribe();
+      this.adminDeviceInformationService.dataSource = this.adminDeviceInformationService.dataSource.filter(
+        (x) => x.id !== data.id
+      );
+    });
   }
 
-  selectionChange(data: DeviceComponent): void {
-    console.log(data);
-  }
+  selectionChange(data: DeviceComponent): void {}
 
   // Click event
   onClearClick(): void {
@@ -61,11 +88,29 @@ export class AdminDeviceInformationComponentComponent
   }
 
   onResetClick(form: NgForm): void {
-    console.log(form.value);
+    form.resetForm();
   }
 
   onSubmitClick(form: NgForm): void {
-    console.log(form.value);
+    if (form.valid) {
+      const newComponent: DeviceComponent = {
+        id: 11,
+        name: form.value.name,
+        iconName: form.value.icon,
+        categoryId: form.value.category[0]?.id,
+      };
+
+      this.deviceComponentInformationService
+        .addDeviceComponent(newComponent)
+        .subscribe(
+          (next) => {
+            this.adminDeviceInformationService.dataSource.push(next);
+          },
+          (error) => {
+            this.alertService.error(error);
+          }
+        );
+    }
   }
 
   // Local helper method
@@ -73,6 +118,6 @@ export class AdminDeviceInformationComponentComponent
     if (this.selectedCategory === null) {
       return 'Choose category';
     }
-    return this.selectedCategory;
+    return this.selectedCategory[0].name;
   }
 }

@@ -2,20 +2,25 @@ import { Injectable } from '@angular/core';
 import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DeviceComponentInformationService {
-  baseUrl = environment.baseUrl;
+  deviceComponentUrl = environment.baseUrl + '/components';
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   getDeviceComponents(): Observable<DeviceComponent[]> {
-    return of([]);
+    return this.httpClient.get<DeviceComponent[]>(this.deviceComponentUrl);
   }
 
-  addDeviceComponent(name: string): void {}
+  addDeviceComponent(deviceComponent: DeviceComponent): Observable<any> {
+    return this.httpClient.put(this.deviceComponentUrl, deviceComponent);
+  }
 
-  removeDeviceComponent(name: string): void {}
+  removeDeviceComponent(id: number): Observable<any> {
+    return this.httpClient.delete(this.deviceComponentUrl + `/${id}`);
+  }
 }

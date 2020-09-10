@@ -9,7 +9,7 @@ export class AlertService {
 
   confirm(message: string, okCallback: () => any): void {
     Swal.fire({
-      title: 'Are you sure?',
+      title: message,
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
@@ -18,16 +18,25 @@ export class AlertService {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
+        okCallback();
         Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
     });
   }
 
-  success(message: string): void {}
+  success(message: string): void {
+    console.log(message);
+  }
 
-  error(message: string): void {}
+  error(message: string): void {
+    console.log(message);
+  }
 
-  warning(message: string): void {}
+  warning(message: string): void {
+    console.log(message);
+  }
 
-  message(message: string): void {}
+  message(message: string): void {
+    console.log(message);
+  }
 }

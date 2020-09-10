@@ -2,7 +2,14 @@
   <div class="wrapper">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
-      <input matInput placeholder="Name" ngModel name="name" required />
+      <input
+        matInput
+        placeholder="Name"
+        ngModel
+        name="name"
+        required
+        [(ngModel)]="kindName"
+      />
     </mat-form-field>
   </div>
   <div class="row_button">
