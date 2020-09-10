@@ -6,55 +6,52 @@
 >
   <mat-form-field appearance="outline">
     <mat-label>MacAddress</mat-label>
-    <input matInput placeholder="MacAddress" ngModel name="macAddress" />
+    <input
+      matInput
+      placeholder="MacAddress"
+      ngModel
+      name="macAddress"
+      [(ngModel)]="macAddress"
+    />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" ngModel name="name" />
+    <input matInput placeholder="Name" ngModel name="name" [(ngModel)]="name" />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Photo Url</mat-label>
-    <input matInput placeholder="Photo Url" ngModel name="photoUrl" />
+    <input
+      matInput
+      placeholder="Photo Url"
+      ngModel
+      name="photoUrl"
+      [(ngModel)]="photoUrl"
+    />
   </mat-form-field>
 
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Kind</mat-label>
-      <mat-select>
-        <mat-option
-          *ngFor="let kind of kinds$ | async"
-          [value]="kind"
-          name="kind"
-        >
-          {{ kind }}
+      <mat-select [(ngModel)]="kind" name="kind">
+        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind">
+          {{ kind.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Category</mat-label>
-      <mat-select>
-        <mat-option
-          *ngFor="let category of categories$ | async"
-          [value]="category"
-          name="category"
-        >
-          {{ category }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
       <mat-label>Component</mat-label>
-      <mat-select>
-        <mat-option
-          *ngFor="let component of components$ | async"
-          [value]="component"
-          name="component"
-        >
-          {{ component }}
-        </mat-option>
+      <mat-select [(ngModel)]="deviceComponent" name="component">
+        <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name">
+          <mat-option
+            *ngFor="let pokemon of group.pokemon"
+            [value]="pokemon.value"
+          >
+            {{ pokemon.viewValue }}
+          </mat-option>
+        </mat-optgroup>
       </mat-select>
     </mat-form-field>
   </div>
@@ -63,7 +60,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Specific version</mat-label>
       <mat-select
-        [(ngModel)]="selectedVersion"
+        [(ngModel)]="version"
         name="version"
         [disabled]="isAutoUpdate()"
       >
@@ -74,13 +71,18 @@
     </mat-form-field>
     <mat-button-toggle-group
       class="button_group"
-      [(ngModel)]="group"
+      [(ngModel)]="autoUpdateGroupValue"
       name="group"
     >
       <mat-button-toggle class="flex_item" value="specific"
         >Specific</mat-button-toggle
       >
-      <mat-button-toggle class="flex_item" value="auto">Auto</mat-button-toggle>
+      <mat-button-toggle
+        (click)="onClearVersionClick()"
+        class="flex_item"
+        value="auto"
+        >Auto</mat-button-toggle
+      >
     </mat-button-toggle-group>
   </div>
   <button mat-raised-button color="primary" type="submit">

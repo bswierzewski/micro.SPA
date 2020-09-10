@@ -6,32 +6,88 @@
 >
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" ngModel name="name" />
+    <input
+      matInput
+      placeholder="Name"
+      ngModel
+      name="name"
+      required
+      [(ngModel)]="name"
+    />
   </mat-form-field>
 
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Major</mat-label>
-      <input matInput placeholder="Major" ngModel name="major" />
+      <input
+        matInput
+        type="number"
+        placeholder="Major"
+        ngModel
+        name="major"
+        required
+        [(ngModel)]="major"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Minor</mat-label>
-      <input matInput placeholder="Minor" ngModel name="minor" />
+      <input
+        matInput
+        type="number"
+        placeholder="Minor"
+        ngModel
+        name="minor"
+        required
+        [(ngModel)]="minor"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Patch</mat-label>
-      <input matInput placeholder="Patch" ngModel name="patch" />
+      <input
+        matInput
+        type="number"
+        placeholder="Patch"
+        ngModel
+        name="patch"
+        required
+        [(ngModel)]="patch"
+      />
     </mat-form-field>
   </div>
-  <mat-form-field appearance="outline">
-    <mat-label>Kind</mat-label>
-    <input matInput placeholder="Kind" ngModel name="kind" />
-  </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Kind</mat-label>
-    <input matInput placeholder="Kind" ngModel name="kind" />
-  </mat-form-field>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Kind</mat-label>
+      <mat-select
+        matInput
+        placeholder="Kind"
+        ngModel
+        name="kind"
+        [(ngModel)]="kind"
+      >
+        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind">{{
+          kind.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Component</mat-label>
+      <mat-select
+        matInput
+        placeholder="Component"
+        ngModel
+        name="deviceComponent"
+        [(ngModel)]="deviceComponent"
+      >
+        <mat-option
+          *ngFor="let deviceComponent of deviceComponents$ | async"
+          [value]="deviceComponent"
+          >{{ deviceComponent.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <label class="file mat-elevation-z4">
     <input
