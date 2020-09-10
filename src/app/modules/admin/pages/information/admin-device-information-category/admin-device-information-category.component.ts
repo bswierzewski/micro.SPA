@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { CategoryInformationService } from 'src/app/modules/_services/device-information/category-information.service';
 import { DeviceComponentInformationService } from 'src/app/modules/_services/device-information/device-component-information.service';
 import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
-import { Observable, of } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Category } from 'src/app/modules/models/device-information/Category';
 import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
@@ -17,8 +16,8 @@ export class AdminDeviceInformationCategoryComponent
   isAlive = true;
   panelOpenState: any;
 
-  categories$: Observable<Category[]>;
-  components$: Observable<DeviceComponent[]>;
+  categories: Category[];
+  components: DeviceComponent[];
   selectedComponents: any = [];
   selectedCategory: any = null;
 
@@ -28,15 +27,7 @@ export class AdminDeviceInformationCategoryComponent
     private adminDeviceInformationService: AdminDeviceInformationService<
       Category
     >
-  ) {
-    this.refreshBinding();
-  }
-
-  private refreshBinding(): void {
-    this.components$ = this.deviceComponentInformationService.getDeviceComponents();
-    this.categories$ = this.categoriesInformationService.getCategories();
-    this.adminDeviceInformationService.dataSource$ = this.categoriesInformationService.getCategories();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.adminDeviceInformationService.selectionChangeSubject$

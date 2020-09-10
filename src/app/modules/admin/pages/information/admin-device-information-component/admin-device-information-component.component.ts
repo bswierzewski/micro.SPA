@@ -4,7 +4,6 @@ import { CategoryInformationService } from 'src/app/modules/_services/device-inf
 import { DeviceComponentInformationService } from 'src/app/modules/_services/device-information/device-component-information.service';
 import { AdminDeviceInformationService } from '../admin-device-information/admin-device-information.service';
 import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
-import { Observable, of } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Category } from 'src/app/modules/models/device-information/Category';
 
@@ -16,8 +15,8 @@ import { Category } from 'src/app/modules/models/device-information/Category';
 export class AdminDeviceInformationComponentComponent
   implements OnInit, OnDestroy {
   isAlive = true;
-  categories$: Observable<Category[]>;
-  components$: Observable<DeviceComponent[]>;
+  categories: Category[];
+  components: DeviceComponent[];
   selectedCategory: any = null;
   selectedComponent: any = null;
   panelOpenState: any;
@@ -27,11 +26,7 @@ export class AdminDeviceInformationComponentComponent
     private adminDeviceInformationService: AdminDeviceInformationService<
       DeviceComponent
     >
-  ) {
-    this.categories$ = categoriesInformationService.getCategories();
-    this.components$ = deviceComponentInformationService.getDeviceComponents();
-    adminDeviceInformationService.dataSource$ = deviceComponentInformationService.getDeviceComponents();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.adminDeviceInformationService.selectionChangeSubject$

@@ -23,7 +23,7 @@
         >
           <mat-list-option
             *ngFor="
-              let item of adminDeviceInformationService?.dataSource$ | async
+              let item of adminDeviceInformationService?.dataSource | async
             "
             [value]="item"
           >

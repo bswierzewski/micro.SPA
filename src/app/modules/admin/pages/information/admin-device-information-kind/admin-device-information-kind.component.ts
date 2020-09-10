@@ -4,6 +4,7 @@ import { AdminDeviceInformationService } from '../admin-device-information/admin
 import { NgForm } from '@angular/forms';
 import { Kind } from 'src/app/modules/models/device-information/Kind';
 import { takeWhile } from 'rxjs/operators';
+import { AlertifyService } from 'src/app/modules/_services/alertifyjs.service';
 
 @Component({
   selector: 'app-admin-device-information-kind',
@@ -15,7 +16,8 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   selectedItem: any;
   constructor(
     private kindInformationService: KindInformationService,
-    private adminDeviceInformationService: AdminDeviceInformationService<Kind>
+    private adminDeviceInformationService: AdminDeviceInformationService<Kind>,
+    private alertify: AlertifyService
   ) {
     kindInformationService.getKinds().subscribe((data) => {
       adminDeviceInformationService.dataSource = data;
@@ -42,7 +44,9 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
 
   // Method to subscribe subject
   removeClick(data: Kind): void {
-    console.log(data);
+    this.alertify.confirm('Really?', () => {
+      console.log(data);
+    });
   }
 
   selectionChange(data: Kind): void {
@@ -55,7 +59,9 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   }
 
   onResetClick(form: NgForm): void {
-    console.log(form.value);
+    this.alertify.confirm('Really?', () => {
+      console.log(form.value);
+    });
   }
 
   onSubmitClick(form: NgForm): void {
