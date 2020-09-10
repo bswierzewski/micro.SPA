@@ -6,7 +6,7 @@ import { IAdminDeviceInformation } from './IAdminDeviceInformation';
   providedIn: 'root',
 })
 export class AdminDeviceInformationService<T extends IAdminDeviceInformation> {
-  dataSource$: Observable<T[]>;
+  dataSource: T[];
   removeSubject$: Subject<any> = new Subject();
   clearSubject$: Subject<any> = new Subject();
   selectionChangeSubject$: Subject<T> = new Subject();

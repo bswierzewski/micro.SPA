@@ -17,7 +17,9 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     private kindInformationService: KindInformationService,
     private adminDeviceInformationService: AdminDeviceInformationService<Kind>
   ) {
-    adminDeviceInformationService.dataSource$ = kindInformationService.getKinds();
+    kindInformationService.getKinds().subscribe((data) => {
+      adminDeviceInformationService.dataSource = data;
+    });
   }
 
   ngOnInit(): void {
