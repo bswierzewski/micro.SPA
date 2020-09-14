@@ -6,13 +6,16 @@
   grid-gap: 15px;
 
   &_filter {
-    mat-card-content {
-      margin-bottom: -10px;
+    padding: 15px;
+    .row {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      grid-gap: 15px;
 
-      .fields_container {
-        display: flex;
-        justify-content: center;
-        grid-gap: 15px;
+      .item {
+        min-width: 200px;
+        flex: 1;
       }
     }
   }
