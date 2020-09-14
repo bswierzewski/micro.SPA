@@ -1,30 +1,31 @@
-<h2>Devices to subscribe</h2>
+<h1 mat-dialog-title>Devices to subscribe</h1>
+<mat-dialog-content>
+  <mat-selection-list class="selection_list" [(ngModel)]="selectedDevices">
+    <mat-list-option
+      *ngFor="let device of deviceDialogDataModel.devices"
+      [value]="device"
+    >
+      {{ device.name }}
+    </mat-list-option>
+  </mat-selection-list>
 
-<mat-selection-list [(ngModel)]="selectedDevices">
-  <mat-list-option
-    *ngFor="let device of deviceDialogDataModel.devices"
-    [value]="device"
-  >
-    {{ device.name }}
-  </mat-list-option>
-</mat-selection-list>
-
-<div class="row_buttons">
-  <button
-    class="row_button"
-    mat-raised-button
-    color="warn"
-    (click)="onClearClick()"
-  >
-    Clear
-  </button>
-  <button
-    class="row_button"
-    mat-raised-button
-    color="primary"
-    (click)="onFilterClick()"
-    cdkFocusInitial
-  >
-    Filter
-  </button>
-</div>
+  <div class="row_buttons">
+    <button
+      class="row_button"
+      mat-raised-button
+      color="warn"
+      (click)="onClearClick()"
+    >
+      Clear
+    </button>
+    <button
+      class="row_button"
+      mat-raised-button
+      color="primary"
+      (click)="onFilterClick()"
+      cdkFocusInitial
+    >
+      Filter
+    </button>
+  </div>
+</mat-dialog-content>
