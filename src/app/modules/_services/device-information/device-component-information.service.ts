@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +12,16 @@ export class DeviceComponentInformationService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getDeviceComponents(): Observable<DeviceComponent[]> {
-    return this.httpClient.get<DeviceComponent[]>(this.deviceComponentUrl);
+  getDeviceComponents(categoryId?: number): Observable<DeviceComponent[]> {
+    let params = new HttpParams();
+
+    if (categoryId) {
+      params = params.append('categoryId', categoryId.toString());
+    }
+
+    return this.httpClient.get<DeviceComponent[]>(this.deviceComponentUrl, {
+      params,
+    });
   }
 
   addDeviceComponent(deviceComponent: DeviceComponent): Observable<any> {

@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="wrapper_filter mat-elevation-z4">
-    <form #filterForm="ngForm">
+    <form>
       <div class="row">
         <mat-form-field class="item" appearance="outline">
           <mat-label>Kinds</mat-label>
@@ -29,8 +29,11 @@
         </mat-form-field>
 
         <mat-form-field class="item" appearance="outline">
-          <mat-label> {{ getDeviceComponentsLabelDescripton() }} </mat-label>
+          <mat-label>
+            {{ getDeviceComponentsLabelDescripton(deviceParams.category) }}
+          </mat-label>
           <mat-select
+            [disabled]="!isCategorySelected()"
             multiple
             [(ngModel)]="deviceParams.components"
             name="component"

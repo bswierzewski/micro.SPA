@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Device } from 'src/app/modules/models/Device';
 import { Category } from 'src/app/modules/models/device-information/Category';
 import { DeviceComponent } from 'src/app/modules/models/device-information/DeviceComponent';
@@ -9,7 +9,7 @@ import { KindInformationService } from 'src/app/modules/_services/device-informa
 import { DeviceComponentInformationService } from 'src/app/modules/_services/device-information/device-component-information.service';
 import { DeviceService } from 'src/app/modules/_services/device.service';
 import { DeviceParams } from 'src/app/modules/_services/Params/DeviceParams';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export interface DeviceParamsData {
   category?: Category;
@@ -30,6 +30,10 @@ export class DeviceListComponent implements OnInit {
 
   deviceParams: DeviceParamsData = {};
 
+  isCategorySelected = () => {
+    return typeof this.deviceParams?.category?.id === typeof 1;
+  };
+
   constructor(
     private categoriesInformationService: CategoryInformationService,
     private deviceComponentInformationService: DeviceComponentInformationService,
@@ -37,6 +41,7 @@ export class DeviceListComponent implements OnInit {
     private deviceService: DeviceService
   ) {}
   ngOnInit(): void {
+    this.loadDevices();
     this.categories$ = this.categoriesInformationService.getCategories();
     this.kinds$ = this.kindInformationService.getKinds();
   }
@@ -46,31 +51,66 @@ export class DeviceListComponent implements OnInit {
   }
 
   onApplyFilterClick(): void {
-    // this.devices$ = this.deviceService.getDevices(deviceParams);
+    this.loadDevices();
+  }
 
-    console.log(this.deviceParams);
+  onResetFilterClick(): void {
+    this.deviceParams = {};
+    this.categorySelectedClear();
+    this.loadDevices();
+  }
+
+  categorySelectionChange(category: Category): void {
+    if (category) {
+      this.loadDeviceComponents(category);
+    } else {
+      this.categorySelectedClear();
+    }
+  }
+
+  categorySelectedClear(): void {
+    this.deviceParams.components = null;
+    this.components$ = of([]);
+  }
+
+  loadDevices(): void {
+    const deviceParams: DeviceParams = {
+      categoryId: this.deviceParams?.category?.id,
+      kindId: this.deviceParams?.kind?.id,
+    };
 
     if (
       this.deviceParams.components &&
       this.deviceParams.components.length > 0
     ) {
-      console.log(this.deviceParams.components.map((x) => x.id));
+      const componentIds = this.deviceParams.components.map((x) => x.id);
+
+      console.log(componentIds);
+
+      this.devices$ = this.deviceService
+        .getDevices(deviceParams)
+        .pipe(
+          map((devices) =>
+            devices.filter((x) => componentIds.includes(x.deviceComponentId))
+          )
+        );
+    } else {
+      this.devices$ = this.deviceService.getDevices(deviceParams);
     }
   }
 
-  onResetFilterClick(): void {
-    this.deviceParams = {};
-  }
-
-  categorySelectionChange(category: Category): void {
-    this.components$ = this.deviceComponentInformationService.getDeviceComponents();
+  loadDeviceComponents(category: Category): void {
+    if (category) {
+      this.components$ = this.deviceComponentInformationService.getDeviceComponents(
+        category.id
+      );
+    }
   }
 
   getDeviceComponentsLabelDescripton(category: any): string {
-    if (category) {
+    if (!category) {
       return 'Choose category';
     }
-
     return 'Device components';
   }
 }

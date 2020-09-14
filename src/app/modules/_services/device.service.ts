@@ -9,17 +9,17 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class DeviceService {
-  devicesUrl = 'http://localhost:5000/api' + '/devices';
+  devicesUrl = 'http://localhost:3000' + '/devices';
 
   constructor(private http: HttpClient) {}
 
   getDevices(deviceParams: DeviceParams = null): Observable<Device[]> {
     let params = new HttpParams();
 
-    if (deviceParams.kindId) {
+    if (deviceParams?.kindId) {
       params = params.append('kindId', deviceParams.kindId?.toString());
     }
-    if (deviceParams.categoryId) {
+    if (deviceParams?.categoryId) {
       params = params.append('categoryId', deviceParams.categoryId.toString());
     }
 
