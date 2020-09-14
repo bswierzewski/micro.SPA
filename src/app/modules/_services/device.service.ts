@@ -24,7 +24,7 @@ export class DeviceService {
       params = params.append('categoryId', deviceParams.categoryId.toString());
     }
 
-    if (deviceParams.componentIds && deviceParams.componentIds.length > 0) {
+    if (deviceParams?.componentIds && deviceParams?.componentIds.length > 0) {
       return this.http
         .get<Device[]>(this.devicesUrl, {
           params,

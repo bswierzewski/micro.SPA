@@ -72,10 +72,7 @@
         class="card mat-elevation-z4"
         *ngFor="let device of devices$ | async"
       >
-        <mat-card
-          [routerLink]="['/devices/' + device.id]"
-          (click)="onCardClick(device)"
-        >
+        <mat-card [routerLink]="['/devices/' + device.id]">
           <mat-icon [inline]="true" class="card_icon">{{
             device.icon
           }}</mat-icon>

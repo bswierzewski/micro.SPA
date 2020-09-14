@@ -9,7 +9,6 @@ import { KindInformationService } from 'src/app/modules/_services/device-informa
 import { DeviceComponentInformationService } from 'src/app/modules/_services/device-information/device-component-information.service';
 import { DeviceService } from 'src/app/modules/_services/device.service';
 import { DeviceParams } from 'src/app/modules/_services/Params/DeviceParams';
-import { map } from 'rxjs/operators';
 
 export interface DeviceParamsData {
   category?: Category;
@@ -40,14 +39,11 @@ export class DeviceListComponent implements OnInit {
     private kindInformationService: KindInformationService,
     private deviceService: DeviceService
   ) {}
+
   ngOnInit(): void {
     this.loadDevices();
     this.categories$ = this.categoriesInformationService.getCategories();
     this.kinds$ = this.kindInformationService.getKinds();
-  }
-
-  onCardClick(item: any): void {
-    console.log(item);
   }
 
   onApplyFilterClick(): void {
@@ -56,38 +52,32 @@ export class DeviceListComponent implements OnInit {
 
   onResetFilterClick(): void {
     this.deviceParams = {};
-    this.categorySelectedClear();
+
     this.loadDevices();
   }
 
   categorySelectionChange(category: Category): void {
     if (category) {
-      this.loadDeviceComponents(category);
+      this.components$ = this.deviceComponentInformationService.getDeviceComponents(
+        category.id
+      );
     } else {
-      this.categorySelectedClear();
+      this.components$ = of([]);
     }
   }
 
-  categorySelectedClear(): void {
-    this.deviceParams.components = null;
-    this.components$ = of([]);
-  }
-
   loadDevices(): void {
-    const componentIds = this.deviceParams.components.map((x) => x.id);
+    let componentIds = [];
+
+    if (this.deviceParams?.components) {
+      componentIds = this.deviceParams.components.map((x) => x.id);
+    }
+
     this.devices$ = this.deviceService.getDevices({
       categoryId: this.deviceParams?.category?.id,
       kindId: this.deviceParams?.kind?.id,
       componentIds,
     } as DeviceParams);
-  }
-
-  loadDeviceComponents(category: Category): void {
-    if (category) {
-      this.components$ = this.deviceComponentInformationService.getDeviceComponents(
-        category.id
-      );
-    }
   }
 
   getDeviceComponentsLabelDescripton(category: any): string {
