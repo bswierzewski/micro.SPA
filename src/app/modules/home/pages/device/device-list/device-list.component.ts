@@ -74,29 +74,12 @@ export class DeviceListComponent implements OnInit {
   }
 
   loadDevices(): void {
-    const deviceParams: DeviceParams = {
+    const componentIds = this.deviceParams.components.map((x) => x.id);
+    this.devices$ = this.deviceService.getDevices({
       categoryId: this.deviceParams?.category?.id,
       kindId: this.deviceParams?.kind?.id,
-    };
-
-    if (
-      this.deviceParams.components &&
-      this.deviceParams.components.length > 0
-    ) {
-      const componentIds = this.deviceParams.components.map((x) => x.id);
-
-      console.log(componentIds);
-
-      this.devices$ = this.deviceService
-        .getDevices(deviceParams)
-        .pipe(
-          map((devices) =>
-            devices.filter((x) => componentIds.includes(x.deviceComponentId))
-          )
-        );
-    } else {
-      this.devices$ = this.deviceService.getDevices(deviceParams);
-    }
+      componentIds,
+    } as DeviceParams);
   }
 
   loadDeviceComponents(category: Category): void {

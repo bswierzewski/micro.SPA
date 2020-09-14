@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Device } from 'src/app/modules/Models/Device';
 import { DeviceParams } from 'src/app/modules/_services/Params/DeviceParams';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,23 @@ export class DeviceService {
       params = params.append('categoryId', deviceParams.categoryId.toString());
     }
 
-    return this.http.get<Device[]>(this.devicesUrl, {
-      params,
-    });
+    if (deviceParams.componentIds && deviceParams.componentIds.length > 0) {
+      return this.http
+        .get<Device[]>(this.devicesUrl, {
+          params,
+        })
+        .pipe(
+          map((devices) =>
+            devices.filter((x) =>
+              deviceParams.componentIds.includes(x.deviceComponentId)
+            )
+          )
+        );
+    } else {
+      return this.http.get<Device[]>(this.devicesUrl, {
+        params,
+      });
+    }
   }
 
   addKind(kind: Device): Observable<any> {
