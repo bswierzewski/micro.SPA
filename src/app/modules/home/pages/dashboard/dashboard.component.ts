@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined) {
+      if (result) {
         this.data = result;
         this.refreshChips();
       }
