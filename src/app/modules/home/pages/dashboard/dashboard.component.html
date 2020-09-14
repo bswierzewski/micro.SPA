@@ -4,20 +4,20 @@
       <div class="devices_chips_row">
         <div class="devices_chips">
           <mat-card class="devices_chips_card mat-elevation-z4">
-            <div *ngIf="devicesChips.length <= 0" class="subscribe">
+            <div *ngIf="selectedDevices?.length <= 0" class="subscribe">
               <mat-chip color="accent" selected (click)="openDialog()">
                 Please subscribe any devices
                 <mat-icon class="chips_icon">playlist_add</mat-icon></mat-chip
               >
             </div>
-            <mat-chip-list *ngIf="devicesChips.length > 0">
+            <mat-chip-list *ngIf="selectedDevices?.length > 0">
               <mat-chip
                 color="primary"
                 selected
                 [removable]="true"
-                (click)="remove(deviceName)"
-                *ngFor="let deviceName of devicesChips"
-                >{{ deviceName }}
+                (click)="remove(device)"
+                *ngFor="let device of selectedDevices"
+                >{{ device.name }}
                 <mat-icon class="chips_icon">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>

@@ -1,12 +1,10 @@
-.example-h2 {
-  margin: 10px;
-}
-
-.example-section {
+.row_buttons {
   display: flex;
-  flex-direction: column;
-}
+  flex-flow: row wrap;
+  grid-gap: 10px;
 
-.example-margin {
-  margin: 0 10px;
+  .row_button {
+    flex: 1;
+    min-width: 100px;
+  }
 }
