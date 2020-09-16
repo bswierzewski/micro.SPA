@@ -1,20 +1,19 @@
+import { NavbarData, SidebarData } from './core/base/navigation/data';
 import { Routes } from '@angular/router';
-import { LoginComponent } from './modules/auth/pages/login/login.component';
-import { HomeComponent } from './modules/home/pages/home/home.component';
-import { DashboardComponent } from './modules/home/pages/dashboard/dashboard.component';
-import { DeviceListComponent } from './modules/home/pages/device/device-list/device-list.component';
-import { DeviceDetailComponent } from './modules/home/pages/device/device-detail/device-detail.component';
-import { BaseComponent } from './modules/base/base.component';
-import { AdminDeviceListComponent } from './modules/admin/pages/device/admin-device-list/admin-device-list.component';
-import { AdminDeviceDetailComponent } from './modules/admin/pages/device/admin-device-detail/admin-device-detail.component';
-import { AdminVersionListComponent } from './modules/admin/pages/version/admin-version-list/admin-version-list.component';
-import { AdminVersionDetailComponent } from './modules/admin/pages/version/admin-version-detail/admin-version-detail.component';
-import { SidebarData } from './modules/base/components/navigation/sidebar/SidebarData';
-import { NavbarData } from './modules/base/components/navigation/navbar/NavbarData';
-import { AdminDeviceInformationComponent } from './modules/admin/pages/information/admin-device-information/admin-device-information.component';
-import { AdminDeviceInformationKindComponent } from './modules/admin/pages/information/admin-device-information-kind/admin-device-information-kind.component';
-import { AdminDeviceInformationCategoryComponent } from './modules/admin/pages/information/admin-device-information-category/admin-device-information-category.component';
-import { AdminDeviceInformationComponentComponent } from './modules/admin/pages/information/admin-device-information-component/admin-device-information-component.component';
+import { LoginComponent } from './core/authentication/login/login.component';
+import { HomeComponent } from './modules/home/home/home.component';
+import { DashboardComponent } from './modules/home/dashboard/dashboard.component';
+import { DeviceListComponent } from './modules/home/device/device-list/device-list.component';
+import { DeviceDetailComponent } from './modules/home/device/device-detail/device-detail.component';
+import { BaseComponent } from './core/base/base.component';
+import { AdminDeviceListComponent } from './modules/admin/device/admin-device-list/admin-device-list.component';
+import { AdminDeviceDetailComponent } from './modules/admin/device/admin-device-detail/admin-device-detail.component';
+import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
+import { AdminVersionDetailComponent } from './modules/admin/version/admin-version-detail/admin-version-detail.component';
+import { AdminDeviceInformationComponent } from './shared/components/admin-device-information/admin-device-information.component';
+import { AdminDeviceInformationKindComponent } from './modules/admin/information/admin-device-information-kind/admin-device-information-kind.component';
+import { AdminDeviceInformationCategoryComponent } from './modules/admin/information/admin-device-information-category/admin-device-information-category.component';
+import { AdminDeviceInformationComponentComponent } from './modules/admin/information/admin-device-information-component/admin-device-information-component.component';
 
 export const AppRoutes: Routes = [
   {
