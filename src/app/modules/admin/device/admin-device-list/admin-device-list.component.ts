@@ -26,13 +26,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./admin-device-list.component.scss'],
 })
 export class AdminDeviceListComponent implements OnInit {
-  displayedColumns: string[] = [
-    'position',
-    'name',
-    'weight',
-    'symbol',
-    'action',
-  ];
+  autoColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  actionsColumns: string[] = ['action'];
+  displayedColumns: string[] = this.autoColumns.concat(this.actionsColumns);
   dataSource = ELEMENT_DATA;
   constructor() {}
 
