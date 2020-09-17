@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
-import { AdminDeviceInformationService } from 'src/app/shared/components/admin-device-information';
-import { AlertService } from 'src/app/core/_services';
+import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { DeviceComponent, Category } from 'src/app/shared/models';
 import {
   DeviceComponentInformationService,
   CategoryInformationService,
+  AlertService,
 } from 'src/app/core/_services';
 
 @Component({
@@ -27,14 +27,12 @@ export class AdminDeviceInformationComponentComponent
   constructor(
     private categoriesInformationService: CategoryInformationService,
     private deviceComponentInformationService: DeviceComponentInformationService,
-    private adminDeviceInformationService: AdminDeviceInformationService<
-      DeviceComponent
-    >,
+    private tabListFormService: TabListFormService<DeviceComponent>,
     private alertService: AlertService
   ) {
     deviceComponentInformationService.getDeviceComponents().subscribe(
       (data) => {
-        this.adminDeviceInformationService.dataSource = data;
+        this.tabListFormService.dataSource = data;
       },
       (error) => {
         alertService.error(error);
@@ -52,13 +50,13 @@ export class AdminDeviceInformationComponentComponent
   }
 
   ngOnInit(): void {
-    this.adminDeviceInformationService.selectionChangeSubject$
+    this.tabListFormService.selectionChangeSubject$
       .pipe(takeWhile(() => this.isAlive))
       .subscribe((data) => {
         this.selectionChange(data);
       });
 
-    this.adminDeviceInformationService.removeSubject$
+    this.tabListFormService.removeSubject$
       .pipe(takeWhile(() => this.isAlive))
       .subscribe((data) => {
         this.removeClick(data);
@@ -75,7 +73,7 @@ export class AdminDeviceInformationComponentComponent
       this.deviceComponentInformationService
         .removeDeviceComponent(data.id)
         .subscribe();
-      this.adminDeviceInformationService.dataSource = this.adminDeviceInformationService.dataSource.filter(
+      this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter(
         (x) => x.id !== data.id
       );
     });
@@ -85,7 +83,7 @@ export class AdminDeviceInformationComponentComponent
 
   // Click event
   onClearClick(): void {
-    this.adminDeviceInformationService.clearSubject$.next();
+    this.tabListFormService.clearSubject$.next();
   }
 
   onResetClick(form: NgForm): void {
@@ -105,7 +103,7 @@ export class AdminDeviceInformationComponentComponent
         .addDeviceComponent(newComponent)
         .subscribe(
           (next) => {
-            this.adminDeviceInformationService.dataSource.push(next);
+            this.tabListFormService.dataSource.push(next);
           },
           (error) => {
             this.alertService.error(error);

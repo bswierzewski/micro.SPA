@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
-import { AdminDeviceInformationService } from 'src/app/shared/components/admin-device-information';
+import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { Kind } from 'src/app/shared/models';
 import { KindInformationService, AlertService } from 'src/app/core/_services';
 
@@ -15,22 +15,22 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   kindName: any;
   constructor(
     private kindInformationService: KindInformationService,
-    private adminDeviceInformationService: AdminDeviceInformationService<Kind>,
+    private tabListFormService: TabListFormService<Kind>,
     private alertService: AlertService
   ) {
     kindInformationService.getKinds().subscribe((data) => {
-      adminDeviceInformationService.dataSource = data;
+      tabListFormService.dataSource = data;
     });
   }
 
   ngOnInit(): void {
-    this.adminDeviceInformationService.selectionChangeSubject$
+    this.tabListFormService.selectionChangeSubject$
       .pipe(takeWhile(() => this.isAlive))
       .subscribe((data) => {
         this.selectionChange(data);
       });
 
-    this.adminDeviceInformationService.removeSubject$
+    this.tabListFormService.removeSubject$
       .pipe(takeWhile(() => this.isAlive))
       .subscribe((data) => {
         this.removeClick(data);
@@ -45,7 +45,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   removeClick(data: Kind): void {
     this.alertService.confirm('Are you sure?', () => {
       this.kindInformationService.removeKind(data.id).subscribe();
-      this.adminDeviceInformationService.dataSource = this.adminDeviceInformationService.dataSource.filter(
+      this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter(
         (x) => x.id !== data.id
       );
     });
@@ -57,7 +57,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
 
   // Click event
   onClearClick(): void {
-    this.adminDeviceInformationService.clearSubject$.next();
+    this.tabListFormService.clearSubject$.next();
   }
 
   onResetClick(form: NgForm): void {
@@ -68,9 +68,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     if (form.valid) {
       const newKind: Kind = {
         id:
-          Math.max(
-            ...this.adminDeviceInformationService.dataSource.map((o) => o.id)
-          ) + 1,
+          Math.max(...this.tabListFormService.dataSource.map((o) => o.id)) + 1,
         name: form.value.name,
         created: new Date(),
         photoUrl: '',
@@ -78,7 +76,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
 
       this.kindInformationService.addKind(newKind).subscribe(
         (next) => {
-          this.adminDeviceInformationService.dataSource.push(next);
+          this.tabListFormService.dataSource.push(next);
           form.resetForm();
         },
         (error) => {

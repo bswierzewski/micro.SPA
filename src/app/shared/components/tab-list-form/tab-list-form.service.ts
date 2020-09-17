@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { IAdminDeviceInformation } from './IAdminDeviceInformation';
+import { ITabListFormData } from '.';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminDeviceInformationService<T extends IAdminDeviceInformation> {
+export class TabListFormService<T extends ITabListFormData> {
   dataSource: T[];
   removeSubject$: Subject<any> = new Subject();
   clearSubject$: Subject<any> = new Subject();

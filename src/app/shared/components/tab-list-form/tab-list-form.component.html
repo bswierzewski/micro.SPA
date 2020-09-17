@@ -3,13 +3,13 @@
     <nav mat-tab-nav-bar backgroundColor="primary">
       <a
         mat-tab-link
-        [routerLink]="tabItem.Path"
-        *ngFor="let tabItem of tabItems"
+        [routerLink]="navItem.path"
+        *ngFor="let navItem of tabNavigation"
         routerLinkActive
         #rla="routerLinkActive"
         [active]="rla.isActive"
       >
-        {{ tabItem.Name }}
+        {{ navItem.name }}
       </a>
     </nav>
     <div class="content_wrapper">
@@ -19,10 +19,10 @@
           [multiple]="false"
           #lists
           (selectionChange)="onSelectionChange()"
-          [(ngModel)]="selectedItems"
+          [(ngModel)]="selectedItem"
         >
           <mat-list-option
-            *ngFor="let item of adminDeviceInformationService?.dataSource"
+            *ngFor="let item of tabListFormService?.dataSource"
             [value]="item"
           >
             <div class="list_option">

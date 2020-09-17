@@ -19,10 +19,10 @@ import { DeviceDetailComponent } from './modules/home/device/device-detail/devic
 import { DashboardComponent } from './modules/home/dashboard/dashboard.component';
 import { DialogDeviceListComponent } from './modules/home/dashboard/components/dialog-device-list.component';
 
+import { TabListFormComponent } from './shared/components/tab-list-form';
 import { AdminDeviceInformationComponentComponent } from './modules/admin/information/admin-device-information-component/admin-device-information-component.component';
 import { AdminDeviceInformationKindComponent } from './modules/admin/information/admin-device-information-kind/admin-device-information-kind.component';
 import { AdminDeviceInformationCategoryComponent } from './modules/admin/information/admin-device-information-category/admin-device-information-category.component';
-import { AdminDeviceInformationComponent } from './shared/components/admin-device-information/admin-device-information.component';
 import { AdminDeviceDetailComponent } from './modules/admin/device/admin-device-detail/admin-device-detail.component';
 import { AdminDeviceListComponent } from './modules/admin/device/admin-device-list/admin-device-list.component';
 import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
@@ -44,10 +44,10 @@ import { AdminVersionDetailComponent } from './modules/admin/version/admin-versi
     NavbarComponent,
     SidebarComponent,
     BaseComponent,
+    TabListFormComponent,
     AdminDeviceInformationCategoryComponent,
     AdminDeviceInformationKindComponent,
     AdminDeviceInformationComponentComponent,
-    AdminDeviceInformationComponent,
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),

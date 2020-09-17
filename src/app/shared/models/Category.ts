@@ -1,6 +1,6 @@
-import { IAdminDeviceInformation } from 'src/app/shared/components/admin-device-information/IAdminDeviceInformation';
+import { ITabListFormData } from 'src/app/shared/components/tab-list-form';
 
-export class Category implements IAdminDeviceInformation {
+export class Category implements ITabListFormData {
   id: number;
   name: string;
   iconName: string;

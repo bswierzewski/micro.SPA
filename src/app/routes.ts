@@ -10,7 +10,7 @@ import { AdminDeviceListComponent } from './modules/admin/device/admin-device-li
 import { AdminDeviceDetailComponent } from './modules/admin/device/admin-device-detail/admin-device-detail.component';
 import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
 import { AdminVersionDetailComponent } from './modules/admin/version/admin-version-detail/admin-version-detail.component';
-import { AdminDeviceInformationComponent } from './shared/components/admin-device-information/admin-device-information.component';
+import { TabListFormComponent } from './shared/components/tab-list-form';
 import { AdminDeviceInformationKindComponent } from './modules/admin/information/admin-device-information-kind/admin-device-information-kind.component';
 import { AdminDeviceInformationCategoryComponent } from './modules/admin/information/admin-device-information-category/admin-device-information-category.component';
 import { AdminDeviceInformationComponentComponent } from './modules/admin/information/admin-device-information-component/admin-device-information-component.component';
@@ -59,7 +59,7 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'devices_information',
-        component: AdminDeviceInformationComponent,
+        component: TabListFormComponent,
         children: [
           { path: 'kind', component: AdminDeviceInformationKindComponent },
           {
@@ -71,6 +71,13 @@ export const AppRoutes: Routes = [
             component: AdminDeviceInformationComponentComponent,
           },
         ],
+        data: {
+          tabNavigation: [
+            { path: '/admin/devices_information/kind', name: 'Kind' },
+            { path: '/admin/devices_information/category', name: 'Category' },
+            { path: '/admin/devices_information/component', name: 'Component' },
+          ],
+        },
       },
       { path: 'versions', component: AdminVersionListComponent },
       {
