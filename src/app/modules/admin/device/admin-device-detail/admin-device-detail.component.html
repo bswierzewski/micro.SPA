@@ -1,57 +1,42 @@
 <div class="header">{{ getHeader() }}</div>
-<form
-  #versionDetailForm="ngForm"
-  class="wrapper mat-elevation-z4"
-  (ngSubmit)="onSubmitClick(versionDetailForm)"
->
+<form #versionDetailForm="ngForm" class="wrapper mat-elevation-z4" (ngSubmit)="onSubmitClick(versionDetailForm)">
   <mat-form-field appearance="outline">
     <mat-label>MacAddress</mat-label>
     <input
       matInput
       placeholder="MacAddress"
-      ngModel
       name="macAddress"
-      [(ngModel)]="macAddress"
+      [(ngModel)]="dataModel.macAddress"
+      [disabled]="isPassMacAddress || !isCreatedMode"
     />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" ngModel name="name" [(ngModel)]="name" />
+    <input matInput placeholder="Name" name="name" [(ngModel)]="dataModel.name" />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
-    <mat-label>Photo Url</mat-label>
-    <input
-      matInput
-      placeholder="Photo Url"
-      ngModel
-      name="photoUrl"
-      [(ngModel)]="photoUrl"
-    />
+    <mat-label>Icon</mat-label>
+    <input matInput placeholder="Icon" name="icon" [(ngModel)]="dataModel.icon" />
   </mat-form-field>
 
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Kind</mat-label>
-      <mat-select [(ngModel)]="kind" name="kind">
-        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind">
+      <mat-select [(ngModel)]="dataModel.kindId" name="kind">
+        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">
           {{ kind.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Component</mat-label>
-      <mat-select [(ngModel)]="deviceComponent" name="component">
-        <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name">
-          <mat-option
-            *ngFor="let pokemon of group.pokemon"
-            [value]="pokemon.value"
-          >
-            {{ pokemon.viewValue }}
-          </mat-option>
-        </mat-optgroup>
+      <mat-label>DeviceComponent</mat-label>
+      <mat-select [(ngModel)]="dataModel.deviceComponentId" name="deviceComponent">
+        <mat-option *ngFor="let deviceComponent of deviceComponents$ | async" [value]="deviceComponent.id">
+          {{ deviceComponent.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -59,30 +44,15 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Specific version</mat-label>
-      <mat-select
-        [(ngModel)]="version"
-        name="version"
-        [disabled]="isAutoUpdate()"
-      >
-        <mat-option *ngFor="let food of ['foods', 'food2']" [value]="food">
-          {{ food }}
+      <mat-select [(ngModel)]="dataModel.versionId" name="version" [disabled]="isAutoUpdate()">
+        <mat-option *ngFor="let version of versions$ | async" [value]="version.id">
+          {{ version.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-button-toggle-group
-      class="button_group"
-      [(ngModel)]="autoUpdateGroupValue"
-      name="group"
-    >
-      <mat-button-toggle class="flex_item" value="specific"
-        >Specific</mat-button-toggle
-      >
-      <mat-button-toggle
-        (click)="onClearVersionClick()"
-        class="flex_item"
-        value="auto"
-        >Auto</mat-button-toggle
-      >
+    <mat-button-toggle-group class="button_group" [(ngModel)]="autoUpdateGroupValue" name="group">
+      <mat-button-toggle class="flex_item" value="specific">Specific</mat-button-toggle>
+      <mat-button-toggle (click)="onClearVersionClick()" class="flex_item" value="auto">Auto</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <button mat-raised-button color="primary" type="submit">

@@ -9,7 +9,7 @@ import {
   DeviceService,
 } from 'src/app/core/_services';
 
-export interface DeviceParamsData {
+export class Data {
   category?: Category;
   kind?: Kind;
   deviceComponents?: DeviceComponent[];
@@ -26,10 +26,10 @@ export class DeviceListComponent implements OnInit {
   components$: Observable<DeviceComponent[]>;
   devices$: Observable<Device[]>;
 
-  deviceParams: DeviceParamsData = {};
+  data: Data = new Data();
 
   isCategorySelected = () => {
-    return this.deviceParams?.category;
+    return this.data?.category;
   };
 
   constructor(
@@ -50,16 +50,14 @@ export class DeviceListComponent implements OnInit {
   }
 
   onResetFilterClick(): void {
-    this.deviceParams = {};
+    this.data = new Data();
 
     this.loadDevices();
   }
 
   categorySelectionChange(category: Category): void {
     if (category) {
-      this.components$ = this.deviceComponentInformationService.getDeviceComponents(
-        category.id
-      );
+      this.components$ = this.deviceComponentInformationService.getDeviceComponents(category.id);
     } else {
       this.components$ = of([]);
     }
@@ -68,13 +66,13 @@ export class DeviceListComponent implements OnInit {
   loadDevices(): void {
     let componentIds = [];
 
-    if (this.deviceParams?.deviceComponents) {
-      componentIds = this.deviceParams.deviceComponents.map((x) => x.id);
+    if (this.data?.deviceComponents) {
+      componentIds = this.data.deviceComponents.map((x) => x.id);
     }
 
     this.devices$ = this.deviceService.getDevices({
-      categoryId: this.deviceParams?.category?.id,
-      kindId: this.deviceParams?.kind?.id,
+      categoryId: this.data?.category?.id,
+      kindId: this.data?.kind?.id,
       componentIds,
     } as DeviceParams);
   }
@@ -87,15 +85,13 @@ export class DeviceListComponent implements OnInit {
   }
 
   getDeviceComponentsTriggerText(): string {
-    if (this.deviceParams.deviceComponents) {
-      const length = this.deviceParams.deviceComponents.length;
+    if (this.data.deviceComponents) {
+      const length = this.data.deviceComponents.length;
       if (length === 1) {
-        return this.deviceParams.deviceComponents[0].name;
+        return this.data.deviceComponents[0].name;
       }
       if (length > 1) {
-        return `${this.deviceParams.deviceComponents[0].name} (+ ${
-          length - 1
-        } ${length === 2 ? 'other' : 'others'})`;
+        return `${this.data.deviceComponents[0].name} (+ ${length - 1} ${length === 2 ? 'other' : 'others'})`;
       }
     }
     return '';

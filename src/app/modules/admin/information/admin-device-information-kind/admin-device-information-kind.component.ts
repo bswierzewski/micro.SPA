@@ -5,6 +5,11 @@ import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { Kind } from 'src/app/shared/models';
 import { KindInformationService, AlertService } from 'src/app/core/_services';
 
+export class DataModel {
+  name = '';
+  icon = '';
+}
+
 @Component({
   selector: 'app-admin-device-information-kind',
   templateUrl: './admin-device-information-kind.component.html',
@@ -12,7 +17,7 @@ import { KindInformationService, AlertService } from 'src/app/core/_services';
 })
 export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   isAlive = true;
-  kindName: any;
+  data = new DataModel();
   constructor(
     private kindInformationService: KindInformationService,
     private tabListFormService: TabListFormService<Kind>,
@@ -24,17 +29,13 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.tabListFormService.selectionChangeSubject$
-      .pipe(takeWhile(() => this.isAlive))
-      .subscribe((data) => {
-        this.selectionChange(data);
-      });
+    this.tabListFormService.selectionChangeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data) => {
+      this.selectionChange(data);
+    });
 
-    this.tabListFormService.removeSubject$
-      .pipe(takeWhile(() => this.isAlive))
-      .subscribe((data) => {
-        this.removeClick(data);
-      });
+    this.tabListFormService.removeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data) => {
+      this.removeClick(data);
+    });
   }
 
   ngOnDestroy(): void {
@@ -45,15 +46,11 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   removeClick(data: Kind): void {
     this.alertService.confirm('Are you sure?', () => {
       this.kindInformationService.removeKind(data.id).subscribe();
-      this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter(
-        (x) => x.id !== data.id
-      );
+      this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter((x) => x.id !== data.id);
     });
   }
 
-  selectionChange(data: Kind): void {
-    this.kindName = data[0].name;
-  }
+  selectionChange(data: Kind): void {}
 
   // Click event
   onClearClick(): void {
@@ -64,20 +61,17 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     form.resetForm();
   }
 
-  onSubmitClick(form: NgForm): void {
-    if (form.valid) {
-      const newKind: Kind = {
-        id:
-          Math.max(...this.tabListFormService.dataSource.map((o) => o.id)) + 1,
-        name: form.value.name,
-        created: new Date(),
-        icon: '',
-      };
+  onSubmitClick(): void {
+    console.log(this.data);
+    if (this.data.name && this.data.icon) {
+      let kind = new Kind();
+      kind.name = this.data.name;
+      kind.icon = this.data.icon;
 
-      this.kindInformationService.addKind(newKind).subscribe(
+      this.kindInformationService.addKind(kind).subscribe(
         (next) => {
           this.tabListFormService.dataSource.push(next);
-          form.resetForm();
+          this.data = new DataModel();
         },
         (error) => {
           this.alertService.error(error);

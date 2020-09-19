@@ -1,8 +1,13 @@
+import { Kind, Version, DeviceComponent, Category, Address } from './';
+
 export class Device {
   id: number;
+  created?: Date;
   name: string;
   icon?: string;
-  kindId?: number;
-  categoryId?: number;
-  deviceComponentId?: number;
+  address?: Address;
+  kind?: Kind;
+  category?: Category;
+  deviceComponent?: DeviceComponent;
+  version?: Version;
 }

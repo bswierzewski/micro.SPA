@@ -14,22 +14,18 @@ export class DeviceService {
 
   constructor(private http: HttpClient) {}
 
-  getDevices(
-    deviceParams: paramModels.DeviceParams = null
-  ): Observable<models.Device[]> {
+  getDevice(id: number): Observable<models.Device> {
+    return this.http.get<models.Device>(this.devicesUrl + `/${id}`);
+  }
+
+  getDevices(deviceParams: paramModels.DeviceParams = null): Observable<models.Device[]> {
     let headerParams = new HttpParams();
 
     if (deviceParams?.kindId) {
-      headerParams = headerParams.append(
-        'kindId',
-        deviceParams.kindId?.toString()
-      );
+      headerParams = headerParams.append('kindId', deviceParams.kindId?.toString());
     }
     if (deviceParams?.categoryId) {
-      headerParams = headerParams.append(
-        'categoryId',
-        deviceParams.categoryId.toString()
-      );
+      headerParams = headerParams.append('categoryId', deviceParams.categoryId.toString());
     }
 
     if (deviceParams?.componentIds && deviceParams?.componentIds.length > 0) {
@@ -37,13 +33,7 @@ export class DeviceService {
         .get<models.Device[]>(this.devicesUrl, {
           params: headerParams,
         })
-        .pipe(
-          map((devices) =>
-            devices.filter((x) =>
-              deviceParams.componentIds.includes(x.deviceComponentId)
-            )
-          )
-        );
+        .pipe(map((devices) => devices.filter((x) => deviceParams.componentIds.includes(x.deviceComponent.id))));
     } else {
       return this.http.get<models.Device[]>(this.devicesUrl, {
         params: headerParams,

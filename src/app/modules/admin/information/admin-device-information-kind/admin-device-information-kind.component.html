@@ -2,41 +2,19 @@
   <div class="wrapper">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
-      <input
-        matInput
-        placeholder="Name"
-        ngModel
-        name="name"
-        required
-        [(ngModel)]="kindName"
-      />
+      <input matInput placeholder="Name" name="name" required [(ngModel)]="data.name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Icon</mat-label>
+      <input matInput placeholder="Icon" name="icon" required [(ngModel)]="data.icon" />
     </mat-form-field>
   </div>
   <div class="row_button">
-    <button
-      mat-raised-button
-      class="mat-elevation-z4"
-      type="button"
-      (click)="onClearClick()"
-    >
-      Clear
-    </button>
-    <button
-      mat-raised-button
-      class="mat-elevation-z4"
-      color="warn"
-      type="button"
-      (click)="onResetClick(form)"
-    >
+    <button mat-raised-button class="mat-elevation-z4" type="button" (click)="onClearClick()">Clear</button>
+    <button mat-raised-button class="mat-elevation-z4" color="warn" type="button" (click)="onResetClick(form)">
       Reset
     </button>
-    <button
-      mat-raised-button
-      class="mat-elevation-z4"
-      color="primary"
-      type="submit"
-      (click)="onSubmitClick(form)"
-    >
+    <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit" (click)="onSubmitClick()">
       Submit
     </button>
   </div>

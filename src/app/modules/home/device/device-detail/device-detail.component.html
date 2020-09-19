@@ -1,81 +1,44 @@
 <div class="wrapper">
-  <div class="panel-device">
+  <div class="panel">
     <mat-card class="mat-elevation-z8">
-      <img
-        mat-card-image
-        src="https://botland.com.pl/61345-thickbox_default/esp32-wifi-bt-42-platforma-z-modulem-esp-wroom-32-zgodny-z-esp32-devkit.jpg"
-        alt="Photo of a Shiba Inu"
-      />
+      <div class="panel-header-icon">
+        <mat-icon [inline]="true">{{ device?.icon }}</mat-icon>
+      </div>
       <mat-card-content>
         <mat-divider></mat-divider>
         <br />
-        <h3>Name: ESP32</h3>
+        <h3>Name: {{ device?.name }}</h3>
         <mat-divider></mat-divider>
         <br />
-        <h3>Address MAC: ESP32</h3>
+        <h3>Created: {{ device?.created | date: 'yyyy-MM-dd HH:mm:ss' }}</h3>
         <mat-divider></mat-divider>
         <br />
-        <h3>Version: ESP32</h3>
+        <h3>Mac Address: {{ device?.address?.label }}</h3>
+        <mat-divider></mat-divider>
+        <br />
+        <h3>Kind: {{ device?.kind?.name }}</h3>
+        <mat-divider></mat-divider>
+        <br />
+        <h3>Category: {{ device?.category?.name }}</h3>
+        <mat-divider></mat-divider>
+        <br />
+        <h3>DeviceComponent: {{ device?.deviceComponent?.name }}</h3>
+        <mat-divider></mat-divider>
+        <br />
+        <h3>Actuall version: {{ device?.version?.name }}</h3>
       </mat-card-content>
     </mat-card>
   </div>
   <div class="container">
-    <div class="mat-elevation-z4">
-      <mat-tab-group backgroundColor="primary">
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <mat-icon class="example-tab-icon">analytics</mat-icon>
-            Information
-          </ng-template>
-          <div class="tab-container">Content 2</div>
-        </mat-tab>
+    <table mat-table [dataSource]="registrations$ | async" class="mat-elevation-z4 table-full-width table-brand-header">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
 
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <mat-icon class="example-tab-icon">history</mat-icon>
-            History
-          </ng-template>
-          <div class="tab-container">
-            <table
-              mat-table
-              [dataSource]="dataSource"
-              class="mat-elevation-z8 table-full-width"
-            >
-              <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef>No.</th>
-                <td mat-cell *matCellDef="let element">
-                  {{ element.position }}
-                </td>
-              </ng-container>
-
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-              </ng-container>
-
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef>Weight</th>
-                <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-              </ng-container>
-
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef>Symbol</th>
-                <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
   </div>
 </div>

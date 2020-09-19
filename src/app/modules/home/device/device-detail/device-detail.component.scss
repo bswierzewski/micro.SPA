@@ -1,14 +1,19 @@
 .wrapper {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 1fr 5fr;
+  display: flex;
+  flex-flow: row wrap;
+  grid-gap: 15px;
+}
+
+.panel {
+  flex: 1;
+
+  .panel-header-icon {
+    padding: 30px;
+    font-size: 5rem;
+    text-align: center;
+  }
 }
 
 .container {
-  display: grid;
-  grid-auto-rows: minmax(min-content, max-content);
-}
-
-mat-icon {
-  padding-right: 8px;
+  flex: 3;
 }
