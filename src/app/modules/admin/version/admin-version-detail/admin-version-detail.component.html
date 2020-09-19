@@ -2,14 +2,13 @@
 <form
   #versionDetailForm="ngForm"
   class="wrapper mat-elevation-z4"
-  (ngSubmit)="onSubmitClick(versionDetailForm)"
+  (ngSubmit)="onSubmitClick(versionDetailForm.value)"
 >
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input
       matInput
       placeholder="Name"
-      ngModel
       name="name"
       required
       [(ngModel)]="name"
@@ -23,7 +22,6 @@
         matInput
         type="number"
         placeholder="Major"
-        ngModel
         name="major"
         required
         [(ngModel)]="major"
@@ -35,7 +33,6 @@
         matInput
         type="number"
         placeholder="Minor"
-        ngModel
         name="minor"
         required
         [(ngModel)]="minor"
@@ -47,7 +44,6 @@
         matInput
         type="number"
         placeholder="Patch"
-        ngModel
         name="patch"
         required
         [(ngModel)]="patch"
@@ -61,11 +57,10 @@
       <mat-select
         matInput
         placeholder="Kind"
-        ngModel
-        name="kind"
-        [(ngModel)]="kind"
+        name="kindId"
+        [(ngModel)]="kindId"
       >
-        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind">{{
+        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">{{
           kind.name
         }}</mat-option>
       </mat-select>
@@ -76,26 +71,29 @@
       <mat-select
         matInput
         placeholder="Component"
-        ngModel
-        name="deviceComponent"
-        [(ngModel)]="deviceComponent"
+        name="deviceComponentId"
+        [(ngModel)]="deviceComponentId"
       >
         <mat-option
           *ngFor="let deviceComponent of deviceComponents$ | async"
-          [value]="deviceComponent"
+          [value]="deviceComponent.id"
           >{{ deviceComponent.name }}</mat-option
         >
       </mat-select>
     </mat-form-field>
   </div>
 
-  <label class="file mat-elevation-z4">
+  <label
+    [ngClass]="!isCreatedMode ? 'disable-file' : ''"
+    class="file mat-elevation-z4"
+  >
     <input
       type="file"
       id="file"
       style="display: none"
       #file
       (change)="handleFileInput($event.target.files)"
+      [disabled]="!isCreatedMode"
     />
     <div class="cutom-file">
       <div class="text-file">{{ getInputFileText() }}</div>
@@ -105,6 +103,7 @@
         color="primary"
         type="button"
         (click)="file.click()"
+        [disabled]="!isCreatedMode"
       >
         Browse
       </button>

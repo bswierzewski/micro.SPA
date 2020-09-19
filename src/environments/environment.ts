@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000',
-  socketUrl: 'http://localhost:8988',
-  testUrl: 'http://localhost:5000/api',
+  baseUrl: 'http://localhost:3000/',
+  socketUrl: 'http://localhost:8988/',
+  deviceUrl: 'http://localhost:3000/',
+  updateUrl: 'http://localhost:3000/',
 };
 
 /*

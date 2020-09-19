@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class CategoryInformationService {
-  categoriesUrl = environment.baseUrl + '/categories';
+  categoriesUrl = environment.deviceUrl + 'categories';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -17,7 +17,8 @@ export class CategoryInformationService {
   }
 
   addCategory(category: models.Category): Observable<any> {
-    return this.httpClient.put(this.categoriesUrl, category);
+    console.log(category);
+    return this.httpClient.post(this.categoriesUrl, category);
   }
 
   removeCategory(id: number): Observable<any> {

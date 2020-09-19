@@ -95,7 +95,7 @@ export class AdminDeviceInformationComponentComponent
       const newComponent: DeviceComponent = {
         id: 11,
         name: form.value.name,
-        iconName: form.value.icon,
+        icon: form.value.icon,
         categoryId: form.value.category[0]?.id,
       };
 

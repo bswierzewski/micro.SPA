@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DeviceService {
-  devicesUrl = 'http://localhost:3000' + '/devices';
+  devicesUrl = environment.deviceUrl + 'devices';
 
   constructor(private http: HttpClient) {}
 
@@ -51,11 +51,11 @@ export class DeviceService {
     }
   }
 
-  addKind(kind: models.Device): Observable<any> {
+  addDevice(kind: models.Device): Observable<any> {
     return this.http.post(this.devicesUrl, kind);
   }
 
-  removeKind(id: number): Observable<any> {
+  deleteDevice(id: number): Observable<any> {
     return this.http.delete(this.devicesUrl + `/${id}`);
   }
 }

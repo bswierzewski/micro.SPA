@@ -8,7 +8,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root',
 })
 export class DeviceComponentInformationService {
-  deviceComponentUrl = environment.baseUrl + '/components';
+  deviceComponentUrl = environment.deviceUrl + 'components';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -30,7 +30,7 @@ export class DeviceComponentInformationService {
   }
 
   addDeviceComponent(deviceComponent: models.DeviceComponent): Observable<any> {
-    return this.httpClient.put(this.deviceComponentUrl, deviceComponent);
+    return this.httpClient.post(this.deviceComponentUrl, deviceComponent);
   }
 
   removeDeviceComponent(id: number): Observable<any> {

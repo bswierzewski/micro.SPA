@@ -90,8 +90,8 @@ export class AdminDeviceInformationCategoryComponent
       const newCategory: Category = {
         id: 11,
         name: form.value.name,
-        iconName: form.value.icon,
-        deviceComponents: form.value.components.map((x) => x.id),
+        icon: form.value.icon,
+        deviceComponentIds: form.value.components.map((x) => x.id),
       };
 
       this.categoriesInformationService.addCategory(newCategory).subscribe(

@@ -4,5 +4,5 @@ export class Kind implements ITabListFormData {
   id: number;
   created: Date;
   name: string;
-  photoUrl: string;
+  icon: string;
 }

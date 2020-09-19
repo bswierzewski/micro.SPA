@@ -12,7 +12,7 @@ import {
 export interface DeviceParamsData {
   category?: Category;
   kind?: Kind;
-  components?: DeviceComponent[];
+  deviceComponents?: DeviceComponent[];
 }
 
 @Component({
@@ -29,7 +29,7 @@ export class DeviceListComponent implements OnInit {
   deviceParams: DeviceParamsData = {};
 
   isCategorySelected = () => {
-    return typeof this.deviceParams?.category?.id === typeof 1;
+    return this.deviceParams?.category;
   };
 
   constructor(
@@ -68,8 +68,8 @@ export class DeviceListComponent implements OnInit {
   loadDevices(): void {
     let componentIds = [];
 
-    if (this.deviceParams?.components) {
-      componentIds = this.deviceParams.components.map((x) => x.id);
+    if (this.deviceParams?.deviceComponents) {
+      componentIds = this.deviceParams.deviceComponents.map((x) => x.id);
     }
 
     this.devices$ = this.deviceService.getDevices({
@@ -79,10 +79,25 @@ export class DeviceListComponent implements OnInit {
     } as DeviceParams);
   }
 
-  getDeviceComponentsLabelDescripton(category: any): string {
+  getDeviceComponentsLabelDescripton(category: Category): string {
     if (!category) {
       return 'Choose category';
     }
     return 'Device components';
+  }
+
+  getDeviceComponentsTriggerText(): string {
+    if (this.deviceParams.deviceComponents) {
+      const length = this.deviceParams.deviceComponents.length;
+      if (length === 1) {
+        return this.deviceParams.deviceComponents[0].name;
+      }
+      if (length > 1) {
+        return `${this.deviceParams.deviceComponents[0].name} (+ ${
+          length - 1
+        } ${length === 2 ? 'other' : 'others'})`;
+      }
+    }
+    return '';
   }
 }

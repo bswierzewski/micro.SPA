@@ -71,7 +71,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
           Math.max(...this.tabListFormService.dataSource.map((o) => o.id)) + 1,
         name: form.value.name,
         created: new Date(),
-        photoUrl: '',
+        icon: '',
       };
 
       this.kindInformationService.addKind(newKind).subscribe(

@@ -6,3 +6,4 @@ export { CategoryInformationService } from './device-information/category-inform
 export { DeviceComponentInformationService } from './device-information/device-component-information.service';
 export { KindInformationService } from './device-information/kind-information.service';
 export { VersionService } from './version.service';
+export { AddressService } from './address.service';

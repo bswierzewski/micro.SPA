@@ -1,6 +1,7 @@
-export * from './Category';
-export * from './Device';
-export * from './DeviceComponent';
-export * from './Kind';
-export * from './SocketMessage';
-export * from './Version';
+export { Category } from './Category';
+export { Device } from './Device';
+export { DeviceComponent } from './DeviceComponent';
+export { Kind } from './Kind';
+export { SocketMessage } from './SocketMessage';
+export { Version } from './Version';
+export { Address } from './Address';
