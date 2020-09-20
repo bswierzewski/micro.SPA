@@ -38,6 +38,7 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
         alertService.error(error.message);
       }
     );
+
     this.loadCategories();
   }
 
@@ -65,6 +66,7 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
       this.categoriesInformationService.removeCategory(data.id).subscribe(
         (next) => {
           this.loadCategories();
+          this.onClearClick();
         },
         (error) => {
           this.alertService.error(error.message);
@@ -83,36 +85,31 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
   }
 
   // Click event
-  onClearClick(form: NgForm): void {
+  onClearClick(): void {
     this.tabListFormService.clearSubject$.next();
-    form.resetForm();
     this.model = new Model();
   }
 
-  onSubmitClick(form: NgForm): void {
-    if (!form.valid) {
-      return;
-    } else {
-      const category = {
-        id: this.model.id,
-        name: this.model.name,
-        icon: this.model.icon,
-        deviceComponentIds: this.model.deviceComponentIds,
-      } as Category;
+  onSubmitClick(): void {
+    const category = {
+      id: this.model.id,
+      name: this.model.name,
+      icon: this.model.icon,
+      deviceComponentIds: this.model.deviceComponentIds,
+    } as Category;
 
-      this.categoriesInformationService.addCategory(category).subscribe(
-        (next) => {
-          if (this.model.id === 0) {
-            this.alertService.success('Category updated!');
-          }
-          this.onClearClick(form);
-          this.loadCategories();
-        },
-        (error) => {
-          this.alertService.error(error.message);
+    this.categoriesInformationService.addCategory(category).subscribe(
+      (next) => {
+        if (this.model.id === 0) {
+          this.alertService.success('Category updated!');
         }
-      );
-    }
+        this.loadCategories();
+        this.onClearClick();
+      },
+      (error) => {
+        this.alertService.error(error.message);
+      }
+    );
   }
 
   getComponentsFieldHeader(): string {

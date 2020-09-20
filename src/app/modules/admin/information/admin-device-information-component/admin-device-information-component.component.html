@@ -25,8 +25,10 @@
     </mat-expansion-panel>
   </div>
   <div class="row_button">
-    <button mat-raised-button class="mat-elevation-z4" type="button" (click)="onClearClick(form)">Clear</button>
-    <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit" (click)="onSubmitClick(form)">
+    <button mat-raised-button class="mat-elevation-z4" type="button" (click)="form.resetForm(); onClearClick()">
+      Clear
+    </button>
+    <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit" (click)="onSubmitClick()">
       Submit
     </button>
   </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { DeviceComponent, Category } from 'src/app/shared/models';
 import { DeviceComponentInformationService, CategoryInformationService, AlertService } from 'src/app/core/_services';
@@ -31,6 +30,7 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     private alertService: AlertService
   ) {
     this.loadComponents();
+
     categoriesInformationService.getCategories().subscribe(
       (data) => {
         this.categories = data;
@@ -60,6 +60,7 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     this.alertService.confirm('Are you sure?', () => {
       this.deviceComponentInformationService.removeDeviceComponent(data.id).subscribe(
         (next) => {
+          this.onClearClick();
           this.loadComponents();
         },
         (error) => {
@@ -83,34 +84,31 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
   }
 
   // Click event
-  onClearClick(form: NgForm): void {
+  onClearClick(): void {
     this.tabListFormService.clearSubject$.next();
-    form.resetForm();
     this.model = new Model();
   }
 
-  onSubmitClick(form: NgForm): void {
-    if (form.valid) {
-      const deviceComponent = {
-        id: this.model.id,
-        name: this.model.name,
-        icon: this.model.icon,
-        categoryId: this.model.categoryId[0],
-      } as DeviceComponent;
+  onSubmitClick(): void {
+    const deviceComponent = {
+      id: this.model.id,
+      name: this.model.name,
+      icon: this.model.icon,
+      categoryId: this.model.categoryId[0],
+    } as DeviceComponent;
 
-      this.deviceComponentInformationService.addDeviceComponent(deviceComponent).subscribe(
-        (next) => {
-          if (this.model.id !== 0) {
-            this.alertService.success('Components updated!');
-          }
-          this.onClearClick(form);
-          this.loadComponents();
-        },
-        (error) => {
-          this.alertService.error(error);
+    this.deviceComponentInformationService.addDeviceComponent(deviceComponent).subscribe(
+      (next) => {
+        if (this.model.id !== 0) {
+          this.alertService.success('Components updated!');
         }
-      );
-    }
+        this.onClearClick();
+        this.loadComponents();
+      },
+      (error) => {
+        this.alertService.error(error);
+      }
+    );
   }
 
   // Local helper method

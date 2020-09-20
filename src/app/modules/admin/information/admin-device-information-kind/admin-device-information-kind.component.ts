@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
 import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { Kind } from 'src/app/shared/models';
@@ -25,7 +24,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     private tabListFormService: TabListFormService<Kind>,
     private alertService: AlertService
   ) {
-    tabListFormService.dataSource$ = kindInformationService.getKinds();
+    this.loadKinds();
   }
 
   ngOnInit(): void {
@@ -42,12 +41,17 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     this.isAlive = false;
   }
 
+  loadKinds(): void {
+    this.tabListFormService.dataSource$ = this.kindInformationService.getKinds();
+  }
+
   // Method to subscribe subject
   removeClick(data: Kind): void {
     this.alertService.confirm('Are you sure?', () => {
       this.kindInformationService.removeKind(data.id).subscribe(
         (next) => {
-          this.tabListFormService.dataSource$ = next;
+          this.onClearClick();
+          this.loadKinds();
         },
         (error) => {
           this.alertService.error(error);
@@ -70,10 +74,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     this.model = new Model();
   }
 
-  onSubmitClick(form: NgForm): void {
-    if (!form.valid) {
-      return;
-    }
+  onSubmitClick(): void {
     if (this.model.name && this.model.icon) {
       const kind = {
         id: this.model.id,
@@ -83,12 +84,11 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
 
       this.kindInformationService.addKind(kind).subscribe(
         (next) => {
-          if (kind.id === 0) {
-            this.tabListFormService.dataSource$ = this.kindInformationService.getKinds();
-          } else {
+          if (kind.id !== 0) {
             this.alertService.success('Kind updated!');
           }
-          form.resetForm();
+          this.onClearClick();
+          this.loadKinds();
         },
         (error) => {
           this.alertService.error(error);
