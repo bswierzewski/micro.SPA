@@ -22,6 +22,7 @@
           [(ngModel)]="selectedItem"
         >
           <mat-list-option *ngFor="let item of tabListFormService?.dataSource" [value]="item">
+            <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
             <div class="list_option">
               {{ item.name }}
               <button
@@ -33,7 +34,6 @@
                 <mat-icon>remove</mat-icon>
               </button>
             </div>
-            <mat-icon mat-list-icon>developer_board</mat-icon>
           </mat-list-option>
         </mat-selection-list>
       </div>
