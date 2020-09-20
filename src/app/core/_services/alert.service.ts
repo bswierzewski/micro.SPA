@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -19,24 +19,40 @@ export class AlertService {
     }).then((result) => {
       if (result.isConfirmed) {
         okCallback();
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
     });
   }
 
   success(message: string): void {
-    console.log(message);
+    this.fireMixin(message, 'success');
   }
 
   error(message: string): void {
-    console.log(message);
+    this.fireMixin(message, 'error');
   }
 
   warning(message: string): void {
-    console.log(message);
+    this.fireMixin(message, 'warning');
   }
 
   message(message: string): void {
-    console.log(message);
+    this.fireMixin(message, 'info');
+  }
+
+  private fireMixin(message: string, sweetAlertIcon: SweetAlertIcon): void {
+    Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    }).fire({
+      icon: sweetAlertIcon,
+      title: message,
+    });
   }
 }

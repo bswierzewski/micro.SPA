@@ -12,26 +12,21 @@ import { ITabListFormData } from './ITabListFormData';
 })
 export class TabListFormComponent implements OnInit, OnDestroy {
   isSubscribe = true;
-  selectedItem: ITabListFormData;
+  selectedItem: ITabListFormData[];
 
   @Input()
   tabNavigation: ITabListFormNavigation[];
 
-  constructor(
-    private route: ActivatedRoute,
-    public tabListFormService: TabListFormService<any>
-  ) {
+  constructor(private route: ActivatedRoute, public tabListFormService: TabListFormService<any>) {
     route.data.subscribe((data) => {
       this.tabNavigation = data.tabNavigation;
     });
   }
 
   ngOnInit(): void {
-    this.tabListFormService.clearSubject$
-      .pipe(takeWhile(() => this.isSubscribe))
-      .subscribe(() => {
-        this.selectedItem = null;
-      });
+    this.tabListFormService.clearSubject$.pipe(takeWhile(() => this.isSubscribe)).subscribe(() => {
+      this.selectedItem = null;
+    });
   }
 
   ngOnDestroy(): void {

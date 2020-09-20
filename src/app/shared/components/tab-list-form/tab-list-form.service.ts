@@ -9,7 +9,7 @@ export class TabListFormService<T extends ITabListFormData> {
   dataSource: T[];
   removeSubject$: Subject<any> = new Subject();
   clearSubject$: Subject<any> = new Subject();
-  selectionChangeSubject$: Subject<T> = new Subject();
+  selectionChangeSubject$: Subject<T[]> = new Subject();
 
   constructor() {}
 }

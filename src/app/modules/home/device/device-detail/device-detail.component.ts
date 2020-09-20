@@ -13,10 +13,7 @@ export class DeviceDetailComponent implements OnInit {
   displayedColumns: string[] = ['position'];
   device: Device;
   registrations$: Observable<Registration[]>;
-  constructor(
-    private route: ActivatedRoute,
-    private deviceService: DeviceService
-  ) {
+  constructor(private route: ActivatedRoute, private deviceService: DeviceService) {
     route.params.subscribe((params) => {
       if (params.id) {
         deviceService.getDevice(params.id).subscribe((next) => {

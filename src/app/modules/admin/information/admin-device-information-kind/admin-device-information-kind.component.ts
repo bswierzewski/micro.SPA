@@ -5,7 +5,8 @@ import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { Kind } from 'src/app/shared/models';
 import { KindInformationService, AlertService } from 'src/app/core/_services';
 
-export class DataModel {
+export class Model {
+  id = 0;
   name = '';
   icon = '';
 }
@@ -17,15 +18,21 @@ export class DataModel {
 })
 export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   isAlive = true;
-  data = new DataModel();
+  model = new Model();
+
   constructor(
     private kindInformationService: KindInformationService,
     private tabListFormService: TabListFormService<Kind>,
     private alertService: AlertService
   ) {
-    kindInformationService.getKinds().subscribe((data) => {
-      tabListFormService.dataSource = data;
-    });
+    kindInformationService.getKinds().subscribe(
+      (data) => {
+        tabListFormService.dataSource = data;
+      },
+      (error) => {
+        alertService.error(error.message);
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -45,33 +52,50 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
   // Method to subscribe subject
   removeClick(data: Kind): void {
     this.alertService.confirm('Are you sure?', () => {
-      this.kindInformationService.removeKind(data.id).subscribe();
-      this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter((x) => x.id !== data.id);
+      this.kindInformationService.removeKind(data.id).subscribe(
+        (next) => {
+          this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter((x) => x.id !== data.id);
+        },
+        (error) => {
+          this.alertService.error(error);
+        }
+      );
     });
   }
 
-  selectionChange(data: Kind): void {}
+  selectionChange(data: Kind[]): void {
+    if (data[0].name) {
+      this.model.id = data[0].id;
+      this.model.icon = data[0].icon;
+      this.model.name = data[0].name;
+    }
+  }
 
   // Click event
   onClearClick(): void {
     this.tabListFormService.clearSubject$.next();
+    this.model = new Model();
   }
 
-  onResetClick(form: NgForm): void {
-    form.resetForm();
-  }
-
-  onSubmitClick(): void {
-    console.log(this.data);
-    if (this.data.name && this.data.icon) {
-      let kind = new Kind();
-      kind.name = this.data.name;
-      kind.icon = this.data.icon;
+  onSubmitClick(form: NgForm): void {
+    if (!form.valid) {
+      return;
+    }
+    if (this.model.name && this.model.icon) {
+      const kind = {
+        id: this.model.id,
+        name: this.model.name,
+        icon: this.model.icon,
+      } as Kind;
 
       this.kindInformationService.addKind(kind).subscribe(
         (next) => {
-          this.tabListFormService.dataSource.push(next);
-          this.data = new DataModel();
+          if (kind.id === 0) {
+            this.tabListFormService.dataSource.push(next);
+          } else {
+            this.alertService.success('Kind updated!');
+          }
+          form.resetForm();
         },
         (error) => {
           this.alertService.error(error);
