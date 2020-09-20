@@ -56,14 +56,7 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
   }
 
   loadCategories(): void {
-    this.categoriesInformationService.getCategories().subscribe(
-      (data) => {
-        this.tabListFormService.dataSource = [...data];
-      },
-      (error) => {
-        this.alertService.error(error.message);
-      }
-    );
+    this.tabListFormService.dataSource$ = this.categoriesInformationService.getCategories();
   }
 
   // Method to subscribe subject
@@ -71,7 +64,7 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
     this.alertService.confirm('Are you sure?', () => {
       this.categoriesInformationService.removeCategory(data.id).subscribe(
         (next) => {
-          this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter((x) => x.id !== data.id);
+          this.loadCategories();
         },
         (error) => {
           this.alertService.error(error.message);
@@ -80,12 +73,12 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
     });
   }
 
-  selectionChange(data: Category[]): void {
-    if (data[0].name) {
-      this.model.id = data[0].id;
-      this.model.name = data[0].name;
-      this.model.icon = data[0].icon;
-      this.model.deviceComponentIds = data[0].deviceComponentIds;
+  selectionChange(data: Category): void {
+    if (data.name) {
+      this.model.id = data.id;
+      this.model.name = data.name;
+      this.model.icon = data.icon;
+      this.model.deviceComponentIds = data.deviceComponentIds;
     }
   }
 
@@ -110,8 +103,6 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
       this.categoriesInformationService.addCategory(category).subscribe(
         (next) => {
           if (this.model.id === 0) {
-            this.tabListFormService.dataSource.push(next);
-          } else {
             this.alertService.success('Category updated!');
           }
           this.onClearClick(form);

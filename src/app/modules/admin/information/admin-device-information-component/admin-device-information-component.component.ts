@@ -9,7 +9,7 @@ export class Model {
   id = 0;
   name = '';
   icon = '';
-  categoryId: number[] = [];
+  categoryId = [0];
   isExpanded = false;
 }
 
@@ -60,7 +60,7 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     this.alertService.confirm('Are you sure?', () => {
       this.deviceComponentInformationService.removeDeviceComponent(data.id).subscribe(
         (next) => {
-          this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter((x) => x.id !== data.id);
+          this.loadComponents();
         },
         (error) => {
           this.alertService.error(error);
@@ -69,24 +69,17 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     });
   }
 
-  selectionChange(data: DeviceComponent[]): void {
-    if (data[0].name) {
-      this.model.id = data[0].id;
-      this.model.name = data[0].name;
-      this.model.icon = data[0].icon;
-      this.model.categoryId = [data[0].categoryId];
+  selectionChange(data: DeviceComponent): void {
+    if (data.name) {
+      this.model.id = data.id;
+      this.model.name = data.name;
+      this.model.icon = data.icon;
+      this.model.categoryId = [data.categoryId];
     }
   }
 
   loadComponents(): void {
-    this.deviceComponentInformationService.getDeviceComponents().subscribe(
-      (data) => {
-        this.tabListFormService.dataSource = data;
-      },
-      (error) => {
-        this.alertService.error(error.message);
-      }
-    );
+    this.tabListFormService.dataSource$ = this.deviceComponentInformationService.getDeviceComponents();
   }
 
   // Click event
@@ -102,14 +95,12 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
         id: this.model.id,
         name: this.model.name,
         icon: this.model.icon,
-        categoryId: this.model?.categoryId[0],
+        categoryId: this.model.categoryId[0],
       } as DeviceComponent;
 
       this.deviceComponentInformationService.addDeviceComponent(deviceComponent).subscribe(
         (next) => {
-          if (this.model.id === 0) {
-            this.tabListFormService.dataSource.push(next);
-          } else {
+          if (this.model.id !== 0) {
             this.alertService.success('Components updated!');
           }
           this.onClearClick(form);
@@ -124,9 +115,10 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
 
   // Local helper method
   getCategoryiesFieldHeader(): string {
-    if (!this.model?.categoryId[0] || this.model.categoryId[0] === undefined) {
+    if (!this.model.categoryId[0]) {
       return 'Choose category';
+    } else {
+      return this.categories.find((x) => x.id === this.model.categoryId[0]).name;
     }
-    return this.categories[this.model.categoryId[0] - 1].name;
   }
 }

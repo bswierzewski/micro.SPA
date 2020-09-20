@@ -25,14 +25,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     private tabListFormService: TabListFormService<Kind>,
     private alertService: AlertService
   ) {
-    kindInformationService.getKinds().subscribe(
-      (data) => {
-        tabListFormService.dataSource = data;
-      },
-      (error) => {
-        alertService.error(error.message);
-      }
-    );
+    tabListFormService.dataSource$ = kindInformationService.getKinds();
   }
 
   ngOnInit(): void {
@@ -54,7 +47,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     this.alertService.confirm('Are you sure?', () => {
       this.kindInformationService.removeKind(data.id).subscribe(
         (next) => {
-          this.tabListFormService.dataSource = this.tabListFormService.dataSource.filter((x) => x.id !== data.id);
+          this.tabListFormService.dataSource$ = next;
         },
         (error) => {
           this.alertService.error(error);
@@ -63,11 +56,11 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectionChange(data: Kind[]): void {
-    if (data[0].name) {
-      this.model.id = data[0].id;
-      this.model.icon = data[0].icon;
-      this.model.name = data[0].name;
+  selectionChange(data: Kind): void {
+    if (data.name) {
+      this.model.id = data.id;
+      this.model.icon = data.icon;
+      this.model.name = data.name;
     }
   }
 
@@ -91,7 +84,7 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
       this.kindInformationService.addKind(kind).subscribe(
         (next) => {
           if (kind.id === 0) {
-            this.tabListFormService.dataSource.push(next);
+            this.tabListFormService.dataSource$ = this.kindInformationService.getKinds();
           } else {
             this.alertService.success('Kind updated!');
           }

@@ -21,7 +21,7 @@
           (selectionChange)="onSelectionChange()"
           [(ngModel)]="selectedItem"
         >
-          <mat-list-option *ngFor="let item of tabListFormService?.dataSource" [value]="item">
+          <mat-list-option *ngFor="let item of tabListFormService?.dataSource$ | async" [value]="item">
             <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
             <div class="list_option">
               {{ item.name }}

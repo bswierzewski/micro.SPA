@@ -17,7 +17,6 @@ export class CategoryInformationService {
   }
 
   addCategory(category: models.Category): Observable<any> {
-    console.log(category);
     return this.httpClient.post(this.categoriesUrl, category);
   }
 

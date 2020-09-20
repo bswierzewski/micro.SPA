@@ -34,7 +34,7 @@ export class TabListFormComponent implements OnInit, OnDestroy {
   }
 
   onSelectionChange(): void {
-    this.tabListFormService.selectionChangeSubject$.next(this.selectedItem);
+    this.tabListFormService.selectionChangeSubject$.next(this.selectedItem[0]);
   }
 
   onRemoveClick(item: ITabListFormData): void {

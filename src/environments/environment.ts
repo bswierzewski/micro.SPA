@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   baseUrl: 'http://localhost:3000/',
   socketUrl: 'http://localhost:8988/',
-  deviceUrl: 'http://localhost:3000/',
+  deviceUrl: 'http://localhost:5000/api/',
   updateUrl: 'http://localhost:3000/',
 };
 
