@@ -45,7 +45,7 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     if (!this.model.categoryIndex[0] && this.model.categoryIndex[0] !== 0) {
       return 'Choose category';
     } else {
-      return this.categories[this.model.categoryIndex[0]].name;
+      return this.categories[this.model.categoryIndex[0]]?.name ?? 'Choose category';
     }
   }
 
@@ -100,20 +100,35 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
       id: this.model.id,
       name: this.model.name,
       icon: this.model.icon,
-      categoryId: this.categories[this.model.categoryIndex[0]].id,
+      categoryId: this.categories[this.model.categoryIndex[0]]?.id,
     } as DeviceComponent;
 
-    this.deviceComponentInformationService.addDeviceComponent(deviceComponent).subscribe(
-      (next) => {
-        if (this.model.id !== 0) {
-          this.alertService.success('Components updated!');
+    if (this.model.id !== 0) {
+      this.deviceComponentInformationService.updateDeviceComponent(deviceComponent).subscribe(
+        (next) => {
+          if (this.model.id !== 0) {
+            this.alertService.success('Components updated!');
+          }
+          this.onClearClick();
+          this.loadComponents();
+        },
+        (error) => {
+          this.alertService.error(error);
         }
-        this.onClearClick();
-        this.loadComponents();
-      },
-      (error) => {
-        this.alertService.error(error);
-      }
-    );
+      );
+    } else {
+      this.deviceComponentInformationService.addDeviceComponent(deviceComponent).subscribe(
+        (next) => {
+          if (this.model.id !== 0) {
+            this.alertService.success('Components added!');
+          }
+          this.onClearClick();
+          this.loadComponents();
+        },
+        (error) => {
+          this.alertService.error(error);
+        }
+      );
+    }
   }
 }

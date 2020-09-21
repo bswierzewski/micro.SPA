@@ -8,6 +8,6 @@ export class Device {
   address?: Address;
   kind?: Kind;
   category?: Category;
-  deviceComponent?: DeviceComponent;
+  component?: DeviceComponent;
   version?: Version;
 }

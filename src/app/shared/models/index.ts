@@ -1,5 +1,6 @@
 export { Category } from './Category';
 export { Device } from './Device';
+export { DeviceEntry } from './DeviceEntry';
 export { DeviceComponent } from './DeviceComponent';
 export { Kind } from './Kind';
 export { SocketMessage } from './SocketMessage';

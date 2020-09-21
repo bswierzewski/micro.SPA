@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Address, Device } from 'src/app/shared/models';
-import {
-  AddressService,
-  DeviceService,
-  AlertService,
-} from 'src/app/core/_services';
+import { AddressService, DeviceService, AlertService } from 'src/app/core/_services';
 
 @Component({
   selector: 'app-admin-device-list',
@@ -13,12 +9,7 @@ import {
   styleUrls: ['./admin-device-list.component.scss'],
 })
 export class AdminDeviceListComponent implements OnInit {
-  displayedKnowColumns: string[] = [
-    'name',
-    'deviceComponent',
-    'kind',
-    'action',
-  ];
+  displayedKnowColumns: string[] = ['name', 'kind', 'category', 'component', 'action'];
   displayedUnKnowColumns: string[] = ['created', 'label', 'action'];
 
   unKnowDataSource$: Observable<Address[]>;

@@ -33,7 +33,7 @@ export class DeviceService {
         .get<models.Device[]>(this.devicesUrl, {
           params: headerParams,
         })
-        .pipe(map((devices) => devices.filter((x) => deviceParams.componentIds.includes(x.deviceComponent.id))));
+        .pipe(map((devices) => devices.filter((x) => deviceParams.componentIds.includes(x.component.id))));
     } else {
       return this.http.get<models.Device[]>(this.devicesUrl, {
         params: headerParams,
@@ -41,8 +41,12 @@ export class DeviceService {
     }
   }
 
-  addDevice(kind: models.Device): Observable<any> {
-    return this.http.post(this.devicesUrl, kind);
+  addDevice(device: models.DeviceEntry): Observable<any> {
+    return this.http.post(this.devicesUrl, device);
+  }
+
+  updateDevice(device: models.DeviceEntry): Observable<any> {
+    return this.http.put(this.devicesUrl + `/${device.id}`, device);
   }
 
   deleteDevice(id: number): Observable<any> {
