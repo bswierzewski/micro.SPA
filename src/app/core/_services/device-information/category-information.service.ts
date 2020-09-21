@@ -20,6 +20,10 @@ export class CategoryInformationService {
     return this.httpClient.post(this.categoriesUrl, category);
   }
 
+  updateCategory(category: models.Category): Observable<any> {
+    return this.httpClient.put(this.categoriesUrl + `/${category.id}`, category);
+  }
+
   removeCategory(id: number): Observable<any> {
     return this.httpClient.delete(this.categoriesUrl + `/${id}`);
   }

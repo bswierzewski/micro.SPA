@@ -8,8 +8,8 @@ export class Model {
   id = 0;
   name = '';
   icon = '';
-  categoryId = [0];
   isExpanded = false;
+  categoryIndex: number[] = [];
 }
 
 @Component({
@@ -18,10 +18,9 @@ export class Model {
   styleUrls: ['./admin-device-information-component.component.scss'],
 })
 export class AdminDeviceInformationComponentComponent implements OnInit, OnDestroy {
+  categories: Category[];
   isAlive = true;
   model = new Model();
-
-  categories: Category[];
 
   constructor(
     private categoriesInformationService: CategoryInformationService,
@@ -30,57 +29,64 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     private alertService: AlertService
   ) {
     this.loadComponents();
-
-    categoriesInformationService.getCategories().subscribe(
-      (data) => {
-        this.categories = data;
-      },
-      (error) => {
-        this.alertService.error(error.message);
-      }
-    );
+    this.loadCategories();
   }
 
   ngOnInit(): void {
-    this.tabListFormService.selectionChangeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data) => {
-      this.selectionChange(data);
-    });
-
-    this.tabListFormService.removeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data) => {
-      this.removeClick(data);
-    });
+    this.selectionChangeSubscribe();
+    this.removeSubscribe();
   }
 
   ngOnDestroy(): void {
     this.isAlive = false;
   }
 
-  // Method to subscribe subject
-  removeClick(data: DeviceComponent): void {
-    this.alertService.confirm('Are you sure?', () => {
-      this.deviceComponentInformationService.removeDeviceComponent(data.id).subscribe(
-        (next) => {
-          this.onClearClick();
-          this.loadComponents();
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
-    });
+  expansionPanelTitle(): string {
+    if (!this.model.categoryIndex[0] && this.model.categoryIndex[0] !== 0) {
+      return 'Choose category';
+    } else {
+      return this.categories[this.model.categoryIndex[0]].name;
+    }
   }
 
-  selectionChange(data: DeviceComponent): void {
-    if (data.name) {
-      this.model.id = data.id;
-      this.model.name = data.name;
-      this.model.icon = data.icon;
-      this.model.categoryId = [data.categoryId];
-    }
+  selectionChangeSubscribe(): void {
+    this.tabListFormService.selectionChangeSubject$
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((value: DeviceComponent) => {
+        if (value.name) {
+          this.model.id = value.id;
+          this.model.name = value.name;
+          this.model.icon = value.icon;
+          this.model.categoryIndex = [this.categories.findIndex((x) => x.id === value.categoryId)];
+        }
+      });
+  }
+
+  // Method to subscribe subject
+  removeSubscribe(): void {
+    this.tabListFormService.removeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data: DeviceComponent) => {
+      this.alertService.confirm('Are you sure?', () => {
+        this.deviceComponentInformationService.removeDeviceComponent(data.id).subscribe(
+          (next) => {
+            this.onClearClick();
+            this.loadComponents();
+          },
+          (error) => {
+            this.alertService.error(error);
+          }
+        );
+      });
+    });
   }
 
   loadComponents(): void {
     this.tabListFormService.dataSource$ = this.deviceComponentInformationService.getDeviceComponents();
+  }
+
+  loadCategories(): void {
+    this.categoriesInformationService.getCategories().subscribe((value) => {
+      this.categories = value;
+    });
   }
 
   // Click event
@@ -94,7 +100,7 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
       id: this.model.id,
       name: this.model.name,
       icon: this.model.icon,
-      categoryId: this.model.categoryId[0],
+      categoryId: this.categories[this.model.categoryIndex[0]].id,
     } as DeviceComponent;
 
     this.deviceComponentInformationService.addDeviceComponent(deviceComponent).subscribe(
@@ -109,14 +115,5 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
         this.alertService.error(error);
       }
     );
-  }
-
-  // Local helper method
-  getCategoryiesFieldHeader(): string {
-    if (!this.model.categoryId[0]) {
-      return 'Choose category';
-    } else {
-      return this.categories.find((x) => x.id === this.model.categoryId[0]).name;
-    }
   }
 }

@@ -3,6 +3,7 @@ import { takeWhile } from 'rxjs/operators';
 import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { Kind } from 'src/app/shared/models';
 import { KindInformationService, AlertService } from 'src/app/core/_services';
+import { NgForm } from '@angular/forms';
 
 export class Model {
   id = 0;
@@ -27,18 +28,21 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     this.loadKinds();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectionChangeSubscribe();
+    this.removeSubscribe();
+  }
 
   ngOnDestroy(): void {
     this.isAlive = false;
   }
 
   selectionChangeSubscribe(): void {
-    this.tabListFormService.selectionChangeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data) => {
-      if (data.name) {
-        this.model.id = data.id;
-        this.model.icon = data.icon;
-        this.model.name = data.name;
+    this.tabListFormService.selectionChangeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((value: Kind) => {
+      if (value.name) {
+        this.model.id = value.id;
+        this.model.icon = value.icon;
+        this.model.name = value.name;
       }
     });
   }
@@ -70,7 +74,11 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
     this.model = new Model();
   }
 
-  onSubmitClick(): void {
+  onSubmitClick(form: NgForm): void {
+    if (form.invalid) {
+      return;
+    }
+
     if (this.model.name && this.model.icon) {
       const kind = {
         id: this.model.id,
@@ -78,18 +86,31 @@ export class AdminDeviceInformationKindComponent implements OnInit, OnDestroy {
         icon: this.model.icon,
       } as Kind;
 
-      this.kindInformationService.addKind(kind).subscribe(
-        (next) => {
-          if (kind.id !== 0) {
-            this.alertService.success('Kind updated!');
+      if (kind.id === 0) {
+        this.kindInformationService.addKind(kind).subscribe(
+          (next) => {
+            this.alertService.success('Kind added!');
+            form.resetForm();
+            this.onClearClick();
+            this.loadKinds();
+          },
+          (error) => {
+            this.alertService.error(error);
           }
-          this.onClearClick();
-          this.loadKinds();
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
+        );
+      } else {
+        this.kindInformationService.updateKind(kind).subscribe(
+          (next) => {
+            this.alertService.success('Kind updated!');
+            form.resetForm();
+            this.onClearClick();
+            this.loadKinds();
+          },
+          (error) => {
+            this.alertService.error(error);
+          }
+        );
+      }
     }
   }
 }

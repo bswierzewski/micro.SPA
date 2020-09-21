@@ -1,16 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
 import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { DeviceComponent, Category } from 'src/app/shared/models';
 import { DeviceComponentInformationService, CategoryInformationService, AlertService } from 'src/app/core/_services';
-import { Observable } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 export class Model {
   id = 0;
   name = '';
   icon = '';
-  deviceComponentIds: number[] = [];
+  componentIndexes: number[] = [];
   isExpanded = false;
 }
 
@@ -20,9 +19,9 @@ export class Model {
   styleUrls: ['./admin-device-information-category.component.scss'],
 })
 export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestroy {
+  components: DeviceComponent[];
   isAlive = true;
   model = new Model();
-  components: DeviceComponent[];
 
   constructor(
     private categoriesInformationService: CategoryInformationService,
@@ -30,58 +29,72 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
     private tabListFormService: TabListFormService<Category>,
     private alertService: AlertService
   ) {
-    this.deviceComponentInformationService.getDeviceComponents().subscribe(
-      (data) => {
-        this.components = data;
-      },
-      (error) => {
-        alertService.error(error.message);
-      }
-    );
-
+    this.loadComponents();
     this.loadCategories();
   }
 
   ngOnInit(): void {
-    this.tabListFormService.selectionChangeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data) => {
-      this.selectionChange(data);
-    });
-
-    this.tabListFormService.removeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((data) => {
-      this.removeClick(data);
-    });
+    this.selectionChangeSubscribe();
+    this.removeSubscribe();
   }
 
   ngOnDestroy(): void {
     this.isAlive = false;
   }
 
+  expansionPanelTitle(): string {
+    if (!this.model.componentIndexes[0] && this.model.componentIndexes[0] !== 0) {
+      return 'Choose components';
+    }
+    if (this.model.componentIndexes.length === 1) {
+      return this.components[this.model.componentIndexes[0]].name;
+    }
+    return `${this.components[this.model.componentIndexes[0]].name} (+${this.model.componentIndexes.length - 1} other${
+      this.model.componentIndexes.length > 2 ? 's' : ''
+    })`;
+  }
+
+  selectionChangeSubscribe(): void {
+    this.tabListFormService.selectionChangeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((value: Category) => {
+      if (value.name) {
+        this.model.id = value.id;
+        this.model.name = value.name;
+        this.model.icon = value.icon;
+        this.model.componentIndexes = this.getIndexes(value.components);
+      }
+    });
+  }
+
+  // Method to subscribe subject
+  removeSubscribe(): void {
+    this.tabListFormService.removeSubject$.pipe(takeWhile(() => this.isAlive)).subscribe((value: Category) => {
+      this.alertService.confirm('Are you sure?', () => {
+        this.categoriesInformationService.removeCategory(value.id).subscribe(
+          (next) => {
+            this.loadCategories();
+            this.onClearClick();
+          },
+          (error) => {
+            this.alertService.error(error.message);
+          }
+        );
+      });
+    });
+  }
+
   loadCategories(): void {
     this.tabListFormService.dataSource$ = this.categoriesInformationService.getCategories();
   }
 
-  // Method to subscribe subject
-  removeClick(data: Category): void {
-    this.alertService.confirm('Are you sure?', () => {
-      this.categoriesInformationService.removeCategory(data.id).subscribe(
-        (next) => {
-          this.loadCategories();
-          this.onClearClick();
-        },
-        (error) => {
-          this.alertService.error(error.message);
-        }
-      );
-    });
-  }
-
-  selectionChange(data: Category): void {
-    if (data.name) {
-      this.model.id = data.id;
-      this.model.name = data.name;
-      this.model.icon = data.icon;
-      this.model.deviceComponentIds = data.deviceComponentIds;
-    }
+  loadComponents(): void {
+    this.deviceComponentInformationService.getDeviceComponents().subscribe(
+      (data) => {
+        this.components = data;
+      },
+      (error) => {
+        this.alertService.error(error.message);
+      }
+    );
   }
 
   // Click event
@@ -90,39 +103,65 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
     this.model = new Model();
   }
 
-  onSubmitClick(): void {
+  onSubmitClick(form: NgForm): void {
+    if (form.invalid) {
+      return;
+    }
+
     const category = {
       id: this.model.id,
       name: this.model.name,
       icon: this.model.icon,
-      deviceComponentIds: this.model.deviceComponentIds,
+      components: this.getComponentIds(this.model.componentIndexes),
     } as Category;
 
-    this.categoriesInformationService.addCategory(category).subscribe(
-      (next) => {
-        if (this.model.id === 0) {
-          this.alertService.success('Category updated!');
+    if (this.model.id === 0) {
+      this.categoriesInformationService.addCategory(category).subscribe(
+        (next) => {
+          this.alertService.success('Category added!');
+          form.resetForm();
+          this.loadCategories();
+          this.onClearClick();
+        },
+        (error) => {
+          this.alertService.error(error.message);
         }
-        this.loadCategories();
-        this.onClearClick();
-      },
-      (error) => {
-        this.alertService.error(error.message);
-      }
-    );
+      );
+    } else {
+      this.categoriesInformationService.updateCategory(category).subscribe(
+        (next) => {
+          this.alertService.success('Category updated!');
+          form.resetForm();
+          this.loadCategories();
+          this.onClearClick();
+        },
+        (error) => {
+          this.alertService.error(error.message);
+        }
+      );
+    }
   }
 
-  getComponentsFieldHeader(): string {
-    if (!this.model?.deviceComponentIds || this.model.deviceComponentIds.length === 0) {
-      return 'Choose components';
-    }
+  getIndexes(components: number[]): number[] {
+    const indexes: number[] = [];
 
-    if (this.model?.deviceComponentIds?.length === 1) {
-      return this.components.find((x) => x.id === this.model.deviceComponentIds[0])?.name;
-    }
+    components?.forEach((component) => {
+      const index = this.components.findIndex((x) => x.id === component);
+      if (index !== -1) {
+        indexes.push(index);
+      }
+    });
 
-    return `${this.components.find((x) => x.id === this.model.deviceComponentIds[0])?.name} (+${
-      this.model?.deviceComponentIds?.length - 1
-    } other)`;
+    return indexes;
+  }
+
+  getComponentIds(indexes: number[]): number[] {
+    const ids: number[] = [];
+
+    indexes?.forEach((index) => {
+      ids.push(this.components[index].id);
+    });
+
+    return ids;
   }
 }

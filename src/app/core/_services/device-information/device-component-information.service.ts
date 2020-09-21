@@ -12,25 +12,24 @@ export class DeviceComponentInformationService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getDeviceComponents(
-    categoryId?: number
-  ): Observable<models.DeviceComponent[]> {
+  getDeviceComponents(categoryId?: number): Observable<models.DeviceComponent[]> {
     let params = new HttpParams();
 
     if (categoryId) {
       params = params.append('categoryId', categoryId.toString());
     }
 
-    return this.httpClient.get<models.DeviceComponent[]>(
-      this.deviceComponentUrl,
-      {
-        params,
-      }
-    );
+    return this.httpClient.get<models.DeviceComponent[]>(this.deviceComponentUrl, {
+      params,
+    });
   }
 
   addDeviceComponent(deviceComponent: models.DeviceComponent): Observable<any> {
     return this.httpClient.post(this.deviceComponentUrl, deviceComponent);
+  }
+
+  updateDeviceComponent(deviceComponent: models.DeviceComponent): Observable<any> {
+    return this.httpClient.put(this.deviceComponentUrl + `/${deviceComponent.id}`, deviceComponent);
   }
 
   removeDeviceComponent(id: number): Observable<any> {

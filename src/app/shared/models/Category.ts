@@ -5,5 +5,5 @@ export class Category implements ITabListFormData {
   id: number;
   name: string;
   icon: string;
-  deviceComponentIds: number[];
+  components: number[];
 }

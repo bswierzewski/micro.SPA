@@ -20,6 +20,10 @@ export class KindInformationService {
     return this.http.post(this.kindsUrl, kind);
   }
 
+  updateKind(kind: models.Kind): Observable<any> {
+    return this.http.put(this.kindsUrl + `/${kind.id}`, kind);
+  }
+
   removeKind(id: number): Observable<any> {
     return this.http.delete(this.kindsUrl + `/${id}`);
   }
