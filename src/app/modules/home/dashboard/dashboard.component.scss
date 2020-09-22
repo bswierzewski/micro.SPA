@@ -1,7 +1,8 @@
-@import "variables";
+@import 'variables';
 
 .filter_device {
-  margin-bottom: 30px;
+  padding: 5px;
+  margin-bottom: 40px;
 
   .subscribe {
     display: flex;
@@ -19,7 +20,7 @@
     justify-content: center;
 
     .expanded_button {
-      margin-bottom: -25px;
+      margin-bottom: -30px;
     }
   }
 }
