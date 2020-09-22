@@ -28,6 +28,7 @@ import { AdminDeviceDetailComponent } from './modules/admin/device/admin-device-
 import { AdminDeviceListComponent } from './modules/admin/device/admin-device-list/admin-device-list.component';
 import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
 import { AdminVersionDetailComponent } from './modules/admin/version/admin-version-detail/admin-version-detail.component';
+import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AdminVersionDetailComponent } from './modules/admin/version/admin-versi
     AdminDeviceInformationCategoryComponent,
     AdminDeviceInformationKindComponent,
     AdminDeviceInformationComponentComponent,
+    IconPickerComponent,
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),

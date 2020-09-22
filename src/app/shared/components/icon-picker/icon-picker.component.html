@@ -1,0 +1,6 @@
+<button color="primary" mat-raised-button class="picker_button" (click)="isShow = !isShow" type="button">Icon</button>
+<mat-card class="mat-elevation-z8" *ngIf="isShow" (click)="$event.stopPropagation()">
+  <mat-icon class="mat-elevation-z2" [inline]="true" *ngFor="let icon of icons" (click)="setIcon(icon)">{{
+    icon
+  }}</mat-icon>
+</mat-card>
