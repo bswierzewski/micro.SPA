@@ -3,6 +3,7 @@ import { TabListFormService } from 'src/app/shared/components/tab-list-form';
 import { DeviceComponent, Category } from 'src/app/shared/models';
 import { DeviceComponentInformationService, CategoryInformationService, AlertService } from 'src/app/core/_services';
 import { takeWhile } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 
 export class Model {
   id = 0;
@@ -95,7 +96,11 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     this.model = new Model();
   }
 
-  onSubmitClick(): void {
+  onSubmitClick(form: NgForm): void {
+    if (form.invalid) {
+      return;
+    }
+
     const deviceComponent = {
       id: this.model.id,
       name: this.model.name,
@@ -106,11 +111,7 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     if (this.model.id !== 0) {
       this.deviceComponentInformationService.updateDeviceComponent(deviceComponent).subscribe(
         (next) => {
-          if (this.model.id !== 0) {
-            this.alertService.success('Components updated!');
-          }
-          this.onClearClick();
-          this.loadComponents();
+          this.nextCallback('Components updated!', form);
         },
         (error) => {
           this.alertService.error(error);
@@ -119,16 +120,19 @@ export class AdminDeviceInformationComponentComponent implements OnInit, OnDestr
     } else {
       this.deviceComponentInformationService.addDeviceComponent(deviceComponent).subscribe(
         (next) => {
-          if (this.model.id !== 0) {
-            this.alertService.success('Components added!');
-          }
-          this.onClearClick();
-          this.loadComponents();
+          this.nextCallback('Components added!', form);
         },
         (error) => {
           this.alertService.error(error);
         }
       );
     }
+  }
+
+  nextCallback(message: string, form: NgForm): void {
+    this.alertService.success(message);
+    form.resetForm();
+    this.onClearClick();
+    this.loadComponents();
   }
 }

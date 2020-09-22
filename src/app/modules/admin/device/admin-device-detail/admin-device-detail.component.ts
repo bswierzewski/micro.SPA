@@ -68,7 +68,7 @@ export class AdminDeviceDetailComponent implements OnInit {
           this.router.navigateByUrl('/admin/devices');
         },
         (error) => {
-          this.alertService.error(error.message);
+          this.alertService.error(error);
         }
       );
     } else {
@@ -78,7 +78,7 @@ export class AdminDeviceDetailComponent implements OnInit {
           this.router.navigateByUrl('/admin/devices');
         },
         (error) => {
-          this.alertService.error(error.message);
+          console.log(error);
         }
       );
     }

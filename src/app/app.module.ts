@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptorProvider } from 'src/app/core/_services/error.interceptor';
 
 import { AppRoutes } from './routes';
 import { RouterModule } from '@angular/router';
@@ -58,7 +59,7 @@ import { AdminVersionDetailComponent } from './modules/admin/version/admin-versi
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

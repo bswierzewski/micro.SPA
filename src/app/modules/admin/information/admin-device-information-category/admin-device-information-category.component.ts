@@ -75,7 +75,7 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
             this.onClearClick();
           },
           (error) => {
-            this.alertService.error(error.message);
+            this.alertService.error(error);
           }
         );
       });
@@ -92,7 +92,7 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
         this.components = data;
       },
       (error) => {
-        this.alertService.error(error.message);
+        this.alertService.error(error);
       }
     );
   }
@@ -118,28 +118,29 @@ export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestro
     if (this.model.id === 0) {
       this.categoriesInformationService.addCategory(category).subscribe(
         (next) => {
-          this.alertService.success('Category added!');
-          form.resetForm();
-          this.loadCategories();
-          this.onClearClick();
+          this.nextCallback('Category added!', form);
         },
         (error) => {
-          this.alertService.error(error.message);
+          this.alertService.error(error);
         }
       );
     } else {
       this.categoriesInformationService.updateCategory(category).subscribe(
         (next) => {
-          this.alertService.success('Category updated!');
-          form.resetForm();
-          this.loadCategories();
-          this.onClearClick();
+          this.nextCallback('Category updated!', form);
         },
         (error) => {
-          this.alertService.error(error.message);
+          this.alertService.error(error);
         }
       );
     }
+  }
+
+  nextCallback(message: string, form: NgForm): void {
+    this.alertService.success(message);
+    form.resetForm();
+    this.loadCategories();
+    this.onClearClick();
   }
 
   getIndexes(components: number[]): number[] {
