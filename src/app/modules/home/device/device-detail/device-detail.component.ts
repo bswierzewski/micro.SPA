@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Device, Registration } from 'src/app/shared/models';
-import { DeviceService } from 'src/app/core/_services';
+import { DeviceService, RegistrationService } from 'src/app/core/_services';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -10,14 +10,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./device-detail.component.scss'],
 })
 export class DeviceDetailComponent implements OnInit {
-  displayedColumns: string[] = ['position'];
+  displayedColumns: string[] = ['position', 'created', 'address', 'rssi'];
   device: Device;
   registrations$: Observable<Registration[]>;
-  constructor(private route: ActivatedRoute, private deviceService: DeviceService) {
+  constructor(
+    private route: ActivatedRoute,
+    private deviceService: DeviceService,
+    private registrationService: RegistrationService
+  ) {
     route.params.subscribe((params) => {
       if (params.id) {
         deviceService.getDevice(params.id).subscribe((next) => {
           this.device = next;
+          this.registrations$ = registrationService.getRegistrations(next.address?.id);
         });
       }
     });

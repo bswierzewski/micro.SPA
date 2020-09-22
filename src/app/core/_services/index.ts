@@ -7,3 +7,4 @@ export { DeviceComponentInformationService } from './device-information/device-c
 export { KindInformationService } from './device-information/kind-information.service';
 export { VersionService } from './version.service';
 export { AddressService } from './address.service';
+export { RegistrationService } from './registration.service';

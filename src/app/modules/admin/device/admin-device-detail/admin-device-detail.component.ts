@@ -62,15 +62,25 @@ export class AdminDeviceDetailComponent implements OnInit {
 
   onSubmitClick(): void {
     if (this.isCreatedMode) {
-      this.deviceService.addDevice(this.model).subscribe((next) => {
-        this.alertService.success('Device updated');
-        this.router.navigateByUrl('/admin/devices');
-      });
+      this.deviceService.addDevice(this.model).subscribe(
+        (next) => {
+          this.alertService.success('Device updated');
+          this.router.navigateByUrl('/admin/devices');
+        },
+        (error) => {
+          this.alertService.error(error.message);
+        }
+      );
     } else {
-      this.deviceService.updateDevice(this.model).subscribe((next) => {
-        this.alertService.success('Device added');
-        this.router.navigateByUrl('/admin/devices');
-      });
+      this.deviceService.updateDevice(this.model).subscribe(
+        (next) => {
+          this.alertService.success('Device added');
+          this.router.navigateByUrl('/admin/devices');
+        },
+        (error) => {
+          this.alertService.error(error.message);
+        }
+      );
     }
   }
 
