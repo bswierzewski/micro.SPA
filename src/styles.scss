@@ -38,18 +38,3 @@ body {
     flex: 1;
   }
 }
-
-.picker_icon {
-  grid-gap: 10px;
-  display: flex;
-  flex-flow: wrap row;
-
-  .picker_icon_input {
-    flex: 4;
-  }
-  .picker_icon_button {
-    flex: 1;
-    margin-top: 4px;
-    height: 50px;
-  }
-}

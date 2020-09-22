@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Icons } from './icons';
 
 @Component({
@@ -7,16 +7,16 @@ import { Icons } from './icons';
   styleUrls: ['./icon-picker.component.scss'],
 })
 export class IconPickerComponent {
-  @Output()
-  selectedIcon: EventEmitter<string> = new EventEmitter<string>();
-
+  @Input() icon;
+  @Output() iconChange = new EventEmitter<string>();
   isShow = false;
   icons: string[] = Icons;
 
   constructor() {}
 
-  setIcon(icon: string): void {
+  updateIcon(icon: string): void {
+    this.icon = icon;
+    this.iconChange.emit(icon);
     this.isShow = false;
-    this.selectedIcon.emit(icon);
   }
 }

@@ -4,13 +4,7 @@
       <mat-label>Name</mat-label>
       <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" [disabled]="model.id" />
     </mat-form-field>
-    <div class="picker_icon">
-      <mat-form-field class="picker_icon_input" appearance="outline">
-        <mat-label>Icon</mat-label>
-        <input matInput placeholder="Icon" name="icon" required [(ngModel)]="model.icon" />
-      </mat-form-field>
-      <app-icon-picker class="picker_icon_button" (selectedIcon)="model.icon = $event"></app-icon-picker>
-    </div>
+    <app-icon-picker [(icon)]="model.icon"></app-icon-picker>
   </div>
   <div class="row_button">
     <button mat-raised-button class="mat-elevation-z4" type="button" (click)="onClearClick()">Clear</button>

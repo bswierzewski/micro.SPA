@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .content_wrapper {
   display: flex;
@@ -26,7 +26,7 @@
 }
 
 .selection_list {
-  mat-list-option[aria-selected="true"] {
+  mat-list-option[aria-selected='true'] {
     background: $brand-color;
     color: #ffffff;
   }
@@ -40,4 +40,8 @@
 
 .list_option_button {
   margin: 5px;
+}
+
+.icon-picker {
+  margin-bottom: 25px;
 }

@@ -5,13 +5,7 @@
       <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" [disabled]="model.id" />
     </mat-form-field>
 
-    <div class="picker_icon">
-      <mat-form-field class="picker_icon_input" appearance="outline">
-        <mat-label>Icon</mat-label>
-        <input matInput placeholder="Icon" name="icon" required [(ngModel)]="model.icon" />
-      </mat-form-field>
-      <app-icon-picker class="picker_icon_button" (selectedIcon)="model.icon = $event"></app-icon-picker>
-    </div>
+    <app-icon-picker class="icon-picker" [(icon)]="model.icon"></app-icon-picker>
 
     <mat-expansion-panel [expanded]="model.isExpanded" (opened)="model.isExpanded = true">
       <mat-expansion-panel-header>
