@@ -1,0 +1,18 @@
+mat-form-field {
+  width: 100%;
+}
+
+.action_buttons {
+  margin-top: 25px;
+  display: flex;
+  flex-flow: row wrap;
+  grid-gap: 15px;
+
+  button {
+    flex: 1;
+  }
+}
+
+.expansion-panel {
+  margin-top: 25px;
+}

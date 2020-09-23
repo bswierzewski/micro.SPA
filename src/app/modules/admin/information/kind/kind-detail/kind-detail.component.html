@@ -1,1 +1,13 @@
-<p>kind-detail works!</p>
+<mat-card>
+  <form #form="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" [disabled]="model.id" />
+    </mat-form-field>
+    <app-icon-picker [(icon)]="model.icon"></app-icon-picker>
+    <div class="action_buttons">
+      <button mat-raised-button class="mat-elevation-z4" type="button">Clear</button>
+      <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit">Submit</button>
+    </div>
+  </form>
+</mat-card>

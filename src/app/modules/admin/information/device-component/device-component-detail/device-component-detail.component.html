@@ -1,1 +1,29 @@
-<p>device-component-detail works!</p>
+<mat-card>
+  <form #form="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" [disabled]="model.id" />
+    </mat-form-field>
+
+    <app-icon-picker [(icon)]="model.icon"></app-icon-picker>
+
+    <mat-expansion-panel class="expansion-panel" [expanded]="model.isExpanded" (opened)="model.isExpanded = true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ model.category[0].name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-selection-list name="category" [(ngModel)]="model.category" [multiple]="false">
+        <mat-list-option *ngFor="let category of categories$ | async" [value]="category">
+          <mat-icon matListIcon>{{ category.icon }}</mat-icon
+          >{{ category.name }}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-expansion-panel>
+
+    <div class="action_buttons">
+      <button mat-raised-button class="mat-elevation-z4" type="button">Clear</button>
+      <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit">Submit</button>
+    </div>
+  </form>
+</mat-card>

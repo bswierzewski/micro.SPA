@@ -20,8 +20,8 @@ export class Model {
 })
 export class AdminDeviceInformationCategoryComponent implements OnInit, OnDestroy {
   components: DeviceComponent[];
-  isAlive = true;
   model = new Model();
+  isAlive = true;
 
   constructor(
     private categoriesInformationService: CategoryInformationService,

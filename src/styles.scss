@@ -15,7 +15,13 @@ body {
 
 .table-full-width {
   width: 100%;
+
+  th:last-child {
+    text-align: center;
+  }
+
   tr td:last-child {
+    text-align: center;
     width: 1%;
     white-space: nowrap;
   }
@@ -25,16 +31,5 @@ body {
   th {
     background-color: $brand-color;
     color: #ffffff;
-  }
-}
-
-.row_button {
-  display: flex;
-  flex-flow: row wrap;
-  grid-gap: 30px;
-  margin: 30px;
-
-  button {
-    flex: 1;
   }
 }
