@@ -3,11 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DeviceComponent, Kind, Version } from 'src/app/shared/models';
-import {
-  DeviceComponentInformationService,
-  KindInformationService,
-  VersionService,
-} from 'src/app/core/_services';
+import { DeviceComponentInformationService, KindInformationService, VersionService } from 'src/app/core/_services';
+
+export class Model {
+  name: string;
+  major: number;
+  minor: number;
+  patch: number;
+  kindId: number;
+  deviceComponentId: number;
+  versionId: number;
+  fileToUpload: File = null;
+}
 
 @Component({
   selector: 'app-admin-version-detail',
@@ -16,15 +23,8 @@ import {
 })
 export class AdminVersionDetailComponent implements OnInit {
   isCreatedMode = false;
-  fileToUpload: File = null;
-  versionId: number;
   // Initial form data
-  name: string;
-  major: number;
-  minor: number;
-  patch: number;
-  kindId: number;
-  deviceComponentId: number;
+  model: Model = new Model();
 
   deviceComponents$: Observable<DeviceComponent[]>;
   kinds$: Observable<Kind[]>;
@@ -44,14 +44,14 @@ export class AdminVersionDetailComponent implements OnInit {
       this.route.params.subscribe((params) => {
         if (params.id) {
           this.versionService.getVersion(params.id).subscribe((version) => {
-            this.versionId = version.id;
-            this.name = version.name;
-            this.kindId = version.kindId;
-            this.deviceComponentId = version.deviceComponentId;
-            this.major = version.major;
-            this.minor = version.minor;
-            this.patch = version.patch;
-            this.fileToUpload = version.fileData;
+            this.model.versionId = version.id;
+            this.model.name = version.name;
+            this.model.kindId = version.kindId;
+            this.model.deviceComponentId = version.deviceComponentId;
+            this.model.major = version.major;
+            this.model.minor = version.minor;
+            this.model.patch = version.patch;
+            this.model.fileToUpload = version.fileData;
           });
         }
       });
@@ -60,35 +60,29 @@ export class AdminVersionDetailComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmitClick(value: any): void {
+  onSubmitClick(form: NgForm): void {
     const version: Version = {
-      name: value.name,
-      major: value.major,
-      minor: value.minor,
-      patch: value.patch,
-      kindId: value.kindId,
-      deviceComponentId: value.deviceComponentId,
+      name: this.model.name,
+      major: this.model.major,
+      minor: this.model.minor,
+      patch: this.model.patch,
+      kindId: this.model.kindId,
+      deviceComponentId: this.model.deviceComponentId,
     };
 
-    console.log(version);
-
     if (this.isCreatedMode) {
-      this.versionService
-        .addVersion(version, this.fileToUpload)
-        .subscribe((success) => {
-          this.router.navigateByUrl('/admin/versions');
-        });
+      this.versionService.addVersion(version, this.model.fileToUpload).subscribe((success) => {
+        this.router.navigateByUrl('/admin/versions');
+      });
     } else {
-      this.versionService
-        .updateVersion(this.versionId, version)
-        .subscribe((success) => {
-          this.router.navigateByUrl('/admin/versions');
-        });
+      this.versionService.updateVersion(this.model.versionId, version).subscribe((success) => {
+        this.router.navigateByUrl('/admin/versions');
+      });
     }
   }
 
   handleFileInput(files: FileList): void {
-    this.fileToUpload = files.item(0);
+    this.model.fileToUpload = files.item(0);
   }
 
   getHeader(): string {
@@ -100,6 +94,6 @@ export class AdminVersionDetailComponent implements OnInit {
   }
 
   getInputFileText(): string {
-    return this.fileToUpload ? this.fileToUpload.name : 'Choose file';
+    return this.model.fileToUpload ? this.model.fileToUpload.name : 'Choose file';
   }
 }

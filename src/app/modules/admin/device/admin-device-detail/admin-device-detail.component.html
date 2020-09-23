@@ -17,10 +17,7 @@
     <input matInput placeholder="Name" name="name" [(ngModel)]="model.name" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Icon</mat-label>
-    <input matInput placeholder="Icon" name="icon" [(ngModel)]="model.icon" />
-  </mat-form-field>
+  <app-icon-picker class="icon_picker" [(icon)]="model.icon"></app-icon-picker>
 
   <div class="row">
     <mat-form-field appearance="outline">

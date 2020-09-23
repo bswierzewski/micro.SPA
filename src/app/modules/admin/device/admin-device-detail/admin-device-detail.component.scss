@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .wrapper {
   display: grid;
@@ -28,4 +28,8 @@
   .flex_item {
     flex: 1;
   }
+}
+
+.icon_picker {
+  margin-bottom: 20px;
 }
