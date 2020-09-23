@@ -10,10 +10,13 @@ import { AdminDeviceListComponent } from './modules/admin/device/admin-device-li
 import { AdminDeviceDetailComponent } from './modules/admin/device/admin-device-detail/admin-device-detail.component';
 import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
 import { AdminVersionDetailComponent } from './modules/admin/version/admin-version-detail/admin-version-detail.component';
-import { TabListFormComponent } from './shared/components/tab-list-form';
-import { AdminDeviceInformationKindComponent } from './modules/admin/information/admin-device-information-kind/admin-device-information-kind.component';
-import { AdminDeviceInformationCategoryComponent } from './modules/admin/information/admin-device-information-category/admin-device-information-category.component';
-import { AdminDeviceInformationComponentComponent } from './modules/admin/information/admin-device-information-component/admin-device-information-component.component';
+import { InformationListComponent } from './modules/admin/information/information-list/information-list.component';
+import { DeviceComponentListComponent } from './modules/admin/information/device-component/device-component-list/device-component-list.component';
+import { CategoryListComponent } from './modules/admin/information/category/category-list/category-list.component';
+import { KindListComponent } from './modules/admin/information/kind/kind-list/kind-list.component';
+import { DeviceComponentDetailComponent } from './modules/admin/information/device-component/device-component-detail/device-component-detail.component';
+import { CategoryDetailComponent } from './modules/admin/information/category/category-detail/category-detail.component';
+import { KindDetailComponent } from './modules/admin/information/kind/kind-detail/kind-detail.component';
 
 export const AppRoutes: Routes = [
   {
@@ -47,49 +50,22 @@ export const AppRoutes: Routes = [
     children: [
       { path: '', component: AdminDeviceListComponent },
       { path: 'devices', component: AdminDeviceListComponent },
+      { path: 'devices/:id', component: AdminDeviceDetailComponent },
       {
-        path: 'devices/create',
-        component: AdminDeviceDetailComponent,
-        data: { isCreatedMode: true },
-      },
-      {
-        path: 'devices/:id',
-        component: AdminDeviceDetailComponent,
-        data: { isCreatedMode: false },
-      },
-      {
-        path: 'devices_information',
-        component: TabListFormComponent,
+        path: 'information',
+        component: InformationListComponent,
         children: [
-          { path: 'kind', component: AdminDeviceInformationKindComponent },
-          {
-            path: 'category',
-            component: AdminDeviceInformationCategoryComponent,
-          },
-          {
-            path: 'component',
-            component: AdminDeviceInformationComponentComponent,
-          },
+          { path: 'kinds', component: KindListComponent },
+          { path: 'categories', component: CategoryListComponent },
+          { path: 'components', component: DeviceComponentListComponent },
         ],
-        data: {
-          tabNavigation: [
-            { path: '/admin/devices_information/kind', name: 'Kind' },
-            { path: '/admin/devices_information/category', name: 'Category' },
-            { path: '/admin/devices_information/component', name: 'Component' },
-          ],
-        },
       },
+      { path: 'kinds/:id', component: KindDetailComponent },
+      { path: 'categories/:id', component: CategoryDetailComponent },
+      { path: 'components/:id', component: DeviceComponentDetailComponent },
+
       { path: 'versions', component: AdminVersionListComponent },
-      {
-        path: 'versions/create',
-        component: AdminVersionDetailComponent,
-        data: { isCreatedMode: true },
-      },
-      {
-        path: 'versions/:id',
-        component: AdminVersionDetailComponent,
-        data: { isCreatedMode: false },
-      },
+      { path: 'versions/:id', component: AdminVersionDetailComponent },
     ],
     data: {
       navMenuItems: NavbarData.admin.AdminNavMenuItems,

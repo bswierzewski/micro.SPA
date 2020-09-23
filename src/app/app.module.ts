@@ -29,6 +29,13 @@ import { AdminDeviceListComponent } from './modules/admin/device/admin-device-li
 import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
 import { AdminVersionDetailComponent } from './modules/admin/version/admin-version-detail/admin-version-detail.component';
 import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
+import { InformationListComponent } from './modules/admin/information/information-list/information-list.component';
+import { KindListComponent } from './modules/admin/information/kind/kind-list/kind-list.component';
+import { KindDetailComponent } from './modules/admin/information/kind/kind-detail/kind-detail.component';
+import { DeviceComponentDetailComponent } from './modules/admin/information/device-component/device-component-detail/device-component-detail.component';
+import { DeviceComponentListComponent } from './modules/admin/information/device-component/device-component-list/device-component-list.component';
+import { CategoryListComponent } from './modules/admin/information/category/category-list/category-list.component';
+import { CategoryDetailComponent } from './modules/admin/information/category/category-detail/category-detail.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +58,13 @@ import { IconPickerComponent } from './shared/components/icon-picker/icon-picker
     AdminDeviceInformationKindComponent,
     AdminDeviceInformationComponentComponent,
     IconPickerComponent,
+    InformationListComponent,
+    KindListComponent,
+    KindDetailComponent,
+    DeviceComponentDetailComponent,
+    DeviceComponentListComponent,
+    CategoryListComponent,
+    CategoryDetailComponent,
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),

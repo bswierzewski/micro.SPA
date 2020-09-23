@@ -14,7 +14,7 @@ export let NavbarData = {
         icon: 'swap_vertical_circle',
       },
       {
-        path: '/admin/devices_information/kind',
+        path: '/admin/information/kinds',
         title: 'Information',
         icon: 'settings',
       },
