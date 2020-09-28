@@ -1,6 +1,4 @@
-import { ITabListFormData } from 'src/app/shared/components/tab-list-form';
-
-export class Kind implements ITabListFormData {
+export class Kind {
   id: number;
   name: string;
   icon: string;

@@ -1,8 +1,9 @@
-import { ITabListFormData } from 'src/app/shared/components/tab-list-form';
+import { Category } from './Category';
 
-export class DeviceComponent implements ITabListFormData {
+export class DeviceComponent {
   id: number;
   name: string;
   icon: string;
   categoryId?: number;
+  category?: Category;
 }

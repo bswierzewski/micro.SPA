@@ -17,6 +17,8 @@ import { KindListComponent } from './modules/admin/information/kind/kind-list/ki
 import { DeviceComponentDetailComponent } from './modules/admin/information/device-component/device-component-detail/device-component-detail.component';
 import { CategoryDetailComponent } from './modules/admin/information/category/category-detail/category-detail.component';
 import { KindDetailComponent } from './modules/admin/information/kind/kind-detail/kind-detail.component';
+import { AdminDeviceTabComponent } from './modules/admin/device/admin-device-tab/admin-device-tab.component';
+import { AdminDeviceAddressComponent } from './modules/admin/device/admin-device-address/admin-device-address.component';
 
 export const AppRoutes: Routes = [
   {
@@ -48,9 +50,16 @@ export const AppRoutes: Routes = [
     // canActivate: [AuthGuard],
     component: BaseComponent,
     children: [
-      { path: '', component: AdminDeviceListComponent },
-      { path: 'devices', component: AdminDeviceListComponent },
-      { path: 'devices/:id', component: AdminDeviceDetailComponent },
+      {
+        path: '',
+        component: AdminDeviceTabComponent,
+        children: [
+          { path: '', component: AdminDeviceListComponent },
+          { path: 'devices', component: AdminDeviceListComponent },
+          { path: 'devices/:id', component: AdminDeviceDetailComponent },
+          { path: 'addresses', component: AdminDeviceAddressComponent },
+        ],
+      },
       {
         path: 'information',
         component: InformationListComponent,

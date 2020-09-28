@@ -8,7 +8,9 @@ import {
   DeviceService,
   AlertService,
   CategoryInformationService,
+  VersionService,
 } from 'src/app/core/_services';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-device-detail',
@@ -20,7 +22,7 @@ export class AdminDeviceDetailComponent implements OnInit {
 
   isCreatedMode = false;
   isPassMacAddress = false;
-  autoUpdateGroupValue = 'auto';
+  isAutoUpdate = false;
   kinds$: Observable<Kind[]>;
   components$: Observable<DeviceComponent[]>;
   categories$: Observable<Category[]>;
@@ -28,20 +30,22 @@ export class AdminDeviceDetailComponent implements OnInit {
 
   constructor(
     route: ActivatedRoute,
+    kindService: KindInformationService,
+    categoryService: CategoryInformationService,
+    versionService: VersionService,
+    private componentService: DeviceComponentInformationService,
     private router: Router,
-    private kindInformationService: KindInformationService,
-    private categoryInformationService: CategoryInformationService,
-    private deviceComponentInformationService: DeviceComponentInformationService,
     private deviceService: DeviceService,
     private alertService: AlertService
   ) {
-    this.isCreatedMode = route.snapshot.data.isCreatedMode;
-    this.components$ = deviceComponentInformationService.getDeviceComponents();
-    this.kinds$ = kindInformationService.getKinds();
-    this.categories$ = categoryInformationService.getCategories();
+    this.kinds$ = kindService.getKinds();
+    this.categories$ = categoryService.getCategories();
+    this.versions$ = versionService.getVersions();
 
     route.params.subscribe((params) => {
-      if (params.id) {
+      this.isCreatedMode = Number(params.id) === 0;
+
+      if (params.id && params.id > 0) {
         this.deviceService.getDevice(params.id).subscribe((value: Device) => {
           this.model.id = params.id;
           this.model.icon = value.icon;
@@ -60,7 +64,15 @@ export class AdminDeviceDetailComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmitClick(): void {
+  selectionCategoryChange(categoryId: number): void {
+    this.components$ = this.componentService.getDeviceComponents(categoryId);
+  }
+
+  onSubmitClick(form: NgForm): void {
+    if (form.invalid) {
+      return;
+    }
+
     if (this.isCreatedMode) {
       this.deviceService.addDevice(this.model).subscribe(
         (next) => {
@@ -84,17 +96,9 @@ export class AdminDeviceDetailComponent implements OnInit {
     }
   }
 
-  onClearVersionClick(): void {}
-
-  getHeader(): string {
-    return this.isCreatedMode ? 'Create new device' : 'Update device';
-  }
-
-  getSubmitButtonName(): string {
-    return this.isCreatedMode ? 'Create' : 'Update';
-  }
-
-  isAutoUpdate(): boolean {
-    return this.autoUpdateGroupValue === 'auto';
+  buttonAutoUpdateChange(isAutoUpdate: boolean): void {
+    if (isAutoUpdate) {
+      this.model.versionId = null;
+    }
   }
 }

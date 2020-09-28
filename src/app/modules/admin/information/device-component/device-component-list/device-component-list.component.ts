@@ -10,7 +10,7 @@ import { DeviceComponent } from 'src/app/shared/models';
   styleUrls: ['./device-component-list.component.scss'],
 })
 export class DeviceComponentListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'actions'];
+  displayedColumns: string[] = ['position', 'name', 'category', 'actions'];
   dataSource = new MatTableDataSource<DeviceComponent>();
 
   constructor(private componentsService: DeviceComponentInformationService, private alertService: AlertService) {

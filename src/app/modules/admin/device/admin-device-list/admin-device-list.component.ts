@@ -9,19 +9,11 @@ import { AddressService, DeviceService, AlertService } from 'src/app/core/_servi
   styleUrls: ['./admin-device-list.component.scss'],
 })
 export class AdminDeviceListComponent implements OnInit {
-  displayedKnowColumns: string[] = ['name', 'kind', 'category', 'component', 'action'];
-  displayedUnKnowColumns: string[] = ['created', 'label', 'action'];
+  devicesColumns: string[] = ['name', 'kind', 'category', 'component', 'action'];
+  devices$: Observable<Device[]>;
 
-  unKnowDataSource$: Observable<Address[]>;
-  knownDataSource$: Observable<Device[]>;
-
-  constructor(
-    private addressService: AddressService,
-    private deviceService: DeviceService,
-    private alertService: AlertService
-  ) {
-    this.unKnowDataSource$ = addressService.getAddresses();
-    this.knownDataSource$ = deviceService.getDevices();
+  constructor(private deviceService: DeviceService, private alertService: AlertService) {
+    this.devices$ = deviceService.getDevices();
   }
 
   ngOnInit(): void {}
@@ -29,7 +21,7 @@ export class AdminDeviceListComponent implements OnInit {
   onRemoveClick(id: number): void {
     this.alertService.confirm("Really wan't delete this device?", () => {
       this.deviceService.deleteDevice(id).subscribe((next) => {
-        this.knownDataSource$ = this.deviceService.getDevices();
+        this.devices$ = this.deviceService.getDevices();
       });
     });
   }
