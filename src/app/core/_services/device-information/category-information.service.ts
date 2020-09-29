@@ -1,4 +1,4 @@
-import * as models from 'src/app/shared/models';
+import { Category } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,15 +12,19 @@ export class CategoryInformationService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCategories(): Observable<models.Category[]> {
-    return this.httpClient.get<models.Category[]>(this.categoriesUrl);
+  getCategory(id: number): Observable<Category> {
+    return this.httpClient.get<Category>(this.categoriesUrl + `/${id}`);
   }
 
-  addCategory(category: models.Category): Observable<any> {
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.categoriesUrl);
+  }
+
+  addCategory(category: Category): Observable<any> {
     return this.httpClient.post(this.categoriesUrl, category);
   }
 
-  updateCategory(category: models.Category): Observable<any> {
+  updateCategory(category: Category): Observable<any> {
     return this.httpClient.put(this.categoriesUrl + `/${category.id}`, category);
   }
 

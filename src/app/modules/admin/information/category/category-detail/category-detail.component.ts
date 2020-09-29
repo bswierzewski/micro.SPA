@@ -9,8 +9,8 @@ export class Model {
   id = 0;
   name = '';
   icon = '';
-  componentIndexes: number[] = [];
   isExpanded = false;
+  componentIds: number[] = [];
 }
 
 @Component({
@@ -21,7 +21,7 @@ export class Model {
 export class CategoryDetailComponent {
   model = new Model();
   isCreateMode = false;
-  components$: Observable<DeviceComponent[]>;
+  components: DeviceComponent[];
 
   constructor(
     private alertService: AlertService,
@@ -32,11 +32,23 @@ export class CategoryDetailComponent {
   ) {
     route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
-      if (params.id === 0) {
-      } else {
+      if (!this.isCreateMode) {
+        categoryService.getCategory(params.id).subscribe(
+          (data) => {
+            this.model.name = data.name;
+            this.model.icon = data.icon;
+            this.model.componentIds = data.components;
+          },
+          (error) => {
+            alertService.error(error);
+          }
+        );
       }
     });
-    this.components$ = componentService.getDeviceComponents();
+
+    componentService.getDeviceComponents().subscribe((data) => {
+      this.components = data;
+    });
   }
 
   onSumbitClick(form: NgForm): void {
@@ -50,6 +62,7 @@ export class CategoryDetailComponent {
     const category = {
       name: this.model.name,
       icon: this.model.icon,
+      components: this.model.componentIds,
     } as Category;
 
     if (this.isCreateMode) {
@@ -77,5 +90,27 @@ export class CategoryDetailComponent {
 
   onReturnClick(): void {
     this.router.navigateByUrl('/admin/information/categories');
+  }
+
+  getHeader(): string {
+    if (this.model.componentIds?.length === undefined) {
+      return 'Choose components';
+    }
+
+    if (this.model.componentIds.length === 1) {
+      return this.components.find((x) => x.id === this.model.componentIds[0])?.name;
+    } else if (this.model.componentIds?.length === 2) {
+      return (
+        this.components.find((x) => x.id === this.model.componentIds[0])?.name +
+        ` (+ ${this.model.componentIds.length - 1} other)`
+      );
+    } else if (this.model.componentIds.length > 1) {
+      return (
+        this.components.find((x) => x.id === this.model.componentIds[0])?.name +
+        ` (+ ${this.model.componentIds.length - 1} others)`
+      );
+    }
+
+    return 'Choose components';
   }
 }

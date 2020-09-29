@@ -10,7 +10,7 @@ export class Model {
   name = '';
   icon = '';
   isExpanded = false;
-  category: Category[] = [];
+  categoryId: number[] = [];
 }
 
 @Component({
@@ -21,7 +21,7 @@ export class Model {
 export class DeviceComponentDetailComponent {
   model = new Model();
   isCreateMode = false;
-  categories$: Observable<Category[]>;
+  categories: Category[];
 
   constructor(
     private alertService: AlertService,
@@ -32,11 +32,24 @@ export class DeviceComponentDetailComponent {
   ) {
     route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
-      if (this.isCreateMode) {
-      } else {
+      if (!this.isCreateMode) {
+        componentService.getDeviceComponent(params.id).subscribe(
+          (data) => {
+            this.model.id = data.id;
+            this.model.name = data.name;
+            this.model.icon = data.icon;
+            this.model.categoryId = [data.categoryId];
+          },
+          (error) => {
+            alertService.error(error);
+          }
+        );
       }
     });
-    this.categories$ = categoryService.getCategories();
+
+    categoryService.getCategories().subscribe((data) => {
+      this.categories = data;
+    });
   }
 
   onSumbitClick(form: NgForm): void {
@@ -50,7 +63,7 @@ export class DeviceComponentDetailComponent {
     const component = {
       name: this.model.name,
       icon: this.model.icon,
-      categoryId: this.model.category[0].id,
+      categoryId: this.model?.categoryId[0],
     } as DeviceComponent;
 
     if (this.isCreateMode) {
@@ -78,5 +91,12 @@ export class DeviceComponentDetailComponent {
 
   onReturnClick(): void {
     this.router.navigateByUrl('/admin/information/components');
+  }
+
+  getHeader(): string {
+    if (this.model.categoryId?.length === 1) {
+      return this.categories?.find((x) => x.id === this.model.categoryId[0])?.name;
+    }
+    return 'Choose category';
   }
 }

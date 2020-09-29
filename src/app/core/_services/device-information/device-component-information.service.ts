@@ -1,4 +1,4 @@
-import * as models from 'src/app/shared/models';
+import { DeviceComponent } from 'src/app/shared/models';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -12,23 +12,27 @@ export class DeviceComponentInformationService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getDeviceComponents(categoryId?: number): Observable<models.DeviceComponent[]> {
+  getDeviceComponent(id: number): Observable<DeviceComponent> {
+    return this.httpClient.get<DeviceComponent>(this.deviceComponentUrl + `/${id}`);
+  }
+
+  getDeviceComponents(categoryId?: number): Observable<DeviceComponent[]> {
     let params = new HttpParams();
 
     if (categoryId) {
       params = params.append('categoryId', categoryId.toString());
     }
 
-    return this.httpClient.get<models.DeviceComponent[]>(this.deviceComponentUrl, {
+    return this.httpClient.get<DeviceComponent[]>(this.deviceComponentUrl, {
       params,
     });
   }
 
-  addDeviceComponent(deviceComponent: models.DeviceComponent): Observable<any> {
+  addDeviceComponent(deviceComponent: DeviceComponent): Observable<any> {
     return this.httpClient.post(this.deviceComponentUrl, deviceComponent);
   }
 
-  updateDeviceComponent(deviceComponent: models.DeviceComponent): Observable<any> {
+  updateDeviceComponent(deviceComponent: DeviceComponent): Observable<any> {
     return this.httpClient.put(this.deviceComponentUrl + `/${deviceComponent.id}`, deviceComponent);
   }
 

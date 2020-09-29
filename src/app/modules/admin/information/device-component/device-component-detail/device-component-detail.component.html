@@ -10,11 +10,11 @@
     <mat-expansion-panel class="expansion-panel" [expanded]="model.isExpanded" (opened)="model.isExpanded = true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ model.category[0]?.name ? model.category[0]?.name : 'Choose category' }}
+          {{ getHeader() }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-selection-list name="category" [(ngModel)]="model.category" [multiple]="false">
-        <mat-list-option *ngFor="let category of categories$ | async" [value]="category">
+      <mat-selection-list name="category" [(ngModel)]="model.categoryId" [multiple]="false">
+        <mat-list-option *ngFor="let category of categories" [value]="category.id">
           <mat-icon matListIcon>{{ category.icon }}</mat-icon
           >{{ category.name }}
         </mat-list-option>
