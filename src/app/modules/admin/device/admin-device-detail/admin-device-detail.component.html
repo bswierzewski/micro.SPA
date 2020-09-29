@@ -21,7 +21,7 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Kind</mat-label>
-      <mat-select [(ngModel)]="model.kindId" name="kind">
+      <mat-select required [(ngModel)]="model.kindId" name="kind">
         <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">
           {{ kind.name }}
         </mat-option>
@@ -31,6 +31,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Category</mat-label>
       <mat-select
+        required
         [(ngModel)]="model.categoryId"
         name="category"
         (selectionChange)="selectionCategoryChange($event.value)"
@@ -42,8 +43,8 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Component</mat-label>
-      <mat-select [(ngModel)]="model.componentId" name="component" [disabled]="!model.categoryId">
+      <mat-label>{{ model.categoryId ? 'Component' : 'Choose category' }}</mat-label>
+      <mat-select required [(ngModel)]="model.componentId" name="component">
         <mat-option *ngFor="let component of components$ | async" [value]="component.id">
           {{ component.name }}
         </mat-option>

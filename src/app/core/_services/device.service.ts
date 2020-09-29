@@ -1,5 +1,5 @@
-import * as models from 'src/app/shared/models';
-import * as paramModels from 'src/app/shared/params';
+import { DeviceEntry, DeviceForList, Device } from 'src/app/shared/models';
+import { DeviceParams } from 'src/app/shared/params';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -14,11 +14,11 @@ export class DeviceService {
 
   constructor(private http: HttpClient) {}
 
-  getDevice(id: number): Observable<models.Device> {
-    return this.http.get<models.Device>(this.devicesUrl + `/${id}`);
+  getDevice(id: number): Observable<Device> {
+    return this.http.get<Device>(this.devicesUrl + `/${id}`);
   }
 
-  getDevices(deviceParams: paramModels.DeviceParams = null): Observable<models.Device[]> {
+  getDevices(deviceParams: DeviceParams = null): Observable<DeviceForList[]> {
     let headerParams = new HttpParams();
 
     if (deviceParams?.kindId) {
@@ -30,22 +30,22 @@ export class DeviceService {
 
     if (deviceParams?.componentIds && deviceParams?.componentIds.length > 0) {
       return this.http
-        .get<models.Device[]>(this.devicesUrl, {
+        .get<DeviceForList[]>(this.devicesUrl, {
           params: headerParams,
         })
-        .pipe(map((devices) => devices.filter((x) => deviceParams.componentIds.includes(x.component.id))));
+        .pipe(map((devices) => devices.filter((x) => deviceParams.componentIds.includes(x.componentId))));
     } else {
-      return this.http.get<models.Device[]>(this.devicesUrl, {
+      return this.http.get<DeviceForList[]>(this.devicesUrl, {
         params: headerParams,
       });
     }
   }
 
-  addDevice(device: models.DeviceEntry): Observable<any> {
+  addDevice(device: DeviceEntry): Observable<any> {
     return this.http.post(this.devicesUrl, device);
   }
 
-  updateDevice(device: models.DeviceEntry): Observable<any> {
+  updateDevice(device: DeviceEntry): Observable<any> {
     return this.http.put(this.devicesUrl + `/${device.id}`, device);
   }
 

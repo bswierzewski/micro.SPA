@@ -9,7 +9,7 @@ export class Version {
   patch: number;
   kindId?: number;
   kind?: Kind;
-  deviceComponentId?: number;
-  deviceComponent?: DeviceComponent;
+  componentId?: number;
+  Component?: DeviceComponent;
   fileData?: File;
 }

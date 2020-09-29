@@ -9,17 +9,7 @@ import { Version } from 'src/app/shared/models';
   styleUrls: ['./admin-version-list.component.scss'],
 })
 export class AdminVersionListComponent implements OnInit {
-  autoColumns: string[] = [
-    'id',
-    'created',
-    'name',
-    'major',
-    'minor',
-    'patch',
-    'kind',
-    'deviceComponent',
-    'fileData',
-  ];
+  autoColumns: string[] = ['id', 'created', 'name', 'major', 'minor', 'patch', 'kind', 'component', 'fileData'];
   displayedColumns: string[] = [...this.autoColumns, 'action'];
   versions$: Observable<Version[]>;
   constructor(private versionService: VersionService) {

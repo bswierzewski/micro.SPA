@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogDeviceListComponent } from './components/dialog-device-list.component';
 import { DeviceDialogDataModel } from './components/DeviceDialogDataModel';
 import { DeviceService, SocketService } from 'src/app/core/_services';
-import { SocketMessage, Device } from 'src/app/shared/models';
+import { SocketMessage, DeviceForList } from 'src/app/shared/models';
 
 export interface DashboardDeviceModel {
   id: number;
-  device?: Device;
+  device?: DeviceForList;
   data: SocketMessage[];
 }
 
@@ -18,14 +18,10 @@ export interface DashboardDeviceModel {
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['time', 'address', 'rssi'];
-  devices: Device[] = [];
+  devices: DeviceForList[] = [];
   selectedDevices: DashboardDeviceModel[] = [];
 
-  constructor(
-    public dialog: MatDialog,
-    private deviceService: DeviceService,
-    private socketService: SocketService
-  ) {
+  constructor(public dialog: MatDialog, private deviceService: DeviceService, private socketService: SocketService) {
     deviceService.getDevices().subscribe((data) => {
       this.devices = data;
     });
@@ -35,9 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     socketService.getMessages().subscribe((message) => {
       message.time = new Date().toLocaleTimeString();
 
-      const deviceIndex = this.selectedDevices.findIndex(
-        (x) => x.device.name === message.name
-      );
+      const deviceIndex = this.selectedDevices.findIndex((x) => x.device.name === message.name);
 
       if (deviceIndex > -1) {
         const lenght = this.selectedDevices[deviceIndex].data.unshift(message);
@@ -46,9 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.selectedDevices[deviceIndex].data.pop();
         }
 
-        this.selectedDevices[deviceIndex].data = this.selectedDevices[
-          deviceIndex
-        ].data.slice();
+        this.selectedDevices[deviceIndex].data = this.selectedDevices[deviceIndex].data.slice();
       }
     });
   }
@@ -59,12 +51,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.socketService.disconnectSocket();
   }
 
-  remove(device: Device): void {
+  remove(device: DeviceForList): void {
     if (device) {
       this.socketService.unsubscribe(device.name);
-      this.selectedDevices = this.selectedDevices.filter(
-        (x) => x.id !== device.id
-      );
+      this.selectedDevices = this.selectedDevices.filter((x) => x.id !== device.id);
     }
   }
 
@@ -77,7 +67,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       } as DeviceDialogDataModel,
     });
 
-    dialogRef.afterClosed().subscribe((result: Device[]) => {
+    dialogRef.afterClosed().subscribe((result: DeviceForList[]) => {
       if (result) {
         this.selectedDevices = [];
         result.forEach((device) => {

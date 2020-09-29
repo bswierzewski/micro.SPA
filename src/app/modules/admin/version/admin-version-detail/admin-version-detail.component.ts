@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DeviceComponent, Kind, Version } from 'src/app/shared/models';
-import { DeviceComponentInformationService, KindInformationService, VersionService } from 'src/app/core/_services';
+import {
+  AlertService,
+  DeviceComponentInformationService,
+  KindInformationService,
+  VersionService,
+} from 'src/app/core/_services';
 
 export class Model {
+  id: number;
   name: string;
   major: number;
   minor: number;
   patch: number;
   kindId: number;
-  deviceComponentId: number;
-  versionId: number;
+  componentId: number;
   fileToUpload: File = null;
 }
 
@@ -21,9 +26,8 @@ export class Model {
   templateUrl: './admin-version-detail.component.html',
   styleUrls: ['./admin-version-detail.component.scss'],
 })
-export class AdminVersionDetailComponent implements OnInit {
+export class AdminVersionDetailComponent {
   isCreatedMode = false;
-  // Initial form data
   model: Model = new Model();
 
   deviceComponents$: Observable<DeviceComponent[]>;
@@ -32,68 +36,78 @@ export class AdminVersionDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private alertService: AlertService,
     private kindInformationService: KindInformationService,
     private deviceComponentInformationService: DeviceComponentInformationService,
     private versionService: VersionService
   ) {
-    this.isCreatedMode = route.snapshot.data.isCreatedMode;
     this.deviceComponents$ = deviceComponentInformationService.getDeviceComponents();
     this.kinds$ = kindInformationService.getKinds();
 
-    if (!this.isCreatedMode) {
-      this.route.params.subscribe((params) => {
-        if (params.id) {
-          this.versionService.getVersion(params.id).subscribe((version) => {
-            this.model.versionId = version.id;
+    this.route.params.subscribe((params) => {
+      this.isCreatedMode = params.id === '0';
+      if (!this.isCreatedMode) {
+        this.versionService.getVersion(params.id).subscribe(
+          (version) => {
+            this.model.id = params.id;
             this.model.name = version.name;
             this.model.kindId = version.kindId;
-            this.model.deviceComponentId = version.deviceComponentId;
+            this.model.componentId = version.componentId;
             this.model.major = version.major;
             this.model.minor = version.minor;
             this.model.patch = version.patch;
             this.model.fileToUpload = version.fileData;
-          });
-        }
-      });
-    }
+          },
+          (error) => {
+            alertService.error(error);
+          }
+        );
+      }
+    });
   }
 
-  ngOnInit(): void {}
-
   onSubmitClick(form: NgForm): void {
+    if (form.invalid || !this.model.fileToUpload) {
+      if (!this.model.fileToUpload) {
+        this.alertService.error('File is required!');
+      }
+      return;
+    }
+
     const version: Version = {
+      id: this.model.id,
       name: this.model.name,
+      kindId: this.model.kindId,
+      componentId: this.model.componentId,
       major: this.model.major,
       minor: this.model.minor,
       patch: this.model.patch,
-      kindId: this.model.kindId,
-      deviceComponentId: this.model.deviceComponentId,
     };
 
     if (this.isCreatedMode) {
-      this.versionService.addVersion(version, this.model.fileToUpload).subscribe((success) => {
-        this.router.navigateByUrl('/admin/versions');
-      });
+      this.versionService.addVersion(version, this.model.fileToUpload).subscribe(
+        (success) => {
+          this.alertService.success('Version added');
+          this.router.navigateByUrl('/admin/versions');
+        },
+        (error) => {
+          this.alertService.error(error);
+        }
+      );
     } else {
-      this.versionService.updateVersion(this.model.versionId, version).subscribe((success) => {
-        this.router.navigateByUrl('/admin/versions');
-      });
+      this.versionService.updateVersion(this.model.id, version).subscribe(
+        (success) => {
+          this.alertService.success('Version updated');
+          this.router.navigateByUrl('/admin/versions');
+        },
+        (error) => {
+          this.alertService.error(error);
+        }
+      );
     }
   }
 
   handleFileInput(files: FileList): void {
     this.model.fileToUpload = files.item(0);
-  }
-
-  getHeader(): string {
-    return this.isCreatedMode ? 'Create new version' : 'Update version';
-  }
-
-  getSubmitButtonName(): string {
-    return this.isCreatedMode ? 'Create' : 'Update';
-  }
-
-  getInputFileText(): string {
-    return this.model.fileToUpload ? this.model.fileToUpload.name : 'Choose file';
   }
 }

@@ -1,5 +1,5 @@
-<div class="header">{{ getHeader() }}</div>
-<form #versionDetailForm="ngForm" class="wrapper mat-elevation-z4" (ngSubmit)="onSubmitClick(versionDetailForm.value)">
+<div class="header">{{ isCreatedMode ? 'Create new version' : 'Update version' }}</div>
+<form #form="ngForm" class="wrapper mat-elevation-z4" (ngSubmit)="onSubmitClick(form)">
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" />
@@ -23,14 +23,14 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Kind</mat-label>
-      <mat-select matInput placeholder="Kind" name="kindId" [(ngModel)]="model.kindId">
+      <mat-select required matInput placeholder="Kind" name="kindId" [(ngModel)]="model.kindId">
         <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">{{ kind.name }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Component</mat-label>
-      <mat-select matInput placeholder="Component" name="deviceComponentId" [(ngModel)]="model.deviceComponentId">
+      <mat-select required matInput placeholder="Component" name="deviceComponentId" [(ngModel)]="model.componentId">
         <mat-option *ngFor="let deviceComponent of deviceComponents$ | async" [value]="deviceComponent.id">{{
           deviceComponent.name
         }}</mat-option>
@@ -48,7 +48,7 @@
       [disabled]="!isCreatedMode"
     />
     <div class="cutom-file">
-      <div class="text-file">{{ getInputFileText() }}</div>
+      <div class="text-file">{{ model.fileToUpload ? this.model.fileToUpload?.name : 'Choose file' }}</div>
       <button
         class="file-button"
         mat-raised-button
@@ -63,6 +63,6 @@
   </label>
 
   <button mat-raised-button color="primary" type="submit">
-    {{ getSubmitButtonName() }}
+    {{ isCreatedMode ? 'Create' : 'Update' }}
   </button>
 </form>

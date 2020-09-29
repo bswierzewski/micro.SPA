@@ -72,7 +72,11 @@ export class AdminDeviceDetailComponent implements OnInit {
   }
 
   onSubmitClick(form: NgForm): void {
-    if (form.invalid) {
+    if (form.invalid || !this.model.icon) {
+      if (!this.model.icon) {
+        this.alertService.error('Icon is required');
+      }
+
       return;
     }
 
