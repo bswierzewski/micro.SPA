@@ -17,7 +17,7 @@ export interface DashboardDeviceModel {
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['time', 'address', 'rssi'];
+  displayedColumns: string[] = ['time', 'macAddress', 'rssi'];
   devices: DeviceForList[] = [];
   selectedDevices: DashboardDeviceModel[] = [];
 
@@ -31,7 +31,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     socketService.getMessages().subscribe((message) => {
       message.time = new Date().toLocaleTimeString();
 
-      const deviceIndex = this.selectedDevices.findIndex((x) => x.device.name === message.name);
+      console.log(message);
+      const deviceIndex = this.selectedDevices.findIndex((x) => x.device.address === message.macAddress);
 
       if (deviceIndex > -1) {
         const lenght = this.selectedDevices[deviceIndex].data.unshift(message);
@@ -71,7 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (result) {
         this.selectedDevices = [];
         result.forEach((device) => {
-          this.socketService.subscribe(device.name);
+          this.socketService.subscribe(device.address);
           this.selectedDevices.push({
             id: device.id,
             device,

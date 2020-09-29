@@ -1,6 +1,6 @@
 export class SocketMessage {
   time: string;
-  name: string;
-  address: string;
+  macAddress: string;
+  bleAddress: string;
   rssi: string;
 }

@@ -2,7 +2,7 @@ import * as io from 'socket.io-client';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import * as models from 'src/app/shared/models';
+import { SocketMessage } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -39,18 +39,18 @@ export class SocketService {
   }
 
   public getMessages = () => {
-    return new Observable<models.SocketMessage>((observer) => {
+    return new Observable<SocketMessage>((observer) => {
       this.socket.on('message', (message: string) => {
-        const json = JSON.parse(message) as models.SocketMessage;
+        const json = JSON.parse(message) as SocketMessage;
         observer.next(json);
       });
     });
   };
 
   public getPMessages = () => {
-    return new Observable<models.SocketMessage>((observer) => {
+    return new Observable<SocketMessage>((observer) => {
       this.socket.on('pmessage', (message: string) => {
-        const json = JSON.parse(message) as models.SocketMessage;
+        const json = JSON.parse(message) as SocketMessage;
         observer.next(json);
       });
     });

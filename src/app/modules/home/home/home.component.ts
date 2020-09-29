@@ -7,7 +7,7 @@ import { SocketService } from 'src/app/core/_services/socket.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['time', 'name', 'address', 'rssi'];
+  displayedColumns: string[] = ['time', 'bleAddress', 'macAddress', 'rssi'];
   devices = new Map();
 
   constructor(private socketService: SocketService) {
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     socketService.getPMessages().subscribe((message) => {
       message.time = new Date().toLocaleTimeString();
 
-      this.devices.set(message.address, message);
+      this.devices.set(message.bleAddress, message);
     });
   }
 
