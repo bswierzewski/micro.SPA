@@ -57,6 +57,7 @@ export class AdminDeviceDetailComponent implements OnInit {
           this.model.kindId = device.kind?.id;
           this.model.categoryId = device.category?.id;
           this.model.componentId = device.component?.id;
+          this.model.versionId = device.version?.id;
         });
       } else if (params.address) {
         this.isPassMacAddress = true;
