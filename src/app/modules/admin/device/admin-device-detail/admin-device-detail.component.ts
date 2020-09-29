@@ -46,14 +46,17 @@ export class AdminDeviceDetailComponent implements OnInit {
       this.isCreatedMode = Number(params.id) === 0;
 
       if (params.id && params.id > 0) {
-        this.deviceService.getDevice(params.id).subscribe((value: Device) => {
+        this.deviceService.getDevice(params.id).subscribe((device: Device) => {
+          if (device?.category?.id) {
+            this.components$ = this.componentService.getDeviceComponents(device.category?.id);
+          }
           this.model.id = params.id;
-          this.model.icon = value.icon;
-          this.model.name = value.name;
-          this.model.address = value.address?.label;
-          this.model.kindId = value.kind?.id;
-          this.model.componentId = value.component?.id;
-          this.model.categoryId = value.category?.id;
+          this.model.icon = device.icon;
+          this.model.name = device.name;
+          this.model.address = device.address?.label;
+          this.model.kindId = device.kind?.id;
+          this.model.categoryId = device.category?.id;
+          this.model.componentId = device.component?.id;
         });
       } else if (params.address) {
         this.isPassMacAddress = true;
