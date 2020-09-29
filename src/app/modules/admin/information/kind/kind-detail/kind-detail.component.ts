@@ -26,9 +26,9 @@ export class KindDetailComponent {
   ) {
     route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
-      if (this.isCreateMode) {
-      } else {
+      if (!this.isCreateMode) {
         kindService.getKind(params.id).subscribe((data) => {
+          this.model.id = data.id;
           this.model.name = data.name;
           this.model.icon = data.icon;
         });
@@ -45,6 +45,7 @@ export class KindDetailComponent {
     }
 
     const kind = {
+      id: this.model.id,
       name: this.model.name,
       icon: this.model.icon,
     } as Kind;
