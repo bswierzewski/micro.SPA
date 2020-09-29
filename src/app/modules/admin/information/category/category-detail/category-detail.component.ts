@@ -37,9 +37,10 @@ export class CategoryDetailComponent {
       if (!this.isCreateMode) {
         categoryService.getCategory(params.id).subscribe(
           (data) => {
+            this.model.id = data.id;
             this.model.name = data.name;
             this.model.icon = data.icon;
-            this.model.components = this.components.filter((component) => data.componentIds?.includes(component.id));
+            this.model.components = this.components?.filter((component) => data.componentIds?.includes(component.id));
           },
           (error) => {
             alertService.error(error);
@@ -58,9 +59,10 @@ export class CategoryDetailComponent {
     }
 
     const category = {
+      id: this.model.id,
       name: this.model.name,
       icon: this.model.icon,
-      componentIds: this.model.components.map((component) => component.id),
+      componentIds: this.model.components?.map((component) => component.id),
     } as Category;
 
     if (this.isCreateMode) {
@@ -91,13 +93,13 @@ export class CategoryDetailComponent {
   }
 
   getHeader(): string {
-    if (this.model.components.length > 1) {
+    if (this.model.components?.length > 1) {
       return `${this.model.components[0].name} (+${this.model.components.length - 1} ${
         this.model.components?.length === 2 ? 'other' : 'others'
       })`;
     }
 
-    if (this.model.components[0]) {
+    if (this.model.components?.length === 1) {
       return `${this.model.components[0].name}`;
     }
 

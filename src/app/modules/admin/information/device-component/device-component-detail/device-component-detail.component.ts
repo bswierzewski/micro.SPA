@@ -59,6 +59,7 @@ export class DeviceComponentDetailComponent {
     }
 
     const component = {
+      id: this.model.id,
       name: this.model.name,
       icon: this.model.icon,
       categoryId: this.model.category[0].id,
