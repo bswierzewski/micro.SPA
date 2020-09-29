@@ -8,14 +8,14 @@
 
       <app-icon-picker class="icon-picker" [(icon)]="model.icon"></app-icon-picker>
 
-      <mat-expansion-panel class="expansion-panel" [expanded]="model.isExpanded" (opened)="model.isExpanded = true">
+      <mat-expansion-panel class="expansion-panel">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{ getHeader() }}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-selection-list name="components" [(ngModel)]="model.componentIds">
-          <mat-list-option *ngFor="let component of components" [value]="component.id">
+        <mat-selection-list name="components" [(ngModel)]="model.components">
+          <mat-list-option *ngFor="let component of components" [value]="component">
             <mat-icon matListIcon>{{ component.icon }}</mat-icon
             >{{ component.name }}
           </mat-list-option>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AlertService, CategoryInformationService, DeviceComponentInformationService } from 'src/app/core/_services';
 import { DeviceComponent, Category } from 'src/app/shared/models';
 
@@ -9,8 +8,7 @@ export class Model {
   id = 0;
   name = '';
   icon = '';
-  isExpanded = false;
-  componentIds: number[] = [];
+  components: DeviceComponent[] = [];
 }
 
 @Component({
@@ -30,6 +28,10 @@ export class CategoryDetailComponent {
     private categoryService: CategoryInformationService,
     private componentService: DeviceComponentInformationService
   ) {
+    componentService.getDeviceComponents().subscribe((data) => {
+      this.components = data;
+    });
+
     route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
       if (!this.isCreateMode) {
@@ -37,17 +39,13 @@ export class CategoryDetailComponent {
           (data) => {
             this.model.name = data.name;
             this.model.icon = data.icon;
-            this.model.componentIds = data.components;
+            this.model.components = this.components.filter((component) => data.componentIds?.includes(component.id));
           },
           (error) => {
             alertService.error(error);
           }
         );
       }
-    });
-
-    componentService.getDeviceComponents().subscribe((data) => {
-      this.components = data;
     });
   }
 
@@ -62,7 +60,7 @@ export class CategoryDetailComponent {
     const category = {
       name: this.model.name,
       icon: this.model.icon,
-      components: this.model.componentIds,
+      componentIds: this.model.components.map((component) => component.id),
     } as Category;
 
     if (this.isCreateMode) {
@@ -93,22 +91,14 @@ export class CategoryDetailComponent {
   }
 
   getHeader(): string {
-    if (this.model.componentIds?.length === undefined) {
-      return 'Choose components';
+    if (this.model.components.length > 1) {
+      return `${this.model.components[0].name} (+${this.model.components.length - 1} ${
+        this.model.components?.length === 2 ? 'other' : 'others'
+      })`;
     }
 
-    if (this.model.componentIds.length === 1) {
-      return this.components.find((x) => x.id === this.model.componentIds[0])?.name;
-    } else if (this.model.componentIds?.length === 2) {
-      return (
-        this.components.find((x) => x.id === this.model.componentIds[0])?.name +
-        ` (+ ${this.model.componentIds.length - 1} other)`
-      );
-    } else if (this.model.componentIds.length > 1) {
-      return (
-        this.components.find((x) => x.id === this.model.componentIds[0])?.name +
-        ` (+ ${this.model.componentIds.length - 1} others)`
-      );
+    if (this.model.components[0]) {
+      return `${this.model.components[0].name}`;
     }
 
     return 'Choose components';

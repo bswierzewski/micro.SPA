@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AlertService, CategoryInformationService, DeviceComponentInformationService } from 'src/app/core/_services';
 import { Category, DeviceComponent } from 'src/app/shared/models';
 
@@ -9,8 +8,7 @@ export class Model {
   id = 0;
   name = '';
   icon = '';
-  isExpanded = false;
-  categoryId: number[] = [];
+  category: Category[] = [];
 }
 
 @Component({
@@ -30,6 +28,10 @@ export class DeviceComponentDetailComponent {
     private categoryService: CategoryInformationService,
     private componentService: DeviceComponentInformationService
   ) {
+    categoryService.getCategories().subscribe((data) => {
+      this.categories = data;
+    });
+
     route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
       if (!this.isCreateMode) {
@@ -38,17 +40,13 @@ export class DeviceComponentDetailComponent {
             this.model.id = data.id;
             this.model.name = data.name;
             this.model.icon = data.icon;
-            this.model.categoryId = [data.categoryId];
+            this.model.category = this.categories.filter((category) => category.id === data.categoryId);
           },
           (error) => {
             alertService.error(error);
           }
         );
       }
-    });
-
-    categoryService.getCategories().subscribe((data) => {
-      this.categories = data;
     });
   }
 
@@ -63,7 +61,7 @@ export class DeviceComponentDetailComponent {
     const component = {
       name: this.model.name,
       icon: this.model.icon,
-      categoryId: this.model?.categoryId[0],
+      categoryId: this.model.category[0].id,
     } as DeviceComponent;
 
     if (this.isCreateMode) {
@@ -94,8 +92,8 @@ export class DeviceComponentDetailComponent {
   }
 
   getHeader(): string {
-    if (this.model.categoryId?.length === 1) {
-      return this.categories?.find((x) => x.id === this.model.categoryId[0])?.name;
+    if (this.model.category[0]) {
+      return this.model.category[0].name;
     }
     return 'Choose category';
   }
