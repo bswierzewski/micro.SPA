@@ -19,14 +19,7 @@ export let NavbarData = {
         icon: 'settings',
       },
     ] as NavMenuItem[],
-    AdminNavExpandedMenuItems: [
-      { path: '/home', title: 'Home', icon: 'home' },
-      {
-        path: '',
-        title: 'Logout',
-        icon: 'exit_to_app',
-      },
-    ] as NavMenuItem[],
+    AdminNavExpandedMenuItems: [{ path: '/home', title: 'Home', icon: 'home' }] as NavMenuItem[],
   },
 
   home: {
@@ -35,9 +28,6 @@ export let NavbarData = {
       { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
       { path: '/devices', title: 'Devices', icon: 'perm_device_information' },
     ] as NavMenuItem[],
-    HomeNavExpandedMenuItems: [
-      { path: '/admin', title: 'Admin', icon: 'admin_panel_settings' },
-      { path: '', title: 'Logout', icon: 'exit_to_app' },
-    ] as NavMenuItem[],
+    HomeNavExpandedMenuItems: [{ path: '/admin', title: 'Admin', icon: 'admin_panel_settings' }] as NavMenuItem[],
   },
 };

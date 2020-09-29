@@ -1,3 +1,4 @@
+import { AuthGuard } from 'src/app/core/_guards/auth.guard';
 import { NavbarData, SidebarData } from './core/base/navigation/data';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './core/authentication/login/login.component';
@@ -29,7 +30,7 @@ export const AppRoutes: Routes = [
   {
     path: '',
     runGuardsAndResolvers: 'always',
-    // canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: BaseComponent,
     children: [
       { path: '', component: HomeComponent },
@@ -47,7 +48,7 @@ export const AppRoutes: Routes = [
   {
     path: 'admin',
     runGuardsAndResolvers: 'always',
-    // canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: BaseComponent,
     children: [
       {

@@ -1,3 +1,4 @@
+export { AuthService } from './auth.service';
 export { AlertService } from './alert.service';
 export { DeviceService } from './device.service';
 export { SideNavbarService } from './side-navbar.service';

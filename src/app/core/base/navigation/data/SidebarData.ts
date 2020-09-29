@@ -18,7 +18,6 @@ export let SidebarData = {
       title: 'Information',
       icon: 'settings',
     },
-    { path: '', title: 'Logout', icon: 'exit_to_app' },
   ] as SideMenuItem[],
 
   HomeNavMenuItems: [
@@ -26,6 +25,5 @@ export let SidebarData = {
     { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
     { path: '/devices', title: 'Devices', icon: 'perm_device_information' },
     { path: '/admin', title: 'Admin', icon: 'admin_panel_settings' },
-    { path: '', title: 'Logout', icon: 'exit_to_app' },
   ] as SideMenuItem[],
 };

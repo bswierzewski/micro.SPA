@@ -3,7 +3,7 @@
     <img src="./assets/img/bg.svg" />
   </div>
   <div class="login-content">
-    <form action="index.html">
+    <form action="index.html" #form="ngForm" (ngSubmit)="login()" autocomplete="off">
       <img src="./assets/img/avatar.svg" />
       <h2 class="title">Welcome</h2>
       <div class="input-div one">
@@ -11,7 +11,14 @@
           <i class="fas fa-user"></i>
         </div>
         <div class="div">
-          <input type="text" class="input" placeholder="Username" />
+          <input
+            required
+            type="text"
+            class="input"
+            placeholder="Username"
+            [(ngModel)]="model.username"
+            name="username"
+          />
         </div>
       </div>
       <div class="input-div pass">
@@ -19,10 +26,17 @@
           <i class="fas fa-lock"></i>
         </div>
         <div class="div">
-          <input type="password" class="input" placeholder="Password" />
+          <input
+            required
+            type="password"
+            class="input"
+            placeholder="Password"
+            [(ngModel)]="model.password"
+            name="password"
+          />
         </div>
       </div>
-      <input type="submit" class="btn" value="Login" />
+      <input [disabled]="!form.valid" type="submit" class="btn" value="Login" />
     </form>
   </div>
 </div>

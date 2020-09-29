@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptorProvider } from 'src/app/core/_services/error.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutes } from './routes';
 import { RouterModule } from '@angular/router';
@@ -34,6 +35,11 @@ import { CategoryListComponent } from './modules/admin/information/category/cate
 import { CategoryDetailComponent } from './modules/admin/information/category/category-detail/category-detail.component';
 import { AdminDeviceTabComponent } from './modules/admin/device/admin-device-tab/admin-device-tab.component';
 import { AdminDeviceAddressComponent } from './modules/admin/device/admin-device-address/admin-device-address.component';
+import { AlertService, AuthService } from './core/_services';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -70,8 +76,13 @@ import { AdminDeviceAddressComponent } from './modules/admin/device/admin-device
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+      },
+    }),
   ],
-  providers: [ErrorInterceptorProvider],
+  providers: [ErrorInterceptorProvider, AuthService, AlertService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

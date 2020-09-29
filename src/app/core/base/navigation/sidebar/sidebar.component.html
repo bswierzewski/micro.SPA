@@ -11,5 +11,10 @@
       </a>
       <mat-divider></mat-divider>
     </div>
+    <button mat-menu-item (click)="authService.logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+    <mat-divider></mat-divider>
   </mat-nav-list>
 </div>

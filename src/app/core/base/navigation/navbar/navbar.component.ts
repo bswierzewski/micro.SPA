@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SideNavbarService } from '../../../_services/side-navbar.service';
 import { NavMenuItem } from '../data';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/core/_services';
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +13,7 @@ export class NavbarComponent implements OnInit {
   navMenuItems: NavMenuItem[] = [];
   navExpandedMenuItems: NavMenuItem[] = [];
 
-  constructor(
-    public sideNavbarService: SideNavbarService,
-    route: ActivatedRoute
-  ) {
+  constructor(public sideNavbarService: SideNavbarService, route: ActivatedRoute, public authService: AuthService) {
     this.navMenuItems = route.snapshot.data.navMenuItems;
     this.navExpandedMenuItems = route.snapshot.data.navExpandedMenuItems;
   }

@@ -1,9 +1,7 @@
 <mat-toolbar color="primary">
   <div class="mobile">
     <div class="nav-layout">
-      <a mat-button routerLink="/home"
-        ><img class="logo" src="./assets/img/logo-white.svg"
-      /></a>
+      <a mat-button routerLink="/home"><img class="logo" src="./assets/img/logo-white.svg" /></a>
       <span class="example-spacer"></span>
       <button mat-icon-button (click)="openSideNavbar()">
         <mat-icon>menu</mat-icon>
@@ -12,9 +10,7 @@
   </div>
   <div class="desktop">
     <div class="nav-layout">
-      <a mat-button routerLink="/home"
-        ><img class="logo" src="./assets/img/logo-white.svg"
-      /></a>
+      <a mat-button routerLink="/home"><img class="logo" src="./assets/img/logo-white.svg" /></a>
       <div *ngFor="let navMenuItem of navMenuItems">
         <a mat-button routerLink="{{ navMenuItem.path }}">
           <mat-icon>{{ navMenuItem.icon }}</mat-icon> {{ navMenuItem.title }}
@@ -31,6 +27,10 @@
             <span>{{ navExpandedMenuItem.title }}</span>
           </button>
         </div>
+        <button mat-menu-item (click)="authService.logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
       </mat-menu>
     </div>
   </div>
