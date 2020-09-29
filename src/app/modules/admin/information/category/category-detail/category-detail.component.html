@@ -23,8 +23,12 @@
       </mat-expansion-panel>
     </div>
     <div class="action_buttons">
-      <button mat-raised-button class="mat-elevation-z4" type="button">Clear</button>
-      <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit">Submit</button>
+      <button mat-raised-button class="mat-elevation-z4" color="warn" type="button" (click)="onReturnClick()">
+        Return
+      </button>
+      <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit" (click)="onSumbitClick(form)">
+        Submit
+      </button>
     </div>
   </form>
 </mat-card>

@@ -1,4 +1,4 @@
-import * as models from 'src/app/shared/models';
+import { Kind } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -12,15 +12,19 @@ export class KindInformationService {
 
   constructor(private http: HttpClient) {}
 
-  getKinds(): Observable<models.Kind[]> {
-    return this.http.get<models.Kind[]>(this.kindsUrl);
+  getKind(id: number): Observable<Kind> {
+    return this.http.get<Kind>(this.kindsUrl + `/${id}`);
   }
 
-  addKind(kind: models.Kind): Observable<any> {
+  getKinds(): Observable<Kind[]> {
+    return this.http.get<Kind[]>(this.kindsUrl);
+  }
+
+  addKind(kind: Kind): Observable<any> {
     return this.http.post(this.kindsUrl, kind);
   }
 
-  updateKind(kind: models.Kind): Observable<any> {
+  updateKind(kind: Kind): Observable<any> {
     return this.http.put(this.kindsUrl + `/${kind.id}`, kind);
   }
 
