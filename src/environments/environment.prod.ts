@@ -1,4 +1,7 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:3000',
+  socketUrl: 'http://socket.localhost/',
+  deviceUrl: 'http://device.localhost/api/',
+  updateUrl: 'http://update.localhost/api/',
+  authUrl: 'http://auth.localhost/api/',
 };
