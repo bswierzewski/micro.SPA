@@ -22,7 +22,6 @@ export class AdminDeviceDetailComponent implements OnInit {
 
   isCreatedMode = false;
   isPassMacAddress = false;
-  isAutoUpdate = false;
   kinds$: Observable<Kind[]>;
   components$: Observable<DeviceComponent[]>;
   categories$: Observable<Category[]>;

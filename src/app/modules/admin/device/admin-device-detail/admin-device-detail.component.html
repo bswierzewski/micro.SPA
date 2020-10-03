@@ -55,7 +55,7 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Specific version</mat-label>
-      <mat-select [(ngModel)]="model.versionId" name="version" [disabled]="isAutoUpdate">
+      <mat-select [(ngModel)]="model.versionId" name="version" [disabled]="model.isAutoUpdate">
         <mat-option *ngFor="let version of versions$ | async" [value]="version.id">
           {{ version.name }}
         </mat-option>
@@ -64,7 +64,7 @@
     <mat-button-toggle-group
       (change)="buttonAutoUpdateChange($event.value)"
       class="button_group"
-      [(ngModel)]="isAutoUpdate"
+      [(ngModel)]="model.isAutoUpdate"
       name="group"
     >
       <mat-button-toggle class="flex_item" [value]="false">Specific</mat-button-toggle>
