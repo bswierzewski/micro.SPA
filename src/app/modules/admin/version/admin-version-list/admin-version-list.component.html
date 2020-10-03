@@ -16,9 +16,12 @@
       </a>
     </th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="['/admin/versions/' + element.id]" class="cell-button" mat-mini-fab color="primary">
+      <button [routerLink]="['/admin/versions/' + element.id]" class="cell-button" mat-mini-fab color="primary">
         <mat-icon>settings</mat-icon>
-      </a>
+      </button>
+      <button class="cell-button" mat-mini-fab color="warn" (click)="deleteVersion(element.id)">
+        <mat-icon>clear</mat-icon>
+      </button>
     </td>
   </ng-container>
 

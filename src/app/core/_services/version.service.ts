@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class VersionService {
   versionUrl = environment.updateUrl + 'versions';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getVersion(id: number): Observable<Version> {
     return this.httpClient.get<Version>(this.versionUrl + `/${id}`);
@@ -38,7 +38,7 @@ export class VersionService {
     return this.httpClient.put(this.versionUrl + `/${id}`, version);
   }
 
-  removeVersion(id: number): Observable<any> {
+  deleteVersion(id: number): Observable<any> {
     return this.httpClient.delete(this.versionUrl + `/${id}`);
   }
 }

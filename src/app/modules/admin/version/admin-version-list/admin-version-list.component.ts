@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { VersionService } from 'src/app/core/_services';
+import { AlertService, VersionService } from 'src/app/core/_services';
 import { Version } from 'src/app/shared/models';
 
 @Component({
@@ -8,13 +8,27 @@ import { Version } from 'src/app/shared/models';
   templateUrl: './admin-version-list.component.html',
   styleUrls: ['./admin-version-list.component.scss'],
 })
-export class AdminVersionListComponent implements OnInit {
+export class AdminVersionListComponent {
   autoColumns: string[] = ['id', 'created', 'name', 'major', 'minor', 'patch', 'kind', 'component', 'fileData'];
   displayedColumns: string[] = [...this.autoColumns, 'action'];
   versions$: Observable<Version[]>;
-  constructor(private versionService: VersionService) {
-    this.versions$ = versionService.getVersions();
+  constructor(private versionService: VersionService, private alertService: AlertService) {
+    this.loadVersions();
   }
 
-  ngOnInit(): void {}
+  loadVersions(): void {
+    this.versions$ = this.versionService.getVersions();
+  }
+
+  deleteVersion(id: number): void {
+    this.versionService.deleteVersion(id).subscribe(
+      (next) => {
+        this.alertService.success('Version deleted');
+        this.loadVersions();
+      },
+      (error) => {
+        this.alertService.error(error);
+      }
+    );
+  }
 }
