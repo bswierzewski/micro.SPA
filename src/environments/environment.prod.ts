@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  socketUrl: 'http://socket.localhost/',
-  deviceUrl: 'http://device.localhost/api/',
-  updateUrl: 'http://update.localhost/api/',
-  authUrl: 'http://auth.localhost/api/',
+  socketUrl: 'http://socket.micro.io/',
+  deviceUrl: 'http://device.micro.io/api/',
+  updateUrl: 'http://update.micro.io/api/',
+  authUrl: 'http://auth.micro.io/api/',
 };
