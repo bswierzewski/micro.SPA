@@ -1,12 +1,15 @@
-FROM node:alpine AS builder
+FROM node:alpine As builder
 
-WORKDIR /app
+WORKDIR /usr/src/app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
 
 COPY . .
 
-RUN npm install && \
-    npm run build
+RUN npm run build --prod
 
 FROM arm32v7/nginx:alpine
 
-COPY --from=builder /app/dist/* /usr/share/nginx/html/
+COPY --from=builder /usr/src/app/dist/micro/ /usr/share/nginx/html
