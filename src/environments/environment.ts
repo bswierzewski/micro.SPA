@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   socketUrl: 'http://socket.localhost/',
-  deviceUrl: 'http://device.localhost:5001/api/',
-  updateUrl: 'http://localhost:5000/api/',
+  deviceUrl: 'http://device.localhost/api/',
+  updateUrl: 'http://update.localhost/api/',
   authUrl: 'http://auth.localhost/api/',
 };
 
