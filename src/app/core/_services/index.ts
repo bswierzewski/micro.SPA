@@ -1,7 +1,6 @@
 export { AuthService } from './auth.service';
 export { AlertService } from './alert.service';
 export { DeviceService } from './device.service';
-export { SideNavbarService } from './side-navbar.service';
 export { SocketService } from './socket.service';
 export { CategoryInformationService } from './device-information/category-information.service';
 export { DeviceComponentInformationService } from './device-information/device-component-information.service';

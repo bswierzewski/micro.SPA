@@ -1,9 +1,9 @@
-<mat-sidenav-container fullscreen>
-  <mat-sidenav #sidenav mode="over" fixedInViewport="true">
-    <app-sidebar></app-sidebar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <app-sidenav (closeSidenav)="sidenav.close()"></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-navbar></app-navbar>
+    <app-header (sidenavToogle)="sidenav.toggle()"></app-header>
     <main>
       <router-outlet></router-outlet>
     </main>

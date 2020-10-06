@@ -1,0 +1,15 @@
+<a routerLink="/">
+  <div class="logo" (click)="onClose()">
+    <img src="./assets/img/logo-white.svg" /></div
+></a>
+<mat-nav-list (click)="onClose()">
+  <mat-divider></mat-divider>
+  <div *ngFor="let group of menuGroups">
+    <div *ngFor="let item of group.items">
+      <a mat-list-item routerLink="{{ item.path }}">
+        <mat-icon matListIcon>{{ item.icon }}</mat-icon
+        >{{ item.title }}
+      </a>
+      <mat-divider></mat-divider>
+    </div></div
+></mat-nav-list>

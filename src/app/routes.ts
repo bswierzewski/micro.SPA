@@ -1,5 +1,4 @@
 import { AuthGuard } from 'src/app/core/_guards/auth.guard';
-import { NavbarData, SidebarData } from './core/base/navigation/data';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './core/authentication/login/login.component';
 import { HomeComponent } from './modules/home/home/home.component';
@@ -39,11 +38,6 @@ export const AppRoutes: Routes = [
       { path: 'devices', component: DeviceListComponent },
       { path: 'devices/:id', component: DeviceDetailComponent },
     ],
-    data: {
-      navMenuItems: NavbarData.home.HomeNavMenuItems,
-      navExpandedMenuItems: NavbarData.home.HomeNavExpandedMenuItems,
-      sideMenuItems: SidebarData.HomeNavMenuItems,
-    },
   },
   {
     path: 'admin',
@@ -77,11 +71,6 @@ export const AppRoutes: Routes = [
       { path: 'versions', component: AdminVersionListComponent },
       { path: 'versions/:id', component: AdminVersionDetailComponent },
     ],
-    data: {
-      navMenuItems: NavbarData.admin.AdminNavMenuItems,
-      navExpandedMenuItems: NavbarData.admin.AdminNavExpandedMenuItems,
-      sideMenuItems: SidebarData.AdminNavMenuItems,
-    },
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

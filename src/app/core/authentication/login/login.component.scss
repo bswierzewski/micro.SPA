@@ -113,7 +113,7 @@ form {
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: $brand-color;
+    background-color: $primary;
     transition: 0.4s;
     right: 50%;
   }
@@ -124,7 +124,7 @@ form {
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: $brand-color;
+    background-color: $primary;
     transition: 0.4s;
     left: 50%;
   }
@@ -148,7 +148,7 @@ form {
 
   > .i {
     > i {
-      color: $brand-color;
+      color: $primary;
     }
   }
 }
@@ -166,7 +166,7 @@ a {
   transition: 0.3s;
 
   &:hover {
-    color: $brand-color;
+    color: $primary;
   }
 }
 
@@ -177,7 +177,7 @@ a {
   border-radius: 25px;
   outline: none;
   border: none;
-  background: $brand-color;
+  background: $primary;
   background-size: 200%;
   font-size: 1.2rem;
   color: #fff;

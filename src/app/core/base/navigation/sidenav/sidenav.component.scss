@@ -1,0 +1,15 @@
+@import 'variables';
+
+mat-nav-list {
+  padding: 0;
+}
+
+.logo {
+  background-color: $primary;
+  padding: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}

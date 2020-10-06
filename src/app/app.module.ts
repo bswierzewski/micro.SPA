@@ -1,18 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialModule } from './angular-material.module';
+import { MaterialModule } from './material.module';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorInterceptorProvider } from 'src/app/core/_services/error.interceptor';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutes } from './routes';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from './core/base/navigation/navbar/navbar.component';
-import { SidebarComponent } from './core/base/navigation/sidebar/sidebar.component';
 import { BaseComponent } from './core/base/base.component';
+import { HeaderComponent } from './core/base/navigation/header/header.component';
+import { SidenavComponent } from './core/base/navigation/sidenav/sidenav.component';
+
+import { ErrorInterceptorProvider } from 'src/app/core/_services/error.interceptor';
+import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
 
 import { LoginComponent } from './core/authentication/login/login.component';
 import { HomeComponent } from './modules/home/home/home.component';
@@ -25,7 +28,6 @@ import { AdminDeviceDetailComponent } from './modules/admin/device/admin-device-
 import { AdminDeviceListComponent } from './modules/admin/device/admin-device-list/admin-device-list.component';
 import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
 import { AdminVersionDetailComponent } from './modules/admin/version/admin-version-detail/admin-version-detail.component';
-import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
 import { InformationListComponent } from './modules/admin/information/information-list/information-list.component';
 import { KindListComponent } from './modules/admin/information/kind/kind-list/kind-list.component';
 import { KindDetailComponent } from './modules/admin/information/kind/kind-detail/kind-detail.component';
@@ -37,7 +39,7 @@ import { AdminDeviceTabComponent } from './modules/admin/device/admin-device-tab
 import { AdminDeviceAddressComponent } from './modules/admin/device/admin-device-address/admin-device-address.component';
 import { AlertService, AuthService } from './core/_services';
 
-export function tokenGetter() {
+export function tokenGetter(): string {
   return localStorage.getItem('token');
 }
 
@@ -54,8 +56,6 @@ export function tokenGetter() {
     AdminDeviceListComponent,
     AdminVersionListComponent,
     AdminVersionDetailComponent,
-    NavbarComponent,
-    SidebarComponent,
     BaseComponent,
     IconPickerComponent,
     InformationListComponent,
@@ -67,15 +67,18 @@ export function tokenGetter() {
     CategoryDetailComponent,
     AdminDeviceTabComponent,
     AdminDeviceAddressComponent,
+    HeaderComponent,
+    SidenavComponent,
   ],
   imports: [
-    RouterModule.forRoot(AppRoutes),
-    BrowserModule,
-    BrowserAnimationsModule,
-    AngularMaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    FlexLayoutModule,
+    RouterModule.forRoot(AppRoutes),
     JwtModule.forRoot({
       config: {
         tokenGetter,
