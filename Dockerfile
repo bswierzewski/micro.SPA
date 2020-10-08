@@ -6,9 +6,11 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
+RUN npm install -g @angular/cli
+
 COPY . .
 
-RUN npm run build --prod
+RUN ng build --prod
 
 FROM arm32v7/nginx:alpine
 

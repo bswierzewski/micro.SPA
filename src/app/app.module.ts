@@ -19,8 +19,8 @@ export function tokenGetter(): string {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    CoreModule,
     AppRoutingModule,
+    CoreModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
