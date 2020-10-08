@@ -8,7 +8,7 @@ import {
   DeviceComponentInformationService,
   KindInformationService,
   VersionService,
-} from 'src/app/core/_services';
+} from 'src/app/core/services';
 
 export class Model {
   id: number;

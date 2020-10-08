@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AlertService, VersionService } from 'src/app/core/_services';
+import { AlertService, VersionService } from 'src/app/core/services';
 import { Version } from 'src/app/shared/models';
 
 @Component({

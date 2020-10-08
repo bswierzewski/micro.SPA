@@ -1,13 +1,12 @@
-export interface MenuGroup {
-  group: string;
-  icon: string;
-  items: MenuItem[];
-}
-
 export interface MenuItem {
   title: string;
   path: string;
   icon?: string;
+}
+export interface MenuGroup {
+  group: string;
+  icon: string;
+  items: MenuItem[];
 }
 
 export let MenuGroups: MenuGroup[] = [

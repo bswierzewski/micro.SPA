@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MenuGroups, MenuGroup } from '../data/MenuItem';
+import { MenuGroups, MenuGroup } from '../navigation-data/MenuItem';
 
 @Component({
   selector: 'app-header',

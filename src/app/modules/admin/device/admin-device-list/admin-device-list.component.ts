@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { DeviceForList } from 'src/app/shared/models';
-import { DeviceService, AlertService } from 'src/app/core/_services';
+import { DeviceService, AlertService } from 'src/app/core/services';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 

@@ -1,84 +1,26 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
-import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { AppRoutes } from './routes';
-import { RouterModule } from '@angular/router';
-import { BaseComponent } from './core/base/base.component';
-import { HeaderComponent } from './core/base/navigation/header/header.component';
-import { SidenavComponent } from './core/base/navigation/sidenav/sidenav.component';
-
-import { ErrorInterceptorProvider } from 'src/app/core/_services/error.interceptor';
-import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
-
-import { LoginComponent } from './core/authentication/login/login.component';
-import { HomeComponent } from './modules/home/home/home.component';
-import { DeviceListComponent } from './modules/home/device/device-list/device-list.component';
-import { DeviceDetailComponent } from './modules/home/device/device-detail/device-detail.component';
-import { DashboardComponent } from './modules/home/dashboard/dashboard.component';
-import { DialogDeviceListComponent } from './modules/home/dashboard/components/dialog-device-list.component';
-
-import { AdminDeviceDetailComponent } from './modules/admin/device/admin-device-detail/admin-device-detail.component';
-import { AdminDeviceListComponent } from './modules/admin/device/admin-device-list/admin-device-list.component';
-import { AdminVersionListComponent } from './modules/admin/version/admin-version-list/admin-version-list.component';
-import { AdminVersionDetailComponent } from './modules/admin/version/admin-version-detail/admin-version-detail.component';
-import { InformationListComponent } from './modules/admin/information/information-list/information-list.component';
-import { KindListComponent } from './modules/admin/information/kind/kind-list/kind-list.component';
-import { KindDetailComponent } from './modules/admin/information/kind/kind-detail/kind-detail.component';
-import { DeviceComponentDetailComponent } from './modules/admin/information/device-component/device-component-detail/device-component-detail.component';
-import { DeviceComponentListComponent } from './modules/admin/information/device-component/device-component-list/device-component-list.component';
-import { CategoryListComponent } from './modules/admin/information/category/category-list/category-list.component';
-import { CategoryDetailComponent } from './modules/admin/information/category/category-detail/category-detail.component';
-import { AdminDeviceTabComponent } from './modules/admin/device/admin-device-tab/admin-device-tab.component';
-import { AdminDeviceAddressComponent } from './modules/admin/device/admin-device-address/admin-device-address.component';
-import { AlertService, AuthService } from './core/_services';
+import { ErrorInterceptorProvider } from 'src/app/core/interceptors/error.interceptor';
+import { AlertService, AuthService } from './core/services';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    DeviceListComponent,
-    DeviceDetailComponent,
-    HomeComponent,
-    DashboardComponent,
-    DialogDeviceListComponent,
-    AdminDeviceDetailComponent,
-    AdminDeviceListComponent,
-    AdminVersionListComponent,
-    AdminVersionDetailComponent,
-    BaseComponent,
-    IconPickerComponent,
-    InformationListComponent,
-    KindListComponent,
-    KindDetailComponent,
-    DeviceComponentDetailComponent,
-    DeviceComponentListComponent,
-    CategoryListComponent,
-    CategoryDetailComponent,
-    AdminDeviceTabComponent,
-    AdminDeviceAddressComponent,
-    HeaderComponent,
-    SidenavComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
-    HttpClientModule,
-    BrowserAnimationsModule,
     BrowserModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
-    FlexLayoutModule,
-    RouterModule.forRoot(AppRoutes),
+    BrowserAnimationsModule,
+    CoreModule,
+    AppRoutingModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

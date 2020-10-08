@@ -9,7 +9,7 @@ import {
   AlertService,
   CategoryInformationService,
   VersionService,
-} from 'src/app/core/_services';
+} from 'src/app/core/services';
 import { NgForm } from '@angular/forms';
 
 @Component({

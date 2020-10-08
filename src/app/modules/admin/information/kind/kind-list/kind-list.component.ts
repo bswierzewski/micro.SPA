@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AlertService, KindInformationService } from 'src/app/core/_services';
+import { AlertService, KindInformationService } from 'src/app/core/services';
 import { Kind } from 'src/app/shared/models';
 
 @Component({

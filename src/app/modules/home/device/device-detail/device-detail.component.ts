@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Device, Registration } from 'src/app/shared/models';
-import { DeviceService, RegistrationService } from 'src/app/core/_services';
+import { DeviceService, RegistrationService } from 'src/app/core/services';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 

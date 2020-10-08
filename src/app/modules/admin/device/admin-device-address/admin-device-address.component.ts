@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddressService, AlertService } from 'src/app/core/_services';
+import { AddressService, AlertService } from 'src/app/core/services';
 import { Address } from 'src/app/shared/models';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeviceListComponent } from './components/dialog-device-list.component';
 import { DeviceDialogDataModel } from './components/DeviceDialogDataModel';
-import { DeviceService, SocketService } from 'src/app/core/_services';
+import { DeviceService, SocketService } from 'src/app/core/services';
 import { SocketMessage, DeviceForList } from 'src/app/shared/models';
 
 export interface DashboardDeviceModel {

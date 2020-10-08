@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, KindInformationService } from 'src/app/core/_services';
+import { AlertService, KindInformationService } from 'src/app/core/services';
 import { Kind } from 'src/app/shared/models';
 
 export class Model {
