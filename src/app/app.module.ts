@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { ErrorInterceptorProvider } from 'src/app/core/interceptors/error.interceptor';
@@ -19,8 +18,8 @@ export function tokenGetter(): string {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    SharedModule,
     AppRoutingModule,
-    CoreModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

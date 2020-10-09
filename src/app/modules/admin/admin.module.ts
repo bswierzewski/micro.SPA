@@ -1,6 +1,6 @@
 // Modules
 import { NgModule } from '@angular/core';
-import { CoreModule } from '../../core/core.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 
 import { AdminDeviceTabComponent } from '../../modules/admin/device/admin-device-tab/admin-device-tab.component';
@@ -39,7 +39,7 @@ import { AdminComponent } from './admin.component';
     IconPickerComponent,
     AdminComponent,
   ],
-  imports: [CoreModule, AdminRoutingModule],
+  imports: [SharedModule, AdminRoutingModule],
   exports: [],
 })
 export class AdminModule {}

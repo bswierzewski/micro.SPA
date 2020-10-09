@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from '../../core/core.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 
 import { HomeComponent } from '../../modules/home/home/home.component';
@@ -19,7 +19,7 @@ import { HomeBaseComponent } from './home-base.component';
     DialogDeviceListComponent,
     HomeBaseComponent,
   ],
-  imports: [CoreModule, HomeRoutingModule],
+  imports: [SharedModule, HomeRoutingModule],
   exports: [],
 })
 export class HomeModule {}

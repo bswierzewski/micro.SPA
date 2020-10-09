@@ -15,7 +15,6 @@ const routes: Routes = [
     component: HomeBaseComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'home', component: HomeComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'devices', component: DeviceListComponent },
       { path: 'devices/:id', component: DeviceDetailComponent },
