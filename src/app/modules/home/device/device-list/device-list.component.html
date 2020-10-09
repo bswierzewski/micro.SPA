@@ -7,9 +7,9 @@
           <mat-select [(value)]="data.kind" name="kindValid">
             <mat-select-trigger>{{ data?.kind?.name }}</mat-select-trigger>
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let kind of kinds$ | async" [value]="kind"
-              ><mat-icon>{{ kind.icon }}</mat-icon
-              >{{ kind.name }}</mat-option
+            <mat-option *ngFor="let kind of kinds$ | async" [value]="kind">
+              <i [ngClass]="kind.icon"></i>
+              {{ kind.name }}</mat-option
             >
           </mat-select>
         </mat-form-field>
@@ -24,9 +24,9 @@
           >
             <mat-select-trigger>{{ data?.category?.name }}</mat-select-trigger>
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let category of categories$ | async" [value]="category"
-              ><mat-icon>{{ category.icon }}</mat-icon
-              >{{ category.name }}</mat-option
+            <mat-option *ngFor="let category of categories$ | async" [value]="category">
+              <i [ngClass]="category.icon"></i>
+              {{ category.name }}</mat-option
             >
           </mat-select>
         </mat-form-field>
@@ -42,9 +42,9 @@
             [(value)]="data.deviceComponents"
           >
             <mat-select-trigger>{{ getDeviceComponentsTriggerText() }}</mat-select-trigger>
-            <mat-option *ngFor="let component of components$ | async" [value]="component"
-              ><mat-icon>{{ component.icon }}</mat-icon
-              >{{ component.name }}</mat-option
+            <mat-option *ngFor="let component of components$ | async" [value]="component">
+              <i [ngClass]="component.icon"></i>
+              {{ component.name }}</mat-option
             >
           </mat-select>
         </mat-form-field>

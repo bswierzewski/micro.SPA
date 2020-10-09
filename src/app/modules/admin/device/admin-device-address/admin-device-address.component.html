@@ -27,10 +27,10 @@
       </th>
       <td mat-cell *matCellDef="let element">
         <button [routerLink]="['/admin/devices/0', { address: element.label }]" mat-mini-fab color="primary">
-          <mat-icon>add</mat-icon>
+          <i class="fas fa-plus"></i>
         </button>
         <button class="button_space" mat-mini-fab color="warn" (click)="onRemoveClick(element.id)">
-          <mat-icon>clear</mat-icon>
+          <i class="fas fa-minus"></i>
         </button>
       </td>
     </ng-container>

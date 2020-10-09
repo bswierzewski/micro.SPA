@@ -12,31 +12,31 @@ export interface MenuGroup {
 export let MenuGroups: MenuGroup[] = [
   {
     group: 'Home',
-    icon: 'home',
+    icon: 'fas fa-home',
     items: [
-      { path: '/home', title: 'Home', icon: 'home' },
-      { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
-      { path: '/devices', title: 'Devices', icon: 'perm_device_information' },
+      { path: '/home', title: 'Home', icon: 'fas fa-home' },
+      { path: '/dashboard', title: 'Dashboard', icon: 'fas fa-clipboard-check' },
+      { path: '/devices', title: 'Devices', icon: 'fas fa-mobile-alt' },
     ] as MenuItem[],
   },
   {
     group: 'Admin',
-    icon: 'settings',
+    icon: 'fas fa-user-cog',
     items: [
       {
         path: '/admin/devices',
         title: 'Devices',
-        icon: 'perm_device_information',
+        icon: 'fas fa-mobile-alt',
       },
       {
         path: '/admin/versions',
         title: 'Versions',
-        icon: 'swap_vertical_circle',
+        icon: 'fas fa-info-circle',
       },
       {
         path: '/admin/information/kinds',
         title: 'Information',
-        icon: 'settings',
+        icon: 'fas fa-cogs',
       },
     ] as MenuItem[],
   },

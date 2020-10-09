@@ -15,8 +15,8 @@
       </mat-expansion-panel-header>
       <mat-selection-list name="category" [(ngModel)]="model.category" [multiple]="false">
         <mat-list-option *ngFor="let category of categories" [value]="category">
-          <mat-icon matListIcon>{{ category.icon }}</mat-icon
-          >{{ category.name }}
+          <i matListIcon [ngClass]="category.icon"></i>
+          {{ category.name }}
         </mat-list-option>
       </mat-selection-list>
     </mat-expansion-panel>

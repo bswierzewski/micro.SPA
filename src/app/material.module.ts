@@ -10,18 +10,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
     MatCardModule,
-    MatIconModule,
     MatDividerModule,
     MatListModule,
     MatToolbarModule,
@@ -37,10 +36,10 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatTabsModule,
     MatInputModule,
+    MatChipsModule,
   ],
   exports: [
     MatCardModule,
-    MatIconModule,
     MatDividerModule,
     MatListModule,
     MatToolbarModule,
@@ -56,6 +55,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatTabsModule,
     MatInputModule,
+    MatChipsModule,
   ],
 })
 export class MaterialModule {}

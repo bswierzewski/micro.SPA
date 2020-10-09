@@ -9,8 +9,8 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon class="text_icon">{{ element.icon }}</mat-icon
-        >{{ element.name }}
+        <i [ngClass]="element.icon"></i>
+        {{ element.name }}
       </td></ng-container
     >
     <ng-container matColumnDef="address">
@@ -43,10 +43,10 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <a [routerLink]="['/admin/devices/' + element.id]" class="cell-button" mat-mini-fab color="primary">
-          <mat-icon>settings</mat-icon>
+          <i class="fas fa-cog"></i>
         </a>
         <button class="cell-button" mat-mini-fab color="primary" (click)="onRemoveClick(element.id)">
-          <mat-icon>clear</mat-icon>
+          <i class="fas fa-minus"></i>
         </button>
       </td>
     </ng-container>

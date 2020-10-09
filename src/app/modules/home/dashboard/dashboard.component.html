@@ -9,7 +9,7 @@
       (click)="openDialog()"
     >
       Please subscribe any devices
-      <mat-icon class="chips_icon">playlist_add</mat-icon>
+      <i class="fas fa-user-plus"></i>
     </button>
     <mat-chip-list *ngIf="selectedDevices?.length > 0">
       <mat-chip
@@ -19,13 +19,13 @@
         (click)="remove(selectedDevice.device)"
         *ngFor="let selectedDevice of selectedDevices"
         >{{ selectedDevice.device.name }}
-        <mat-icon class="chips_icon">cancel</mat-icon>
+        <i class="fas fa-times"></i>
       </mat-chip>
     </mat-chip-list>
   </div>
   <div class="expanded">
     <button class="expanded_button" (click)="openDialog()" mat-fab color="primary">
-      <mat-icon>list</mat-icon>
+      <i class="fas fa-list"></i>
     </button>
   </div>
 </mat-card>
