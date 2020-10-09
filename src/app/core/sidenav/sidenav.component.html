@@ -5,9 +5,12 @@
 <mat-nav-list (click)="onClose()">
   <mat-divider></mat-divider>
   <div *ngFor="let group of menuGroups">
+    <div class="subheader-div">
+      <span class="subheader-text">{{ group.group }}</span>
+    </div>
     <div *ngFor="let item of group.items">
       <a mat-list-item routerLink="{{ item.path }}">
-        <i matListIcon [ngClass]="item.icon"></i>
+        <i [ngClass]="[item.icon, 'fa-fw']"></i>
         {{ item.title }}
       </a>
       <mat-divider></mat-divider>

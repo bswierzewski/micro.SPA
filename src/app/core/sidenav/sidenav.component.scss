@@ -4,6 +4,13 @@ mat-nav-list {
   padding: 0;
 }
 
+.subheader-div {
+  padding: 10px 15px;
+  .subheader-text {
+    font-size: 1.1rem;
+  }
+}
+
 .logo {
   background-color: $primary;
   padding: 15px;

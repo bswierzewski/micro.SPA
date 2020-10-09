@@ -15,8 +15,8 @@ export let MenuGroups: MenuGroup[] = [
     icon: 'fas fa-home',
     items: [
       { path: '/home', title: 'Home', icon: 'fas fa-home' },
-      { path: '/dashboard', title: 'Dashboard', icon: 'fas fa-clipboard-check' },
-      { path: '/devices', title: 'Devices', icon: 'fas fa-mobile-alt' },
+      { path: '/home/dashboard', title: 'Dashboard', icon: 'fas fa-clipboard-check' },
+      { path: '/home/devices', title: 'Devices', icon: 'fas fa-mobile-alt' },
     ] as MenuItem[],
   },
   {
@@ -26,7 +26,7 @@ export let MenuGroups: MenuGroup[] = [
       {
         path: '/admin/devices',
         title: 'Devices',
-        icon: 'fas fa-mobile-alt',
+        icon: 'fas fa-microchip',
       },
       {
         path: '/admin/versions',

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { NavigationModule } from '../../core/navigation.module';
+import { MaterialModule } from '../../material.module';
 
 import { HomeComponent } from '../../modules/home/home/home.component';
 import { DashboardComponent } from '../../modules/home/dashboard/dashboard.component';
@@ -19,7 +21,7 @@ import { HomeBaseComponent } from './home-base.component';
     DialogDeviceListComponent,
     HomeBaseComponent,
   ],
-  imports: [SharedModule, HomeRoutingModule],
+  imports: [HomeRoutingModule, SharedModule, MaterialModule, NavigationModule],
   exports: [],
 })
 export class HomeModule {}

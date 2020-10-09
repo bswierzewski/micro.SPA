@@ -1,6 +1,6 @@
 <div (click)="isShow = !isShow" class="icon-container mat-elevation-z4">
   <div class="icon-text">
-    <i [ngClass]="[icon, icon ? 'icon-text-margin' : '']"></i>
+    <i [ngClass]="[icon, 'icon-text-margin']"></i>
     {{ icon ? icon : 'Choose icon' }}
   </div>
   <button class="icon-button" mat-raised-button color="primary" type="button">Icon</button>

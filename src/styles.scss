@@ -7,9 +7,10 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .fa,
 .fas {
+  font-size: 1.3rem;
   margin: {
-    left: 5px;
-    right: 5px;
+    left: 10px;
+    right: 10px;
   }
 }
 
@@ -20,7 +21,6 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .shadow {

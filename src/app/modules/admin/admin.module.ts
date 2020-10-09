@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
+import { NavigationModule } from '../../core/navigation.module';
+import { MaterialModule } from '../../material.module';
 
 import { AdminDeviceTabComponent } from '../../modules/admin/device/admin-device-tab/admin-device-tab.component';
 import { AdminDeviceAddressComponent } from '../../modules/admin/device/admin-device-address/admin-device-address.component';
@@ -39,7 +41,7 @@ import { AdminComponent } from './admin.component';
     IconPickerComponent,
     AdminComponent,
   ],
-  imports: [SharedModule, AdminRoutingModule],
+  imports: [AdminRoutingModule, SharedModule, NavigationModule, MaterialModule],
   exports: [],
 })
 export class AdminModule {}

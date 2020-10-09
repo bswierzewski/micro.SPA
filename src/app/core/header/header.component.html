@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <div>
     <a routerLink="/">
-      <img class="logo" src="./assets/img/logo-white.svg" (click)="onToggleSidenav()" />
+      <img class="logo" src="./assets/img/logo-white.svg" />
     </a>
   </div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
@@ -13,7 +13,7 @@
       <mat-menu #menu="matMenu">
         <div *ngFor="let item of group.items">
           <button mat-menu-item [routerLink]="item.path">
-            <i [ngClass]="item.icon"></i>
+            <i [ngClass]="[item.icon, 'fa-fw']"></i>
             {{ item.title }}
           </button>
         </div>
