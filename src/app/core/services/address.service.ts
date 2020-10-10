@@ -8,15 +8,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AddressService {
-  addressUrl = environment.deviceUrl + 'addresses';
+  addressUrl = environment.backendUrl + 'addresses';
 
   constructor(private http: HttpClient) {}
 
   getAddresses(): Observable<Address[]> {
-    const headerParams = new HttpParams().append(
-      'isConfirmed',
-      false.toString()
-    );
+    const headerParams = new HttpParams().append('isConfirmed', false.toString());
 
     return this.http.get<Address[]>(this.addressUrl, { params: headerParams });
   }

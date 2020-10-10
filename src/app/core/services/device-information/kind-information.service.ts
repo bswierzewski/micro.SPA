@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class KindInformationService {
-  kindsUrl = environment.deviceUrl + 'kinds';
+  kindsUrl = environment.backendUrl + 'kinds';
 
   constructor(private http: HttpClient) {}
 

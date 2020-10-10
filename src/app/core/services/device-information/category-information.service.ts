@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class CategoryInformationService {
-  categoriesUrl = environment.deviceUrl + 'categories';
+  categoriesUrl = environment.backendUrl + 'categories';
 
   constructor(private httpClient: HttpClient) {}
 

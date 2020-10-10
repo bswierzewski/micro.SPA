@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DeviceService {
-  devicesUrl = environment.deviceUrl + 'devices';
+  devicesUrl = environment.backendUrl + 'devices';
 
   constructor(private http: HttpClient) {}
 

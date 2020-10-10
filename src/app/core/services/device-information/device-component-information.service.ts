@@ -8,7 +8,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root',
 })
 export class DeviceComponentInformationService {
-  deviceComponentUrl = environment.deviceUrl + 'components';
+  deviceComponentUrl = environment.backendUrl + 'components';
 
   constructor(private httpClient: HttpClient) {}
 

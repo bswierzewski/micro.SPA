@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class RegistrationService {
-  registrationUrl = environment.deviceUrl + 'registrations';
+  registrationUrl = environment.backendUrl + 'registrations';
 
   constructor(private http: HttpClient) {}
 

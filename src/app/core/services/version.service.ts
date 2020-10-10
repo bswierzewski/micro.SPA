@@ -8,9 +8,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class VersionService {
-  versionUrl = environment.updateUrl + 'versions';
+  versionUrl = environment.microcontrollerUrl + 'versions';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getVersion(id: number): Observable<Version> {
     return this.httpClient.get<Version>(this.versionUrl + `/${id}`);
