@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  socketUrl: 'http://socket.localhost:3000/',
-  authUrl: 'http://auth.localhost:5001/api/',
-  backendUrl: 'http://backend.localhost:5003/api/',
-  microcontrollerUrl: 'http://microcontroller.localhost:5002/api/',
+  socketUrl: 'http://localhost:3000/',
+  authUrl: 'http://localhost:5001/api/',
+  backendUrl: 'http://localhost:5002/api/',
+  microcontrollerUrl: 'http://localhost:5003/api/',
 };
 
 /*
