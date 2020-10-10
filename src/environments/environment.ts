@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  socketUrl: 'http://socket.localhost/',
+  socketUrl: 'http://socket.localhost:3000/',
   authUrl: 'http://auth.localhost:5001/api/',
   backendUrl: 'http://backend.localhost:5003/api/',
   microcontrollerUrl: 'http://microcontroller.localhost:5002/api/',
