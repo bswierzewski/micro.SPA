@@ -17,6 +17,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTabsModule,
     MatInputModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatCardModule,
@@ -56,6 +58,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTabsModule,
     MatInputModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class MaterialModule {}

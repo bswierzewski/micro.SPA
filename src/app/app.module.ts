@@ -17,6 +17,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
+import { KindEffects } from './store/effects/kind.effects';
+import { reducers } from './store/app.reducer';
+
 export function tokenGetter(): string {
   return localStorage.getItem('token');
 }
@@ -34,9 +37,9 @@ export function tokenGetter(): string {
       },
     }),
     // Modules
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([KindEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
   ],
   providers: [ErrorInterceptorProvider, AuthService, AlertService],
   bootstrap: [AppComponent],
