@@ -9,5 +9,5 @@ RUN ng build --prod
 
 FROM arm32v7/nginx:alpine
 COPY --from=builder /usr/src/app/dist/micro/ /usr/share/nginx/html
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./proxy/nginx.conf /etc/nginx/conf.d/default.conf
 CMD ["nginx", "-g","daemon off;"]
