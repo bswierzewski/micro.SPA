@@ -1,5 +1,5 @@
 <mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
-<div *ngIf="!(isLoading$ | async)" class="mat-elevation-z8">
+<div [hidden]="isLoading$ | async" class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" class="table-full-width">
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->

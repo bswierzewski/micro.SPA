@@ -6,7 +6,7 @@ import { Kind } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../../store/app.reducer';
 import * as KindActions from '../../../../../store/actions/kind.actions';
-import { take } from 'rxjs/operators';
+import { skip, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -27,13 +27,20 @@ export class KindDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.route.params.subscribe((params) => {
-      this.store.dispatch(KindActions.loadKind({ id: params.id }));
-      this.store.select(fromRoot.getKind).subscribe((kind) => {
-        this.model = kind;
-        this.isCreateMode = kind?.id === 0;
-      });
+      this.isCreateMode = params.id === '0';
+      if (!this.isCreateMode) {
+        this.isLoading$ = this.store.select(fromRoot.getIsLoadingKind);
+        this.store.dispatch(KindActions.loadKind({ id: params.id }));
+        this.store
+          .select(fromRoot.getKind)
+          .pipe(skip(1), take(1))
+          .subscribe((kind) => {
+            this.model = Object.assign({}, kind);
+          });
+      } else {
+        this.model = new Kind();
+      }
     });
   }
 
@@ -44,6 +51,8 @@ export class KindDetailComponent implements OnInit {
       }
       return;
     }
+
+    console.log(this.model);
 
     if (this.isCreateMode) {
       this.store.dispatch(KindActions.addKind({ kind: this.model }));

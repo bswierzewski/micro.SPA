@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { KindInformationService } from 'src/app/core/services';
+import { AlertService, KindInformationService } from 'src/app/core/services';
 import * as KindActions from '../actions/kind.actions';
 
 @Injectable()
 export class KindEffects {
-  constructor(private kindService: KindInformationService, private action$: Actions) {}
+  constructor(
+    private kindService: KindInformationService,
+    private action$: Actions,
+    private router: Router,
+    private alertService: AlertService
+  ) {}
 
   getKinds$ = createEffect(() =>
     this.action$.pipe(
@@ -29,7 +35,6 @@ export class KindEffects {
     this.action$.pipe(
       ofType(KindActions.loadKind),
       mergeMap((action) => {
-        console.log(action);
         return this.kindService.getKind(action.id).pipe(
           map((data) => {
             return KindActions.loadKindSuccess({ kind: data });
@@ -55,6 +60,42 @@ export class KindEffects {
           })
         )
       )
+    )
+  );
+
+  addKind$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(KindActions.addKind),
+      mergeMap((action) => {
+        return this.kindService.addKind(action.kind).pipe(
+          map((data) => {
+            this.alertService.success('Kind added');
+            this.router.navigateByUrl('/admin/information/kinds');
+            return KindActions.addKindSuccess();
+          }),
+          catchError((error: Error) => {
+            return of(KindActions.addKindError({ error }));
+          })
+        );
+      })
+    )
+  );
+
+  updateKind$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(KindActions.updateKind),
+      mergeMap((action) => {
+        return this.kindService.updateKind(action.kind).pipe(
+          map((data) => {
+            this.alertService.success('Kind updated');
+            this.router.navigateByUrl('/admin/information/kinds');
+            return KindActions.updateKindSuccess();
+          }),
+          catchError((error: Error) => {
+            return of(KindActions.updateKindError({ error }));
+          })
+        );
+      })
     )
   );
 }

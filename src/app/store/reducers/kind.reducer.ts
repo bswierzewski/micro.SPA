@@ -18,15 +18,15 @@ const initialState: State = {
 
 export const kindReducer = createReducer(
   initialState,
-  on(KindsActions.loadKinds, (state, payload) => ({
+  on(KindsActions.loadKinds, (state) => ({
     ...state,
     isLoading: true,
     error: null,
   })),
   on(KindsActions.loadKindsSuccess, (state, payload) => ({
     ...state,
-    isLoading: false,
     kinds: payload.kinds,
+    isLoading: false,
     error: null,
   })),
   on(KindsActions.loadKindsError, (state, payload) => ({
@@ -34,7 +34,7 @@ export const kindReducer = createReducer(
     isLoading: false,
     error: payload.error,
   })),
-  on(KindsActions.loadKind, (state, payload) => ({
+  on(KindsActions.loadKind, (state) => ({
     ...state,
     isLoading: true,
     error: null,

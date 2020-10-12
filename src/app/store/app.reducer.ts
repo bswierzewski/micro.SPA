@@ -18,7 +18,7 @@ export const reducers: ActionReducerMap<State> = {
 export const getKindState = createFeatureSelector<fromKind.State>('kind');
 export const getKinds = createSelector(getKindState, fromKind.getKinds);
 export const getKind = createSelector(getKindState, fromKind.getKind);
-export const getIsLoading = createSelector(getKindState, fromKind.getIsLoading);
+export const getIsLoadingKind = createSelector(getKindState, fromKind.getIsLoading);
 
 export const getCategoryState = createFeatureSelector<fromCategory.State>('category');
 export const getCategories = createSelector(getCategoryState, fromCategory.getCategories);
