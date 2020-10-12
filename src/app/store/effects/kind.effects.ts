@@ -1,29 +1,57 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { Kind } from '../../shared/models';
+import { KindInformationService } from 'src/app/core/services';
 import * as KindActions from '../actions/kind.actions';
-
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class KindEffects {
-  constructor(private http: HttpClient, private action$: Actions) {}
-  kindsUrl = environment.backendUrl + 'kinds';
+  constructor(private kindService: KindInformationService, private action$: Actions) {}
 
-  getKinds$: Observable<Action> = createEffect(() =>
+  getKinds$ = createEffect(() =>
     this.action$.pipe(
       ofType(KindActions.loadKinds),
       mergeMap((action) =>
-        this.http.get<Kind[]>(this.kindsUrl).pipe(
+        this.kindService.getKinds().pipe(
           map((data) => {
             return KindActions.loadKindsSuccess({ kinds: data });
           }),
           catchError((error: Error) => {
             return of(KindActions.loadKindsError({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  getKind$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(KindActions.loadKind),
+      mergeMap((action) => {
+        console.log(action);
+        return this.kindService.getKind(action.id).pipe(
+          map((data) => {
+            return KindActions.loadKindSuccess({ kind: data });
+          }),
+          catchError((error: Error) => {
+            return of(KindActions.loadKindError({ error }));
+          })
+        );
+      })
+    )
+  );
+
+  deleteKind$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(KindActions.deleteKind),
+      mergeMap((action) =>
+        this.kindService.removeKind(action.id).pipe(
+          map((data) => {
+            return KindActions.deleteKindSuccess({ id: action.id });
+          }),
+          catchError((error: Error) => {
+            return of(KindActions.deleteKindError({ error }));
           })
         )
       )

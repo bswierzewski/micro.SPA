@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DeviceComponent, Kind, Version } from 'src/app/shared/models';
-import {
-  AlertService,
-  DeviceComponentInformationService,
-  KindInformationService,
-  VersionService,
-} from 'src/app/core/services';
+import { AlertService, VersionService } from 'src/app/core/services';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../store/app.reducer';
+import * as KindActions from '../../../../store/actions/kind.actions';
+import * as ComponentActions from '../../../../store/actions/component.actions';
 
 export class Model {
   id: number;
@@ -26,7 +25,7 @@ export class Model {
   templateUrl: './admin-version-detail.component.html',
   styleUrls: ['./admin-version-detail.component.scss'],
 })
-export class AdminVersionDetailComponent {
+export class AdminVersionDetailComponent implements OnInit {
   isCreatedMode = false;
   model: Model = new Model();
 
@@ -34,16 +33,12 @@ export class AdminVersionDetailComponent {
   kinds$: Observable<Kind[]>;
 
   constructor(
+    private store: Store<fromRoot.State>,
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
-    private kindInformationService: KindInformationService,
-    private deviceComponentInformationService: DeviceComponentInformationService,
     private versionService: VersionService
   ) {
-    this.deviceComponents$ = deviceComponentInformationService.getDeviceComponents();
-    this.kinds$ = kindInformationService.getKinds();
-
     this.route.params.subscribe((params) => {
       this.isCreatedMode = params.id === '0';
       if (!this.isCreatedMode) {
@@ -64,6 +59,13 @@ export class AdminVersionDetailComponent {
         );
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(ComponentActions.loadComponents());
+    this.store.dispatch(KindActions.loadKinds());
+    this.deviceComponents$ = this.store.select(fromRoot.getComponents);
+    this.kinds$ = this.store.select(fromRoot.getKinds);
   }
 
   onSubmitClick(form: NgForm): void {

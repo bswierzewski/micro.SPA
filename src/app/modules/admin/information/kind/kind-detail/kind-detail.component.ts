@@ -1,38 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, KindInformationService } from 'src/app/core/services';
+import { AlertService } from 'src/app/core/services';
 import { Kind } from 'src/app/shared/models';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../../store/app.reducer';
+import * as KindActions from '../../../../../store/actions/kind.actions';
+import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-export class Model {
-  id = 0;
-  name = '';
-  icon = '';
-}
 @Component({
   selector: 'app-kind-detail',
   templateUrl: './kind-detail.component.html',
   styleUrls: ['./kind-detail.component.scss'],
 })
-export class KindDetailComponent {
-  model = new Model();
-  isCreateMode = false;
+export class KindDetailComponent implements OnInit {
+  model: Kind;
+  isLoading$: Observable<boolean>;
+  isCreateMode: boolean;
 
   constructor(
-    private kindService: KindInformationService,
+    private store: Store<fromRoot.State>,
     private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    route.params.subscribe((params) => {
-      this.isCreateMode = params.id === '0';
-      if (!this.isCreateMode) {
-        kindService.getKind(params.id).subscribe((data) => {
-          this.model.id = data.id;
-          this.model.name = data.name;
-          this.model.icon = data.icon;
-        });
-      }
+  ) {}
+
+  ngOnInit(): void {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.route.params.subscribe((params) => {
+      this.store.dispatch(KindActions.loadKind({ id: params.id }));
+      this.store.select(fromRoot.getKind).subscribe((kind) => {
+        this.model = kind;
+        this.isCreateMode = kind?.id === 0;
+      });
     });
   }
 
@@ -44,32 +45,10 @@ export class KindDetailComponent {
       return;
     }
 
-    const kind = {
-      id: this.model.id,
-      name: this.model.name,
-      icon: this.model.icon,
-    } as Kind;
-
     if (this.isCreateMode) {
-      this.kindService.addKind(kind).subscribe(
-        (next) => {
-          this.alertService.success('Kind added');
-          this.router.navigateByUrl('/admin/information/kinds');
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
+      this.store.dispatch(KindActions.addKind({ kind: this.model }));
     } else {
-      this.kindService.updateKind(kind).subscribe(
-        (next) => {
-          this.alertService.success('Kind updated');
-          this.router.navigateByUrl('/admin/information/kinds');
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
+      this.store.dispatch(KindActions.updateKind({ kind: this.model }));
     }
   }
 
