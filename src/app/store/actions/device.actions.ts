@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
+import { DeviceParams } from 'src/app/shared/params';
 import { Device } from '../../shared/models';
 
-export const loadDevices = createAction('[Device] Load Devices');
+export const loadDevices = createAction('[Device] Load Devices', props<{ params?: DeviceParams }>());
 export const loadDevicesSuccess = createAction('[Device] Load Devices Success', props<{ devices: Device[] }>());
 export const loadDevicesError = createAction('[Device] Load Devices Error', props<{ error: any }>());
 

@@ -26,7 +26,7 @@ export class AdminDeviceListComponent implements OnInit, OnDestroy, AfterViewIni
   constructor(private store: Store<fromRoot.State>, private alertService: AlertService) {}
 
   ngOnInit(): void {
-    this.store.dispatch(DeviceActions.loadDevices());
+    this.store.dispatch(DeviceActions.loadDevices({}));
     this.store
       .pipe(
         select(fromRoot.getDevices),

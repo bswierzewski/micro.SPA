@@ -20,7 +20,6 @@ export class DeviceService {
 
   getDevices(deviceParams: DeviceParams = null): Observable<Device[]> {
     let headerParams = new HttpParams();
-
     if (deviceParams?.kindId) {
       headerParams = headerParams.append('kindId', deviceParams.kindId?.toString());
     }

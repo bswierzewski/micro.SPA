@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .wrapper {
   display: grid;
@@ -36,7 +36,8 @@
             outline: none;
           }
 
-          .card_icon {
+          .card-icon {
+            margin-bottom: 20px;
             font-size: 5rem;
             line-height: 5rem;
           }

@@ -5,6 +5,7 @@ export class Device {
   name: string;
   icon?: string;
   created?: Date;
+  addressLabel?: string;
   addressId?: number;
   address?: Address;
   kindId?: number;

@@ -8,6 +8,7 @@
         matInput
         placeholder="MacAddress"
         name="macAddress"
+        [(ngModel)]="model.addressLabel"
         [disabled]="isPassMacAddress || !isCreatedMode"
       />
     </mat-form-field>

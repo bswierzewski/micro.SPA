@@ -2,18 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { DeviceComponent, Category, Kind, Device } from 'src/app/shared/models';
 import { DeviceParams } from 'src/app/shared/params';
-import {
-  DeviceComponentInformationService,
-  CategoryInformationService,
-  KindInformationService,
-  DeviceService,
-} from 'src/app/core/services';
-
-export class Data {
-  category?: Category;
-  kind?: Kind;
-  deviceComponents?: DeviceComponent[];
-}
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../store/app.reducer';
+import * as DeviceActions from '../../../../store/actions/device.actions';
+import * as ComponentActions from '../../../../store/actions/component.actions';
+import * as KindActions from '../../../../store/actions/kind.actions';
+import * as CategoryActions from '../../../../store/actions/category.actions';
 
 @Component({
   selector: 'app-device-list',
@@ -21,79 +15,43 @@ export class Data {
   styleUrls: ['./device-list.component.scss'],
 })
 export class DeviceListComponent implements OnInit {
+  isLoading$: Observable<boolean>;
   kinds$: Observable<Kind[]>;
   categories$: Observable<Category[]>;
   components$: Observable<DeviceComponent[]>;
   devices$: Observable<Device[]>;
+  params: DeviceParams = new DeviceParams();
 
-  data: Data = new Data();
+  isCategorySelected = () => this.params?.categoryId;
 
-  isCategorySelected = () => {
-    return this.data?.category;
-  };
-
-  constructor(
-    private categoriesInformationService: CategoryInformationService,
-    private deviceComponentInformationService: DeviceComponentInformationService,
-    private kindInformationService: KindInformationService,
-    private deviceService: DeviceService
-  ) {}
+  constructor(private store: Store<fromRoot.State>) {}
 
   ngOnInit(): void {
-    this.loadDevices();
-    this.categories$ = this.categoriesInformationService.getCategories();
-    this.kinds$ = this.kindInformationService.getKinds();
+    this.isLoading$ = this.store.select(fromRoot.getIsLoadingDevice);
+    this.store.dispatch(DeviceActions.loadDevices({}));
+    this.store.dispatch(ComponentActions.loadComponents({}));
+    this.store.dispatch(KindActions.loadKinds());
+    this.store.dispatch(CategoryActions.loadCategories());
+    this.devices$ = this.store.select(fromRoot.getDevices);
+    this.components$ = this.store.select(fromRoot.getComponents);
+    this.categories$ = this.store.select(fromRoot.getCategories);
+    this.kinds$ = this.store.select(fromRoot.getKinds);
   }
 
   onApplyFilterClick(): void {
-    this.loadDevices();
+    this.store.dispatch(DeviceActions.loadDevices({ params: Object.assign({}, this.params) }));
   }
 
   onResetFilterClick(): void {
-    this.data = new Data();
-
-    this.loadDevices();
+    this.params = new DeviceParams();
+    this.store.dispatch(DeviceActions.loadDevices({ params: Object.assign({}, this.params) }));
   }
 
-  categorySelectionChange(category: Category): void {
-    if (category) {
-      this.components$ = this.deviceComponentInformationService.getDeviceComponents(category.id);
+  categorySelectionChange(categoryId: number): void {
+    if (categoryId) {
+      this.store.dispatch(ComponentActions.loadComponents({ id: categoryId }));
     } else {
       this.components$ = of([]);
     }
-  }
-
-  loadDevices(): void {
-    let componentIds = [];
-
-    if (this.data?.deviceComponents) {
-      componentIds = this.data.deviceComponents.map((x) => x.id);
-    }
-
-    this.devices$ = this.deviceService.getDevices({
-      categoryId: this.data?.category?.id,
-      kindId: this.data?.kind?.id,
-      componentIds,
-    } as DeviceParams);
-  }
-
-  getDeviceComponentsLabelDescripton(category: Category): string {
-    if (!category) {
-      return 'Choose category';
-    }
-    return 'Device components';
-  }
-
-  getDeviceComponentsTriggerText(): string {
-    if (this.data.deviceComponents) {
-      const length = this.data.deviceComponents.length;
-      if (length === 1) {
-        return this.data.deviceComponents[0].name;
-      }
-      if (length > 1) {
-        return `${this.data.deviceComponents[0].name} (+ ${length - 1} ${length === 2 ? 'other' : 'others'})`;
-      }
-    }
-    return '';
   }
 }

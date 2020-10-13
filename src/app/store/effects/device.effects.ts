@@ -19,7 +19,7 @@ export class DeviceEffects {
     this.action$.pipe(
       ofType(DeviceActions.loadDevices),
       mergeMap((action) =>
-        this.deviceService.getDevices().pipe(
+        this.deviceService.getDevices(action.params).pipe(
           map((data) => {
             return DeviceActions.loadDevicesSuccess({ devices: data });
           }),
