@@ -1,4 +1,5 @@
-<mat-card>
+<mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
+<mat-card *ngIf="!(isLoading$ | async)">
   <form #form="ngForm">
     <div class="wrapper">
       <mat-form-field appearance="outline">
@@ -14,8 +15,8 @@
             {{ getHeader() }}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-selection-list name="components" [(ngModel)]="model.components">
-          <mat-list-option *ngFor="let component of components" [value]="component">
+        <mat-selection-list [compareWith]="compareComponents" name="components" [(ngModel)]="model.components">
+          <mat-list-option *ngFor="let component of components$ | async" [value]="component">
             <i matListIcon [ngClass]="component.icon"></i>
             {{ component.name }}
           </mat-list-option>

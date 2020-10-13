@@ -22,8 +22,10 @@ export const getIsLoadingKind = createSelector(getKindState, fromKind.getIsLoadi
 
 export const getCategoryState = createFeatureSelector<fromCategory.State>('category');
 export const getCategories = createSelector(getCategoryState, fromCategory.getCategories);
-export const getIsLoadingCategories = createSelector(getCategoryState, fromCategory.getIsLoadingCategories);
+export const getCategory = createSelector(getCategoryState, fromCategory.getCategory);
+export const getIsLoadingCategory = createSelector(getCategoryState, fromCategory.getIsLoadingCategories);
 
 export const getComponentState = createFeatureSelector<fromComponent.State>('component');
 export const getComponents = createSelector(getComponentState, fromComponent.getComponents);
-export const getIsLoadingComponents = createSelector(getComponentState, fromComponent.getIsLoadingComponents);
+export const getComponent = createSelector(getComponentState, fromComponent.getComponent);
+export const getIsLoadingComponent = createSelector(getComponentState, fromComponent.getIsLoadingComponent);

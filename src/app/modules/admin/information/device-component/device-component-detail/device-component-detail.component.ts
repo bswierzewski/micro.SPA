@@ -1,51 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, CategoryInformationService, DeviceComponentInformationService } from 'src/app/core/services';
+import { Store } from '@ngrx/store';
+import { AlertService } from 'src/app/core/services';
+import * as fromRoot from '../../../../../store/app.reducer';
+import * as ComponentActions from '../../../../../store/actions/component.actions';
+import * as CategoryActions from '../../../../../store/actions/category.actions';
 import { Category, DeviceComponent } from 'src/app/shared/models';
-
-export class Model {
-  id = 0;
-  name = '';
-  icon = '';
-  category: Category[] = [];
-}
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-device-component-detail',
   templateUrl: './device-component-detail.component.html',
   styleUrls: ['./device-component-detail.component.scss'],
 })
-export class DeviceComponentDetailComponent {
-  model = new Model();
-  isCreateMode = false;
-  categories: Category[];
+export class DeviceComponentDetailComponent implements OnInit {
+  model: DeviceComponent;
+  isLoading$: Observable<boolean>;
+  isCreateMode: boolean;
+  categories$: Observable<Category[]>;
 
   constructor(
+    private store: Store<fromRoot.State>,
     private alertService: AlertService,
     private route: ActivatedRoute,
-    private router: Router,
-    private categoryService: CategoryInformationService,
-    private componentService: DeviceComponentInformationService
-  ) {
-    categoryService.getCategories().subscribe((data) => {
-      this.categories = data;
-    });
+    private router: Router
+  ) {}
 
-    route.params.subscribe((params) => {
+  ngOnInit(): void {
+    this.store.dispatch(CategoryActions.loadCategories());
+    this.categories$ = this.store.select(fromRoot.getCategories);
+    this.route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
       if (!this.isCreateMode) {
-        componentService.getDeviceComponent(params.id).subscribe(
-          (data) => {
-            this.model.id = data.id;
-            this.model.name = data.name;
-            this.model.icon = data.icon;
-            this.model.category = this.categories.filter((category) => category.id === data.categoryId);
-          },
-          (error) => {
-            alertService.error(error);
-          }
-        );
+        this.isLoading$ = this.store.select(fromRoot.getIsLoadingComponent);
+        this.store.dispatch(ComponentActions.loadComponent({ id: params.id }));
+        this.store
+          .select(fromRoot.getComponent)
+          .pipe(first((component) => component !== null))
+          .subscribe((component) => {
+            this.model = Object.assign({}, component);
+          });
+      } else {
+        this.model = new DeviceComponent();
       }
     });
   }
@@ -58,33 +56,10 @@ export class DeviceComponentDetailComponent {
       return;
     }
 
-    const component = {
-      id: this.model.id,
-      name: this.model.name,
-      icon: this.model.icon,
-      categoryId: this.model.category[0].id,
-    } as DeviceComponent;
-
     if (this.isCreateMode) {
-      this.componentService.addDeviceComponent(component).subscribe(
-        (next) => {
-          this.alertService.success('Component added');
-          this.router.navigateByUrl('/admin/information/components');
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
+      this.store.dispatch(ComponentActions.addComponent({ component: this.model }));
     } else {
-      this.componentService.updateDeviceComponent(component).subscribe(
-        (next) => {
-          this.alertService.success('Component updated');
-          this.router.navigateByUrl('/admin/information/components');
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
+      this.store.dispatch(ComponentActions.updateComponent({ component: this.model }));
     }
   }
 
@@ -93,7 +68,7 @@ export class DeviceComponentDetailComponent {
   }
 
   getHeader(): string {
-    if (this.model.category[0]) {
+    if (this.model.category) {
       return this.model.category[0].name;
     }
     return 'Choose category';

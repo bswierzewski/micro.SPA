@@ -52,8 +52,6 @@ export class KindDetailComponent implements OnInit {
       return;
     }
 
-    console.log(this.model);
-
     if (this.isCreateMode) {
       this.store.dispatch(KindActions.addKind({ kind: this.model }));
     } else {

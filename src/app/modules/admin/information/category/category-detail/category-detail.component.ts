@@ -1,51 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, CategoryInformationService, DeviceComponentInformationService } from 'src/app/core/services';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromRoot from '../../../../../store/app.reducer';
+import * as CategoryActions from '../../../../../store/actions/category.actions';
+import * as ComponentActions from '../../../../../store/actions/component.actions';
+import { AlertService } from 'src/app/core/services';
 import { DeviceComponent, Category } from 'src/app/shared/models';
-
-export class Model {
-  id = 0;
-  name = '';
-  icon = '';
-  components: DeviceComponent[] = [];
-}
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-detail',
   templateUrl: './category-detail.component.html',
   styleUrls: ['./category-detail.component.scss'],
 })
-export class CategoryDetailComponent {
-  model = new Model();
+export class CategoryDetailComponent implements OnInit {
+  model: Category;
   isCreateMode = false;
-  components: DeviceComponent[];
+  isLoading$: Observable<boolean>;
+  components$: Observable<DeviceComponent[]>;
 
   constructor(
+    private store: Store<fromRoot.State>,
     private alertService: AlertService,
     private route: ActivatedRoute,
-    private router: Router,
-    private categoryService: CategoryInformationService,
-    private componentService: DeviceComponentInformationService
-  ) {
-    componentService.getDeviceComponents().subscribe((data) => {
-      this.components = data;
-    });
+    private router: Router
+  ) {}
 
-    route.params.subscribe((params) => {
+  ngOnInit(): void {
+    this.store.dispatch(ComponentActions.loadComponents());
+    this.components$ = this.store.select(fromRoot.getComponents);
+    this.route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
       if (!this.isCreateMode) {
-        categoryService.getCategory(params.id).subscribe(
-          (data) => {
-            this.model.id = data.id;
-            this.model.name = data.name;
-            this.model.icon = data.icon;
-            this.model.components = this.components?.filter((component) => data.componentIds?.includes(component.id));
-          },
-          (error) => {
-            alertService.error(error);
-          }
-        );
+        this.isLoading$ = this.store.select(fromRoot.getIsLoadingCategory);
+        this.store.dispatch(CategoryActions.loadCategory({ id: params.id }));
+        this.store
+          .select(fromRoot.getCategory)
+          .pipe(first((category) => category !== null))
+          .subscribe((category) => {
+            this.model = Object.assign({}, category);
+          });
+      } else {
+        this.model = new Category();
       }
     });
   }
@@ -58,33 +56,10 @@ export class CategoryDetailComponent {
       return;
     }
 
-    const category = {
-      id: this.model.id,
-      name: this.model.name,
-      icon: this.model.icon,
-      componentIds: this.model.components?.map((component) => component.id),
-    } as Category;
-
     if (this.isCreateMode) {
-      this.categoryService.addCategory(category).subscribe(
-        (next) => {
-          this.alertService.success('Category added');
-          this.router.navigateByUrl('/admin/information/categories');
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
+      this.store.dispatch(CategoryActions.addCategory({ category: this.model }));
     } else {
-      this.categoryService.updateCategory(category).subscribe(
-        (next) => {
-          this.alertService.success('Category updated');
-          this.router.navigateByUrl('/admin/information/categories');
-        },
-        (error) => {
-          this.alertService.error(error);
-        }
-      );
+      this.store.dispatch(CategoryActions.updateCategory({ category: this.model }));
     }
   }
 
@@ -104,5 +79,13 @@ export class CategoryDetailComponent {
     }
 
     return 'Choose components';
+  }
+
+  compareComponents(o1: DeviceComponent, o2: DeviceComponent): boolean {
+    if (o1.id === o2.id) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

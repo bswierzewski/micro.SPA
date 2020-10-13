@@ -1,13 +1,19 @@
-import { DeviceComponentInformationService } from '../../core/services';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as ComponentActions from '../actions/component.actions';
+import { AlertService, DeviceComponentInformationService } from 'src/app/core/services';
 
 @Injectable()
 export class ComponentEffects {
-  constructor(private componentService: DeviceComponentInformationService, private action$: Actions) {}
+  constructor(
+    private componentService: DeviceComponentInformationService,
+    private action$: Actions,
+    private router: Router,
+    private alertService: AlertService
+  ) {}
 
   getComponents$ = createEffect(() =>
     this.action$.pipe(
@@ -25,6 +31,23 @@ export class ComponentEffects {
     )
   );
 
+  getComponent$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(ComponentActions.loadComponent),
+      mergeMap((action) => {
+        return this.componentService.getDeviceComponent(action.id).pipe(
+          map((data) => {
+            return ComponentActions.loadComponentSuccess({ component: data });
+          }),
+          catchError((error: Error) => {
+            this.router.navigateByUrl('/admin/information/components');
+            return of(ComponentActions.loadComponentError({ error }));
+          })
+        );
+      })
+    )
+  );
+
   deleteComponent$ = createEffect(() =>
     this.action$.pipe(
       ofType(ComponentActions.deleteComponent),
@@ -38,6 +61,43 @@ export class ComponentEffects {
           })
         )
       )
+    )
+  );
+
+  addComponent$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(ComponentActions.addComponent),
+      mergeMap((action) => {
+        return this.componentService.addDeviceComponent(action.component).pipe(
+          map((data) => {
+            this.alertService.success('Component added');
+            this.router.navigateByUrl('/admin/information/components');
+            return ComponentActions.addComponentSuccess();
+          }),
+          catchError((error: Error) => {
+            this.alertService.error(error.message);
+            return of(ComponentActions.addComponentError({ error }));
+          })
+        );
+      })
+    )
+  );
+
+  updateComponent$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(ComponentActions.updateComponent),
+      mergeMap((action) => {
+        return this.componentService.updateDeviceComponent(action.component).pipe(
+          map((data) => {
+            this.alertService.success('Component updated');
+            this.router.navigateByUrl('/admin/information/components');
+            return ComponentActions.updateComponentSuccess();
+          }),
+          catchError((error: Error) => {
+            return of(ComponentActions.updateComponentError({ error }));
+          })
+        );
+      })
     )
   );
 }

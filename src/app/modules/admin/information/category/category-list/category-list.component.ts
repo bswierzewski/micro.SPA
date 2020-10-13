@@ -33,7 +33,7 @@ export class CategoryListComponent implements AfterViewInit, OnInit {
     this.store.select(fromRoot.getCategories).subscribe((data) => {
       this.dataSource.data = data;
     });
-    this.isLoading$ = this.store.select(fromRoot.getIsLoadingCategories);
+    this.isLoading$ = this.store.select(fromRoot.getIsLoadingCategory);
     this.store.dispatch(CategoryActions.loadCategories());
   }
 

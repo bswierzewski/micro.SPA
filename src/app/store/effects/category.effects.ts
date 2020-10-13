@@ -1,13 +1,19 @@
-import { CategoryInformationService } from '../../core/services';
+import { AlertService, CategoryInformationService } from '../../core/services';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as CategoryActions from '../actions/category.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CategoryEffects {
-  constructor(private categoryService: CategoryInformationService, private action$: Actions) {}
+  constructor(
+    private categoryService: CategoryInformationService,
+    private action$: Actions,
+    private router: Router,
+    private alertService: AlertService
+  ) {}
 
   getCategories$ = createEffect(() =>
     this.action$.pipe(
@@ -25,6 +31,23 @@ export class CategoryEffects {
     )
   );
 
+  getCategory$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CategoryActions.loadCategory),
+      mergeMap((action) => {
+        return this.categoryService.getCategory(action.id).pipe(
+          map((data) => {
+            return CategoryActions.loadCategorySuccess({ category: data });
+          }),
+          catchError((error: Error) => {
+            this.router.navigateByUrl('/admin/information/categories');
+            return of(CategoryActions.loadCategoryError({ error }));
+          })
+        );
+      })
+    )
+  );
+
   deleteCategory$ = createEffect(() =>
     this.action$.pipe(
       ofType(CategoryActions.deleteCategory),
@@ -38,6 +61,43 @@ export class CategoryEffects {
           })
         )
       )
+    )
+  );
+
+  addCategory$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CategoryActions.addCategory),
+      mergeMap((action) => {
+        return this.categoryService.addCategory(action.category).pipe(
+          map((data) => {
+            this.alertService.success('Category added');
+            this.router.navigateByUrl('/admin/information/categories');
+            return CategoryActions.addCategorySuccess();
+          }),
+          catchError((error: Error) => {
+            this.alertService.error(error.message);
+            return of(CategoryActions.addCategoryError({ error }));
+          })
+        );
+      })
+    )
+  );
+
+  updateCategory$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CategoryActions.updateCategory),
+      mergeMap((action) => {
+        return this.categoryService.updateCategory(action.category).pipe(
+          map((data) => {
+            this.alertService.success('Category updated');
+            this.router.navigateByUrl('/admin/information/categories');
+            return CategoryActions.updateCategorySuccess();
+          }),
+          catchError((error: Error) => {
+            return of(CategoryActions.updateCategoryError({ error }));
+          })
+        );
+      })
     )
   );
 }

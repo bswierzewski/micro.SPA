@@ -33,7 +33,7 @@ export class DeviceComponentListComponent implements AfterViewInit, OnInit {
     this.store.select(fromRoot.getComponents).subscribe((data) => {
       this.dataSource.data = data;
     });
-    this.isLoading$ = this.store.select(fromRoot.getIsLoadingComponents);
+    this.isLoading$ = this.store.select(fromRoot.getIsLoadingComponent);
     this.store.dispatch(ComponentsActions.loadComponents());
   }
 

@@ -22,7 +22,7 @@ export const kindReducer = createReducer(
     ...state,
     isLoading: true,
     kind: null,
-    kinds: null,
+    kinds: [],
     error: null,
   })),
   on(KindsActions.loadKindsSuccess, (state, payload) => ({
