@@ -80,4 +80,4 @@ export const categoryReducer = createReducer(
 
 export const getCategories = (state: State) => state.categories;
 export const getCategory = (state: State) => state.category;
-export const getIsLoadingCategories = (state: State) => state.isLoading;
+export const getIsLoading = (state: State) => state.isLoading;

@@ -52,7 +52,7 @@ export class CategoryEffects {
     this.action$.pipe(
       ofType(CategoryActions.deleteCategory),
       mergeMap((action) =>
-        this.categoryService.removeCategory(action.id).pipe(
+        this.categoryService.deleteCategory(action.id).pipe(
           map((data) => {
             return CategoryActions.deleteCategorySuccess({ id: action.id });
           }),

@@ -86,4 +86,4 @@ export const componentReducer = createReducer(
 
 export const getComponents = (state: State) => state.components;
 export const getComponent = (state: State) => state.component;
-export const getIsLoadingComponent = (state: State) => state.isLoading;
+export const getIsLoading = (state: State) => state.isLoading;

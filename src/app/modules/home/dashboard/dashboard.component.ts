@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogDeviceListComponent } from './components/dialog-device-list.component';
 import { DeviceDialogDataModel } from './components/DeviceDialogDataModel';
 import { DeviceService, SocketService } from 'src/app/core/services';
-import { SocketMessage, DeviceForList } from 'src/app/shared/models';
+import { SocketMessage, Device } from 'src/app/shared/models';
 
 export interface DashboardDeviceModel {
   id: number;
-  device?: DeviceForList;
+  device?: Device;
   data: SocketMessage[];
 }
 
@@ -18,7 +18,7 @@ export interface DashboardDeviceModel {
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['time', 'bleAddress', 'rssi'];
-  devices: DeviceForList[] = [];
+  devices: Device[] = [];
   selectedDevices: DashboardDeviceModel[] = [];
 
   constructor(public dialog: MatDialog, private deviceService: DeviceService, private socketService: SocketService) {
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     socketService.getMessages().subscribe((message) => {
       message.time = new Date().toLocaleTimeString();
 
-      const deviceIndex = this.selectedDevices.findIndex((x) => x.device.address === message.macAddress);
+      const deviceIndex = this.selectedDevices.findIndex((x) => x.device.address.label === message.macAddress);
 
       if (deviceIndex > -1) {
         const lenght = this.selectedDevices[deviceIndex].data.unshift(message);
@@ -51,9 +51,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.socketService.disconnectSocket();
   }
 
-  remove(device: DeviceForList): void {
+  remove(device: Device): void {
     if (device) {
-      this.socketService.unsubscribe(device.address);
+      this.socketService.unsubscribe(device.address.label);
       this.selectedDevices = this.selectedDevices.filter((x) => x.id !== device.id);
     }
   }
@@ -67,11 +67,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       } as DeviceDialogDataModel,
     });
 
-    dialogRef.afterClosed().subscribe((result: DeviceForList[]) => {
+    dialogRef.afterClosed().subscribe((result: Device[]) => {
       if (result) {
         this.selectedDevices = [];
         result.forEach((device) => {
-          this.socketService.subscribe(device.address);
+          this.socketService.subscribe(device.address.label);
           this.selectedDevices.push({
             id: device.id,
             device,

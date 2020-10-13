@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { DeviceForList } from 'src/app/shared/models';
+import { Device } from 'src/app/shared/models';
 import { DeviceService, AlertService } from 'src/app/core/services';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,7 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class AdminDeviceListComponent implements AfterViewInit {
   devicesColumns: string[] = ['name', 'address', 'kind', 'category', 'component', 'action'];
-  dataSource = new MatTableDataSource<DeviceForList>();
+  dataSource = new MatTableDataSource<Device>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

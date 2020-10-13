@@ -52,7 +52,7 @@ export class ComponentEffects {
     this.action$.pipe(
       ofType(ComponentActions.deleteComponent),
       mergeMap((action) =>
-        this.componentService.removeDeviceComponent(action.id).pipe(
+        this.componentService.deleteDeviceComponent(action.id).pipe(
           map((data) => {
             return ComponentActions.deleteComponentSuccess({ id: action.id });
           }),

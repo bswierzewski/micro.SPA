@@ -1,4 +1,4 @@
-import { DeviceEntry, DeviceForList, Device } from 'src/app/shared/models';
+import { Device } from 'src/app/shared/models';
 import { DeviceParams } from 'src/app/shared/params';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ export class DeviceService {
     return this.http.get<Device>(this.devicesUrl + `/${id}`);
   }
 
-  getDevices(deviceParams: DeviceParams = null): Observable<DeviceForList[]> {
+  getDevices(deviceParams: DeviceParams = null): Observable<Device[]> {
     let headerParams = new HttpParams();
 
     if (deviceParams?.kindId) {
@@ -30,22 +30,22 @@ export class DeviceService {
 
     if (deviceParams?.componentIds && deviceParams?.componentIds.length > 0) {
       return this.http
-        .get<DeviceForList[]>(this.devicesUrl, {
+        .get<Device[]>(this.devicesUrl, {
           params: headerParams,
         })
         .pipe(map((devices) => devices.filter((x) => deviceParams.componentIds.includes(x.componentId))));
     } else {
-      return this.http.get<DeviceForList[]>(this.devicesUrl, {
+      return this.http.get<Device[]>(this.devicesUrl, {
         params: headerParams,
       });
     }
   }
 
-  addDevice(device: DeviceEntry): Observable<any> {
+  addDevice(device: Device): Observable<any> {
     return this.http.post(this.devicesUrl, device);
   }
 
-  updateDevice(device: DeviceEntry): Observable<any> {
+  updateDevice(device: Device): Observable<any> {
     return this.http.put(this.devicesUrl + `/${device.id}`, device);
   }
 

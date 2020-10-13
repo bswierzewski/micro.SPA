@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DeviceForList } from 'src/app/shared/models';
+import { Device } from 'src/app/shared/models';
 import { DeviceDialogDataModel } from './DeviceDialogDataModel';
 
 @Component({
@@ -9,7 +9,7 @@ import { DeviceDialogDataModel } from './DeviceDialogDataModel';
   styleUrls: ['./dialog-device-list.component.scss'],
 })
 export class DialogDeviceListComponent {
-  selectedDevices: DeviceForList[];
+  selectedDevices: Device[];
 
   constructor(
     public dialogRef: MatDialogRef<DialogDeviceListComponent>,

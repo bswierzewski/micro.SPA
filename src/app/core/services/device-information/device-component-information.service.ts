@@ -36,7 +36,7 @@ export class DeviceComponentInformationService {
     return this.httpClient.put(this.deviceComponentUrl + `/${deviceComponent.id}`, deviceComponent);
   }
 
-  removeDeviceComponent(id: number): Observable<any> {
+  deleteDeviceComponent(id: number): Observable<any> {
     return this.httpClient.delete(this.deviceComponentUrl + `/${id}`);
   }
 }

@@ -28,7 +28,7 @@ export class CategoryInformationService {
     return this.httpClient.put(this.categoriesUrl + `/${category.id}`, category);
   }
 
-  removeCategory(id: number): Observable<any> {
+  deleteCategory(id: number): Observable<any> {
     return this.httpClient.delete(this.categoriesUrl + `/${id}`);
   }
 }

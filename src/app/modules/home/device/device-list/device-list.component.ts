@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DeviceComponent, Category, Kind, Device, DeviceForList } from 'src/app/shared/models';
+import { DeviceComponent, Category, Kind, Device } from 'src/app/shared/models';
 import { DeviceParams } from 'src/app/shared/params';
 import {
   DeviceComponentInformationService,
@@ -24,7 +24,7 @@ export class DeviceListComponent implements OnInit {
   kinds$: Observable<Kind[]>;
   categories$: Observable<Category[]>;
   components$: Observable<DeviceComponent[]>;
-  devices$: Observable<DeviceForList[]>;
+  devices$: Observable<Device[]>;
 
   data: Data = new Data();
 

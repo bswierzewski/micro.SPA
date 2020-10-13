@@ -24,6 +24,7 @@ export class KindEffects {
             return KindActions.loadKindsSuccess({ kinds: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(KindActions.loadKindsError({ error }));
           })
         )
@@ -40,6 +41,7 @@ export class KindEffects {
             return KindActions.loadKindSuccess({ kind: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             this.router.navigateByUrl('/admin/information/kinds');
             return of(KindActions.loadKindError({ error }));
           })
@@ -52,11 +54,12 @@ export class KindEffects {
     this.action$.pipe(
       ofType(KindActions.deleteKind),
       mergeMap((action) =>
-        this.kindService.removeKind(action.id).pipe(
+        this.kindService.deleteKind(action.id).pipe(
           map((data) => {
             return KindActions.deleteKindSuccess({ id: action.id });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(KindActions.deleteKindError({ error }));
           })
         )
@@ -94,6 +97,7 @@ export class KindEffects {
             return KindActions.updateKindSuccess();
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(KindActions.updateKindError({ error }));
           })
         );

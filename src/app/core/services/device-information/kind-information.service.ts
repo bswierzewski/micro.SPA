@@ -28,7 +28,7 @@ export class KindInformationService {
     return this.http.put(this.kindsUrl + `/${kind.id}`, kind);
   }
 
-  removeKind(id: number): Observable<any> {
+  deleteKind(id: number): Observable<any> {
     return this.http.delete(this.kindsUrl + `/${id}`);
   }
 }
