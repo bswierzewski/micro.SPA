@@ -4,13 +4,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { SharedModule } from '../shared/shared.module';
 
 import { HeaderComponent } from '../core/header/header.component';
 import { SidenavComponent } from '../core/sidenav/sidenav.component';
-import { SharedModule } from '../shared/shared.module';
+import { MenuButtonComponent } from '../shared/components/menu-button/menu-button.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SidenavComponent],
+  declarations: [HeaderComponent, SidenavComponent, MenuButtonComponent],
   imports: [SharedModule, MatToolbarModule, MatListModule, MatMenuModule, MatButtonModule],
   exports: [HeaderComponent, SidenavComponent],
 })

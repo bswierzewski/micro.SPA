@@ -1,13 +1,4 @@
-export interface MenuItem {
-  title: string;
-  path: string;
-  icon?: string;
-}
-export interface MenuGroup {
-  group: string;
-  icon: string;
-  items?: MenuItem[];
-}
+import { MenuItem, MenuGroup } from '../../shared/components/menu-button/models';
 
 export let MenuGroups: MenuGroup[] = [
   {
@@ -43,6 +34,6 @@ export let MenuGroups: MenuGroup[] = [
   {
     group: 'Logout',
     icon: 'fas fa-sign-out-alt',
-    items: [],
+    path: '/login',
   },
 ];
