@@ -5,9 +5,14 @@
 export const environment = {
   production: false,
   socketUrl: 'http://localhost:3000/',
-  authUrl: 'http://localhost:3000/',
-  backendUrl: 'http://localhost:3000/',
-  microcontrollerUrl: 'http://localhost:3000/',
+
+  // authUrl: 'http://localhost:3000/',
+  // backendUrl: 'http://localhost:3000/',
+  // microcontrollerUrl: 'http://localhost:3000/',
+
+  authUrl: 'http://localhost:5001/api/',
+  backendUrl: 'http://localhost:5002/api/',
+  microcontrollerUrl: 'http://localhost:5003/api/',
 };
 
 /*

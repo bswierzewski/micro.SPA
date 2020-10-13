@@ -56,6 +56,8 @@ export class DeviceComponentDetailComponent implements OnInit {
       return;
     }
 
+    this.model.categoryId = this.model?.category[0]?.id;
+
     if (this.isCreateMode) {
       this.store.dispatch(ComponentActions.addComponent({ component: this.model }));
     } else {

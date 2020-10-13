@@ -24,6 +24,7 @@ export class DeviceEffects {
             return DeviceActions.loadDevicesSuccess({ devices: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(DeviceActions.loadDevicesError({ error }));
           })
         )
@@ -40,6 +41,7 @@ export class DeviceEffects {
             return DeviceActions.loadDeviceSuccess({ device: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             this.router.navigateByUrl('/admin/devices');
             return of(DeviceActions.loadDeviceError({ error }));
           })
@@ -57,6 +59,7 @@ export class DeviceEffects {
             return DeviceActions.deleteDeviceSuccess({ id: action.id });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(DeviceActions.deleteDeviceError({ error }));
           })
         )
@@ -94,6 +97,7 @@ export class DeviceEffects {
             return DeviceActions.updateDeviceSuccess();
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(DeviceActions.updateDeviceError({ error }));
           })
         );

@@ -56,6 +56,7 @@ export class KindEffects {
       mergeMap((action) =>
         this.kindService.deleteKind(action.id).pipe(
           map((data) => {
+            this.alertService.success('Kind deleted successfully.');
             return KindActions.deleteKindSuccess({ id: action.id });
           }),
           catchError((error: Error) => {
@@ -73,7 +74,7 @@ export class KindEffects {
       mergeMap((action) => {
         return this.kindService.addKind(action.kind).pipe(
           map((data) => {
-            this.alertService.success('Kind added');
+            this.alertService.success('Kind added successfully.');
             this.router.navigateByUrl('/admin/information/kinds');
             return KindActions.addKindSuccess();
           }),
@@ -92,7 +93,7 @@ export class KindEffects {
       mergeMap((action) => {
         return this.kindService.updateKind(action.kind).pipe(
           map((data) => {
-            this.alertService.success('Kind updated');
+            this.alertService.success('Kind updated successfully.');
             this.router.navigateByUrl('/admin/information/kinds');
             return KindActions.updateKindSuccess();
           }),

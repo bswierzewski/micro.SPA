@@ -24,6 +24,7 @@ export class ComponentEffects {
             return ComponentActions.loadComponentsSuccess({ components: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(ComponentActions.loadComponentsError({ error }));
           })
         )
@@ -40,6 +41,7 @@ export class ComponentEffects {
             return ComponentActions.loadComponentSuccess({ component: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             this.router.navigateByUrl('/admin/information/components');
             return of(ComponentActions.loadComponentError({ error }));
           })
@@ -54,9 +56,11 @@ export class ComponentEffects {
       mergeMap((action) =>
         this.componentService.deleteDeviceComponent(action.id).pipe(
           map((data) => {
+            this.alertService.success('Component deleted successfully.');
             return ComponentActions.deleteComponentSuccess({ id: action.id });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(ComponentActions.deleteComponentError({ error }));
           })
         )
@@ -70,7 +74,7 @@ export class ComponentEffects {
       mergeMap((action) => {
         return this.componentService.addDeviceComponent(action.component).pipe(
           map((data) => {
-            this.alertService.success('Component added');
+            this.alertService.success('Component added successfully.');
             this.router.navigateByUrl('/admin/information/components');
             return ComponentActions.addComponentSuccess();
           }),
@@ -89,11 +93,12 @@ export class ComponentEffects {
       mergeMap((action) => {
         return this.componentService.updateDeviceComponent(action.component).pipe(
           map((data) => {
-            this.alertService.success('Component updated');
+            this.alertService.success('Component updated successfully.');
             this.router.navigateByUrl('/admin/information/components');
             return ComponentActions.updateComponentSuccess();
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(ComponentActions.updateComponentError({ error }));
           })
         );

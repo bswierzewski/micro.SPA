@@ -24,6 +24,7 @@ export class CategoryEffects {
             return CategoryActions.loadCategoriesSuccess({ categories: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(CategoryActions.loadCategoriesError({ error }));
           })
         )
@@ -40,6 +41,7 @@ export class CategoryEffects {
             return CategoryActions.loadCategorySuccess({ category: data });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             this.router.navigateByUrl('/admin/information/categories');
             return of(CategoryActions.loadCategoryError({ error }));
           })
@@ -54,9 +56,11 @@ export class CategoryEffects {
       mergeMap((action) =>
         this.categoryService.deleteCategory(action.id).pipe(
           map((data) => {
+            this.alertService.success('Category deleted successfully.');
             return CategoryActions.deleteCategorySuccess({ id: action.id });
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(CategoryActions.deleteCategoryError({ error }));
           })
         )
@@ -70,12 +74,12 @@ export class CategoryEffects {
       mergeMap((action) => {
         return this.categoryService.addCategory(action.category).pipe(
           map((data) => {
-            this.alertService.success('Category added');
+            this.alertService.success('Category added successfully.');
             this.router.navigateByUrl('/admin/information/categories');
             return CategoryActions.addCategorySuccess();
           }),
           catchError((error: Error) => {
-            this.alertService.error(error.message);
+            this.alertService.error(error.name);
             return of(CategoryActions.addCategoryError({ error }));
           })
         );
@@ -89,11 +93,12 @@ export class CategoryEffects {
       mergeMap((action) => {
         return this.categoryService.updateCategory(action.category).pipe(
           map((data) => {
-            this.alertService.success('Category updated');
+            this.alertService.success('Category updated successfully.');
             this.router.navigateByUrl('/admin/information/categories');
             return CategoryActions.updateCategorySuccess();
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(CategoryActions.updateCategoryError({ error }));
           })
         );

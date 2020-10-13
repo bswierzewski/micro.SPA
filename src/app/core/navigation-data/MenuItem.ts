@@ -6,7 +6,7 @@ export interface MenuItem {
 export interface MenuGroup {
   group: string;
   icon: string;
-  items: MenuItem[];
+  items?: MenuItem[];
 }
 
 export let MenuGroups: MenuGroup[] = [
@@ -39,5 +39,10 @@ export let MenuGroups: MenuGroup[] = [
         icon: 'fas fa-cogs',
       },
     ] as MenuItem[],
+  },
+  {
+    group: 'Logout',
+    icon: 'fas fa-sign-out-alt',
+    items: [],
   },
 ];

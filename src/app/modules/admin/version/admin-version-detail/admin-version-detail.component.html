@@ -64,8 +64,11 @@
       </div>
     </label>
 
-    <button mat-raised-button color="primary" type="submit">
-      {{ isCreatedMode ? 'Create' : 'Update' }}
-    </button>
+    <div fxLayout fxLayoutGap="20px">
+      <button fxFlex mat-raised-button color="warn" type="button" (click)="onReturnClick()">Return</button>
+      <button fxFlex mat-raised-button color="primary" type="submit">
+        {{ isCreatedMode ? 'Create' : 'Update' }}
+      </button>
+    </div>
   </form>
 </div>

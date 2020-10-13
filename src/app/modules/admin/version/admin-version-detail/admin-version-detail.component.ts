@@ -72,6 +72,10 @@ export class AdminVersionDetailComponent implements OnInit {
     }
   }
 
+  onReturnClick(): void {
+    this.router.navigateByUrl('/admin/versions');
+  }
+
   handleFileInput(files: FileList): void {
     this.model.fileData = files.item(0);
   }
