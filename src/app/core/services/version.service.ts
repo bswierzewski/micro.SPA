@@ -20,7 +20,7 @@ export class VersionService {
     return this.httpClient.get<Version[]>(this.versionUrl);
   }
 
-  addVersion(version: Version, file: File): Observable<any> {
+  addVersion(version: Version): Observable<any> {
     const formData: FormData = new FormData();
 
     formData.append('Name', version.name);
@@ -29,13 +29,13 @@ export class VersionService {
     formData.append('Patch', version.patch.toString());
     formData.append('kindId', version.kindId.toString());
     formData.append('componentId', version.componentId.toString());
-    formData.append('File', file);
+    formData.append('File', version.fileData);
 
     return this.httpClient.post(this.versionUrl, formData);
   }
 
-  updateVersion(id: number, version: Version): Observable<any> {
-    return this.httpClient.put(this.versionUrl + `/${id}`, version);
+  updateVersion(version: Version): Observable<any> {
+    return this.httpClient.put(this.versionUrl + `/${version.id}`, version);
   }
 
   deleteVersion(id: number): Observable<any> {

@@ -13,10 +13,10 @@ export const deleteVersion = createAction('[Version] Delete Version', props<{ id
 export const deleteVersionSuccess = createAction('[Version] Delete Version Success', props<{ id: number }>());
 export const deleteVersionError = createAction('[Version] Delete Version Error', props<{ error: Error }>());
 
-export const addVersion = createAction('[Version] Add Version', props<{ version: Version; file: File }>());
+export const addVersion = createAction('[Version] Add Version', props<{ version: Version }>());
 export const addVersionSuccess = createAction('[Version] Add Version Success');
 export const addVersionError = createAction('[Version] Add Version Error', props<{ error: Error }>());
 
-export const updateVersion = createAction('[Version] Update Version', props<{ id: number; version: Version }>());
+export const updateVersion = createAction('[Version] Update Version', props<{ version: Version }>());
 export const updateVersionSuccess = createAction('[Version] Update Version Success');
 export const updateVersionError = createAction('[Version] Update Version Error', props<{ error: Error }>());

@@ -10,7 +10,8 @@ import * as ComponentActions from '../../../../store/actions/component.actions';
 import * as CategoryActions from '../../../../store/actions/category.actions';
 import * as KindActions from '../../../../store/actions/kind.actions';
 import * as VersionActions from '../../../../store/actions/version.actions';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-device-detail',
@@ -22,23 +23,25 @@ export class AdminDeviceDetailComponent implements OnInit {
 
   isCreatedMode = false;
   isPassMacAddress = false;
+  isLoading$: Observable<boolean>;
   kinds$: Observable<Kind[]>;
   components$: Observable<DeviceComponent[]>;
   categories$: Observable<Category[]>;
   versions$: Observable<Version[]>;
 
   constructor(
+    private router: Router,
     private store: Store<fromRoot.State>,
     private route: ActivatedRoute,
-    private router: Router,
     private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
+    this.store.dispatch(ComponentActions.clear());
+    this.isLoading$ = this.store.select(fromRoot.getIsLoadingDevice);
     this.store.dispatch(CategoryActions.loadCategories());
     this.store.dispatch(KindActions.loadKinds());
     this.store.dispatch(VersionActions.loadVersions());
-    this.store.dispatch(ComponentActions.clear());
     this.categories$ = this.store.select(fromRoot.getCategories);
     this.kinds$ = this.store.select(fromRoot.getKinds);
     this.components$ = this.store.select(fromRoot.getComponents);
@@ -49,11 +52,17 @@ export class AdminDeviceDetailComponent implements OnInit {
 
       if (!this.isCreatedMode) {
         this.store.dispatch(DeviceActions.loadDevice({ id: params.id }));
-        this.store.select(fromRoot.getDevice).subscribe((device) => {
-          if (device?.category?.id) {
-            this.store.dispatch(ComponentActions.loadComponents({ id: device.category.id }));
-          }
-        });
+        this.store
+          .pipe(
+            select(fromRoot.getDevice),
+            first((device) => device !== null)
+          )
+          .subscribe((device) => {
+            if (device?.categoryId) {
+              this.store.dispatch(ComponentActions.loadComponents({ id: device.categoryId }));
+            }
+            this.model = Object.assign({}, device);
+          });
       } else {
         this.model = new Device();
       }

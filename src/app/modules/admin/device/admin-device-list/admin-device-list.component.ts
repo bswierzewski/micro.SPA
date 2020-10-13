@@ -1,26 +1,48 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { Device } from 'src/app/shared/models';
-import { DeviceService, AlertService } from 'src/app/core/services';
+import { AlertService } from 'src/app/core/services';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import * as fromRoot from '../../../../store/app.reducer';
+import * as DeviceActions from '../../../../store/actions/device.actions';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-device-list',
   templateUrl: './admin-device-list.component.html',
   styleUrls: ['./admin-device-list.component.scss'],
 })
-export class AdminDeviceListComponent implements AfterViewInit {
+export class AdminDeviceListComponent implements OnInit, OnDestroy, AfterViewInit {
   devicesColumns: string[] = ['name', 'address', 'kind', 'category', 'component', 'action'];
+
+  isSubscribe = true;
+  isLoading$: Observable<boolean>;
   dataSource = new MatTableDataSource<Device>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private deviceService: DeviceService, private alertService: AlertService) {
-    this.loadDevices();
+  constructor(private store: Store<fromRoot.State>, private alertService: AlertService) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(DeviceActions.loadDevices());
+    this.store
+      .pipe(
+        select(fromRoot.getDevices),
+        takeWhile((x) => this.isSubscribe)
+      )
+      .subscribe((devices) => {
+        this.dataSource.data = devices;
+      });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy(): void {
+    this.isSubscribe = false;
   }
 
   applyFilter(event: Event): void {
@@ -28,22 +50,9 @@ export class AdminDeviceListComponent implements AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  loadDevices(): void {
-    this.deviceService.getDevices().subscribe(
-      (next) => {
-        this.dataSource.data = next;
-      },
-      (error) => {
-        this.alertService.error(error);
-      }
-    );
-  }
-
   onRemoveClick(id: number): void {
     this.alertService.confirm("Really wan't delete this device?", () => {
-      this.deviceService.deleteDevice(id).subscribe((next) => {
-        this.loadDevices();
-      });
+      this.store.dispatch(DeviceActions.deleteDevice({ id }));
     });
   }
 }

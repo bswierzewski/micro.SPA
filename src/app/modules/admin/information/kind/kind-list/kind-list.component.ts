@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../../store/app.reducer';
 import * as KindActions from '../../../../../store/actions/kind.actions';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-kind-list',

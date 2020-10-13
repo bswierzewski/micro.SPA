@@ -68,7 +68,7 @@ export class VersionEffects {
     this.action$.pipe(
       ofType(VersionActions.addVersion),
       mergeMap((action) => {
-        return this.versionService.addVersion(action.version, action.file).pipe(
+        return this.versionService.addVersion(action.version).pipe(
           map((data) => {
             this.alertService.success('Version added');
             this.router.navigateByUrl('/admin/versions');
@@ -87,7 +87,7 @@ export class VersionEffects {
     this.action$.pipe(
       ofType(VersionActions.updateVersion),
       mergeMap((action) => {
-        return this.versionService.updateVersion(action.id, action.version).pipe(
+        return this.versionService.updateVersion(action.version).pipe(
           map((data) => {
             this.alertService.success('Version updated');
             this.router.navigateByUrl('/admin/versions');

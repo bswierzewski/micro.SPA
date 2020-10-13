@@ -1,77 +1,79 @@
-<form #versionDetailForm="ngForm" class="wrapper mat-elevation-z4" (ngSubmit)="onSubmitClick(versionDetailForm)">
-  <mat-form-field appearance="outline">
-    <mat-label>MacAddress</mat-label>
-    <input
-      required
-      matInput
-      placeholder="MacAddress"
-      name="macAddress"
-      [(ngModel)]="model.address"
-      [disabled]="isPassMacAddress || !isCreatedMode"
-    />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" />
-  </mat-form-field>
-
-  <app-icon-picker class="icon_picker" [(icon)]="model.icon"></app-icon-picker>
-
-  <div class="row">
+<mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
+<div *ngIf="!(isLoading$ | async)" class="mat-elevation-z8">
+  <form #versionDetailForm="ngForm" class="wrapper mat-elevation-z4" (ngSubmit)="onSubmitClick(versionDetailForm)">
     <mat-form-field appearance="outline">
-      <mat-label>Kind</mat-label>
-      <mat-select required [(ngModel)]="model.kindId" name="kind">
-        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">
-          {{ kind.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Category</mat-label>
-      <mat-select
+      <mat-label>MacAddress</mat-label>
+      <input
         required
-        [(ngModel)]="model.categoryId"
-        name="category"
-        (selectionChange)="selectionCategoryChange($event.value)"
+        matInput
+        placeholder="MacAddress"
+        name="macAddress"
+        [disabled]="isPassMacAddress || !isCreatedMode"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" />
+    </mat-form-field>
+
+    <app-icon-picker class="icon_picker" [(icon)]="model.icon"></app-icon-picker>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Kind</mat-label>
+        <mat-select required [(ngModel)]="model.kindId" name="kind">
+          <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">
+            {{ kind.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select
+          required
+          [(ngModel)]="model.categoryId"
+          name="category"
+          (selectionChange)="selectionCategoryChange($event.value)"
+        >
+          <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ model.categoryId ? 'Component' : 'Choose category' }}</mat-label>
+        <mat-select required [(ngModel)]="model.componentId" name="component">
+          <mat-option *ngFor="let component of components$ | async" [value]="component.id">
+            {{ component.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Specific version</mat-label>
+        <mat-select [(ngModel)]="model.versionId" name="version" [disabled]="model.isAutoUpdate">
+          <mat-option *ngFor="let version of versions$ | async" [value]="version.id">
+            {{ version.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-button-toggle-group
+        (change)="buttonAutoUpdateChange($event.value)"
+        class="button_group"
+        [(ngModel)]="model.isAutoUpdate"
+        name="group"
       >
-        <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
-          {{ category.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>{{ model.categoryId ? 'Component' : 'Choose category' }}</mat-label>
-      <mat-select required [(ngModel)]="model.componentId" name="component">
-        <mat-option *ngFor="let component of components$ | async" [value]="component.id">
-          {{ component.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Specific version</mat-label>
-      <mat-select [(ngModel)]="model.versionId" name="version" [disabled]="model.isAutoUpdate">
-        <mat-option *ngFor="let version of versions$ | async" [value]="version.id">
-          {{ version.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-button-toggle-group
-      (change)="buttonAutoUpdateChange($event.value)"
-      class="button_group"
-      [(ngModel)]="model.isAutoUpdate"
-      name="group"
-    >
-      <mat-button-toggle class="flex_item" [value]="false">Specific</mat-button-toggle>
-      <mat-button-toggle class="flex_item" [value]="true">Auto</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-  <button mat-raised-button color="primary" type="submit">
-    {{ isCreatedMode ? 'Create' : 'Update' }}
-  </button>
-</form>
+        <mat-button-toggle class="flex_item" [value]="false">Specific</mat-button-toggle>
+        <mat-button-toggle class="flex_item" [value]="true">Auto</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <button mat-raised-button color="primary" type="submit">
+      {{ isCreatedMode ? 'Create' : 'Update' }}
+    </button>
+  </form>
+</div>

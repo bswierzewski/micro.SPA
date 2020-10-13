@@ -1,68 +1,71 @@
-<div class="header">{{ isCreatedMode ? 'Create new version' : 'Update version' }}</div>
-<form #form="ngForm" class="wrapper mat-elevation-z4" (ngSubmit)="onSubmitClick(form)">
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" />
-  </mat-form-field>
-
-  <div class="row">
+<mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
+<div *ngIf="!(isLoading$ | async)">
+  <div class="header">{{ isCreatedMode ? 'Create new version' : 'Update version' }}</div>
+  <form #form="ngForm" class="wrapper mat-elevation-z4" (ngSubmit)="onSubmitClick(form)">
     <mat-form-field appearance="outline">
-      <mat-label>Major</mat-label>
-      <input matInput type="number" placeholder="Major" name="major" required [(ngModel)]="model.major" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Minor</mat-label>
-      <input matInput type="number" placeholder="Minor" name="minor" required [(ngModel)]="model.minor" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Patch</mat-label>
-      <input matInput type="number" placeholder="Patch" name="patch" required [(ngModel)]="model.patch" />
-    </mat-form-field>
-  </div>
-
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Kind</mat-label>
-      <mat-select required matInput placeholder="Kind" name="kindId" [(ngModel)]="model.kindId">
-        <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">{{ kind.name }}</mat-option>
-      </mat-select>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Component</mat-label>
-      <mat-select required matInput placeholder="Component" name="deviceComponentId" [(ngModel)]="model.componentId">
-        <mat-option *ngFor="let deviceComponent of deviceComponents$ | async" [value]="deviceComponent.id">{{
-          deviceComponent.name
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <label [ngClass]="!isCreatedMode ? 'disable-file' : ''" class="file mat-elevation-z4">
-    <input
-      type="file"
-      id="file"
-      style="display: none"
-      #file
-      (change)="handleFileInput($event.target.files)"
-      [disabled]="!isCreatedMode"
-    />
-    <div class="cutom-file">
-      <div class="text-file">{{ model.fileToUpload ? this.model.fileToUpload?.name : 'Choose file' }}</div>
-      <button
-        class="file-button"
-        mat-raised-button
-        color="primary"
-        type="button"
-        (click)="file.click()"
-        [disabled]="!isCreatedMode"
-      >
-        Browse
-      </button>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Major</mat-label>
+        <input matInput type="number" placeholder="Major" name="major" required [(ngModel)]="model.major" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Minor</mat-label>
+        <input matInput type="number" placeholder="Minor" name="minor" required [(ngModel)]="model.minor" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Patch</mat-label>
+        <input matInput type="number" placeholder="Patch" name="patch" required [(ngModel)]="model.patch" />
+      </mat-form-field>
     </div>
-  </label>
 
-  <button mat-raised-button color="primary" type="submit">
-    {{ isCreatedMode ? 'Create' : 'Update' }}
-  </button>
-</form>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Kind</mat-label>
+        <mat-select required matInput placeholder="Kind" name="kindId" [(ngModel)]="model.kindId">
+          <mat-option *ngFor="let kind of kinds$ | async" [value]="kind.id">{{ kind.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Component</mat-label>
+        <mat-select required matInput placeholder="Component" name="deviceComponentId" [(ngModel)]="model.componentId">
+          <mat-option *ngFor="let deviceComponent of deviceComponents$ | async" [value]="deviceComponent.id">{{
+            deviceComponent.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <label [ngClass]="!isCreatedMode ? 'disable-file' : ''" class="file mat-elevation-z4">
+      <input
+        type="file"
+        id="file"
+        style="display: none"
+        #file
+        (change)="handleFileInput($event.target.files)"
+        [disabled]="!isCreatedMode"
+      />
+      <div class="cutom-file">
+        <div class="text-file">{{ model.fileData ? this.model.fileData?.name : 'Choose file' }}</div>
+        <button
+          class="file-button"
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="file.click()"
+          [disabled]="!isCreatedMode"
+        >
+          Browse
+        </button>
+      </div>
+    </label>
+
+    <button mat-raised-button color="primary" type="submit">
+      {{ isCreatedMode ? 'Create' : 'Update' }}
+    </button>
+  </form>
+</div>

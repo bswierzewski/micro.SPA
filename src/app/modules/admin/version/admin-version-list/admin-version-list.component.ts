@@ -1,34 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AlertService, VersionService } from 'src/app/core/services';
+import { AlertService } from 'src/app/core/services';
 import { Version } from 'src/app/shared/models';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../store/app.reducer';
+import * as VersionActions from '../../../../store/actions/version.actions';
 
 @Component({
   selector: 'app-admin-version-list',
   templateUrl: './admin-version-list.component.html',
   styleUrls: ['./admin-version-list.component.scss'],
 })
-export class AdminVersionListComponent {
+export class AdminVersionListComponent implements OnInit {
   autoColumns: string[] = ['id', 'created', 'name', 'major', 'minor', 'patch', 'kind', 'component', 'fileData'];
   displayedColumns: string[] = [...this.autoColumns, 'action'];
   versions$: Observable<Version[]>;
-  constructor(private versionService: VersionService, private alertService: AlertService) {
-    this.loadVersions();
-  }
+  isLoading$: Observable<boolean>;
+  constructor(private store: Store<fromRoot.State>, private alertService: AlertService) {}
 
-  loadVersions(): void {
-    this.versions$ = this.versionService.getVersions();
+  ngOnInit(): void {
+    this.store.dispatch(VersionActions.loadVersions());
+    this.isLoading$ = this.store.select(fromRoot.getIsLoadingKind);
+    this.versions$ = this.store.select(fromRoot.getVersions);
   }
 
   deleteVersion(id: number): void {
-    this.versionService.deleteVersion(id).subscribe(
-      (next) => {
-        this.alertService.success('Version deleted');
-        this.loadVersions();
-      },
-      (error) => {
-        this.alertService.error(error);
-      }
-    );
+    this.store.dispatch(VersionActions.deleteVersion({ id }));
   }
 }
