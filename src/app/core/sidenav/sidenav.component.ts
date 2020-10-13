@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MenuGroups, MenuGroup } from '../navigation-data/MenuItem';
+import { MenuGroups } from '../navigation-data/MenuItem';
+import { MenuGroup } from '../../shared/components/menu-button/models';
 
 @Component({
   selector: 'app-sidenav',
