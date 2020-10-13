@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { DeviceComponent } from '../../shared/models';
 
-export const loadComponents = createAction('[Component] Load Components');
+export const loadComponents = createAction('[Component] Load Components', props<{ id?: number }>());
 export const loadComponentsSuccess = createAction(
   '[Component] Load Components Success',
   props<{ components: DeviceComponent[] }>()
@@ -26,3 +26,5 @@ export const addComponentError = createAction('[Component] Add Component Error',
 export const updateComponent = createAction('[Component] Update Component', props<{ component: DeviceComponent }>());
 export const updateComponentSuccess = createAction('[Component] Update Component Success');
 export const updateComponentError = createAction('[Component] Update Component Error', props<{ error: Error }>());
+
+export const clear = createAction('[Component] Clear');

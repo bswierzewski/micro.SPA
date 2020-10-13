@@ -62,7 +62,7 @@ export class AdminVersionDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(ComponentActions.loadComponents());
+    this.store.dispatch(ComponentActions.loadComponents({}));
     this.store.dispatch(KindActions.loadKinds());
     this.deviceComponents$ = this.store.select(fromRoot.getComponents);
     this.kinds$ = this.store.select(fromRoot.getKinds);

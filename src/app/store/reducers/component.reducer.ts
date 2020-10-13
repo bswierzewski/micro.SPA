@@ -75,6 +75,12 @@ export const componentReducer = createReducer(
     ...state,
     isLoading: false,
     error: payload.error,
+  })),
+  on(ComponentsActions.clear, (state, payload) => ({
+    ...state,
+    components: [],
+    component: null,
+    error: null,
   }))
 );
 

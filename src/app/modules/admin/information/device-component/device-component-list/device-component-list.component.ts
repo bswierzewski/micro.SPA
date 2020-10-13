@@ -34,7 +34,7 @@ export class DeviceComponentListComponent implements AfterViewInit, OnInit {
       this.dataSource.data = data;
     });
     this.isLoading$ = this.store.select(fromRoot.getIsLoadingComponent);
-    this.store.dispatch(ComponentsActions.loadComponents());
+    this.store.dispatch(ComponentsActions.loadComponents({}));
   }
 
   deleteComponent(id: number): void {

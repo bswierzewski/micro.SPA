@@ -19,7 +19,7 @@ export class ComponentEffects {
     this.action$.pipe(
       ofType(ComponentActions.loadComponents),
       mergeMap((action) =>
-        this.componentService.getDeviceComponents().pipe(
+        this.componentService.getDeviceComponents(action.id).pipe(
           map((data) => {
             return ComponentActions.loadComponentsSuccess({ components: data });
           }),

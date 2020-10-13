@@ -29,7 +29,7 @@ export class CategoryDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(ComponentActions.loadComponents());
+    this.store.dispatch(ComponentActions.loadComponents({}));
     this.components$ = this.store.select(fromRoot.getComponents);
     this.route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';

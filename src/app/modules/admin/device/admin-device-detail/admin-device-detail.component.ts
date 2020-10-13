@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category, Device, DeviceComponent, DeviceEntry, Kind, Version } from 'src/app/shared/models';
-import {
-  DeviceComponentInformationService,
-  KindInformationService,
-  DeviceService,
-  AlertService,
-  CategoryInformationService,
-  VersionService,
-} from 'src/app/core/services';
+import { DeviceService, AlertService, VersionService } from 'src/app/core/services';
 import { NgForm } from '@angular/forms';
+import * as fromRoot from '../../../../store/app.reducer';
+import * as ComponentActions from '../../../../store/actions/component.actions';
+import * as CategoryActions from '../../../../store/actions/category.actions';
+import * as KindActions from '../../../../store/actions/kind.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-admin-device-detail',
@@ -28,26 +26,30 @@ export class AdminDeviceDetailComponent implements OnInit {
   versions$: Observable<Version[]>;
 
   constructor(
-    route: ActivatedRoute,
-    kindService: KindInformationService,
-    categoryService: CategoryInformationService,
-    versionService: VersionService,
-    private componentService: DeviceComponentInformationService,
+    private store: Store<fromRoot.State>,
+    private route: ActivatedRoute,
     private router: Router,
+    private versionService: VersionService,
     private deviceService: DeviceService,
     private alertService: AlertService
-  ) {
-    this.kinds$ = kindService.getKinds();
-    this.categories$ = categoryService.getCategories();
-    this.versions$ = versionService.getVersions();
+  ) {}
 
-    route.params.subscribe((params) => {
+  ngOnInit(): void {
+    this.store.dispatch(CategoryActions.loadCategories());
+    this.store.dispatch(KindActions.loadKinds());
+    this.store.dispatch(ComponentActions.clear());
+    this.categories$ = this.store.select(fromRoot.getCategories);
+    this.kinds$ = this.store.select(fromRoot.getKinds);
+    this.components$ = this.store.select(fromRoot.getComponents);
+    this.versions$ = this.versionService.getVersions();
+
+    this.route.params.subscribe((params) => {
       this.isCreatedMode = Number(params.id) === 0;
 
       if (params.id && params.id > 0) {
         this.deviceService.getDevice(params.id).subscribe((device: Device) => {
           if (device?.category?.id) {
-            this.components$ = this.componentService.getDeviceComponents(device.category?.id);
+            this.store.dispatch(ComponentActions.loadComponents({ id: device.category?.id }));
           }
           this.model.id = params.id;
           this.model.icon = device.icon;
@@ -65,10 +67,8 @@ export class AdminDeviceDetailComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
   selectionCategoryChange(categoryId: number): void {
-    this.components$ = this.componentService.getDeviceComponents(categoryId);
+    this.store.dispatch(ComponentActions.loadComponents({ id: categoryId }));
   }
 
   onSubmitClick(form: NgForm): void {
@@ -76,7 +76,6 @@ export class AdminDeviceDetailComponent implements OnInit {
       if (!this.model.icon) {
         this.alertService.error('Icon is required');
       }
-
       return;
     }
 
