@@ -40,6 +40,7 @@ export class KindEffects {
             return KindActions.loadKindSuccess({ kind: data });
           }),
           catchError((error: Error) => {
+            this.router.navigateByUrl('/admin/information/kinds');
             return of(KindActions.loadKindError({ error }));
           })
         );
@@ -74,6 +75,7 @@ export class KindEffects {
             return KindActions.addKindSuccess();
           }),
           catchError((error: Error) => {
+            this.alertService.error(error.message);
             return of(KindActions.addKindError({ error }));
           })
         );

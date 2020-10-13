@@ -6,7 +6,7 @@ export interface State {
   isLoading: boolean;
   kinds: Kind[];
   kind: Kind;
-  error: any;
+  error: Error;
 }
 
 const initialState: State = {
@@ -21,6 +21,8 @@ export const kindReducer = createReducer(
   on(KindsActions.loadKinds, (state) => ({
     ...state,
     isLoading: true,
+    kind: null,
+    kinds: null,
     error: null,
   })),
   on(KindsActions.loadKindsSuccess, (state, payload) => ({
@@ -37,6 +39,7 @@ export const kindReducer = createReducer(
   on(KindsActions.loadKind, (state) => ({
     ...state,
     isLoading: true,
+    kind: null,
     error: null,
   })),
   on(KindsActions.loadKindSuccess, (state, payload) => ({
@@ -63,12 +66,15 @@ export const kindReducer = createReducer(
   })),
   on(KindsActions.addKind, KindsActions.updateKind, (state, payload) => ({
     ...state,
+    isLoading: true,
   })),
   on(KindsActions.addKindSuccess, KindsActions.updateKindSuccess, (state, payload) => ({
     ...state,
+    isLoading: false,
   })),
   on(KindsActions.addKindError, KindsActions.updateKindError, (state, payload) => ({
     ...state,
+    isLoading: false,
     error: payload.error,
   }))
 );

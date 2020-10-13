@@ -6,7 +6,7 @@ import { Kind } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../../store/app.reducer';
 import * as KindActions from '../../../../../store/actions/kind.actions';
-import { skip, take } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -34,7 +34,7 @@ export class KindDetailComponent implements OnInit {
         this.store.dispatch(KindActions.loadKind({ id: params.id }));
         this.store
           .select(fromRoot.getKind)
-          .pipe(skip(1), take(1))
+          .pipe(first((kind) => kind !== null))
           .subscribe((kind) => {
             this.model = Object.assign({}, kind);
           });

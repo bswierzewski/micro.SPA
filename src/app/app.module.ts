@@ -41,7 +41,7 @@ export function tokenGetter(): string {
     EffectsModule.forRoot([KindEffects, ComponentEffects, CategoryEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
-  providers: [ErrorInterceptorProvider, AuthService, AlertService],
+  providers: [AuthService, AlertService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
