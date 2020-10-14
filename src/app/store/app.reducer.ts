@@ -4,6 +4,7 @@ import * as fromCategory from './reducers/category.reducer';
 import * as fromComponent from './reducers/component.reducer';
 import * as fromDevice from './reducers/device.reducer';
 import * as fromVersion from './reducers/version.reducer';
+import * as fromRegistration from './reducers/registration.reducer';
 
 export interface State {
   kind: fromKind.State;
@@ -11,6 +12,7 @@ export interface State {
   component: fromComponent.State;
   device: fromDevice.State;
   version: fromVersion.State;
+  registration: fromRegistration.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -19,6 +21,7 @@ export const reducers: ActionReducerMap<State> = {
   component: fromComponent.componentReducer,
   device: fromDevice.deviceReducer,
   version: fromVersion.versionReducer,
+  registration: fromRegistration.registrationReducer,
 };
 
 export const getKindState = createFeatureSelector<fromKind.State>('kind');
@@ -45,3 +48,8 @@ export const getVersionState = createFeatureSelector<fromVersion.State>('version
 export const getVersions = createSelector(getVersionState, fromVersion.getVersions);
 export const getVersion = createSelector(getVersionState, fromVersion.getVersion);
 export const getIsLoadingVersion = createSelector(getVersionState, fromVersion.getIsLoading);
+
+export const getRegistrationState = createFeatureSelector<fromRegistration.State>('registration');
+export const getRegistrations = createSelector(getRegistrationState, fromRegistration.getRegistrations);
+export const getIsLoadingRegistration = createSelector(getRegistrationState, fromRegistration.getIsLoading);
+export const getIsLoadedRegistration = createSelector(getRegistrationState, fromRegistration.getIsLoaded);
