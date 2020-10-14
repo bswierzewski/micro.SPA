@@ -4,7 +4,7 @@ import { Device } from '../../shared/models';
 
 export const loadDevices = createAction('[Device] Load Devices', props<{ params?: DeviceParams }>());
 export const loadDevicesSuccess = createAction('[Device] Load Devices Success', props<{ devices: Device[] }>());
-export const loadDevicesError = createAction('[Device] Load Devices Error', props<{ error: any }>());
+export const loadDevicesError = createAction('[Device] Load Devices Error', props<{ error: Error }>());
 
 export const loadDevice = createAction('[Device] Load Device', props<{ id: number }>());
 export const loadDeviceSuccess = createAction('[Device] Load Device Success', props<{ device: Device }>());

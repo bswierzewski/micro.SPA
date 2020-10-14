@@ -1,4 +1,5 @@
-<div class="mat-elevation-z8">
+<mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
+<div [hidden]="isLoading$ | async" class="mat-elevation-z8">
   <div class="filter_container">
     <mat-form-field class="filter_input">
       <mat-label>Filter</mat-label>

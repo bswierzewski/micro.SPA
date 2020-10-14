@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Device } from 'src/app/shared/models';
 import { AlertService, DeviceService } from '../../core/services';
 import * as DeviceActions from '../actions/device.actions';
 
@@ -36,16 +37,20 @@ export class DeviceEffects {
     this.action$.pipe(
       ofType(DeviceActions.loadDevice),
       mergeMap((action) => {
-        return this.deviceService.getDevice(action.id).pipe(
-          map((data) => {
-            return DeviceActions.loadDeviceSuccess({ device: data });
-          }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
-            this.router.navigateByUrl('/admin/devices');
-            return of(DeviceActions.loadDeviceError({ error }));
-          })
-        );
+        if (action.id === 0) {
+          return of(DeviceActions.loadDeviceSuccess({ device: new Device() }));
+        } else {
+          return this.deviceService.getDevice(action.id).pipe(
+            map((data) => {
+              return DeviceActions.loadDeviceSuccess({ device: data });
+            }),
+            catchError((error: Error) => {
+              this.alertService.error(error.message);
+              this.router.navigateByUrl('/admin/devices');
+              return of(DeviceActions.loadDeviceError({ error }));
+            })
+          );
+        }
       })
     )
   );

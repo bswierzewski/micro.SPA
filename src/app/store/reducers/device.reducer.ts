@@ -4,6 +4,7 @@ import * as DevicesActions from '../actions/device.actions';
 
 export interface State {
   isLoading: boolean;
+  isLoaded: boolean;
   devices: Device[];
   device: Device;
   error: Error;
@@ -11,6 +12,7 @@ export interface State {
 
 const initialState: State = {
   isLoading: false,
+  isLoaded: false,
   devices: [],
   device: null,
   error: null,
@@ -21,6 +23,7 @@ export const deviceReducer = createReducer(
   on(DevicesActions.loadDevices, (state) => ({
     ...state,
     isLoading: true,
+    isLoaded: false,
     device: null,
     devices: [],
     error: null,
@@ -29,28 +32,33 @@ export const deviceReducer = createReducer(
     ...state,
     devices: payload.devices,
     isLoading: false,
+    isLoaded: true,
     error: null,
   })),
   on(DevicesActions.loadDevicesError, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: false,
     error: payload.error,
   })),
   on(DevicesActions.loadDevice, (state) => ({
     ...state,
     isLoading: true,
+    isLoaded: false,
     device: null,
     error: null,
   })),
   on(DevicesActions.loadDeviceSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: true,
     device: payload.device,
     error: null,
   })),
   on(DevicesActions.loadDeviceError, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: false,
     error: payload.error,
   })),
   on(DevicesActions.deleteDevice, (state, payload) => ({
@@ -82,3 +90,4 @@ export const deviceReducer = createReducer(
 export const getDevices = (state: State) => state.devices;
 export const getDevice = (state: State) => state.device;
 export const getIsLoading = (state: State) => state.isLoading;
+export const getIsLoaded = (state: State) => state.isLoaded;

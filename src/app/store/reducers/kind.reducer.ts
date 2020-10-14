@@ -4,6 +4,7 @@ import * as KindsActions from '../actions/kind.actions';
 
 export interface State {
   isLoading: boolean;
+  isLoaded: boolean;
   kinds: Kind[];
   kind: Kind;
   error: Error;
@@ -11,6 +12,7 @@ export interface State {
 
 const initialState: State = {
   isLoading: false,
+  isLoaded: false,
   kinds: [],
   kind: null,
   error: null,
@@ -21,6 +23,7 @@ export const kindReducer = createReducer(
   on(KindsActions.loadKinds, (state) => ({
     ...state,
     isLoading: true,
+    isLoaded: false,
     kind: null,
     kinds: [],
     error: null,
@@ -29,28 +32,33 @@ export const kindReducer = createReducer(
     ...state,
     kinds: payload.kinds,
     isLoading: false,
+    isLoaded: true,
     error: null,
   })),
   on(KindsActions.loadKindsError, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: false,
     error: payload.error,
   })),
   on(KindsActions.loadKind, (state) => ({
     ...state,
     isLoading: true,
+    isLoaded: false,
     kind: null,
     error: null,
   })),
   on(KindsActions.loadKindSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: true,
     kind: payload.kind,
     error: null,
   })),
   on(KindsActions.loadKindError, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: false,
     error: payload.error,
   })),
   on(KindsActions.deleteKind, (state, payload) => ({
@@ -82,3 +90,4 @@ export const kindReducer = createReducer(
 export const getKinds = (state: State) => state.kinds;
 export const getKind = (state: State) => state.kind;
 export const getIsLoading = (state: State) => state.isLoading;
+export const getIsLoaded = (state: State) => state.isLoaded;

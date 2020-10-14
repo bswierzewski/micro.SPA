@@ -30,21 +30,17 @@ export class CategoryDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(ComponentActions.loadComponents({}));
+    this.isLoading$ = this.store.select(fromRoot.getIsLoadingCategory);
     this.components$ = this.store.select(fromRoot.getComponents);
     this.route.params.subscribe((params) => {
       this.isCreateMode = params.id === '0';
-      if (!this.isCreateMode) {
-        this.isLoading$ = this.store.select(fromRoot.getIsLoadingCategory);
-        this.store.dispatch(CategoryActions.loadCategory({ id: params.id }));
-        this.store
-          .select(fromRoot.getCategory)
-          .pipe(first((category) => category !== null))
-          .subscribe((category) => {
-            this.model = Object.assign({}, category);
-          });
-      } else {
-        this.model = new Category();
-      }
+      this.store.dispatch(CategoryActions.loadCategory({ id: Number(params.id) }));
+      this.store
+        .select(fromRoot.getCategory)
+        .pipe(first((category) => category !== null))
+        .subscribe((category) => {
+          this.model = Object.assign({}, category);
+        });
     });
   }
 

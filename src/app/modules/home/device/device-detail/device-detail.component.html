@@ -1,5 +1,5 @@
-<div class="wrapper">
-  <div class="panel">
+<div fxLayout="row wrap" fxLayoutGap="15px">
+  <div fxFlex>
     <mat-card class="mat-elevation-z8">
       <div class="panel-header-icon">
         <i [ngClass]="device?.icon"></i>
@@ -29,7 +29,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="container">
+  <div fxFlex="2 1 auto">
     <table mat-table [dataSource]="registrations$ | async" class="mat-elevation-z4 table-full-width table-brand-header">
       <!-- Position Column -->
       <ng-container matColumnDef="position">

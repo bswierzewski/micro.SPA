@@ -9,7 +9,7 @@
         placeholder="MacAddress"
         name="macAddress"
         [(ngModel)]="model.addressLabel"
-        [disabled]="isPassMacAddress || !isCreatedMode"
+        [disabled]="isEnabledMacAddress"
       />
     </mat-form-field>
 

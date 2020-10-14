@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Version } from 'src/app/shared/models';
 import { AlertService, VersionService } from '../../core/services';
 import * as VersionActions from '../actions/version.actions';
 
@@ -36,16 +37,20 @@ export class VersionEffects {
     this.action$.pipe(
       ofType(VersionActions.loadVersion),
       mergeMap((action) => {
-        return this.versionService.getVersion(action.id).pipe(
-          map((data) => {
-            return VersionActions.loadVersionSuccess({ version: data });
-          }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
-            this.router.navigateByUrl('/admin/versions');
-            return of(VersionActions.loadVersionError({ error }));
-          })
-        );
+        if (action.id === 0) {
+          return of(VersionActions.loadVersionSuccess({ version: new Version() }));
+        } else {
+          return this.versionService.getVersion(action.id).pipe(
+            map((data) => {
+              return VersionActions.loadVersionSuccess({ version: data });
+            }),
+            catchError((error: Error) => {
+              this.alertService.error(error.message);
+              this.router.navigateByUrl('/admin/versions');
+              return of(VersionActions.loadVersionError({ error }));
+            })
+          );
+        }
       })
     )
   );

@@ -1,19 +1,12 @@
-.wrapper {
-  display: flex;
-  flex-flow: row wrap;
-  grid-gap: 15px;
-}
-
-.panel {
-  flex: 1;
-
-  .panel-header-icon {
-    padding: 30px;
+.panel-header-icon {
+  text-align: center;
+  i {
+    padding: {
+      top: 14px;
+      right: 30px;
+      left: 30px;
+      bottom: 30px;
+    }
     font-size: 5rem;
-    text-align: center;
   }
-}
-
-.container {
-  flex: 3;
 }

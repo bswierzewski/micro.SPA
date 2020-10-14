@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as CategoryActions from '../actions/category.actions';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/shared/models';
 
 @Injectable()
 export class CategoryEffects {
@@ -36,16 +37,20 @@ export class CategoryEffects {
     this.action$.pipe(
       ofType(CategoryActions.loadCategory),
       mergeMap((action) => {
-        return this.categoryService.getCategory(action.id).pipe(
-          map((data) => {
-            return CategoryActions.loadCategorySuccess({ category: data });
-          }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
-            this.router.navigateByUrl('/admin/information/categories');
-            return of(CategoryActions.loadCategoryError({ error }));
-          })
-        );
+        if (action.id === 0) {
+          return of(CategoryActions.loadCategorySuccess({ category: new Category() }));
+        } else {
+          return this.categoryService.getCategory(action.id).pipe(
+            map((data) => {
+              return CategoryActions.loadCategorySuccess({ category: data });
+            }),
+            catchError((error: Error) => {
+              this.alertService.error(error.message);
+              this.router.navigateByUrl('/admin/information/categories');
+              return of(CategoryActions.loadCategoryError({ error }));
+            })
+          );
+        }
       })
     )
   );

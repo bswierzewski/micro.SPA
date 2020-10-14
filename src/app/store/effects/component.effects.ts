@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as ComponentActions from '../actions/component.actions';
 import { AlertService, DeviceComponentInformationService } from 'src/app/core/services';
+import { DeviceComponent } from 'src/app/shared/models';
 
 @Injectable()
 export class ComponentEffects {
@@ -36,16 +37,20 @@ export class ComponentEffects {
     this.action$.pipe(
       ofType(ComponentActions.loadComponent),
       mergeMap((action) => {
-        return this.componentService.getDeviceComponent(action.id).pipe(
-          map((data) => {
-            return ComponentActions.loadComponentSuccess({ component: data });
-          }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
-            this.router.navigateByUrl('/admin/information/components');
-            return of(ComponentActions.loadComponentError({ error }));
-          })
-        );
+        if (action.id === 0) {
+          return of(ComponentActions.loadComponentSuccess({ component: new DeviceComponent() }));
+        } else {
+          return this.componentService.getDeviceComponent(action.id).pipe(
+            map((data) => {
+              return ComponentActions.loadComponentSuccess({ component: data });
+            }),
+            catchError((error: Error) => {
+              this.alertService.error(error.message);
+              this.router.navigateByUrl('/admin/information/components');
+              return of(ComponentActions.loadComponentError({ error }));
+            })
+          );
+        }
       })
     )
   );

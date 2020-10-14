@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AlertService, KindInformationService } from 'src/app/core/services';
+import { Kind } from 'src/app/shared/models';
 import * as KindActions from '../actions/kind.actions';
 
 @Injectable()
@@ -36,16 +37,20 @@ export class KindEffects {
     this.action$.pipe(
       ofType(KindActions.loadKind),
       mergeMap((action) => {
-        return this.kindService.getKind(action.id).pipe(
-          map((data) => {
-            return KindActions.loadKindSuccess({ kind: data });
-          }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
-            this.router.navigateByUrl('/admin/information/kinds');
-            return of(KindActions.loadKindError({ error }));
-          })
-        );
+        if (action.id === 0) {
+          return of(KindActions.loadKindSuccess({ kind: new Kind() }));
+        } else {
+          return this.kindService.getKind(action.id).pipe(
+            map((data) => {
+              return KindActions.loadKindSuccess({ kind: data });
+            }),
+            catchError((error: Error) => {
+              this.alertService.error(error.message);
+              this.router.navigateByUrl('/admin/information/kinds');
+              return of(KindActions.loadKindError({ error }));
+            })
+          );
+        }
       })
     )
   );

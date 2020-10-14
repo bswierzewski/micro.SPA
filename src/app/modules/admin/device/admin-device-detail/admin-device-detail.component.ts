@@ -22,7 +22,7 @@ export class AdminDeviceDetailComponent implements OnInit {
   model: Device;
 
   isCreatedMode = false;
-  isPassMacAddress = false;
+  isEnabledMacAddress = true;
   isLoading$: Observable<boolean>;
   kinds$: Observable<Kind[]>;
   components$: Observable<DeviceComponent[]>;
@@ -49,23 +49,23 @@ export class AdminDeviceDetailComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.isCreatedMode = params.id === '0';
+      this.store.dispatch(DeviceActions.loadDevice({ id: Number(params.id) }));
+      this.store
+        .pipe(
+          select(fromRoot.getDevice),
+          first((device) => device !== null)
+        )
+        .subscribe((device) => {
+          if (device?.categoryId) {
+            this.store.dispatch(ComponentActions.loadComponents({ id: device.categoryId }));
+          }
+          this.model = Object.assign({}, device);
 
-      if (!this.isCreatedMode) {
-        this.store.dispatch(DeviceActions.loadDevice({ id: params.id }));
-        this.store
-          .pipe(
-            select(fromRoot.getDevice),
-            first((device) => device !== null)
-          )
-          .subscribe((device) => {
-            if (device?.categoryId) {
-              this.store.dispatch(ComponentActions.loadComponents({ id: device.categoryId }));
-            }
-            this.model = Object.assign({}, device);
-          });
-      } else {
-        this.model = new Device();
-      }
+          if (params.address) {
+            this.model.addressLabel = params.address;
+          }
+          this.isEnabledMacAddress = this.model.addressLabel?.length > 0;
+        });
     });
   }
 

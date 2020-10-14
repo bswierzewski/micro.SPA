@@ -4,6 +4,7 @@ import * as VersionsActions from '../actions/version.actions';
 
 export interface State {
   isLoading: boolean;
+  isLoaded: boolean;
   versions: Version[];
   version: Version;
   error: Error;
@@ -11,6 +12,7 @@ export interface State {
 
 const initialState: State = {
   isLoading: false,
+  isLoaded: false,
   versions: [],
   version: null,
   error: null,
@@ -21,7 +23,7 @@ export const versionReducer = createReducer(
   on(VersionsActions.loadVersions, (state) => ({
     ...state,
     isLoading: true,
-    version: null,
+    isLoaded: false,
     versions: [],
     error: null,
   })),
@@ -29,28 +31,33 @@ export const versionReducer = createReducer(
     ...state,
     versions: payload.versions,
     isLoading: false,
+    isLoaded: true,
     error: null,
   })),
   on(VersionsActions.loadVersionsError, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: false,
     error: payload.error,
   })),
   on(VersionsActions.loadVersion, (state) => ({
     ...state,
     isLoading: true,
+    isLoaded: false,
     version: null,
     error: null,
   })),
   on(VersionsActions.loadVersionSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: true,
     version: payload.version,
     error: null,
   })),
   on(VersionsActions.loadVersionError, (state, payload) => ({
     ...state,
     isLoading: false,
+    isLoaded: false,
     error: payload.error,
   })),
   on(VersionsActions.deleteVersion, (state, payload) => ({
@@ -82,3 +89,4 @@ export const versionReducer = createReducer(
 export const getVersions = (state: State) => state.versions;
 export const getVersion = (state: State) => state.version;
 export const getIsLoading = (state: State) => state.isLoading;
+export const getIsLoaded = (state: State) => state.isLoaded;

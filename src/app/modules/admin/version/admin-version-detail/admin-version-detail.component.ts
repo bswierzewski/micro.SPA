@@ -32,27 +32,23 @@ export class AdminVersionDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading$ = this.store.select(fromRoot.getIsLoadingVersion);
     this.store.dispatch(ComponentActions.loadComponents({}));
     this.store.dispatch(KindActions.loadKinds());
+    this.isLoading$ = this.store.select(fromRoot.getIsLoadingVersion);
     this.deviceComponents$ = this.store.select(fromRoot.getComponents);
     this.kinds$ = this.store.select(fromRoot.getKinds);
 
     this.route.params.subscribe((params) => {
       this.isCreatedMode = params.id === '0';
-      if (!this.isCreatedMode) {
-        this.store.dispatch(VersionActions.loadVersion({ id: params.id }));
-        this.store
-          .pipe(
-            select(fromRoot.getVersion),
-            first((x) => x !== null)
-          )
-          .subscribe((version) => {
-            this.model = Object.assign({}, version);
-          });
-      } else {
-        this.model = new Version();
-      }
+      this.store.dispatch(VersionActions.loadVersion({ id: params.id }));
+      this.store
+        .pipe(
+          select(fromRoot.getVersion),
+          first((version) => version !== null)
+        )
+        .subscribe((version) => {
+          this.model = Object.assign({}, version);
+        });
     });
   }
 
