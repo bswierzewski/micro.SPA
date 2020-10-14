@@ -40,7 +40,7 @@ export class AdminVersionDetailComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.isCreatedMode = params.id === '0';
-      this.store.dispatch(VersionActions.loadVersion({ id: params.id }));
+      this.store.dispatch(VersionActions.loadVersion({ id: Number(params.id) }));
       this.store
         .pipe(
           select(fromRoot.getVersion),

@@ -31,6 +31,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     socketService.getMessages().subscribe((message) => {
       message.time = new Date().toLocaleTimeString();
 
+      if (this.devices.length > 0) {
+        const index = this.devices.findIndex((x) => x.addressLabel === message.bleAddress);
+        if (index > -1) {
+          message.bleAddress = this.devices[index].name;
+        }
+      }
+
       const deviceIndex = this.selectedDevices.findIndex((x) => x.device.address.label === message.macAddress);
 
       if (deviceIndex > -1) {
@@ -71,6 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (result) {
         this.selectedDevices = [];
         result.forEach((device) => {
+          console.log(device);
           this.socketService.subscribe(device.address.label);
           this.selectedDevices.push({
             id: device.id,

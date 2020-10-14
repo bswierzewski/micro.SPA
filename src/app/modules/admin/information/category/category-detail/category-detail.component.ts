@@ -52,7 +52,9 @@ export class CategoryDetailComponent implements OnInit {
       return;
     }
 
-    this.model.componentIds = this.model.components.map((x) => x.id);
+    if (this.model?.components?.length > 0) {
+      this.model.componentIds = this.model.components.map((x) => x.id);
+    }
 
     if (this.isCreateMode) {
       this.store.dispatch(CategoryActions.addCategory({ category: this.model }));
