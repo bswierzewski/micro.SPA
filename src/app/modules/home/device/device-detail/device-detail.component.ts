@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import * as fromRoot from '../../../../store/app.reducer';
 import * as DeviceActions from '../../../../store/actions/device.actions';
 import * as RegistrationActions from '../../../../store/actions/registration.actions';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-device-detail',
@@ -24,8 +25,8 @@ export class DeviceDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.registrations$ = this.store.select(fromRoot.getRegistrations);
       this.store.dispatch(DeviceActions.loadDevice({ id: Number(params.id) }));
+      this.registrations$ = this.store.select(fromRoot.getRegistrations);
       this.store
         .pipe(
           select(fromRoot.getDevice),

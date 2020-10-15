@@ -13,7 +13,7 @@ import * as VersionActions from '../../../../store/actions/version.actions';
 })
 export class AdminVersionListComponent implements OnInit {
   autoColumns: string[] = ['id', 'created', 'name', 'major', 'minor', 'patch', 'kind', 'component', 'fileData'];
-  displayedColumns: string[] = [...this.autoColumns, 'action'];
+  displayedColumns: string[] = ['action', ...this.autoColumns];
   versions$: Observable<Version[]>;
   isLoading$: Observable<boolean>;
   constructor(private store: Store<fromRoot.State>, private alertService: AlertService) {}

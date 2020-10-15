@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, Router } from '@angular/router';
+import { CanLoad, Router } from '@angular/router';
+import { AuthService } from '../services';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthLoadGuardService implements CanLoad {
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  canLoad(route: Route): boolean {
-    //determine whether you want to load the module
-    //return true or false
+  canLoad(): boolean {
+    if (this.authService.loggedIn()) {
+      return true;
+    }
 
+    this.router.navigate(['/login']);
     return false;
   }
 }

@@ -14,7 +14,7 @@ import * as CategoryActions from '../../../../../store/actions/category.actions'
   styleUrls: ['./category-list.component.scss'],
 })
 export class CategoryListComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['position', 'name', 'actions'];
+  displayedColumns: string[] = ['actions', 'position', 'name'];
   isLoading$: Observable<boolean>;
   dataSource = new MatTableDataSource<Category>();
 

@@ -15,7 +15,7 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./admin-device-list.component.scss'],
 })
 export class AdminDeviceListComponent implements OnInit, OnDestroy, AfterViewInit {
-  devicesColumns: string[] = ['name', 'address', 'kind', 'category', 'component', 'action'];
+  devicesColumns: string[] = ['action', 'name', 'address', 'kind', 'category', 'component'];
 
   isSubscribe = true;
   isLoading$: Observable<boolean>;

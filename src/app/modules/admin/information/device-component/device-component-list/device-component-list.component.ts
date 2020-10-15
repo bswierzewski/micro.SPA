@@ -14,7 +14,7 @@ import * as ComponentsActions from '../../../../../store/actions/component.actio
   styleUrls: ['./device-component-list.component.scss'],
 })
 export class DeviceComponentListComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['position', 'name', 'category', 'actions'];
+  displayedColumns: string[] = ['actions', 'position', 'name', 'category'];
   isLoading$: Observable<boolean>;
   dataSource = new MatTableDataSource<DeviceComponent>();
 

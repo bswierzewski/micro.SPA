@@ -78,8 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (result) {
         this.selectedDevices = [];
         result.forEach((device) => {
-          console.log(device);
-          this.socketService.subscribe(device.address.label);
+          this.socketService.subscribe(device?.address?.label);
           this.selectedDevices.push({
             id: device.id,
             device,

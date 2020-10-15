@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./kind-list.component.scss'],
 })
 export class KindListComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'actions'];
+  displayedColumns: string[] = ['actions', 'position', 'name'];
   isLoading$: Observable<boolean>;
   dataSource = new MatTableDataSource<Kind>();
 

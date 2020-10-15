@@ -11,6 +11,14 @@ body {
   overflow: hidden;
 }
 
+input[type='submit']:disabled {
+  opacity: 0.5;
+}
+
+.logo-color {
+  opacity: 0.9;
+}
+
 .container {
   width: 100vw;
   height: 100vh;
