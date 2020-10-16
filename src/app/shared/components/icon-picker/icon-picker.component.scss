@@ -24,25 +24,28 @@
   }
 }
 
-mat-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-flow: wrap row;
-  justify-content: center;
+.modal-icons {
+  position: fixed;
   z-index: 1;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
 
-  i {
-    border-radius: 15px;
-    font-size: 35px;
-    padding: 10px;
-    margin: 5px;
-    &:hover {
-      background-color: #cccccc;
-      cursor: pointer;
+  mat-card {
+    margin: 5vh 5vw;
+
+    i {
+      border-radius: 15px;
+      font-size: 35px;
+      padding: 10px;
+      margin: 5px;
+      &:hover {
+        background-color: #cccccc;
+        cursor: pointer;
+      }
     }
   }
 }

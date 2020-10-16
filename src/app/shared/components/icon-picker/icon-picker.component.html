@@ -6,6 +6,8 @@
   <button class="icon-button" mat-raised-button color="primary" type="button">Icon</button>
 </div>
 
-<mat-card class="mat-elevation-z8" *ngIf="isShow" (click)="$event.stopPropagation()">
-  <i [ngClass]="icon" class="mat-elevation-z2 icon-picker" *ngFor="let icon of icons" (click)="updateIcon(icon)"></i>
-</mat-card>
+<div class="modal-icons" *ngIf="isShow">
+  <mat-card fxLayout="row wrap" fxLayoutAlign="center" class="mat-elevation-z8" (click)="$event.stopPropagation()">
+    <i [ngClass]="icon" class="mat-elevation-z2 icon-picker" *ngFor="let icon of icons" (click)="updateIcon(icon)"></i>
+  </mat-card>
+</div>

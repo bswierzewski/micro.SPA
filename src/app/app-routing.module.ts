@@ -10,12 +10,12 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
-    canLoad: [AuthLoadGuardService],
+    // canLoad: [AuthLoadGuardService],
   },
   {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
-    canLoad: [AuthLoadGuardService],
+    // canLoad: [AuthLoadGuardService],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
