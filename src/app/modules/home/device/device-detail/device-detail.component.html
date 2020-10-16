@@ -1,33 +1,50 @@
 <div fxLayout="row wrap">
-  <div class="div-margin" fxFlex>
-    <mat-card class="mat-elevation-z8">
-      <div class="panel-header-icon">
-        <i [ngClass]="device?.icon"></i>
-      </div>
-      <mat-card-content>
-        <mat-divider></mat-divider>
-        <br />
-        <h3>Name: {{ device?.name }}</h3>
-        <mat-divider></mat-divider>
-        <br />
-        <h3>Created: {{ device?.created | date: 'yyyy-MM-dd HH:mm:ss' }}</h3>
-        <mat-divider></mat-divider>
-        <br />
-        <h3>Mac Address: {{ device?.address?.label }}</h3>
-        <mat-divider></mat-divider>
-        <br />
-        <h3>Kind: {{ device?.kind?.name }}</h3>
-        <mat-divider></mat-divider>
-        <br />
-        <h3>Category: {{ device?.category?.name }}</h3>
-        <mat-divider></mat-divider>
-        <br />
-        <h3>DeviceComponent: {{ device?.component?.name }}</h3>
-        <mat-divider></mat-divider>
-        <br />
-        <h3>Actuall version: {{ device?.version?.name }}</h3>
-      </mat-card-content>
-    </mat-card>
+  <div fxFlex class="information-wrapper mat-elevation-z8">
+    <div class="panel-header-icon">
+      <i [ngClass]="device?.icon"></i>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information-row">
+      <i [ngClass]="device?.icon"></i>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>Name: {{ device?.name }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information-row">
+      <i [ngClass]="device?.icon"></i>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>Created: {{ device?.created | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information-row">
+      <i [ngClass]="device?.icon"></i>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>Mac Address: {{ device?.address?.label }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information-row">
+      <i [ngClass]="device?.icon"></i>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>Kind: {{ device?.kind?.name }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information-row">
+      <i [ngClass]="device?.icon"></i>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>Category: {{ device?.category?.name }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information-row">
+      <i [ngClass]="device?.icon"></i>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>DeviceComponent: {{ device?.component?.name }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information-row">
+      <i [ngClass]="device?.icon"></i>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>Actuall version: {{ device?.version?.name }}</span>
+    </div>
   </div>
   <div class="div-margin" fxFlex="2 1 auto">
     <mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>

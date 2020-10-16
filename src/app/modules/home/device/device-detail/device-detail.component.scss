@@ -25,3 +25,24 @@
 .div-margin {
   margin: 0 10px;
 }
+
+.information-wrapper {
+  margin: 0 10px;
+  border-radius: 5px;
+
+  .information-row {
+    display: grid;
+    grid-template-columns: [left] auto [space] 1px [right] 1fr;
+
+    i {
+      margin: 15px;
+      align-self: center;
+    }
+
+    span {
+      margin: 10px;
+      align-self: center;
+      font-size: 1.2rem;
+    }
+  }
+}
