@@ -31,9 +31,4 @@ export let MenuGroups: MenuGroup[] = [
       },
     ] as MenuItem[],
   },
-  {
-    group: 'Logout',
-    icon: 'fas fa-sign-out-alt',
-    path: '/login',
-  },
 ];

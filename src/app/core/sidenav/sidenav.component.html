@@ -25,4 +25,13 @@
       <mat-divider></mat-divider>
     </ng-template>
   </div>
+  <!-- Logout section -->
+  <div class="subheader-div">
+    <span class="subheader-text">Logout</span>
+  </div>
+  <a mat-list-item (click)="onLogout()" routerLink="/login">
+    <i class="fas fa-sign-out-alt fa-fw"></i>
+    Logout
+  </a>
+  <mat-divider></mat-divider>
 </mat-nav-list>
