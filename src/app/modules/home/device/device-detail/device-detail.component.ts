@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Device, Registration } from 'src/app/shared/models';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { first, takeWhile } from 'rxjs/operators';
 import * as fromRoot from '../../../../store/app.reducer';
 import * as DeviceActions from '../../../../store/actions/device.actions';
 import * as RegistrationActions from '../../../../store/actions/registration.actions';
@@ -16,9 +16,10 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './device-detail.component.html',
   styleUrls: ['./device-detail.component.scss'],
 })
-export class DeviceDetailComponent implements OnInit, AfterViewInit {
+export class DeviceDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = ['position', 'created', 'address', 'rssi'];
 
+  isSubscribe = true;
   isLoading$: Observable<boolean>;
   device: Device;
   dataSource = new MatTableDataSource<Registration>();
@@ -34,7 +35,7 @@ export class DeviceDetailComponent implements OnInit, AfterViewInit {
       this.store
         .pipe(
           select(fromRoot.getRegistrations),
-          first((registrations) => registrations.length > 0)
+          takeWhile((x) => this.isSubscribe)
         )
         .subscribe((registrations) => {
           this.dataSource.data = registrations;
@@ -42,13 +43,19 @@ export class DeviceDetailComponent implements OnInit, AfterViewInit {
       this.store
         .pipe(
           select(fromRoot.getDevice),
-          first((device) => device !== null)
+          takeWhile((x) => this.isSubscribe)
         )
         .subscribe((device) => {
-          this.device = device;
-          this.store.dispatch(RegistrationActions.loadRegistrations({ id: device.id }));
+          if (device !== null) {
+            this.device = device;
+            this.store.dispatch(RegistrationActions.loadRegistrations({ id: device.addressId }));
+          }
         });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.isSubscribe = false;
   }
 
   ngAfterViewInit(): void {

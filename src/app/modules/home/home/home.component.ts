@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (!this.devices.has(message.bleAddress) || Number(message.rssi) > -70) {
+      if (!this.devices.has(message.bleAddress) || Number(message.rssi) > -65) {
         this.devices.set(message.bleAddress, message);
       }
     });
