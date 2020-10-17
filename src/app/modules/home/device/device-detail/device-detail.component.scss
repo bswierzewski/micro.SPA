@@ -1,3 +1,5 @@
+@import 'variables';
+
 .panel-header-icon {
   text-align: center;
   i {
@@ -26,8 +28,14 @@
   margin: 0 10px;
 }
 
+::ng-deep .tooltip {
+  background-color: $primary;
+  font-size: 1rem;
+}
+
 .information-wrapper {
   margin: 0 10px;
+  margin-bottom: 10px;
   border-radius: 5px;
 
   .information-row {
@@ -35,7 +43,9 @@
     grid-template-columns: [left] auto [space] 1px [right] 1fr;
 
     i {
-      margin: 15px;
+      font-size: 2rem;
+      padding: 15px;
+      margin: 0;
       align-self: center;
     }
 

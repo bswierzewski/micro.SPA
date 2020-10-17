@@ -5,50 +5,70 @@
     </div>
     <mat-divider></mat-divider>
     <div class="information-row">
-      <i [ngClass]="device?.icon"></i>
+      <i class="fas fa-info fa-fw" matTooltip="Name" matTooltipPosition="after" matTooltipClass="tooltip"></i>
       <mat-divider [vertical]="true"></mat-divider>
-      <span>Name: {{ device?.name }}</span>
+      <span>{{ device?.name }}</span>
     </div>
     <mat-divider></mat-divider>
     <div class="information-row">
-      <i [ngClass]="device?.icon"></i>
+      <i class="fas fa-clock fa-fw" matTooltip="Created" matTooltipPosition="after" matTooltipClass="tooltip"></i>
       <mat-divider [vertical]="true"></mat-divider>
-      <span>Created: {{ device?.created | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
+      <span>{{ device?.created | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
     </div>
     <mat-divider></mat-divider>
     <div class="information-row">
-      <i [ngClass]="device?.icon"></i>
+      <i
+        class="fas fa-address-book fa-fw"
+        matTooltip="Address"
+        matTooltipPosition="after"
+        matTooltipClass="tooltip"
+      ></i>
       <mat-divider [vertical]="true"></mat-divider>
-      <span>Mac Address: {{ device?.address?.label }}</span>
+      <span>{{ device?.address?.label }}</span>
     </div>
     <mat-divider></mat-divider>
     <div class="information-row">
-      <i [ngClass]="device?.icon"></i>
+      <i [ngClass]="device?.kind?.icon" matTooltip="Kind" matTooltipPosition="after" matTooltipClass="tooltip"></i>
       <mat-divider [vertical]="true"></mat-divider>
-      <span>Kind: {{ device?.kind?.name }}</span>
+      <span>{{ device?.kind?.name }}</span>
     </div>
     <mat-divider></mat-divider>
     <div class="information-row">
-      <i [ngClass]="device?.icon"></i>
+      <i
+        [ngClass]="device?.category?.icon"
+        matTooltip="Category"
+        matTooltipPosition="after"
+        matTooltipClass="tooltip"
+      ></i>
       <mat-divider [vertical]="true"></mat-divider>
-      <span>Category: {{ device?.category?.name }}</span>
+      <span>{{ device?.category?.name }}</span>
     </div>
     <mat-divider></mat-divider>
     <div class="information-row">
-      <i [ngClass]="device?.icon"></i>
+      <i
+        [ngClass]="device?.component?.icon"
+        matTooltip="Component"
+        matTooltipPosition="after"
+        matTooltipClass="tooltip"
+      ></i>
       <mat-divider [vertical]="true"></mat-divider>
-      <span>DeviceComponent: {{ device?.component?.name }}</span>
+      <span>{{ device?.component?.name }}</span>
     </div>
     <mat-divider></mat-divider>
     <div class="information-row">
-      <i [ngClass]="device?.icon"></i>
+      <i
+        class="fas fa-code-branch fa-fw"
+        matTooltip="Actually Version"
+        matTooltipPosition="after"
+        matTooltipClass="tooltip"
+      ></i>
       <mat-divider [vertical]="true"></mat-divider>
-      <span>Actuall version: {{ device?.version?.name }}</span>
+      <span>{{ device?.version?.name }}</span>
     </div>
   </div>
   <div class="div-margin" fxFlex="2 1 auto">
     <mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
-    <div [hidden]="isLoading$ | async" class="mat-elevation-z4">
+    <div [hidden]="isLoading$ | async" class="mat-elevation-z8">
       <div class="filter_container">
         <mat-form-field class="filter_input">
           <mat-label>Filter</mat-label>

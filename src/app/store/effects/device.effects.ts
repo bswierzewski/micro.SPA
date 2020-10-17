@@ -46,7 +46,6 @@ export class DeviceEffects {
             }),
             catchError((error: Error) => {
               this.alertService.error(error.message);
-              this.router.navigateByUrl('/admin/devices');
               return of(DeviceActions.loadDeviceError({ error }));
             })
           );
