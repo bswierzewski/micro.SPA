@@ -39,8 +39,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       }
 
-      console.log(message);
-
       if (!this.devices.has(message.bleAddress) || Number(message.rssi) > -70) {
         this.devices.set(message.bleAddress, message);
       }
