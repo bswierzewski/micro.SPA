@@ -34,7 +34,7 @@ export class DeviceDetailComponent implements OnInit, AfterViewInit {
       this.store
         .pipe(
           select(fromRoot.getRegistrations),
-          first((registrations) => registrations !== null)
+          first((registrations) => registrations.length > 0)
         )
         .subscribe((registrations) => {
           this.dataSource.data = registrations;
