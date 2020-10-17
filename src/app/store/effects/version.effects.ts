@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Version } from 'src/app/shared/models';
 import { AlertService, VersionService } from '../../core/services';
-import * as VersionActions from '../actions/version.actions';
+import { VersionActions } from '../actions';
 
 @Injectable()
 export class VersionEffects {

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { DeviceComponent } from '../../shared/models';
-import * as ComponentsActions from '../actions/component.actions';
+import { ComponentActions } from '../actions';
 
 export interface State {
   isLoading: boolean;
@@ -20,71 +20,71 @@ const initialState: State = {
 
 export const componentReducer = createReducer(
   initialState,
-  on(ComponentsActions.loadComponents, (state, payload) => ({
+  on(ComponentActions.loadComponents, (state, payload) => ({
     ...state,
     isLoading: true,
     isLoaded: false,
     components: [],
     error: null,
   })),
-  on(ComponentsActions.loadComponentsSuccess, (state, payload) => ({
+  on(ComponentActions.loadComponentsSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: true,
     components: payload.components,
     error: null,
   })),
-  on(ComponentsActions.loadComponentsError, (state, payload) => ({
+  on(ComponentActions.loadComponentsError, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: false,
     error: payload.error,
   })),
-  on(ComponentsActions.loadComponent, (state) => ({
+  on(ComponentActions.loadComponent, (state) => ({
     ...state,
     isLoading: true,
     isLoaded: false,
     component: null,
     error: null,
   })),
-  on(ComponentsActions.loadComponentSuccess, (state, payload) => ({
+  on(ComponentActions.loadComponentSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: true,
     component: payload.component,
     error: null,
   })),
-  on(ComponentsActions.loadComponentError, (state, payload) => ({
+  on(ComponentActions.loadComponentError, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: false,
     error: payload.error,
   })),
-  on(ComponentsActions.deleteComponent, (state, payload) => ({
+  on(ComponentActions.deleteComponent, (state, payload) => ({
     ...state,
   })),
-  on(ComponentsActions.deleteComponentSuccess, (state, payload) => ({
+  on(ComponentActions.deleteComponentSuccess, (state, payload) => ({
     ...state,
     components: state.components.filter((x) => x.id !== payload.id),
   })),
-  on(ComponentsActions.deleteComponentError, (state, payload) => ({
+  on(ComponentActions.deleteComponentError, (state, payload) => ({
     ...state,
     error: payload.error,
   })),
-  on(ComponentsActions.addComponent, ComponentsActions.updateComponent, (state, payload) => ({
+  on(ComponentActions.addComponent, ComponentActions.updateComponent, (state, payload) => ({
     ...state,
     isLoading: true,
   })),
-  on(ComponentsActions.addComponentSuccess, ComponentsActions.updateComponentSuccess, (state, payload) => ({
+  on(ComponentActions.addComponentSuccess, ComponentActions.updateComponentSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
   })),
-  on(ComponentsActions.addComponentError, ComponentsActions.updateComponentError, (state, payload) => ({
+  on(ComponentActions.addComponentError, ComponentActions.updateComponentError, (state, payload) => ({
     ...state,
     isLoading: false,
     error: payload.error,
   })),
-  on(ComponentsActions.clear, (state, payload) => ({
+  on(ComponentActions.clear, (state, payload) => ({
     ...initialState,
   }))
 );

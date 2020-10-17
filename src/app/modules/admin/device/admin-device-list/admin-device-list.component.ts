@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../../store/app.reducer';
-import * as DeviceActions from '../../../../store/actions/device.actions';
+import { DeviceActions } from '../../../../store/actions';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({

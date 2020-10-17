@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Kind } from '../../shared/models';
-import * as KindsActions from '../actions/kind.actions';
+import { KindActions } from '../actions';
 
 export interface State {
   isLoading: boolean;
@@ -20,7 +20,7 @@ const initialState: State = {
 
 export const kindReducer = createReducer(
   initialState,
-  on(KindsActions.loadKinds, (state) => ({
+  on(KindActions.loadKinds, (state) => ({
     ...state,
     isLoading: true,
     isLoaded: false,
@@ -28,59 +28,59 @@ export const kindReducer = createReducer(
     kinds: [],
     error: null,
   })),
-  on(KindsActions.loadKindsSuccess, (state, payload) => ({
+  on(KindActions.loadKindsSuccess, (state, payload) => ({
     ...state,
     kinds: payload.kinds,
     isLoading: false,
     isLoaded: true,
     error: null,
   })),
-  on(KindsActions.loadKindsError, (state, payload) => ({
+  on(KindActions.loadKindsError, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: false,
     error: payload.error,
   })),
-  on(KindsActions.loadKind, (state) => ({
+  on(KindActions.loadKind, (state) => ({
     ...state,
     isLoading: true,
     isLoaded: false,
     kind: null,
     error: null,
   })),
-  on(KindsActions.loadKindSuccess, (state, payload) => ({
+  on(KindActions.loadKindSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: true,
     kind: payload.kind,
     error: null,
   })),
-  on(KindsActions.loadKindError, (state, payload) => ({
+  on(KindActions.loadKindError, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: false,
     error: payload.error,
   })),
-  on(KindsActions.deleteKind, (state, payload) => ({
+  on(KindActions.deleteKind, (state, payload) => ({
     ...state,
   })),
-  on(KindsActions.deleteKindSuccess, (state, payload) => ({
+  on(KindActions.deleteKindSuccess, (state, payload) => ({
     ...state,
     kinds: state.kinds.filter((x) => x.id !== payload.id),
   })),
-  on(KindsActions.deleteKindError, (state, payload) => ({
+  on(KindActions.deleteKindError, (state, payload) => ({
     ...state,
     error: payload.error,
   })),
-  on(KindsActions.addKind, KindsActions.updateKind, (state, payload) => ({
+  on(KindActions.addKind, KindActions.updateKind, (state, payload) => ({
     ...state,
     isLoading: true,
   })),
-  on(KindsActions.addKindSuccess, KindsActions.updateKindSuccess, (state, payload) => ({
+  on(KindActions.addKindSuccess, KindActions.updateKindSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
   })),
-  on(KindsActions.addKindError, KindsActions.updateKindError, (state, payload) => ({
+  on(KindActions.addKindError, KindActions.updateKindError, (state, payload) => ({
     ...state,
     isLoading: false,
     error: payload.error,

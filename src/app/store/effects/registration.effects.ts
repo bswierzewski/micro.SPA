@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AlertService, RegistrationService } from 'src/app/core/services';
-import * as RegistrationActions from '../actions/registration.actions';
+import { RegistrationActions } from '../actions';
 
 @Injectable()
 export class RegistrationEffects {

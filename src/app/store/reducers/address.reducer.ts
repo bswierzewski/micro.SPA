@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Address } from '../../shared/models';
-import * as AddressActions from '../actions/address.actions';
+import { AddressActions } from '../actions';
 
 export interface State {
   isLoading: boolean;

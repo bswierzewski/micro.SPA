@@ -6,7 +6,7 @@ import { AlertService, CategoryInformationService } from 'src/app/core/services'
 import { Category } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../../store/app.reducer';
-import * as CategoryActions from '../../../../../store/actions/category.actions';
+import { CategoryActions } from '../../../../../store/actions';
 
 @Component({
   selector: 'app-category-list',

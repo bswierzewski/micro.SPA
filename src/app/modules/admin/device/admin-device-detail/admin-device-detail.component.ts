@@ -5,11 +5,13 @@ import { Category, Device, DeviceComponent, Kind, Version } from 'src/app/shared
 import { AlertService } from 'src/app/core/services';
 import { NgForm } from '@angular/forms';
 import * as fromRoot from '../../../../store/app.reducer';
-import * as DeviceActions from '../../../../store/actions/device.actions';
-import * as ComponentActions from '../../../../store/actions/component.actions';
-import * as CategoryActions from '../../../../store/actions/category.actions';
-import * as KindActions from '../../../../store/actions/kind.actions';
-import * as VersionActions from '../../../../store/actions/version.actions';
+import {
+  DeviceActions,
+  ComponentActions,
+  CategoryActions,
+  KindActions,
+  VersionActions,
+} from '../../../../store/actions';
 import { select, Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 

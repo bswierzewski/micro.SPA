@@ -4,7 +4,7 @@ import { AlertService } from 'src/app/core/services';
 import { Version } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../store/app.reducer';
-import * as VersionActions from '../../../../store/actions/version.actions';
+import { VersionActions } from '../../../../store/actions';
 
 @Component({
   selector: 'app-admin-version-list',

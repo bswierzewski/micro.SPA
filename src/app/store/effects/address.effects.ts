@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AddressService, AlertService } from '../../core/services';
-import * as AddressActions from '../actions/address.actions';
+import { AddressActions } from '../actions';
 
 @Injectable()
 export class AddressEffects {

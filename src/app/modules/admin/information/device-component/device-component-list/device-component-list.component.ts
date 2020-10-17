@@ -6,7 +6,7 @@ import { AlertService, DeviceComponentInformationService } from 'src/app/core/se
 import { DeviceComponent } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../../store/app.reducer';
-import * as ComponentsActions from '../../../../../store/actions/component.actions';
+import { ComponentActions } from '../../../../../store/actions';
 
 @Component({
   selector: 'app-device-component-list',
@@ -34,12 +34,12 @@ export class DeviceComponentListComponent implements AfterViewInit, OnInit {
       this.dataSource.data = data;
     });
     this.isLoading$ = this.store.select(fromRoot.getIsLoadingComponent);
-    this.store.dispatch(ComponentsActions.loadComponents({}));
+    this.store.dispatch(ComponentActions.loadComponents({}));
   }
 
   deleteComponent(id: number): void {
     this.alertService.confirm('Are you sure?', () => {
-      this.store.dispatch(ComponentsActions.deleteComponent({ id }));
+      this.store.dispatch(ComponentActions.deleteComponent({ id }));
     });
   }
 }

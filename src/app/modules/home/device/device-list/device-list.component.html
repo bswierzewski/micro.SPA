@@ -39,7 +39,6 @@
             name="deviceComponentValid"
             [(value)]="params.componentIds"
           >
-            <mat-select-trigger>{{ 'getDeviceComponentsTriggerText()' }}</mat-select-trigger>
             <mat-option *ngFor="let component of components$ | async" [value]="component.id">
               <i [ngClass]="component.icon"></i>
               {{ component.name }}</mat-option

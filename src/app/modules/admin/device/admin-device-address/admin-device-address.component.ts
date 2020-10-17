@@ -6,7 +6,7 @@ import { AlertService } from 'src/app/core/services';
 import { Address } from 'src/app/shared/models';
 import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../../store/app.reducer';
-import * as AddressActions from '../../../../store/actions/address.actions';
+import { AddressActions } from '../../../../store/actions';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({

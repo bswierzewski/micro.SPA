@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import * as ComponentActions from '../actions/component.actions';
+import { ComponentActions } from '../actions';
 import { AlertService, DeviceComponentInformationService } from 'src/app/core/services';
 import { DeviceComponent } from 'src/app/shared/models';
 

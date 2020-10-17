@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Device } from '../../shared/models';
-import * as DevicesActions from '../actions/device.actions';
+import { DeviceActions } from '../actions';
 
 export interface State {
   isLoading: boolean;
@@ -20,7 +20,7 @@ const initialState: State = {
 
 export const deviceReducer = createReducer(
   initialState,
-  on(DevicesActions.loadDevices, (state) => ({
+  on(DeviceActions.loadDevices, (state) => ({
     ...state,
     isLoading: true,
     isLoaded: false,
@@ -28,59 +28,59 @@ export const deviceReducer = createReducer(
     devices: [],
     error: null,
   })),
-  on(DevicesActions.loadDevicesSuccess, (state, payload) => ({
+  on(DeviceActions.loadDevicesSuccess, (state, payload) => ({
     ...state,
     devices: payload.devices,
     isLoading: false,
     isLoaded: true,
     error: null,
   })),
-  on(DevicesActions.loadDevicesError, (state, payload) => ({
+  on(DeviceActions.loadDevicesError, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: false,
     error: payload.error,
   })),
-  on(DevicesActions.loadDevice, (state) => ({
+  on(DeviceActions.loadDevice, (state) => ({
     ...state,
     isLoading: true,
     isLoaded: false,
     device: null,
     error: null,
   })),
-  on(DevicesActions.loadDeviceSuccess, (state, payload) => ({
+  on(DeviceActions.loadDeviceSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: true,
     device: payload.device,
     error: null,
   })),
-  on(DevicesActions.loadDeviceError, (state, payload) => ({
+  on(DeviceActions.loadDeviceError, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: false,
     error: payload.error,
   })),
-  on(DevicesActions.deleteDevice, (state, payload) => ({
+  on(DeviceActions.deleteDevice, (state, payload) => ({
     ...state,
   })),
-  on(DevicesActions.deleteDeviceSuccess, (state, payload) => ({
+  on(DeviceActions.deleteDeviceSuccess, (state, payload) => ({
     ...state,
     devices: state.devices.filter((x) => x.id !== payload.id),
   })),
-  on(DevicesActions.deleteDeviceError, (state, payload) => ({
+  on(DeviceActions.deleteDeviceError, (state, payload) => ({
     ...state,
     error: payload.error,
   })),
-  on(DevicesActions.addDevice, DevicesActions.updateDevice, (state, payload) => ({
+  on(DeviceActions.addDevice, DeviceActions.updateDevice, (state, payload) => ({
     ...state,
     isLoading: true,
   })),
-  on(DevicesActions.addDeviceSuccess, DevicesActions.updateDeviceSuccess, (state, payload) => ({
+  on(DeviceActions.addDeviceSuccess, DeviceActions.updateDeviceSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
   })),
-  on(DevicesActions.addDeviceError, DevicesActions.updateDeviceError, (state, payload) => ({
+  on(DeviceActions.addDeviceError, DeviceActions.updateDeviceError, (state, payload) => ({
     ...state,
     isLoading: false,
     error: payload.error,

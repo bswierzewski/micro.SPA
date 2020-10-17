@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Category } from '../../shared/models';
-import * as CategoryActions from '../actions/category.actions';
+import { CategoryActions } from '../actions';
 
 export interface State {
   isLoading: boolean;

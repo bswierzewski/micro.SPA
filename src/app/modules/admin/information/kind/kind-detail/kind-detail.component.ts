@@ -5,7 +5,7 @@ import { AlertService } from 'src/app/core/services';
 import { Kind } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../../store/app.reducer';
-import * as KindActions from '../../../../../store/actions/kind.actions';
+import { KindActions } from '../../../../../store/actions';
 import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 

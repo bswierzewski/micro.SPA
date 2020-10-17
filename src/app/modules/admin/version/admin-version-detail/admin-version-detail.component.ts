@@ -6,9 +6,7 @@ import { DeviceComponent, Kind, Version } from 'src/app/shared/models';
 import { AlertService } from 'src/app/core/services';
 import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../../store/app.reducer';
-import * as KindActions from '../../../../store/actions/kind.actions';
-import * as ComponentActions from '../../../../store/actions/component.actions';
-import * as VersionActions from '../../../../store/actions/version.actions';
+import { KindActions, ComponentActions, VersionActions } from '../../../../store/actions';
 import { first } from 'rxjs/operators';
 
 @Component({

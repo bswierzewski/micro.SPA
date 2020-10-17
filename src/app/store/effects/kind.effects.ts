@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AlertService, KindInformationService } from 'src/app/core/services';
 import { Kind } from 'src/app/shared/models';
-import * as KindActions from '../actions/kind.actions';
+import { KindActions } from '../actions';
 
 @Injectable()
 export class KindEffects {

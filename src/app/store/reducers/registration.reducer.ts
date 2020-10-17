@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Registration } from '../../shared/models';
-import * as RegistrationsActions from '../actions/registration.actions';
+import { RegistrationActions } from '../actions';
 
 export interface State {
   isLoading: boolean;
@@ -18,21 +18,21 @@ const initialState: State = {
 
 export const registrationReducer = createReducer(
   initialState,
-  on(RegistrationsActions.loadRegistrations, (state) => ({
+  on(RegistrationActions.loadRegistrations, (state) => ({
     ...state,
     isLoading: true,
     isLoaded: false,
     registrations: [],
     error: null,
   })),
-  on(RegistrationsActions.loadRegistrationsSuccess, (state, payload) => ({
+  on(RegistrationActions.loadRegistrationsSuccess, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: true,
     registrations: payload.registrations,
     error: null,
   })),
-  on(RegistrationsActions.loadRegistrationsError, (state, payload) => ({
+  on(RegistrationActions.loadRegistrationsError, (state, payload) => ({
     ...state,
     isLoading: false,
     isLoaded: false,

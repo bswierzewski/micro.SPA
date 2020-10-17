@@ -4,10 +4,7 @@ import { DeviceComponent, Category, Kind, Device } from 'src/app/shared/models';
 import { DeviceParams } from 'src/app/shared/params';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../store/app.reducer';
-import * as DeviceActions from '../../../../store/actions/device.actions';
-import * as ComponentActions from '../../../../store/actions/component.actions';
-import * as KindActions from '../../../../store/actions/kind.actions';
-import * as CategoryActions from '../../../../store/actions/category.actions';
+import { DeviceActions, ComponentActions, KindActions, CategoryActions } from '../../../../store/actions';
 
 @Component({
   selector: 'app-device-list',

@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Device } from 'src/app/shared/models';
 import { AlertService, DeviceService } from '../../core/services';
-import * as DeviceActions from '../actions/device.actions';
+import { DeviceActions } from '../actions';
 
 @Injectable()
 export class DeviceEffects {
