@@ -13,14 +13,10 @@
   }
 }
 
-.filter_input {
-  width: 100%;
-}
-
 .filter_container {
-  margin: {
-    right: 15px;
-    left: 15px;
+  padding: 15px;
+  .filter_input {
+    width: 100%;
   }
 }
 

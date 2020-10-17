@@ -8,5 +8,6 @@ $app-warn: mat-palette($mat-red);
 
 // Create your Sass color vars (will be available in all the project)
 $primary: mat-color($app-primary);
+$primary-active: mat-color($app-primary, 800);
 $accent: mat-color($app-accent);
 $warn: mat-color($app-warn);

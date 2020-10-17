@@ -70,3 +70,8 @@ body {
     }
   }
 }
+
+.link-active {
+  opacity: 1 !important;
+  background-color: $primary-active;
+}

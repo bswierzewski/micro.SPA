@@ -1,5 +1,17 @@
 <nav mat-tab-nav-bar backgroundColor="primary">
-  <a mat-tab-link [routerLink]="['/admin/devices']"><i class="fas fa-mobile-alt"></i> Devices</a>
-  <a mat-tab-link [routerLink]="['/admin/addresses']"><i class="fas fa-address-card"></i> Addresses</a>
+  <a
+    mat-tab-link
+    [routerLink]="['/admin/devices']"
+    [routerLinkActive]="['link-active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    ><i class="fas fa-mobile-alt fa-fw"></i> Devices</a
+  >
+  <a
+    mat-tab-link
+    [routerLink]="['/admin/addresses']"
+    [routerLinkActive]="['link-active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    ><i class="fas fa-address-card fa-fw"></i> Addresses</a
+  >
 </nav>
 <router-outlet></router-outlet>

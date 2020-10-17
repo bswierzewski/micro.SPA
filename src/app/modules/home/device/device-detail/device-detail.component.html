@@ -1,5 +1,5 @@
 <div fxLayout="row wrap">
-  <div fxFlex class="information-wrapper mat-elevation-z8">
+  <div fxFlex fxFlexAlign="start" class="information-wrapper mat-elevation-z8">
     <div class="panel-header-icon">
       <i [ngClass]="device?.icon"></i>
     </div>
@@ -109,7 +109,7 @@
           </tr>
         </table>
       </div>
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"></mat-paginator>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"></mat-paginator>
     </div>
   </div>
 </div>
