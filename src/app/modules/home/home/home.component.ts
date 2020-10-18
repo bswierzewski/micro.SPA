@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/core/services';
 import { SocketService } from 'src/app/core/services/socket.service';
-import { Device } from 'src/app/shared/models';
+import { Device, SocketMessage } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +10,21 @@ import { Device } from 'src/app/shared/models';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['time', 'bleAddress', 'macAddress', 'rssi'];
-  devices = new Map();
+  devices = new Map<string, SocketMessage>();
   knowScanners: Device[];
 
-  constructor(private socketService: SocketService, private deviceService: DeviceService) {
+  constructor(private socketService: SocketService, private deviceService: DeviceService) {}
+
+  ngOnInit(): void {
     this.deviceService.getDevices().subscribe((devices) => {
       this.knowScanners = devices;
     });
 
-    socketService.connectSocket();
+    this.socketService.connectSocket();
 
-    socketService.psubscribe('*');
+    this.socketService.psubscribe('*');
 
-    socketService.getPMessages().subscribe((message) => {
+    this.socketService.getPMessages().subscribe((message) => {
       message.time = new Date().toLocaleTimeString();
 
       if (this.knowScanners.length > 0) {
@@ -46,8 +48,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.socketService.disconnectSocket();

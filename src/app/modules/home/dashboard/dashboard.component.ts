@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog, private deviceService: DeviceService, private socketService: SocketService) {
     deviceService.getDevices().subscribe((data) => {
       this.devices = data;
+      console.log(data);
     });
 
     socketService.connectSocket();
@@ -34,6 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (this.devices.length > 0) {
         const index = this.devices.findIndex((x) => x.addressLabel === message.bleAddress);
         if (index > -1) {
+          message.bleIcon = this.devices[index].icon;
           message.bleAddress = this.devices[index].name;
         }
       }
