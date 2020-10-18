@@ -8,7 +8,7 @@
     <div fxLayout fxLayoutGap="10px">
       <app-menu-button *ngFor="let group of menuGroups" [group]="group"></app-menu-button>
       <!-- Logout section -->
-      <button mat-raised-button color="primary" (click)="onLogout()" routerLink="/login">
+      <button mat-raised-button color="warn" (click)="onLogout()" routerLink="/login">
         <i class="fas fa-sign-out-alt fa-fw"></i>
         Logout
       </button>
