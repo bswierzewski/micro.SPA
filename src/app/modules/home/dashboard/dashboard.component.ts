@@ -21,15 +21,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   devices: Device[] = [];
   selectedDevices: DashboardDeviceModel[] = [];
 
-  constructor(public dialog: MatDialog, private deviceService: DeviceService, private socketService: SocketService) {
-    deviceService.getDevices().subscribe((data) => {
+  constructor(public dialog: MatDialog, private deviceService: DeviceService, private socketService: SocketService) {}
+
+  ngOnInit(): void {
+    this.deviceService.getDevices().subscribe((data) => {
       this.devices = data;
-      console.log(data);
     });
 
-    socketService.connectSocket();
+    this.socketService.connectSocket();
 
-    socketService.getMessages().subscribe((message) => {
+    this.socketService.getMessages().subscribe((message) => {
       message.time = new Date().toLocaleTimeString();
 
       if (this.devices.length > 0) {
@@ -53,8 +54,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.socketService.disconnectSocket();
