@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (this.knowScanners.length > 0) {
         const index = this.knowScanners.findIndex((x) => x.addressLabel === message.macAddress);
         if (index > -1) {
+          message.macIcon = this.knowScanners[index].icon;
           message.macAddress = this.knowScanners[index].name;
         }
       }
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (this.knowScanners.length > 0) {
         const index = this.knowScanners.findIndex((x) => x.addressLabel === message.bleAddress);
         if (index > -1) {
+          message.bleIcon = this.knowScanners[index].icon;
           message.bleAddress = this.knowScanners[index].name;
         }
       }

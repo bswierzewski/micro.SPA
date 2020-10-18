@@ -7,9 +7,30 @@
   </div>
   <div *ngIf="devices.size > 0" class="overflow-table mat-elevation-z8">
     <table mat-table [dataSource]="devices | keyvalue" class="table-brand-header">
-      <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-        <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.value[column] }}</td>
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+        <td mat-cell *matCellDef="let element">{{ element?.value?.time }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="bleAddress">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>BleAddress</th>
+        <td mat-cell *matCellDef="let element">
+          <i [class]="element?.value?.bleIcon"></i>
+          {{ element?.value?.bleAddress }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="macAddress">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>MacAddress</th>
+        <td mat-cell *matCellDef="let element">
+          <i [class]="element?.value?.macIcon"></i>
+          {{ element?.value?.macAddress }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rssi">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Rssi</th>
+        <td mat-cell *matCellDef="let element">{{ element?.value?.rssi }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
