@@ -1,0 +1,28 @@
+mat-form-field {
+  width: 100%;
+}
+
+mat-card {
+  margin: 0 10vw;
+}
+
+.icon-suffix {
+  position: relative;
+  top: -0.25rem;
+}
+
+.logo-wrapper {
+  text-align: center;
+  .logo {
+    opacity: 0.9;
+  }
+}
+
+.icon-svg-wrapper {
+  text-align: center;
+
+  .icon-svg {
+    max-width: 40vw;
+    margin-left: 100px;
+  }
+}

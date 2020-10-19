@@ -1,1 +1,34 @@
-<p>registration works!</p>
+<div style="height: 100%" fxLayout="wrap column" fxLayoutAlign="center center">
+  <div fxFlex class="icon-svg-wrapper" fxHide.lt-md>
+    <img class="icon-svg" src="./assets/img/bg.svg" />
+  </div>
+  <mat-card fxFlex class="mat-elevation-z8">
+    <form #f="ngForm">
+      <div class="logo-wrapper">
+        <img class="logo" src="./assets/img/logo-black.svg" />
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Login</mat-label>
+        <input matInput placeholder="Login" ngModel name="login" required />
+        <i matSuffix class="fas fa-sign-in-alt fa-fw icon-suffix"></i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Email" ngModel name="email" required />
+        <i matSuffix class="fas fa-at fa-fw icon-suffix"></i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Password" ngModel name="password" required />
+        <i matSuffix class="fas fa-lock fa-fw icon-suffix"></i>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutGap="10px">
+        <button fxFlex mat-raised-button color="warn" routerLink="/login">Login</button>
+        <button [disabled]="f.invalid" fxFlex mat-raised-button color="primary">Register</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
