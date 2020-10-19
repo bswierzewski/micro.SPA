@@ -4,7 +4,7 @@ import { AuthLoadGuardService } from './core/guards/auth_load.guard';
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
