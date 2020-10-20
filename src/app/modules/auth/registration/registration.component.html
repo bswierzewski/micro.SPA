@@ -1,11 +1,12 @@
-<div style="height: 100%" fxLayout="wrap column" fxLayoutAlign="center center">
+<div class="container" fxLayout="wrap column" fxLayoutAlign="center center">
   <div fxFlex class="icon-svg-wrapper" fxHide.lt-md>
     <img class="icon-svg" src="./assets/img/bg.svg" />
   </div>
   <mat-card fxFlex class="mat-elevation-z8">
     <form #f="ngForm">
-      <div class="logo-wrapper">
-        <img class="logo" src="./assets/img/logo-black.svg" />
+      <div fxLayout="row wrap" class="logo-wrapper" fxLayoutAlign="center center">
+        <img fxFlex="1 1 auto" class="avatar" src="./assets/img/avatar.svg" />
+        <img fxFlex="1 1 auto" class="logo" src="./assets/img/logo-black.svg" />
       </div>
       <mat-form-field appearance="outline">
         <mat-label>Login</mat-label>
