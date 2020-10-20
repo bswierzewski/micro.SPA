@@ -1,43 +1,41 @@
-<div class="container">
-  <div class="img">
-    <img src="./assets/img/bg.svg" />
+<div class="container" fxLayout="wrap column" fxLayoutAlign="center center">
+  <div fxFlex class="icon-svg-wrapper" fxHide.lt-md>
+    <img class="icon-svg" src="./assets/img/bg.svg" />
   </div>
-  <div class="login-content">
-    <form action="index.html" #form="ngForm" (ngSubmit)="login()" autocomplete="off">
-      <img src="./assets/img/avatar.svg" />
-      <img class="logo-color" src="./assets/img/logo-black.svg" />
-      <div class="input-div one">
-        <div class="i">
-          <i class="fas fa-user"></i>
-        </div>
-        <div class="div">
-          <input
-            required
-            type="text"
-            class="input"
-            placeholder="Username"
-            [(ngModel)]="model.username"
-            name="username"
-          />
-        </div>
+  <mat-card fxFlex class="mat-elevation-z8">
+    <form #f="ngForm">
+      <div fxLayout="row wrap" class="logo-wrapper" fxLayoutAlign="center center">
+        <img fxFlex="1 1 auto" class="avatar" src="./assets/img/avatar.svg" />
+        <img fxFlex="1 1 auto" class="logo" src="./assets/img/logo-black.svg" />
       </div>
-      <div class="input-div pass">
-        <div class="i">
-          <i class="fas fa-lock"></i>
-        </div>
-        <div class="div">
-          <input
-            required
-            type="password"
-            class="input"
-            placeholder="Password"
-            [(ngModel)]="model.password"
-            name="password"
-          />
-        </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Login</mat-label>
+        <input
+          matInput
+          required
+          type="text"
+          class="input"
+          placeholder="Login"
+          [(ngModel)]="model.username"
+          name="username"
+        />
+        <i matSuffix class="fas fa-sign-in-alt fa-fw icon-suffix"></i>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput required type="password" placeholder="Password" [(ngModel)]="model.password" name="password" />
+        <i matSuffix class="fas fa-lock fa-fw icon-suffix"></i>
+      </mat-form-field>
+
+      <div class="button-border-radius" fxLayout="row" fxLayoutGap="10px">
+        <button fxFlex mat-raised-button routerLink="/registration" color="warn">
+          Sign up <i class="fas fa-user-plus fa-fw"></i>
+        </button>
+        <button [disabled]="f.invalid" type="submit" fxFlex mat-raised-button color="primary" routerLink="/login">
+          Login <i class="fas fa-key fa-fw"></i>
+        </button>
       </div>
-      <input [disabled]="!form.valid" type="submit" class="btn" value="Login" />
-      <input type="button" class="btn btn-warn" value="Sign up" routerLink="/registration" />
     </form>
-  </div>
+  </mat-card>
 </div>

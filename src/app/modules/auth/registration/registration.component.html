@@ -26,9 +26,13 @@
         <i matSuffix class="fas fa-lock fa-fw icon-suffix"></i>
       </mat-form-field>
 
-      <div fxLayout="row" fxLayoutGap="10px">
-        <button fxFlex mat-raised-button color="warn" routerLink="/login">Login</button>
-        <button [disabled]="f.invalid" fxFlex mat-raised-button color="primary">Register</button>
+      <div class="button-border-radius" fxLayout="row" fxLayoutGap="10px">
+        <button fxFlex mat-raised-button color="warn" routerLink="/login">
+          Login <i class="fas fa-key fa-fw"></i>
+        </button>
+        <button [disabled]="f.invalid" fxFlex mat-raised-button color="primary">
+          Register <i class="fas fa-user-plus fa-fw"></i>
+        </button>
       </div>
     </form>
   </mat-card>

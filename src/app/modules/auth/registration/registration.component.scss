@@ -20,7 +20,7 @@ mat-card {
   .logo {
     width: 100%;
     opacity: 0.9;
-    max-height: 150px;
+    max-height: 120px;
   }
   .avatar {
     max-height: 90px;
@@ -29,4 +29,15 @@ mat-card {
 
 .icon-svg-wrapper {
   text-align: center;
+
+  .icon-svg {
+    max-width: 40vw;
+    margin-left: 100px;
+  }
+}
+
+.button-border-radius {
+  button {
+    border-radius: 25px;
+  }
 }
