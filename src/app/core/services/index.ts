@@ -8,3 +8,4 @@ export { KindInformationService } from './device-information/kind-information.se
 export { VersionService } from './version.service';
 export { AddressService } from './address.service';
 export { RegistrationService } from './registration.service';
+export { UserService } from './user.service';

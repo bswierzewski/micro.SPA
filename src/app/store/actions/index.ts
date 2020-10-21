@@ -5,6 +5,7 @@ import * as DeviceActions from './device.actions';
 import * as KindActions from './kind.actions';
 import * as RegistrationActions from './registration.actions';
 import * as VersionActions from './version.actions';
+import * as UsersActions from './user.actions';
 
 export {
   AddressActions,
@@ -14,4 +15,5 @@ export {
   KindActions,
   RegistrationActions,
   VersionActions,
+  UsersActions,
 };

@@ -6,6 +6,7 @@ import * as fromDevice from './reducers/device.reducer';
 import * as fromVersion from './reducers/version.reducer';
 import * as fromRegistration from './reducers/registration.reducer';
 import * as fromAddress from './reducers/address.reducer';
+import * as fromUser from './reducers/user.reducer';
 
 export interface State {
   kind: fromKind.State;
@@ -15,6 +16,7 @@ export interface State {
   version: fromVersion.State;
   registration: fromRegistration.State;
   address: fromAddress.State;
+  user: fromUser.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -25,6 +27,7 @@ export const reducers: ActionReducerMap<State> = {
   version: fromVersion.versionReducer,
   registration: fromRegistration.registrationReducer,
   address: fromAddress.addressReducer,
+  user: fromUser.userReducer,
 };
 
 export const getKindState = createFeatureSelector<fromKind.State>('kind');
@@ -66,3 +69,8 @@ export const getAddressState = createFeatureSelector<fromAddress.State>('address
 export const getAddresses = createSelector(getAddressState, fromAddress.getAddresses);
 export const getIsLoadingAddress = createSelector(getAddressState, fromAddress.getIsLoading);
 export const getIsLoadedAddress = createSelector(getAddressState, fromAddress.getIsLoaded);
+
+export const getUserState = createFeatureSelector<fromUser.State>('user');
+export const getusers = createSelector(getUserState, fromUser.getUsers);
+export const getIsLoadingUser = createSelector(getUserState, fromUser.getIsLoading);
+export const getIsLoadedUser = createSelector(getUserState, fromUser.getIsLoaded);

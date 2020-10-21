@@ -25,6 +25,7 @@ import {
   VersionEffects,
   RegistrationEffects,
   AddressEffects,
+  UserEffects,
 } from './store/effects';
 import { reducers } from './store/app.reducer';
 
@@ -54,6 +55,7 @@ export function tokenGetter(): string {
       VersionEffects,
       RegistrationEffects,
       AddressEffects,
+      UserEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
