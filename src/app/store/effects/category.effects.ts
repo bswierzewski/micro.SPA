@@ -46,7 +46,7 @@ export class CategoryEffects {
             }),
             catchError((error: Error) => {
               this.alertService.error(error.message);
-              this.router.navigateByUrl('/admin/information/categories');
+              this.router.navigateByUrl('/settings/information/categories');
               return of(CategoryActions.loadCategoryError({ error }));
             })
           );
@@ -80,7 +80,7 @@ export class CategoryEffects {
         return this.categoryService.addCategory(action.category).pipe(
           map((data) => {
             this.alertService.success('Category added successfully.');
-            this.router.navigateByUrl('/admin/information/categories');
+            this.router.navigateByUrl('/settings/information/categories');
             return CategoryActions.addCategorySuccess();
           }),
           catchError((error: Error) => {
@@ -99,7 +99,7 @@ export class CategoryEffects {
         return this.categoryService.updateCategory(action.category).pipe(
           map((data) => {
             this.alertService.success('Category updated successfully.');
-            this.router.navigateByUrl('/admin/information/categories');
+            this.router.navigateByUrl('/settings/information/categories');
             return CategoryActions.updateCategorySuccess();
           }),
           catchError((error: Error) => {

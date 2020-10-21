@@ -8,8 +8,8 @@ export const routes: Routes = [
     loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    path: 'settings',
+    loadChildren: () => import('./modules/settings/settings.module').then((m) => m.SettingsModule),
     // canLoad: [AuthLoadGuardService],
   },
   {

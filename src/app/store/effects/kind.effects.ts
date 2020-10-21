@@ -46,7 +46,7 @@ export class KindEffects {
             }),
             catchError((error: Error) => {
               this.alertService.error(error.message);
-              this.router.navigateByUrl('/admin/information/kinds');
+              this.router.navigateByUrl('/settings/information/kinds');
               return of(KindActions.loadKindError({ error }));
             })
           );
@@ -80,7 +80,7 @@ export class KindEffects {
         return this.kindService.addKind(action.kind).pipe(
           map((data) => {
             this.alertService.success('Kind added successfully.');
-            this.router.navigateByUrl('/admin/information/kinds');
+            this.router.navigateByUrl('/settings/information/kinds');
             return KindActions.addKindSuccess();
           }),
           catchError((error: Error) => {
@@ -99,7 +99,7 @@ export class KindEffects {
         return this.kindService.updateKind(action.kind).pipe(
           map((data) => {
             this.alertService.success('Kind updated successfully.');
-            this.router.navigateByUrl('/admin/information/kinds');
+            this.router.navigateByUrl('/settings/information/kinds');
             return KindActions.updateKindSuccess();
           }),
           catchError((error: Error) => {

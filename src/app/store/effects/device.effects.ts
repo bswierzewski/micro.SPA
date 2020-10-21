@@ -78,7 +78,7 @@ export class DeviceEffects {
         return this.deviceService.addDevice(action.device).pipe(
           map((data) => {
             this.alertService.success('Device added');
-            this.router.navigateByUrl('/admin/devices');
+            this.router.navigateByUrl('/settings/devices');
             return DeviceActions.addDeviceSuccess();
           }),
           catchError((error: Error) => {
@@ -97,7 +97,7 @@ export class DeviceEffects {
         return this.deviceService.updateDevice(action.device).pipe(
           map((data) => {
             this.alertService.success('Device updated');
-            this.router.navigateByUrl('/admin/devices');
+            this.router.navigateByUrl('/settings/devices');
             return DeviceActions.updateDeviceSuccess();
           }),
           catchError((error: Error) => {

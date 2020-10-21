@@ -1,0 +1,24 @@
+<nav mat-tab-nav-bar backgroundColor="primary">
+  <a
+    mat-tab-link
+    [routerLink]="['/settings/information/kinds']"
+    [routerLinkActive]="['link-active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Kind</a
+  >
+  <a
+    mat-tab-link
+    [routerLink]="['/settings/information/categories']"
+    [routerLinkActive]="['link-active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Category</a
+  >
+  <a
+    mat-tab-link
+    [routerLink]="['/settings/information/components']"
+    [routerLinkActive]="['link-active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Component</a
+  >
+</nav>
+<router-outlet></router-outlet>

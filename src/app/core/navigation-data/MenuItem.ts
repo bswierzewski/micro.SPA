@@ -11,21 +11,21 @@ export let MenuGroups: MenuGroup[] = [
     ] as MenuItem[],
   },
   {
-    group: 'Admin',
+    group: 'Settings',
     icon: 'fas fa-user-cog',
     items: [
       {
-        path: '/admin/devices',
+        path: '/settings/devices',
         title: 'Devices',
         icon: 'fas fa-microchip',
       },
       {
-        path: '/admin/versions',
+        path: '/settings/versions',
         title: 'Versions',
         icon: 'fas fa-info-circle',
       },
       {
-        path: '/admin/information/kinds',
+        path: '/settings/information/kinds',
         title: 'Information',
         icon: 'fas fa-cogs',
       },

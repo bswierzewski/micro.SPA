@@ -1,0 +1,17 @@
+<nav mat-tab-nav-bar backgroundColor="primary">
+  <a
+    mat-tab-link
+    [routerLink]="['/settings/devices']"
+    [routerLinkActive]="['link-active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    ><i class="fas fa-mobile-alt fa-fw"></i> Devices</a
+  >
+  <a
+    mat-tab-link
+    [routerLink]="['/settings/addresses']"
+    [routerLinkActive]="['link-active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    ><i class="fas fa-address-card fa-fw"></i> Addresses</a
+  >
+</nav>
+<router-outlet></router-outlet>

@@ -46,7 +46,7 @@ export class VersionEffects {
             }),
             catchError((error: Error) => {
               this.alertService.error(error.message);
-              this.router.navigateByUrl('/admin/versions');
+              this.router.navigateByUrl('/settings/versions');
               return of(VersionActions.loadVersionError({ error }));
             })
           );
@@ -80,7 +80,7 @@ export class VersionEffects {
         return this.versionService.addVersion(action.version).pipe(
           map((data) => {
             this.alertService.success('Version added successfully.');
-            this.router.navigateByUrl('/admin/versions');
+            this.router.navigateByUrl('/settings/versions');
             return VersionActions.addVersionSuccess();
           }),
           catchError((error: Error) => {
@@ -99,7 +99,7 @@ export class VersionEffects {
         return this.versionService.updateVersion(action.version).pipe(
           map((data) => {
             this.alertService.success('Version updated successfully.');
-            this.router.navigateByUrl('/admin/versions');
+            this.router.navigateByUrl('/settings/versions');
             return VersionActions.updateVersionSuccess();
           }),
           catchError((error: Error) => {

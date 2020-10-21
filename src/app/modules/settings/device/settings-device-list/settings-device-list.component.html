@@ -1,0 +1,61 @@
+<mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
+<div [hidden]="isLoading$ | async" class="mat-elevation-z8">
+  <div class="filter_container">
+    <mat-form-field class="filter_input">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. address" #input />
+    </mat-form-field>
+  </div>
+  <div class="overflow-table-actions">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">
+          <i [ngClass]="element.icon"></i>
+          {{ element?.name }}
+        </td></ng-container
+      >
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.address?.label }}
+        </td></ng-container
+      >
+
+      <ng-container matColumnDef="kind">
+        <th mat-header-cell *matHeaderCellDef>Kind</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.kind?.name }}
+        </td></ng-container
+      >
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.category?.name }}
+        </td></ng-container
+      >
+      <ng-container matColumnDef="component">
+        <th mat-header-cell *matHeaderCellDef>Component</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.component?.name }}
+        </td></ng-container
+      >
+      <!-- Actions Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef><i class="fas fa-tools button-center-icon"></i></th>
+        <td mat-cell *matCellDef="let element">
+          <button [routerLink]="['/settings/devices/' + element.id]" mat-mini-fab color="primary">
+            <i class="fas fa-cog button-center-icon"></i>
+          </button>
+          <button mat-mini-fab color="warn" (click)="onRemoveClick(element.id)">
+            <i class="fas fa-minus button-center-icon"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="devicesColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: devicesColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

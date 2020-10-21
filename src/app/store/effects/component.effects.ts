@@ -46,7 +46,7 @@ export class ComponentEffects {
             }),
             catchError((error: Error) => {
               this.alertService.error(error.message);
-              this.router.navigateByUrl('/admin/information/components');
+              this.router.navigateByUrl('/settings/information/components');
               return of(ComponentActions.loadComponentError({ error }));
             })
           );
@@ -80,7 +80,7 @@ export class ComponentEffects {
         return this.componentService.addDeviceComponent(action.component).pipe(
           map((data) => {
             this.alertService.success('Component added successfully.');
-            this.router.navigateByUrl('/admin/information/components');
+            this.router.navigateByUrl('/settings/information/components');
             return ComponentActions.addComponentSuccess();
           }),
           catchError((error: Error) => {
@@ -99,7 +99,7 @@ export class ComponentEffects {
         return this.componentService.updateDeviceComponent(action.component).pipe(
           map((data) => {
             this.alertService.success('Component updated successfully.');
-            this.router.navigateByUrl('/admin/information/components');
+            this.router.navigateByUrl('/settings/information/components');
             return ComponentActions.updateComponentSuccess();
           }),
           catchError((error: Error) => {
