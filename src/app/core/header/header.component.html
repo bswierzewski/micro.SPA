@@ -4,7 +4,7 @@
       <img class="logo" src="./assets/img/logo-white.svg" />
     </a>
   </div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-md>
     <div fxLayout fxLayoutGap="10px">
       <app-menu-button *ngFor="let group of menuGroups" [group]="group"></app-menu-button>
       <!-- Logout section -->
@@ -14,7 +14,7 @@
       </button>
     </div>
   </div>
-  <div fxFlex fxLayoutAlign="flex-end" fxHide.gt-xs>
+  <div fxFlex fxLayoutAlign="flex-end" fxHide.gt-sm>
     <button mat-icon-button (click)="onToggleSidenav()">
       <i class="fas fa-bars"></i>
     </button>

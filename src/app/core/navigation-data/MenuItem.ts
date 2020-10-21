@@ -12,7 +12,7 @@ export let MenuGroups: MenuGroup[] = [
   },
   {
     group: 'Settings',
-    icon: 'fas fa-user-cog',
+    icon: 'fas fa-cogs',
     items: [
       {
         path: '/settings/devices',
@@ -28,6 +28,17 @@ export let MenuGroups: MenuGroup[] = [
         path: '/settings/information/kinds',
         title: 'Information',
         icon: 'fas fa-cogs',
+      },
+    ] as MenuItem[],
+  },
+  {
+    group: 'Admin',
+    icon: 'fas fa-user-cog',
+    items: [
+      {
+        path: '/admin/users',
+        title: 'Users',
+        icon: 'fas fa-users',
       },
     ] as MenuItem[],
   },
