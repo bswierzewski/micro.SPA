@@ -5,9 +5,10 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { NavigationModule } from '../../core/navigation.module';
 import { MaterialModule } from '../../material.module';
 import { AdminComponent } from './admin.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [AdminComponent, UserListComponent],
   imports: [AdminRoutingModule, SharedModule, NavigationModule, MaterialModule],
   exports: [],
 })

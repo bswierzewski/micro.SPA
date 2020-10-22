@@ -15,7 +15,7 @@ export class AlertService {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Yes, do it!',
     }).then((result) => {
       if (result.isConfirmed) {
         okCallback();

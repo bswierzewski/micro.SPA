@@ -741,7 +741,7 @@
       "email": "grayce_kris14@yahoo.com",
       "created": "2020-01-18T23:57:30.977044+01:00",
       "lastActive": "2020-07-12T17:54:31.0854431+02:00",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 3,
@@ -749,7 +749,7 @@
       "email": "eloisa_brown@hotmail.com",
       "created": "2020-05-12T15:08:10.3935043+02:00",
       "lastActive": "2020-10-10T20:05:44.2577715+02:00",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 4,
@@ -765,7 +765,7 @@
       "email": "tomasa.deckow@hotmail.com",
       "created": "2020-01-09T01:14:42.4105527+01:00",
       "lastActive": "2020-05-28T08:19:00.216641+02:00",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 6,
@@ -781,7 +781,7 @@
       "email": "rogers_feil58@hotmail.com",
       "created": "2020-08-01T17:36:11.5577272+02:00",
       "lastActive": "2020-07-21T23:37:46.4452174+02:00",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 8,
@@ -797,7 +797,7 @@
       "email": "percival35@gmail.com",
       "created": "2020-08-01T07:18:51.0272639+02:00",
       "lastActive": "2020-05-09T09:27:54.3158696+02:00",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 10,
