@@ -5,6 +5,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { AlertService } from './alert.service';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +28,10 @@ export class AuthService {
         }
       })
     );
+  }
+
+  registerUser(user: User): Observable<any> {
+    return this.http.post(this.authUrl + 'register', user);
   }
 
   loggedIn(): any {

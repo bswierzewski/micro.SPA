@@ -39,6 +39,15 @@ export const userReducer = createReducer(
     users: [],
     error: payload.error,
   })),
+  on(UsersActions.registerUser, (state, payload) => ({
+    ...state,
+  })),
+  on(UsersActions.registerUserSuccess, (state, payload) => ({
+    ...state,
+  })),
+  on(UsersActions.registerUserError, (state, payload) => ({
+    ...state,
+  })),
   on(UsersActions.activateUser, (state, payload) => ({
     ...state,
   })),

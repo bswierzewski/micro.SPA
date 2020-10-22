@@ -3,26 +3,26 @@
     <img class="icon-svg" src="./assets/img/registration.svg" />
   </div>
   <mat-card fxFlex class="mat-elevation-z8">
-    <form #f="ngForm">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div fxLayout="row wrap" class="logo-wrapper" fxLayoutAlign="center center">
         <img fxFlex="1 1 auto" class="avatar" src="./assets/img/avatar.svg" />
         <img fxFlex="1 1 auto" class="logo" src="./assets/img/logo-black.svg" />
       </div>
       <mat-form-field appearance="outline">
-        <mat-label>Login</mat-label>
-        <input matInput placeholder="Login" ngModel name="login" required />
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" [(ngModel)]="model.username" name="username" required />
         <i matSuffix class="fas fa-sign-in-alt fa-fw icon-suffix"></i>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Email" ngModel name="email" required />
+        <input matInput type="email" placeholder="Email" [(ngModel)]="model.email" name="email" required />
         <i matSuffix class="fas fa-at fa-fw icon-suffix"></i>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Password" ngModel name="password" required />
+        <input matInput type="password" placeholder="Password" [(ngModel)]="model.password" name="password" required />
         <i matSuffix class="fas fa-lock fa-fw icon-suffix"></i>
       </mat-form-field>
 
@@ -30,8 +30,8 @@
         <button fxFlex mat-raised-button color="warn" routerLink="/login">
           Login <i class="fas fa-key fa-fw"></i>
         </button>
-        <button [disabled]="f.invalid" fxFlex mat-raised-button color="primary">
-          Register <i class="fas fa-user-plus fa-fw"></i>
+        <button [disabled]="f.invalid" fxFlex mat-raised-button color="primary" type="submit">
+          Sign up <i class="fas fa-user-plus fa-fw"></i>
         </button>
       </div>
     </form>
