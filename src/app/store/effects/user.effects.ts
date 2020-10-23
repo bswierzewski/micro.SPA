@@ -56,7 +56,7 @@ export class UserEffects {
         return this.userService.activateUser(action.user).pipe(
           map((data) => {
             this.alertService.success('User activated successfully.');
-            return UsersActions.activateUserSuccess();
+            return UsersActions.activateUserSuccess({ user: action.user });
           }),
           catchError((error: any) => {
             this.alertService.error(error);

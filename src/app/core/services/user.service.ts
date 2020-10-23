@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UserService {
-  userUrl = environment.authUrl + '/users';
+  userUrl = environment.authUrl + 'users';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -17,6 +17,6 @@ export class UserService {
   }
 
   activateUser(user: User): Observable<any> {
-    return this.httpClient.post(this.userUrl + 'activated', user);
+    return this.httpClient.post(this.userUrl + '/activate', user);
   }
 }

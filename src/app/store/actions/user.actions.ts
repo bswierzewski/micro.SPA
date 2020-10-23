@@ -10,5 +10,5 @@ export const registerUserSuccess = createAction('[User] Register User Success');
 export const registerUserError = createAction('[User] Register User Error', props<{ error: any }>());
 
 export const activateUser = createAction('[User] Activate User', props<{ user: User }>());
-export const activateUserSuccess = createAction('[User] Activate User Success');
+export const activateUserSuccess = createAction('[User] Activate User Success', props<{ user: User }>());
 export const activateUserError = createAction('[User] Activate User Error', props<{ error: any }>());
