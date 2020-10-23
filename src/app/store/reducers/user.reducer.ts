@@ -58,18 +58,19 @@ export const userReducer = createReducer(
   })),
   on(UsersActions.activateUser, (state, payload) => ({
     ...state,
-    isLoading: true,
-    isLoaded: false,
   })),
   on(UsersActions.activateUserSuccess, (state, payload) => ({
     ...state,
-    isLoading: false,
-    isLoaded: true,
+    users: state.users.map((user) => {
+      if (user.id === payload.user.id) {
+        user = { ...user };
+        user.isActive = !user.isActive;
+      }
+      return user;
+    }),
   })),
   on(UsersActions.activateUserError, (state, payload) => ({
     ...state,
-    isLoading: false,
-    isLoaded: false,
     error: payload.error,
   }))
 );

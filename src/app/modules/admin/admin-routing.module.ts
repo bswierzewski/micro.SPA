@@ -11,6 +11,10 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {
+        path: '',
+        component: UserListComponent,
+      },
+      {
         path: 'users',
         component: UserListComponent,
       },
