@@ -6,7 +6,7 @@ export interface State {
   isLoading: boolean;
   isLoaded: boolean;
   registrations: Registration[];
-  error: Error;
+  error: any;
 }
 
 const initialState: State = {

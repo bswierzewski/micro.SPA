@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, AlertService } from 'src/app/core/services';
+import { User } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { AuthService, AlertService } from 'src/app/core/services';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  model: any = {};
+  model = new User();
 
   constructor(public authService: AuthService, private alertService: AlertService, private router: Router) {}
 

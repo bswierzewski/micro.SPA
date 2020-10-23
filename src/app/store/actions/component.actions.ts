@@ -13,7 +13,7 @@ export const loadComponentSuccess = createAction(
   '[Component] Load Component Success',
   props<{ component: DeviceComponent }>()
 );
-export const loadComponentError = createAction('[Component] Load Component Error', props<{ error: Error }>());
+export const loadComponentError = createAction('[Component] Load Component Error', props<{ error: any }>());
 
 export const deleteComponent = createAction('[Component] Delete Component', props<{ id: number }>());
 export const deleteComponentSuccess = createAction('[Component] Delete Component Success', props<{ id: number }>());
@@ -21,10 +21,10 @@ export const deleteComponentError = createAction('[Component] Delete Component E
 
 export const addComponent = createAction('[Component] Add Component', props<{ component: DeviceComponent }>());
 export const addComponentSuccess = createAction('[Component] Add Component Success');
-export const addComponentError = createAction('[Component] Add Component Error', props<{ error: Error }>());
+export const addComponentError = createAction('[Component] Add Component Error', props<{ error: any }>());
 
 export const updateComponent = createAction('[Component] Update Component', props<{ component: DeviceComponent }>());
 export const updateComponentSuccess = createAction('[Component] Update Component Success');
-export const updateComponentError = createAction('[Component] Update Component Error', props<{ error: Error }>());
+export const updateComponentError = createAction('[Component] Update Component Error', props<{ error: any }>());
 
 export const clear = createAction('[Component] Clear');

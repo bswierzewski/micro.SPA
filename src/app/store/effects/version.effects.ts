@@ -24,8 +24,8 @@ export class VersionEffects {
           map((data) => {
             return VersionActions.loadVersionsSuccess({ versions: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(VersionActions.loadVersionsError({ error }));
           })
         )
@@ -44,8 +44,8 @@ export class VersionEffects {
             map((data) => {
               return VersionActions.loadVersionSuccess({ version: data });
             }),
-            catchError((error: Error) => {
-              this.alertService.error(error.message);
+            catchError((error: any) => {
+              this.alertService.error(error);
               this.router.navigateByUrl('/settings/versions');
               return of(VersionActions.loadVersionError({ error }));
             })
@@ -64,8 +64,8 @@ export class VersionEffects {
             this.alertService.success('Version deleted successfully.');
             return VersionActions.deleteVersionSuccess({ id: action.id });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(VersionActions.deleteVersionError({ error }));
           })
         )
@@ -83,8 +83,8 @@ export class VersionEffects {
             this.router.navigateByUrl('/settings/versions');
             return VersionActions.addVersionSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(VersionActions.addVersionError({ error }));
           })
         );
@@ -102,8 +102,8 @@ export class VersionEffects {
             this.router.navigateByUrl('/settings/versions');
             return VersionActions.updateVersionSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(VersionActions.updateVersionError({ error }));
           })
         );

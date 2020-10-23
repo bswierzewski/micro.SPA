@@ -24,8 +24,8 @@ export class KindEffects {
           map((data) => {
             return KindActions.loadKindsSuccess({ kinds: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(KindActions.loadKindsError({ error }));
           })
         )
@@ -44,8 +44,8 @@ export class KindEffects {
             map((data) => {
               return KindActions.loadKindSuccess({ kind: data });
             }),
-            catchError((error: Error) => {
-              this.alertService.error(error.message);
+            catchError((error: any) => {
+              this.alertService.error(error);
               this.router.navigateByUrl('/settings/information/kinds');
               return of(KindActions.loadKindError({ error }));
             })
@@ -64,8 +64,8 @@ export class KindEffects {
             this.alertService.success('Kind deleted successfully.');
             return KindActions.deleteKindSuccess({ id: action.id });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(KindActions.deleteKindError({ error }));
           })
         )
@@ -83,8 +83,8 @@ export class KindEffects {
             this.router.navigateByUrl('/settings/information/kinds');
             return KindActions.addKindSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(KindActions.addKindError({ error }));
           })
         );
@@ -102,8 +102,8 @@ export class KindEffects {
             this.router.navigateByUrl('/settings/information/kinds');
             return KindActions.updateKindSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(KindActions.updateKindError({ error }));
           })
         );

@@ -7,7 +7,7 @@ export interface State {
   isLoaded: boolean;
   devices: Device[];
   device: Device;
-  error: Error;
+  error: any;
 }
 
 const initialState: State = {

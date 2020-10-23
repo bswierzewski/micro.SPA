@@ -23,8 +23,8 @@ export class AddressEffects {
           map((data) => {
             return AddressActions.loadAddressesSuccess({ addresses: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(AddressActions.loadAddressesError({ error }));
           })
         )

@@ -7,7 +7,7 @@ export interface State {
   isLoaded: boolean;
   versions: Version[];
   version: Version;
-  error: Error;
+  error: any;
 }
 
 const initialState: State = {

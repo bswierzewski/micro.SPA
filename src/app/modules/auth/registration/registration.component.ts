@@ -1,24 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/shared/models';
 import * as fromRoot from '../../../store/app.reducer';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AlertService } from 'src/app/core/services';
 import { UsersActions } from '../../../store/actions';
+import { Observable } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
   model = new User();
+  isSubscribe = true;
+  isLoading: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>, private alertService: AlertService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoading = this.store.select(fromRoot.getIsLoadingUser);
+    this.store
+      .pipe(
+        select(fromRoot.getIsLoadedUser),
+        takeWhile((x) => this.isSubscribe)
+      )
+      .subscribe((isLoaded) => {
+        if (isLoaded) {
+          this.model = new User();
+        }
+      });
+  }
 
-  onSubmit(form: NgForm): void {
-    this.store.dispatch(UsersActions.registerUser({ user: this.model }));
+  ngOnDestroy(): void {
+    this.isSubscribe = false;
+  }
+
+  onSubmit(): void {
+    this.store.dispatch(UsersActions.registerUser({ user: Object.assign({}, this.model) }));
   }
 }

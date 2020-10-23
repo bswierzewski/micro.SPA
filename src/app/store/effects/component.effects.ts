@@ -24,8 +24,8 @@ export class ComponentEffects {
           map((data) => {
             return ComponentActions.loadComponentsSuccess({ components: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(ComponentActions.loadComponentsError({ error }));
           })
         )
@@ -44,8 +44,8 @@ export class ComponentEffects {
             map((data) => {
               return ComponentActions.loadComponentSuccess({ component: data });
             }),
-            catchError((error: Error) => {
-              this.alertService.error(error.message);
+            catchError((error: any) => {
+              this.alertService.error(error);
               this.router.navigateByUrl('/settings/information/components');
               return of(ComponentActions.loadComponentError({ error }));
             })
@@ -64,8 +64,8 @@ export class ComponentEffects {
             this.alertService.success('Component deleted successfully.');
             return ComponentActions.deleteComponentSuccess({ id: action.id });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(ComponentActions.deleteComponentError({ error }));
           })
         )
@@ -83,8 +83,8 @@ export class ComponentEffects {
             this.router.navigateByUrl('/settings/information/components');
             return ComponentActions.addComponentSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(ComponentActions.addComponentError({ error }));
           })
         );
@@ -102,8 +102,8 @@ export class ComponentEffects {
             this.router.navigateByUrl('/settings/information/components');
             return ComponentActions.updateComponentSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(ComponentActions.updateComponentError({ error }));
           })
         );

@@ -6,7 +6,7 @@ export interface State {
   isLoading: boolean;
   isLoaded: boolean;
   addresses: Address[];
-  error: Error;
+  error: any;
 }
 
 const initialState: State = {

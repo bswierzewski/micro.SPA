@@ -59,7 +59,7 @@ export function tokenGetter(): string {
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
-  providers: [AuthService, AlertService],
+  providers: [ErrorInterceptorProvider, AuthService, AlertService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

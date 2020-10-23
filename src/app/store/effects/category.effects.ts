@@ -24,8 +24,8 @@ export class CategoryEffects {
           map((data) => {
             return CategoryActions.loadCategoriesSuccess({ categories: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(CategoryActions.loadCategoriesError({ error }));
           })
         )
@@ -44,8 +44,8 @@ export class CategoryEffects {
             map((data) => {
               return CategoryActions.loadCategorySuccess({ category: data });
             }),
-            catchError((error: Error) => {
-              this.alertService.error(error.message);
+            catchError((error: any) => {
+              this.alertService.error(error);
               this.router.navigateByUrl('/settings/information/categories');
               return of(CategoryActions.loadCategoryError({ error }));
             })
@@ -64,8 +64,8 @@ export class CategoryEffects {
             this.alertService.success('Category deleted successfully.');
             return CategoryActions.deleteCategorySuccess({ id: action.id });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(CategoryActions.deleteCategoryError({ error }));
           })
         )
@@ -83,7 +83,7 @@ export class CategoryEffects {
             this.router.navigateByUrl('/settings/information/categories');
             return CategoryActions.addCategorySuccess();
           }),
-          catchError((error: Error) => {
+          catchError((error: any) => {
             this.alertService.error(error.name);
             return of(CategoryActions.addCategoryError({ error }));
           })
@@ -102,8 +102,8 @@ export class CategoryEffects {
             this.router.navigateByUrl('/settings/information/categories');
             return CategoryActions.updateCategorySuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(CategoryActions.updateCategoryError({ error }));
           })
         );

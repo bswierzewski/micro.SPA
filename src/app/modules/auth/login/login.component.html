@@ -3,19 +3,19 @@
     <img class="icon-svg" src="./assets/img/bg.svg" />
   </div>
   <mat-card fxFlex class="mat-elevation-z8">
-    <form #f="ngForm">
+    <form #f="ngForm" (ngSubmit)="login()">
       <div fxLayout="row wrap" class="logo-wrapper" fxLayoutAlign="center center">
         <img fxFlex="1 1 auto" class="avatar" src="./assets/img/avatar.svg" />
         <img fxFlex="1 1 auto" class="logo" src="./assets/img/logo-black.svg" />
       </div>
       <mat-form-field appearance="outline">
-        <mat-label>Login</mat-label>
+        <mat-label>Username/Email</mat-label>
         <input
           matInput
           required
           type="text"
           class="input"
-          placeholder="Login"
+          placeholder="Username/Email"
           [(ngModel)]="model.username"
           name="username"
         />

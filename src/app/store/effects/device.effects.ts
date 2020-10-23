@@ -24,8 +24,8 @@ export class DeviceEffects {
           map((data) => {
             return DeviceActions.loadDevicesSuccess({ devices: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(DeviceActions.loadDevicesError({ error }));
           })
         )
@@ -44,8 +44,8 @@ export class DeviceEffects {
             map((data) => {
               return DeviceActions.loadDeviceSuccess({ device: data });
             }),
-            catchError((error: Error) => {
-              this.alertService.error(error.message);
+            catchError((error: any) => {
+              this.alertService.error(error);
               return of(DeviceActions.loadDeviceError({ error }));
             })
           );
@@ -62,8 +62,8 @@ export class DeviceEffects {
           map((data) => {
             return DeviceActions.deleteDeviceSuccess({ id: action.id });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(DeviceActions.deleteDeviceError({ error }));
           })
         )
@@ -81,8 +81,8 @@ export class DeviceEffects {
             this.router.navigateByUrl('/settings/devices');
             return DeviceActions.addDeviceSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(DeviceActions.addDeviceError({ error }));
           })
         );
@@ -100,8 +100,8 @@ export class DeviceEffects {
             this.router.navigateByUrl('/settings/devices');
             return DeviceActions.updateDeviceSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(DeviceActions.updateDeviceError({ error }));
           })
         );

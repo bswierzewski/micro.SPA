@@ -18,13 +18,13 @@ export class AuthService {
 
   constructor(private http: HttpClient, private alertService: AlertService, private router: Router) {}
 
-  login(model: any): any {
-    return this.http.post(this.authUrl + 'login', model).pipe(
+  login(user: User): any {
+    return this.http.post(this.authUrl + 'login', user).pipe(
       map((response: any) => {
-        const user = response;
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
+        const responseUser = response;
+        if (responseUser) {
+          localStorage.setItem('token', responseUser.token);
+          this.decodedToken = this.jwtHelper.decodeToken(responseUser.token);
         }
       })
     );

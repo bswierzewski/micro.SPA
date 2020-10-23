@@ -22,8 +22,8 @@ export class UserEffects {
           map((data) => {
             return UsersActions.loadUsersSuccess({ users: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(UsersActions.loadUsersError({ error }));
           })
         )
@@ -40,8 +40,8 @@ export class UserEffects {
             this.alertService.success('User register successfully.');
             return UsersActions.registerUserSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(UsersActions.registerUserError({ error }));
           })
         );
@@ -58,8 +58,8 @@ export class UserEffects {
             this.alertService.success('User activated successfully.');
             return UsersActions.activateUserSuccess();
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(UsersActions.activateUserError({ error }));
           })
         );

@@ -7,7 +7,7 @@ export interface State {
   isLoaded: boolean;
   kinds: Kind[];
   kind: Kind;
-  error: Error;
+  error: any;
 }
 
 const initialState: State = {

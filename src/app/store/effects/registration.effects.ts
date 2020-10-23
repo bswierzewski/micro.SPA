@@ -23,8 +23,8 @@ export class RegistrationEffects {
           map((data) => {
             return RegistrationActions.loadRegistrationsSuccess({ registrations: data });
           }),
-          catchError((error: Error) => {
-            this.alertService.error(error.message);
+          catchError((error: any) => {
+            this.alertService.error(error);
             return of(RegistrationActions.loadRegistrationsError({ error }));
           })
         )
