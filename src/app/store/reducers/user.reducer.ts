@@ -22,7 +22,7 @@ export const userReducer = createReducer(
     ...state,
     isLoading: true,
     isLoaded: false,
-    registrations: [],
+    users: [],
     error: null,
   })),
   on(UsersActions.loadUsersSuccess, (state, payload) => ({
@@ -30,7 +30,7 @@ export const userReducer = createReducer(
     isLoading: false,
     isLoaded: true,
     users: payload.users,
-    error: null,
+    error: '',
   })),
   on(UsersActions.loadUsersError, (state, payload) => ({
     ...state,
@@ -58,12 +58,19 @@ export const userReducer = createReducer(
   })),
   on(UsersActions.activateUser, (state, payload) => ({
     ...state,
+    isLoading: true,
+    isLoaded: false,
   })),
   on(UsersActions.activateUserSuccess, (state, payload) => ({
     ...state,
+    isLoading: false,
+    isLoaded: true,
   })),
   on(UsersActions.activateUserError, (state, payload) => ({
     ...state,
+    isLoading: false,
+    isLoaded: false,
+    error: payload.error,
   }))
 );
 

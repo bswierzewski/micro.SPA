@@ -71,6 +71,6 @@ export const getIsLoadingAddress = createSelector(getAddressState, fromAddress.g
 export const getIsLoadedAddress = createSelector(getAddressState, fromAddress.getIsLoaded);
 
 export const getUserState = createFeatureSelector<fromUser.State>('user');
-export const getusers = createSelector(getUserState, fromUser.getUsers);
+export const getUsers = createSelector(getUserState, fromUser.getUsers);
 export const getIsLoadingUser = createSelector(getUserState, fromUser.getIsLoading);
 export const getIsLoadedUser = createSelector(getUserState, fromUser.getIsLoaded);

@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.store.dispatch(UsersActions.loadUsers());
     this.store
       .pipe(
-        select(fromRoot.getusers),
+        select(fromRoot.getUsers),
         takeWhile((x) => this.isSubscribe)
       )
       .subscribe((users) => {
