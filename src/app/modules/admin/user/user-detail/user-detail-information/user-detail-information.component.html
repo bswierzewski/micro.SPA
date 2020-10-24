@@ -1,1 +1,18 @@
-<p>{{ user$ | async | json }}</p>
+<div fxLayout="column" fxLayoutGap="10px" *ngIf="user$ | async as user">
+  <div fxFlex class="row mat-elevation-z4">
+    <i class="fas fa-address-card fa-fw"></i>
+    <span>{{ user.id }}</span>
+  </div>
+  <div fxFlex class="row mat-elevation-z4">
+    <i class="fas fa-at fa-fw"></i>
+    <span>{{ user.email }}</span>
+  </div>
+  <div fxFlex class="row mat-elevation-z4">
+    <i class="fas fa-calendar-day fa-fw"></i>
+    <span>{{ user.created | date: 'medium' }}</span>
+  </div>
+  <div fxFlex class="row mat-elevation-z4">
+    <i class="fas fa-clock fa-fw"></i>
+    <span>{{ user.lastActive | date: 'medium' }}</span>
+  </div>
+</div>

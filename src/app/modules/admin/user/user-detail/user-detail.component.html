@@ -1,6 +1,6 @@
 <div *ngIf="user$ | async as user" fxLayout="row wrap">
-  <mat-selection-list fxFlex class="menu-list flex-margin mat-elevation-z8" [multiple]="false">
-    <div mat-subheader><i class="fas fa-user fa-fw"></i>User name</div>
+  <mat-selection-list fxFlex fxFlexAlign="start" class="menu-list flex-margin mat-elevation-z8" [multiple]="false">
+    <div class="header"><i class="fas fa-user fa-fw"></i>{{ user.username | uppercase }}</div>
     <mat-list-option
       [routerLink]="['/admin/users/' + user.id + '/informations']"
       [routerLinkActive]="['link-active']"
