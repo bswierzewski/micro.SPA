@@ -37,7 +37,9 @@ export class DeviceDetailComponent implements OnInit, AfterViewInit, OnDestroy {
           takeWhile((x) => this.isSubscribe)
         )
         .subscribe((registrations) => {
-          this.dataSource.data = registrations;
+          if (registrations.length > 0) {
+            this.dataSource.data = registrations;
+          }
         });
       this.store
         .pipe(

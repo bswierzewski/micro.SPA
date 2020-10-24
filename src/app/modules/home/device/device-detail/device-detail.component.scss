@@ -36,7 +36,8 @@
 
   .information-row {
     display: grid;
-    grid-template-columns: [left] auto [space] 1px [right] 1fr;
+    grid-template-columns: [left] 70px [space] 1px [right] 1fr;
+    grid-template-rows: 62px;
 
     i {
       font-size: 2rem;
