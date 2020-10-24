@@ -1,0 +1,14 @@
+@import 'variables';
+
+.menu-list {
+  border-radius: 5px;
+}
+
+.flex-margin {
+  margin: 0 10px;
+}
+
+.link-active {
+  background: $primary;
+  color: white;
+}

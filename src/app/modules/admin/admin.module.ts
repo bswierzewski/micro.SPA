@@ -7,9 +7,11 @@ import { MaterialModule } from '../../material.module';
 import { AdminComponent } from './admin.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { UserDetailSettingsComponent } from './user/user-detail/user-detail-settings/user-detail-settings.component';
+import { UserDetailInformationComponent } from './user/user-detail/user-detail-information/user-detail-information.component';
 
 @NgModule({
-  declarations: [AdminComponent, UserListComponent, UserDetailComponent],
+  declarations: [AdminComponent, UserListComponent, UserDetailComponent, UserDetailSettingsComponent, UserDetailInformationComponent],
   imports: [AdminRoutingModule, SharedModule, NavigationModule, MaterialModule],
   exports: [],
 })
