@@ -6,6 +6,7 @@ export interface State {
   isLoading: boolean;
   isLoaded: boolean;
   users: User[];
+  user: User;
   error: any;
 }
 
@@ -13,6 +14,7 @@ const initialState: State = {
   isLoading: false,
   isLoaded: false,
   users: [],
+  user: null,
   error: null,
 };
 
@@ -37,6 +39,27 @@ export const userReducer = createReducer(
     isLoading: false,
     isLoaded: false,
     users: [],
+    error: payload.error,
+  })),
+  on(UsersActions.loadUser, (state) => ({
+    ...state,
+    isLoading: true,
+    isLoaded: false,
+    user: null,
+    error: null,
+  })),
+  on(UsersActions.loadUserSuccess, (state, payload) => ({
+    ...state,
+    isLoading: false,
+    isLoaded: true,
+    user: payload.user,
+    error: null,
+  })),
+  on(UsersActions.loadUserError, (state, payload) => ({
+    ...state,
+    isLoading: false,
+    isLoaded: false,
+    user: null,
     error: payload.error,
   })),
   on(UsersActions.registerUser, (state, payload) => ({
@@ -76,5 +99,6 @@ export const userReducer = createReducer(
 );
 
 export const getUsers = (state: State) => state.users;
+export const getUser = (state: State) => state.user;
 export const getIsLoading = (state: State) => state.isLoading;
 export const getIsLoaded = (state: State) => state.isLoaded;

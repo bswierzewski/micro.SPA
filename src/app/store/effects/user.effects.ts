@@ -14,6 +14,23 @@ export class UserEffects {
     private alertService: AlertService
   ) {}
 
+  getUser$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(UsersActions.loadUser),
+      mergeMap((action) =>
+        this.userService.getUser(action.id).pipe(
+          map((data) => {
+            return UsersActions.loadUserSuccess({ user: data });
+          }),
+          catchError((error: any) => {
+            this.alertService.error(error);
+            return of(UsersActions.loadUserError({ error }));
+          })
+        )
+      )
+    )
+  );
+
   getUsers$ = createEffect(() =>
     this.action$.pipe(
       ofType(UsersActions.loadUsers),

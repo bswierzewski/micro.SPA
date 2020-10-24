@@ -16,6 +16,10 @@ export class UserService {
     return this.httpClient.get<User[]>(this.userUrl);
   }
 
+  getUser(id: number): Observable<User> {
+    return this.httpClient.get<User>(this.userUrl + `/${id}`);
+  }
+
   activateUser(user: User): Observable<any> {
     return this.httpClient.post(this.userUrl + '/activate', user);
   }
