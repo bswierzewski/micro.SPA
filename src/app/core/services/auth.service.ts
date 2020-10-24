@@ -16,7 +16,9 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
 
-  constructor(private http: HttpClient, private alertService: AlertService, private router: Router) {}
+  constructor(private http: HttpClient, private alertService: AlertService, private router: Router) {
+    this.decodedToken = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+  }
 
   login(user: User): any {
     return this.http.post(this.authUrl + 'login', user).pipe(

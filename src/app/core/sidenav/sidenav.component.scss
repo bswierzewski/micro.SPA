@@ -14,6 +14,11 @@ mat-nav-list {
 .logo {
   background-color: $primary;
   padding: 15px;
+  &-user {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    text-align: center;
+  }
 }
 
 a {
