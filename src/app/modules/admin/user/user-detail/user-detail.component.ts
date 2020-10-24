@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AlertService } from 'src/app/core/services';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/shared/models';
 import * as fromRoot from '../../../../store/app.reducer';
 import { UsersActions } from '../../../../store/actions';
-import { ActivatedRoute } from '@angular/router';
 
 export interface Section {
   name: string;
