@@ -1,5 +1,5 @@
 <div *ngIf="group?.items?.length > 0; else withoutDropdown">
-  <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+  <button mat-raised-button class="button-color" [matMenuTriggerFor]="menu">
     <i [ngClass]="group.icon"></i>
     {{ group.group }}
   </button>
@@ -13,7 +13,7 @@
   </mat-menu>
 </div>
 <ng-template #withoutDropdown>
-  <button mat-raised-button color="primary" [routerLink]="group.path">
+  <button mat-raised-button class="button-color" [routerLink]="group.path">
     <i [ngClass]="group.icon"></i>
     {{ group.group }}
   </button>
