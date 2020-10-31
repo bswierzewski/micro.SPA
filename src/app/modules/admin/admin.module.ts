@@ -9,9 +9,19 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserDetailSettingsComponent } from './user/user-detail/user-detail-settings/user-detail-settings.component';
 import { UserDetailInformationComponent } from './user/user-detail/user-detail-information/user-detail-information.component';
+import { RoleListComponent } from './role/role-list/role-list.component';
+import { RoleDetailComponent } from './role/role-detail/role-detail.component';
 
 @NgModule({
-  declarations: [AdminComponent, UserListComponent, UserDetailComponent, UserDetailSettingsComponent, UserDetailInformationComponent],
+  declarations: [
+    AdminComponent,
+    UserListComponent,
+    UserDetailComponent,
+    UserDetailSettingsComponent,
+    UserDetailInformationComponent,
+    RoleListComponent,
+    RoleDetailComponent,
+  ],
   imports: [AdminRoutingModule, SharedModule, NavigationModule, MaterialModule],
   exports: [],
 })

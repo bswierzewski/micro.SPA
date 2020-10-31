@@ -7,3 +7,4 @@ export { Version } from './Version';
 export { Address } from './Address';
 export { Registration } from './Registration';
 export { User } from './User';
+export { Role } from './Role';

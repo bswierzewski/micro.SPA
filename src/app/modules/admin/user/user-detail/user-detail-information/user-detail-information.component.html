@@ -15,4 +15,12 @@
     <i class="fas fa-clock fa-fw"></i>
     <span>{{ user.lastActive | date: 'medium' }}</span>
   </div>
+  <div fxFlex class="row mat-elevation-z4">
+    <i class="fas fa-tags fa-fw"></i>
+    <span>{{ user.roles }}</span>
+  </div>
+  <div fxFlex class="row mat-elevation-z4">
+    <i class="fas fa-plug fa-fw"></i>
+    <span>{{ user.isActive }}</span>
+  </div>
 </div>

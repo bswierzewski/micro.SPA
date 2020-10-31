@@ -40,6 +40,11 @@ export let MenuGroups: MenuGroup[] = [
         title: 'Users',
         icon: 'fas fa-users',
       },
+      {
+        path: '/admin/roles',
+        title: 'Roles',
+        icon: 'fas fa-user-tag',
+      },
     ] as MenuItem[],
   },
 ];

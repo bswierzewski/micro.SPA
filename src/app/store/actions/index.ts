@@ -6,6 +6,7 @@ import * as KindActions from './kind.actions';
 import * as RegistrationActions from './registration.actions';
 import * as VersionActions from './version.actions';
 import * as UsersActions from './user.actions';
+import * as RoleActions from './role.actions';
 
 export {
   AddressActions,
@@ -16,4 +17,5 @@ export {
   RegistrationActions,
   VersionActions,
   UsersActions,
+  RoleActions,
 };

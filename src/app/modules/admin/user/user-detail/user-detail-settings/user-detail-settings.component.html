@@ -1,1 +1,17 @@
-<p>{{ user$ | async | json }}</p>
+<mat-card>
+  <form fxLayout="column" fxLayoutGap="10px">
+    <mat-form-field appearance="outline">
+      <mat-label>Roles</mat-label>
+      <mat-select multiple>
+        <mat-option *ngFor="let food of ['foods', 'qwe']" [value]="food.value">
+          {{ food }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-slide-toggle class="slide-toogle mat-elevation-z4"> Is active account? </mat-slide-toggle>
+    <div fxLayout="row" fxLayoutGap="10px" class="margin-top">
+      <button fxFlex mat-raised-button color="warn">Return</button>
+      <button fxFlex mat-raised-button color="primary">Submit</button>
+    </div>
+  </form>
+</mat-card>

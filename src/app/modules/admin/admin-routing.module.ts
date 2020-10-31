@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
+import { RoleListComponent } from './role/role-list/role-list.component';
 import { UserDetailInformationComponent } from './user/user-detail/user-detail-information/user-detail-information.component';
 import { UserDetailSettingsComponent } from './user/user-detail/user-detail-settings/user-detail-settings.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
@@ -14,21 +15,13 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {
-        path: '',
-        component: UserListComponent,
-      },
-      {
-        path: 'users',
-        component: UserListComponent,
+        path: 'roles',
+        component: RoleListComponent,
       },
       {
         path: 'users/:id',
         component: UserDetailComponent,
         children: [
-          {
-            path: '',
-            component: UserDetailInformationComponent,
-          },
           {
             path: 'informations',
             component: UserDetailInformationComponent,
@@ -37,7 +30,19 @@ const routes: Routes = [
             path: 'settings',
             component: UserDetailSettingsComponent,
           },
+          {
+            path: '',
+            redirectTo: 'informations',
+          },
         ],
+      },
+      {
+        path: 'users',
+        component: UserListComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'users',
       },
     ],
   },

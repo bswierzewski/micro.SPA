@@ -9,3 +9,4 @@ export { VersionService } from './version.service';
 export { AddressService } from './address.service';
 export { RegistrationService } from './registration.service';
 export { UserService } from './user.service';
+export { RoleService } from './role.service';

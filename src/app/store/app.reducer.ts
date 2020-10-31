@@ -7,6 +7,7 @@ import * as fromVersion from './reducers/version.reducer';
 import * as fromRegistration from './reducers/registration.reducer';
 import * as fromAddress from './reducers/address.reducer';
 import * as fromUser from './reducers/user.reducer';
+import * as fromRole from './reducers/role.reducer';
 
 export interface State {
   kind: fromKind.State;
@@ -17,6 +18,7 @@ export interface State {
   registration: fromRegistration.State;
   address: fromAddress.State;
   user: fromUser.State;
+  role: fromRole.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -28,6 +30,7 @@ export const reducers: ActionReducerMap<State> = {
   registration: fromRegistration.registrationReducer,
   address: fromAddress.addressReducer,
   user: fromUser.userReducer,
+  role: fromRole.roleReducer,
 };
 
 export const getKindState = createFeatureSelector<fromKind.State>('kind');
@@ -75,3 +78,8 @@ export const getUsers = createSelector(getUserState, fromUser.getUsers);
 export const getUser = createSelector(getUserState, fromUser.getUser);
 export const getIsLoadingUser = createSelector(getUserState, fromUser.getIsLoading);
 export const getIsLoadedUser = createSelector(getUserState, fromUser.getIsLoaded);
+
+export const getRoleState = createFeatureSelector<fromRole.State>('role');
+export const getRoles = createSelector(getRoleState, fromRole.getRoles);
+export const getIsLoadingRoles = createSelector(getRoleState, fromRole.getIsLoading);
+export const getIsLoadedRoles = createSelector(getRoleState, fromRole.getIsLoaded);
