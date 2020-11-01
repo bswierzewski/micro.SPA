@@ -1,20 +1,22 @@
-<div *ngIf="group?.items?.length > 0; else withoutDropdown">
-  <button mat-raised-button class="button-color" [matMenuTriggerFor]="menu">
-    <i [ngClass]="group.icon"></i>
-    {{ group.group }}
-  </button>
-  <mat-menu #menu="matMenu">
-    <div *ngFor="let item of group.items">
-      <button mat-menu-item [routerLink]="item.path">
-        <i [ngClass]="[item.icon, 'fa-fw']"></i>
-        {{ item.title }}
-      </button>
-    </div>
-  </mat-menu>
+<div *appHasRole="group?.roles">
+  <div *ngIf="group?.items?.length > 0; else withoutDropdown">
+    <button mat-raised-button class="button-color" [matMenuTriggerFor]="menu">
+      <i [ngClass]="group.icon"></i>
+      {{ group.group }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <div *ngFor="let item of group.items">
+        <button *appHasRole="item?.roles" mat-menu-item [routerLink]="item.path">
+          <i [ngClass]="[item.icon, 'fa-fw']"></i>
+          {{ item.title }}
+        </button>
+      </div>
+    </mat-menu>
+  </div>
+  <ng-template #withoutDropdown>
+    <button mat-raised-button class="button-color" [routerLink]="group.path">
+      <i [ngClass]="group.icon"></i>
+      {{ group.group }}
+    </button>
+  </ng-template>
 </div>
-<ng-template #withoutDropdown>
-  <button mat-raised-button class="button-color" [routerLink]="group.path">
-    <i [ngClass]="group.icon"></i>
-    {{ group.group }}
-  </button>
-</ng-template>

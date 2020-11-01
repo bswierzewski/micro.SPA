@@ -5,4 +5,5 @@ export interface MenuGroup {
   icon: string;
   path?: string;
   items?: MenuItem[];
+  roles?: string[];
 }

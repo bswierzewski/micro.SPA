@@ -1,3 +1,4 @@
+export { AppUser } from './AppUser';
 export { Category } from './Category';
 export { Device } from './Device';
 export { DeviceComponent } from './DeviceComponent';

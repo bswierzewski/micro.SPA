@@ -5,11 +5,13 @@ import { AuthService } from '../services';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthLoadGuardService implements CanLoad {
+export class LoadGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canLoad(): boolean {
-    this.router.navigate(['/login']);
-    return false;
+    if (!this.authService.loggedIn) {
+      this.router.navigateByUrl('/login');
+    }
+    return this.authService.loggedIn;
   }
 }

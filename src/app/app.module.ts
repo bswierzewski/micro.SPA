@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-// Services
-import { ErrorInterceptorProvider } from 'src/app/core/interceptors/error.interceptor';
-import { AlertService, AuthService } from './core/services';
+// Interceptors
+import { ErrorInterceptor, JwtInterceptor } from 'src/app/core/interceptors';
 
 // Store
 import { StoreModule } from '@ngrx/store';
@@ -28,10 +28,6 @@ import {
   RoleEffects,
 } from './store/effects';
 import { reducers } from './store/app.reducer';
-
-export function tokenGetter(): string {
-  return localStorage.getItem('token');
-}
 
 @NgModule({
   declarations: [AppComponent],
@@ -55,7 +51,10 @@ export function tokenGetter(): string {
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
-  providers: [ErrorInterceptorProvider, AuthService, AlertService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

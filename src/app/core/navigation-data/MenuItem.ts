@@ -34,6 +34,7 @@ export let MenuGroups: MenuGroup[] = [
   {
     group: 'Admin',
     icon: 'fas fa-user-cog',
+    roles: ['Admin'],
     items: [
       {
         path: '/admin/users',

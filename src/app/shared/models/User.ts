@@ -7,5 +7,4 @@ export class User {
   created: Date;
   roles: string[];
   lastActive: Date;
-  token: string;
 }

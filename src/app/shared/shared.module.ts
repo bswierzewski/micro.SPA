@@ -5,15 +5,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+// Directives
+import { HasRoleDirective } from '../shared/directives/has-role.directive';
+
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, RouterModule, HttpClientModule, FlexLayoutModule, FormsModule],
-  exports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    HttpClientModule,
-    FlexLayoutModule,
-  ],
+  declarations: [HasRoleDirective],
+  imports: [CommonModule, RouterModule, FormsModule, HttpClientModule, FlexLayoutModule],
+  exports: [CommonModule, RouterModule, FormsModule, HttpClientModule, FlexLayoutModule, HasRoleDirective],
 })
 export class SharedModule {}

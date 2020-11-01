@@ -5,14 +5,15 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { AlertService } from './alert.service';
 import { Observable, ReplaySubject } from 'rxjs';
-import { User } from 'src/app/shared/models';
+import { User, AppUser } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   authUrl = environment.authUrl + 'auth/';
-  private currentUserSource = new ReplaySubject<User>(1);
+  loggedIn: boolean;
+  private currentUserSource = new ReplaySubject<AppUser>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient, private alertService: AlertService, private router: Router) {
@@ -20,7 +21,7 @@ export class AuthService {
   }
 
   getCurrentUser(): void {
-    const user: User = JSON.parse(localStorage.getItem('user'));
+    const user: AppUser = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.setCurrentUser(user);
     }
@@ -38,22 +39,24 @@ export class AuthService {
   }
 
   registerUser(user: User): Observable<any> {
+    this.router.navigateByUrl('/login');
     return this.http.post(this.authUrl + 'register', user);
   }
 
   logout(): void {
+    this.loggedIn = false;
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.alertService.message('Logged out');
     this.router.navigate(['/login']);
   }
 
-  setCurrentUser(user: User): void {
-    user.roles = [];
-    const roles = this.getDecodedToken(user.token).role;
-    Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSource.next(user);
+  setCurrentUser(appUser: AppUser): void {
+    this.loggedIn = !!appUser;
+    const roles = this.getDecodedToken(appUser.token).role;
+    appUser.roles = Array.isArray(roles) ? roles : [roles];
+    localStorage.setItem('user', JSON.stringify(appUser));
+    this.currentUserSource.next(appUser);
   }
 
   getDecodedToken(token: string): any {
