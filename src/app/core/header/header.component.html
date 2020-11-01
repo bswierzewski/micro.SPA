@@ -10,7 +10,7 @@
       <!-- Logout section -->
       <button mat-raised-button color="warn" (click)="onLogout()" routerLink="/login">
         <i class="fas fa-sign-out-alt fa-fw"></i>
-        {{ userName | uppercase }}
+        {{ (authService.currentUser$ | async)?.username | uppercase }}
       </button>
     </div>
   </div>

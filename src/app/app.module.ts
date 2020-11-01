@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { JwtModule } from '@auth0/angular-jwt';
 
 // Services
 import { ErrorInterceptorProvider } from 'src/app/core/interceptors/error.interceptor';
@@ -41,11 +40,6 @@ export function tokenGetter(): string {
     BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-      },
-    }),
     // Modules
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([

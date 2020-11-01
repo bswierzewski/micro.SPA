@@ -11,13 +11,13 @@ import { AuthService } from '../services';
 export class HeaderComponent {
   @Output() sidenavToogle = new EventEmitter();
   menuGroups: MenuGroup[];
-  userName = 'Logout';
 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
     this.menuGroups = MenuGroups;
-    if (authService?.decodedToken?.unique_name) {
-      this.userName = authService?.decodedToken?.unique_name;
-    }
+  }
+
+  log(log: any): void {
+    console.log(log);
   }
 
   onToggleSidenav(): void {

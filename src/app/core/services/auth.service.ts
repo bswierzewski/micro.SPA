@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { AlertService } from './alert.service';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { User } from 'src/app/shared/models';
 
 @Injectable({
@@ -13,20 +12,26 @@ import { User } from 'src/app/shared/models';
 })
 export class AuthService {
   authUrl = environment.authUrl + 'auth/';
-  jwtHelper = new JwtHelperService();
-  decodedToken: any;
+  private currentUserSource = new ReplaySubject<User>(1);
+  currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient, private alertService: AlertService, private router: Router) {
-    this.decodedToken = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+    this.getCurrentUser();
   }
 
-  login(user: User): any {
-    return this.http.post(this.authUrl + 'login', user).pipe(
+  getCurrentUser(): void {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      this.setCurrentUser(user);
+    }
+  }
+
+  login(model: User): any {
+    return this.http.post(this.authUrl + 'login', model).pipe(
       map((response: any) => {
-        const responseUser = response;
-        if (responseUser) {
-          localStorage.setItem('token', responseUser.token);
-          this.decodedToken = this.jwtHelper.decodeToken(responseUser.token);
+        const user = response;
+        if (user) {
+          this.setCurrentUser(user);
         }
       })
     );
@@ -36,14 +41,22 @@ export class AuthService {
     return this.http.post(this.authUrl + 'register', user);
   }
 
-  loggedIn(): any {
-    const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
-  }
-
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.currentUserSource.next(null);
     this.alertService.message('Logged out');
     this.router.navigate(['/login']);
+  }
+
+  setCurrentUser(user: User): void {
+    user.roles = [];
+    const roles = this.getDecodedToken(user.token).role;
+    Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUserSource.next(user);
+  }
+
+  getDecodedToken(token: string): any {
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }

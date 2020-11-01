@@ -1,7 +1,7 @@
 <a routerLink="/">
   <div class="logo" (click)="onClose()">
     <img src="./assets/img/logo-white.svg" />
-    <div *ngIf="userName" class="logo-user">{{ userName | uppercase }}</div>
+    <div class="logo-user">{{ (authService.currentUser$ | async)?.username | uppercase }}</div>
   </div>
 </a>
 <mat-nav-list (click)="onClose()">

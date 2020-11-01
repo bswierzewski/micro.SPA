@@ -13,11 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public authService: AuthService, private alertService: AlertService, private router: Router) {}
 
-  ngOnInit(): void {
-    if (this.authService.loggedIn()) {
-      this.router.navigate(['/dashboard']);
-    }
-  }
+  ngOnInit(): void {}
 
   login(): void {
     this.authService.login(this.model).subscribe(

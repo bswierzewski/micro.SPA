@@ -9,10 +9,6 @@ export class AuthLoadGuardService implements CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canLoad(): boolean {
-    if (this.authService.loggedIn()) {
-      return true;
-    }
-
     this.router.navigate(['/login']);
     return false;
   }

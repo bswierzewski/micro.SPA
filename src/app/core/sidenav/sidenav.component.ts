@@ -11,13 +11,9 @@ import { AuthService } from '../services';
 export class SidenavComponent {
   @Output() closeSidenav = new EventEmitter();
   menuGroups: MenuGroup[];
-  userName: string = null;
 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
     this.menuGroups = MenuGroups;
-    if (authService?.decodedToken?.unique_name) {
-      this.userName = authService?.decodedToken?.unique_name;
-    }
   }
 
   onClose(): void {
