@@ -58,7 +58,6 @@ export class RoleEffects {
         return this.roleService.addRole(action.role).pipe(
           map((data) => {
             this.alertService.success('Role added successfully.');
-            this.router.navigateByUrl('/settings/information/roles');
             return RoleActions.addRoleSuccess();
           }),
           catchError((error: any) => {

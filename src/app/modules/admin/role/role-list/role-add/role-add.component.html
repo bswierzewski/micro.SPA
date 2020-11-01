@@ -1,0 +1,14 @@
+<mat-spinner *ngIf="isAdding$ | async" class="spinner"></mat-spinner>
+<form #f="ngForm" *ngIf="!(isAdding$ | async)">
+  <h2 mat-dialog-title>Add new roles</h2>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" name="name" required [(ngModel)]="model.name" />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout>
+    <button fxFlex mat-raised-button mat-dialog-close color="warn">Cancel</button>
+    <button fxFlex mat-raised-button (click)="onSubmitClick(f)" cdkFocusInitial color="primary">Submit</button>
+  </mat-dialog-actions>
+</form>

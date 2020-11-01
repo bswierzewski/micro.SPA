@@ -16,6 +16,9 @@
           <button mat-mini-fab color="primary" [routerLink]="['/admin/users', element.id]">
             <i class="fas fa-cog fa-fw"></i>
           </button>
+          <button mat-mini-fab color="warn" (click)="onDeleteClick(element.id)">
+            <i class="fas fa-minus fa-fw"></i>
+          </button>
         </td>
       </ng-container>
 

@@ -79,20 +79,25 @@ export const userReducer = createReducer(
     isLoaded: false,
     error: payload.error,
   })),
-  on(UsersActions.activateUser, (state, payload) => ({
+  on(UsersActions.updateUser, (state, payload) => ({
     ...state,
   })),
-  on(UsersActions.activateUserSuccess, (state, payload) => ({
+  on(UsersActions.updateUserSuccess, (state, payload) => ({
     ...state,
-    users: state.users.map((user) => {
-      if (user.id === payload.user.id) {
-        user = { ...user };
-        user.isActive = !user.isActive;
-      }
-      return user;
-    }),
+    error: null,
   })),
-  on(UsersActions.activateUserError, (state, payload) => ({
+  on(UsersActions.updateUserError, (state, payload) => ({
+    ...state,
+    error: payload.error,
+  })),
+  on(UsersActions.deleteUser, (state, payload) => ({
+    ...state,
+  })),
+  on(UsersActions.deleteUserSuccess, (state, payload) => ({
+    ...state,
+    error: null,
+  })),
+  on(UsersActions.deleteUserError, (state, payload) => ({
     ...state,
     error: payload.error,
   }))

@@ -20,7 +20,11 @@ export class UserService {
     return this.httpClient.get<User>(this.userUrl + `/${id}`);
   }
 
-  activateUser(user: User): Observable<any> {
-    return this.httpClient.post(this.userUrl + '/activate', user);
+  updateUser(user: User): Observable<any> {
+    return this.httpClient.put(this.userUrl, user);
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.httpClient.delete(this.userUrl + `/${id}`);
   }
 }

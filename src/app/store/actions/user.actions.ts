@@ -13,6 +13,10 @@ export const registerUser = createAction('[User] Register User', props<{ user: U
 export const registerUserSuccess = createAction('[User] Register User Success');
 export const registerUserError = createAction('[User] Register User Error', props<{ error: any }>());
 
-export const activateUser = createAction('[User] Activate User', props<{ user: User }>());
-export const activateUserSuccess = createAction('[User] Activate User Success', props<{ user: User }>());
-export const activateUserError = createAction('[User] Activate User Error', props<{ error: any }>());
+export const updateUser = createAction('[User] Update User', props<{ user: User }>());
+export const updateUserSuccess = createAction('[User] Update User Success');
+export const updateUserError = createAction('[User] Update User Error', props<{ error: any }>());
+
+export const deleteUser = createAction('[User] Delete User', props<{ id: number }>());
+export const deleteUserSuccess = createAction('[User] Delete User Success');
+export const deleteUserError = createAction('[User] Delete User Error', props<{ error: any }>());

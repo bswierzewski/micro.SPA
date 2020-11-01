@@ -83,3 +83,7 @@ export const getRoleState = createFeatureSelector<fromRole.State>('role');
 export const getRoles = createSelector(getRoleState, fromRole.getRoles);
 export const getIsLoadingRoles = createSelector(getRoleState, fromRole.getIsLoading);
 export const getIsLoadedRoles = createSelector(getRoleState, fromRole.getIsLoaded);
+export const getIsAddingRoles = createSelector(getRoleState, fromRole.getIsAdding);
+export const getIsAddedRoles = createSelector(getRoleState, fromRole.getIsAdded);
+export const getIsDeletingRoles = createSelector(getRoleState, fromRole.getIsDeleting);
+export const getIsDeletedRoles = createSelector(getRoleState, fromRole.getIsLoaded);

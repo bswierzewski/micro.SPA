@@ -49,4 +49,10 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  onDeleteClick(id: number): void {
+    this.alertService.confirm('Really want delete user?', () => {
+      this.store.dispatch(UsersActions.deleteUser({ id }));
+    });
+  }
 }

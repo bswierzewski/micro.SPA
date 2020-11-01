@@ -11,9 +11,13 @@
     <table mat-table [dataSource]="dataSource" class="table-brand-header">
       <!-- Actions Column -->
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef><i class="fas fa-tools"></i></th>
+        <th mat-header-cell *matHeaderCellDef>
+          <button mat-raised-button color="accent" (click)="onAddRole()">
+            New <i class="fas fa-plus icon-space"></i>
+          </button>
+        </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab color="warn">
+          <button mat-mini-fab color="warn" (click)="onRemoveRole(element?.id)">
             <i class="fas fa-minus fa-fw"></i>
           </button>
         </td>
@@ -21,8 +25,8 @@
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element?.id }}
+        <td mat-cell *matCellDef="let element; index as index">
+          {{ paginator?.pageSize * paginator?.pageIndex + index + 1 }}
         </td></ng-container
       >
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { AlertService, AuthService, UserService } from '../../core/services';
 import { UsersActions } from '../actions';
 
@@ -11,7 +12,8 @@ export class UserEffects {
     private userService: UserService,
     private authService: AuthService,
     private action$: Actions,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   getUser$ = createEffect(() =>
@@ -66,18 +68,37 @@ export class UserEffects {
     )
   );
 
-  activateUser$ = createEffect(() =>
+  updateUser$ = createEffect(() =>
     this.action$.pipe(
-      ofType(UsersActions.activateUser),
+      ofType(UsersActions.updateUser),
       mergeMap((action) => {
-        return this.userService.activateUser(action.user).pipe(
-          map((data) => {
-            this.alertService.success('User activated successfully.');
-            return UsersActions.activateUserSuccess({ user: action.user });
+        return this.userService.updateUser(action.user).pipe(
+          switchMap((data) => {
+            this.alertService.success('User updated successfully.');
+            this.router.navigateByUrl('/admin/users/' + `${action.user.id}` + '/informations');
+            return [UsersActions.updateUserSuccess(), UsersActions.loadUser({ id: action.user.id })];
           }),
           catchError((error: any) => {
             this.alertService.error(error);
-            return of(UsersActions.activateUserError({ error }));
+            return of(UsersActions.updateUserError({ error }));
+          })
+        );
+      })
+    )
+  );
+
+  deleteUser$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(UsersActions.deleteUser),
+      mergeMap((action) => {
+        return this.userService.deleteUser(action.id).pipe(
+          switchMap((data) => {
+            this.alertService.success('User deleted successfully.');
+            return [UsersActions.deleteUserSuccess(), UsersActions.loadUsers()];
+          }),
+          catchError((error: any) => {
+            this.alertService.error(error);
+            return of(UsersActions.deleteUserError({ error }));
           })
         );
       })

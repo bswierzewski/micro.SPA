@@ -1,3 +1,4 @@
+<mat-spinner *ngIf="!(user$ | async)" class="spinner"></mat-spinner>
 <div *ngIf="user$ | async as user" fxLayout="row wrap">
   <mat-selection-list fxFlex fxFlexAlign="start" class="menu-list flex-margin mat-elevation-z8" [multiple]="false">
     <div fxLayout="row" class="header"><i class="fas fa-user fa-fw"></i>{{ user.username | uppercase }}</div>
