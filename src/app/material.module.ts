@@ -20,6 +20,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatSlideToggleModule,
+    MatRadioModule,
   ],
   exports: [
     MatCardModule,
@@ -65,6 +67,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatSlideToggleModule,
+    MatRadioModule,
   ],
 })
 export class MaterialModule {}

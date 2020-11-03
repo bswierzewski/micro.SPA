@@ -1,5 +1,3 @@
-@import 'variables';
-
 .panel-header-icon {
   text-align: center;
   i {
@@ -25,7 +23,7 @@
 }
 
 ::ng-deep .tooltip {
-  background-color: $primary;
+  // background-color: $primary;
   font-size: 1rem;
 }
 

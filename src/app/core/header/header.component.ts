@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MenuGroups } from '../navigation-data/MenuItem';
 import { MenuGroup } from '../../shared/components/menu-button/models';
 import { AuthService } from '../services';
+import { ThemeService } from '../../shared/components/theme-picker/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class HeaderComponent {
   @Output() sidenavToogle = new EventEmitter();
   menuGroups: MenuGroup[];
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, public themeService: ThemeService) {
     this.menuGroups = MenuGroups;
   }
 

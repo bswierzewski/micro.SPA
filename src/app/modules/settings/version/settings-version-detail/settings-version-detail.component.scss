@@ -1,5 +1,3 @@
-@import 'variables';
-
 .wrapper {
   display: grid;
   grid-gap: 10px;
@@ -13,8 +11,8 @@
 }
 
 .header {
-  background-color: $primary;
-  color: #ffffff;
+  // background-color: $primary;
+  // color: #ffffff;
   height: auto;
   font-size: 2em;
   text-align: center;
@@ -43,5 +41,5 @@
 }
 
 .disable-file {
-  color: #aaaaaa;
+  // color: #aaaaaa;
 }

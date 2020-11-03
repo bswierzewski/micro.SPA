@@ -10,17 +10,17 @@ export const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./modules/settings/settings.module').then((m) => m.SettingsModule),
-    canLoad: [LoadGuard],
+    // canLoad: [LoadGuard],
   },
   {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
-    canLoad: [LoadGuard],
+    // canLoad: [LoadGuard],
   },
   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
-    canLoad: [LoadGuard],
+    // canLoad: [LoadGuard],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

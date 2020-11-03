@@ -1,5 +1,3 @@
-@import 'variables';
-
 .row {
   padding-left: 0px;
   display: grid;
@@ -8,8 +6,8 @@
 
   i {
     border-radius: 5px 0 0 5px;
-    background-color: $primary;
-    color: white;
+    // background-color: $primary;
+    // color: white;
     padding: 16px;
     margin: 0;
   }
