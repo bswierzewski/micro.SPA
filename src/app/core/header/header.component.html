@@ -5,16 +5,13 @@
     </a>
     <mat-divider fxHide.lt-md [vertical]="true"></mat-divider>
     <span fxHide.lt-md>
-      <!-- {{ (authService.currentUser$ | async)?.username | uppercase }} -->
-      ADMIN
+      {{ (authService.currentUser$ | async)?.username | uppercase }}
     </span>
   </div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end center" fxHide.lt-md>
-    <div fxLayout fxLayoutGap="10px">
-      <app-menu-button *ngFor="let group of menuGroups" [group]="group"></app-menu-button>
-    </div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end center" fxLayoutGap="10px" fxHide.lt-md>
+    <app-menu-button *ngFor="let group of menuGroups" [group]="group"></app-menu-button>
     <!-- Theme section -->
-    <app-theme-picker class="margin-logout"></app-theme-picker>
+    <app-theme-picker></app-theme-picker>
     <!-- Logout section -->
     <button mat-mini-fab color="warn" (click)="onLogout()" routerLink="/login">
       <i class="fas fa-sign-out-alt fa-fw"></i>
