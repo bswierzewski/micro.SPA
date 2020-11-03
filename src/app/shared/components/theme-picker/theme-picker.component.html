@@ -1,13 +1,13 @@
-<button mat-icon-button color="accent" [matMenuTriggerFor]="menu">
+<button mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
   <i class="fas fa-paint-brush"></i>
 </button>
 
 <mat-menu #menu="matMenu">
-  <mat-radio-group>
+  <mat-radio-group [value]="theme | async">
     <button *ngFor="let theme of themes" mat-menu-item (click)="changeTheme(theme.value)">
       <div fxLayout fxLayoutGap="15px">
         <div fxFlex>
-          <mat-radio-button> </mat-radio-button>
+          <mat-radio-button [value]="theme.value"> </mat-radio-button>
           <span> {{ theme.label }}</span>
         </div>
         <div fxFlex fxLayoutAlign="end center">
