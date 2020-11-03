@@ -9,7 +9,7 @@ import { Theme } from './theme.model';
   providedIn: 'root',
 })
 export class ThemeService {
-  private currentTheme = new BehaviorSubject<string>('purple-green');
+  private currentTheme = new BehaviorSubject<string>(null);
   currentTheme$ = this.currentTheme.asObservable();
 
   constructor(private http: HttpClient) {
