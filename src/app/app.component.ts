@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, HostBinding } from '@angular/core';
 import { ThemeService } from './shared/components/theme-picker/theme.service';
 
 @Component({
@@ -7,5 +8,12 @@ import { ThemeService } from './shared/components/theme-picker/theme.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private themeService: ThemeService) {}
+  @HostBinding('class') componentCssClass;
+
+  constructor(public overlayContainer: OverlayContainer, private themeService: ThemeService) {
+    themeService.currentTheme$.subscribe((theme) => {
+      this.overlayContainer.getContainerElement().classList.add(theme);
+      this.componentCssClass = theme;
+    });
+  }
 }

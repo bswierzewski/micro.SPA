@@ -35,40 +35,8 @@ export class ThemeService {
     this.currentTheme.next(theme);
   }
 
-  setTheme(themeToSet): void {
-    this.setStyle('theme', `assets/themes/${themeToSet}.css`);
-    localStorage.setItem('theme', themeToSet);
-    this.currentTheme.next(themeToSet);
+  setTheme(theme): void {
+    localStorage.setItem('theme', theme);
+    this.currentTheme.next(theme);
   }
-
-  setStyle(key: string, href: string): void {
-    getLinkElementForKey(key).setAttribute('href', href);
-  }
-
-  removeStyle(key: string): void {
-    const existingLinkElement = getExistingLinkElementByKey(key);
-    if (existingLinkElement) {
-      document.head.removeChild(existingLinkElement);
-    }
-  }
-}
-
-function getLinkElementForKey(key: string): any {
-  return getExistingLinkElementByKey(key) || createLinkElementWithKey(key);
-}
-
-function getExistingLinkElementByKey(key: string): any {
-  return document.head.querySelector(`link[rel="stylesheet"].${getClassNameForKey(key)}`);
-}
-
-function createLinkElementWithKey(key: string): any {
-  const linkEl = document.createElement('link');
-  linkEl.setAttribute('rel', 'stylesheet');
-  linkEl.classList.add(getClassNameForKey(key));
-  document.head.appendChild(linkEl);
-  return linkEl;
-}
-
-function getClassNameForKey(key: string): any {
-  return `app-${key}`;
 }
