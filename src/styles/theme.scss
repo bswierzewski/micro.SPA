@@ -2,30 +2,119 @@
 @include mat-core();
 
 // Default colors
-$default-primary: mat-palette($mat-teal, 700, 100, 800);
-$default-accent: mat-palette($mat-teal, 700, 100, 800);
-
+$default-primary: mat-palette($mat-teal);
+$default-accent: mat-palette($mat-indigo);
+$default-warn: mat-palette($mat-red);
 $default-theme: mat-light-theme($default-primary, $default-accent);
+
 @include angular-material-theme($default-theme);
 
-// Dark theme
-$dark-primary: mat-palette($mat-indigo);
-$dark-accent: mat-palette($mat-red, A200, A100, A400);
-$dark-warn: mat-palette($mat-deep-orange);
-
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-
 .dark-theme {
+  --primary-50: #e8eaf6;
+  --primary-100: #c5cae9;
+  --primary-200: #9fa8da;
+  --primary-300: #7986cb;
+  --primary-400: #5c6bc0;
+  --primary-500: #3f51b5;
+  --primary-600: #3949ab;
+  --primary-700: #303f9f;
+  --primary-800: #283593;
+  --primary-900: #1a237e;
+  --primary-A100: #8c9eff;
+  --primary-A200: #536dfe;
+  --primary-A400: #3d5afe;
+  --primary-A700: #304ffe;
+
+  --warn-50: #ffebee;
+  --warn-100: #ffcdd2;
+  --warn-200: #ef9a9a;
+  --warn-300: #e57373;
+  --warn-400: #ef5350;
+  --warn-500: #f44336;
+  --warn-600: #e53935;
+  --warn-700: #d32f2f;
+  --warn-800: #c62828;
+  --warn-900: #b71c1c;
+  --warn-A100: #ff8a80;
+  --warn-A200: #ff5252;
+  --warn-A400: #ff1744;
+  --warn-A700: #d50000;
+
+  --accent-50: #e3f2fd;
+  --accent-100: #bbdefb;
+  --accent-200: #90caf9;
+  --accent-300: #64b5f6;
+  --accent-400: #42a5f5;
+  --accent-500: #2196f3;
+  --accent-600: #1e88e5;
+  --accent-700: #1976d2;
+  --accent-800: #1565c0;
+  --accent-900: #0d47a1;
+  --accent-A100: #82b1ff;
+  --accent-A200: #448aff;
+  --accent-A400: #2979ff;
+  --accent-A700: #2962ff;
+
+  // Dark theme
+  $dark-primary: mat-palette($mat-indigo);
+  $dark-accent: mat-palette($mat-blue);
+  $dark-warn: mat-palette($mat-deep-orange);
+
+  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   @include angular-material-theme($dark-theme);
 }
 
-// Light theme
-$light-primary: mat-palette($mat-grey, 200, 500, 300);
-$light-accent: mat-palette($mat-brown, 200);
-$light-warn: mat-palette($mat-deep-orange, 200);
-
-$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
-
 .light-theme {
+  --primary-50: #e8eaf6;
+  --primary-100: #c5cae9;
+  --primary-200: #9fa8da;
+  --primary-300: #7986cb;
+  --primary-400: #5c6bc0;
+  --primary-500: #3f51b5;
+  --primary-600: #3949ab;
+  --primary-700: #303f9f;
+  --primary-800: #283593;
+  --primary-900: #1a237e;
+  --primary-A100: #8c9eff;
+  --primary-A200: #536dfe;
+  --primary-A400: #3d5afe;
+  --primary-A700: #304ffe;
+
+  --warn-50: #ffebee;
+  --warn-100: #ffcdd2;
+  --warn-200: #ef9a9a;
+  --warn-300: #e57373;
+  --warn-400: #ef5350;
+  --warn-500: #f44336;
+  --warn-600: #e53935;
+  --warn-700: #d32f2f;
+  --warn-800: #c62828;
+  --warn-900: #b71c1c;
+  --warn-A100: #ff8a80;
+  --warn-A200: #ff5252;
+  --warn-A400: #ff1744;
+  --warn-A700: #d50000;
+
+  --accent-50: #e3f2fd;
+  --accent-100: #bbdefb;
+  --accent-200: #90caf9;
+  --accent-300: #64b5f6;
+  --accent-400: #42a5f5;
+  --accent-500: #2196f3;
+  --accent-600: #1e88e5;
+  --accent-700: #1976d2;
+  --accent-800: #1565c0;
+  --accent-900: #0d47a1;
+  --accent-A100: #82b1ff;
+  --accent-A200: #448aff;
+  --accent-A400: #2979ff;
+  --accent-A700: #2962ff;
+
+  // Light theme
+  $light-primary: mat-palette($mat-indigo);
+  $light-accent: mat-palette($mat-blue);
+  $light-warn: mat-palette($mat-deep-orange);
+
+  $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
   @include angular-material-theme($light-theme);
 }

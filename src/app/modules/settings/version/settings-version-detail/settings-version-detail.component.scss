@@ -11,8 +11,8 @@
 }
 
 .header {
-  // background-color: $primary;
-  // color: #ffffff;
+  background-color: var(--primary-500);
+  color: var(--text-color);
   height: auto;
   font-size: 2em;
   text-align: center;
@@ -38,8 +38,4 @@
       flex: 1;
     }
   }
-}
-
-.disable-file {
-  // color: #aaaaaa;
 }
