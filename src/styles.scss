@@ -15,7 +15,7 @@ body {
 
 .table-brand-header {
   th {
-    background-color: var(--primary-500);
+    background-color: var(--primary-color);
     color: var(--text-color);
   }
 }
@@ -66,5 +66,5 @@ body {
 
 .link-active {
   opacity: 1 !important;
-  background-color: var(--primary-800);
+  background-color: var(--primary-color);
 }
