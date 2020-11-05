@@ -5,7 +5,7 @@
   <mat-card fxFlex class="mat-elevation-z8">
     <div fxLayout="row wrap" class="logo-wrapper" fxLayoutAlign="center center">
       <img fxFlex="1 1 auto" class="avatar" src="./assets/img/avatar.svg" />
-      <img fxFlex="1 1 auto" class="logo" src="./assets/img/logo-black.svg" />
+      <img fxFlex="1 1 auto" class="logo" src="./assets/img/logo.svg" />
     </div>
     <mat-spinner class="spinner" *ngIf="isLoading | async"></mat-spinner>
     <form *ngIf="!(isLoading | async)" #f="ngForm" (ngSubmit)="onSubmit()">
