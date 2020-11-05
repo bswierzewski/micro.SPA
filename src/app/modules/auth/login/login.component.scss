@@ -1,6 +1,5 @@
 .container {
   height: 100%;
-  background-color: whitesmoke;
 }
 
 mat-form-field {
@@ -17,12 +16,9 @@ mat-card {
 }
 
 .logo-wrapper {
-  .logo {
-    width: 100%;
-    opacity: 0.9;
-    max-height: 150px;
-  }
+  margin: 10px;
   .avatar {
+    margin-bottom: 10px;
     max-height: 90px;
   }
 }
