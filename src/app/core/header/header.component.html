@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
   <div fxLayout fxLayoutGap="10px">
     <a routerLink="/">
-      <svg viewBox="0 0 404.87 85.16" x="0px" y="0px" height="36px" style="fill: var(--text-color)">
+      <svg viewBox="0 0 404.87 85.16" x="0px" y="0px" height="36px" style="fill: #ffffff">
         <use xlink:href="./assets/img/logo.svg#micro" />
       </svg>
     </a>
     <mat-divider fxHide.lt-md [vertical]="true"></mat-divider>
-    <span fxHide.lt-md>
+    <span fxFlexAlign="center" fxHide.lt-md>
       {{ (authService.currentUser$ | async)?.username | uppercase }}
     </span>
   </div>

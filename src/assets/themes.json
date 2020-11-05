@@ -1,10 +1,10 @@
 [
   {
-    "backgroundColor": "#fff",
-    "buttonColor": "#ffc107",
-    "headingColor": "#673ab7",
-    "label": "Default theme",
-    "value": "default-theme"
+    "backgroundColor": "#303030",
+    "buttonColor": "#4caf50",
+    "headingColor": "#9c27b0",
+    "label": "Light theme",
+    "value": "light-theme"
   },
   {
     "backgroundColor": "#303030",
@@ -12,12 +12,5 @@
     "headingColor": "#e91e63",
     "label": "Dark theme",
     "value": "dark-theme"
-  },
-  {
-    "backgroundColor": "#303030",
-    "buttonColor": "#4caf50",
-    "headingColor": "#9c27b0",
-    "label": "Light theme",
-    "value": "light-theme"
   }
 ]
