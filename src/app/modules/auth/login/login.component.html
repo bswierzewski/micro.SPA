@@ -30,13 +30,15 @@
         <i matSuffix class="fas fa-lock fa-fw icon-suffix"></i>
       </mat-form-field>
 
-      <div class="button-border-radius" fxLayout="row" fxLayoutGap="10px">
-        <button type="button" fxFlex mat-raised-button routerLink="/registration" color="warn">
-          Sign up <i class="fas fa-user-plus fa-fw"></i>
-        </button>
+      <div class="button-border-radius" fxLayout="column" fxLayoutGap="10px">
         <button [disabled]="f.invalid" type="submit" fxFlex mat-raised-button color="primary" routerLink="/login">
           Login <i class="fas fa-key fa-fw"></i>
         </button>
+        <a class="registration-link" fxFlex fxLayoutAlign="center" routerLink="/registration">
+          <i class="fas fa-angle-double-left fa-fw"></i>
+          Not a member? Sign up now
+          <i class="fas fa-angle-double-right fa-fw"></i>
+        </a>
       </div>
     </form>
   </mat-card>

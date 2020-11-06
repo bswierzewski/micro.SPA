@@ -5,7 +5,7 @@
 .dark-theme {
   // Dark theme
   $dark-primary: mat-palette($mat-deep-purple);
-  $dark-accent: mat-palette($mat-blue);
+  $dark-accent: mat-palette($mat-purple);
   $dark-warn: mat-palette($mat-red);
 
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);

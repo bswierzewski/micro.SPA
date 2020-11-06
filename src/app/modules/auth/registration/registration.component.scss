@@ -36,3 +36,13 @@ mat-card {
     border-radius: 25px;
   }
 }
+
+.login-link {
+  text-align: center;
+  color: var(--hint-text-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--text-color);
+  }
+}
