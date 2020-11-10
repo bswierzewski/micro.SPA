@@ -6,3 +6,7 @@
 .margin-top {
   margin-top: 30px;
 }
+
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: var(--text-color) !important;
+}
