@@ -16,7 +16,7 @@ body {
 .table-brand-header {
   th {
     background-color: var(--primary-color);
-    color: var(--text-color);
+    color: #ffffff !important;
   }
 }
 
@@ -62,13 +62,4 @@ body {
       padding: 10px;
     }
   }
-}
-
-.link-active {
-  opacity: 1;
-  background-color: var(--primary-color-600);
-}
-
-.mat-selected:not(.mat-option-disabled) {
-  color: var(--text-color);
 }

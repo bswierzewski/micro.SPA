@@ -1,3 +1,10 @@
 .tab-icon {
   padding-right: 8px;
 }
+
+.link-active,
+.link-active:focus,
+.link-active:hover {
+  opacity: 1;
+  background-color: var(--focused-button-color);
+}

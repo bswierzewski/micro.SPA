@@ -13,15 +13,16 @@
   }
 }
 
-.link-active {
-  background: var(--warn-500);
-  color: #ffffff;
-}
-
 .header {
   border-radius: 5px 5px 0 0;
   margin-top: -8px;
   padding: 15px;
   background-color: var(--primary-color);
   color: #ffffff;
+}
+
+.link-active,
+.link-active:focus,
+.link-active:hover {
+  background-color: var(--focused-button-color);
 }
