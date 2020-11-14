@@ -38,7 +38,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.isSubscribe = false;
   }
 
-  onSubmit(): void {
+  onSubmit(form: NgForm): void {
+    if (form.invalid) {
+      return;
+    }
     this.store.dispatch(UsersActions.registerUser({ user: Object.assign({}, this.model) }));
   }
 }

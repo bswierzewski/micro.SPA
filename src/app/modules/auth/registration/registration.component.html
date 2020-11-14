@@ -10,7 +10,7 @@
       </svg>
     </div>
     <mat-spinner class="spinner" *ngIf="isLoading | async"></mat-spinner>
-    <form *ngIf="!(isLoading | async)" #f="ngForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="!(isLoading | async)" #f="ngForm" (ngSubmit)="onSubmit(f)">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Username" [(ngModel)]="model.username" name="username" required />
@@ -30,7 +30,7 @@
       </mat-form-field>
 
       <div class="button-border-radius" fxLayout="column" fxLayoutGap="10px">
-        <button [disabled]="f.invalid" fxFlex mat-raised-button color="primary" type="submit">
+        <button fxFlex mat-raised-button color="primary" type="submit">
           Sign up <i class="fas fa-user-plus fa-fw"></i>
         </button>
         <a class="login-link" fxFlex fxLayoutAlign="center" routerLink="/login">
