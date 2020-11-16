@@ -10,35 +10,48 @@
           <use xlink:href="./assets/img/logo.svg#micro" />
         </svg>
       </div>
-      <mat-form-field appearance="outline">
-        <mat-label>Username/Email</mat-label>
-        <input
-          matInput
-          required
-          type="text"
-          class="input"
-          placeholder="Username/Email"
-          [(ngModel)]="model.username"
-          name="username"
-        />
-        <i matSuffix class="fas fa-sign-in-alt fa-fw icon-suffix"></i>
-      </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput required type="password" placeholder="Password" [(ngModel)]="model.password" name="password" />
-        <i matSuffix class="fas fa-lock fa-fw icon-suffix"></i>
-      </mat-form-field>
+      <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+      <div *ngIf="!isLoading">
+        <mat-form-field appearance="outline">
+          <mat-label>Username/Email</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            class="input"
+            placeholder="Username/Email"
+            [(ngModel)]="model.username"
+            name="username"
+            autocomplete="username"
+          />
+          <i matSuffix class="fas fa-sign-in-alt fa-fw icon-suffix"></i>
+        </mat-form-field>
 
-      <div class="button-border-radius" fxLayout="column" fxLayoutGap="10px">
-        <button type="submit" fxFlex mat-raised-button color="primary" routerLink="/login">
-          Login <i class="fas fa-key fa-fw"></i>
-        </button>
-        <a class="registration-link" fxFlex fxLayoutAlign="center" routerLink="/registration">
-          <i class="fas fa-angle-double-left fa-fw"></i>
-          Not a member? Sign up now
-          <i class="fas fa-angle-double-right fa-fw"></i>
-        </a>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            required
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="model.password"
+            name="password"
+            autocomplete="current-password"
+          />
+          <i matSuffix class="fas fa-lock fa-fw icon-suffix"></i>
+        </mat-form-field>
+
+        <div class="button-border-radius" fxLayout="column" fxLayoutGap="10px">
+          <button type="submit" fxFlex mat-raised-button color="primary" routerLink="/login">
+            Login <i class="fas fa-key fa-fw"></i>
+          </button>
+          <a class="registration-link" fxFlex fxLayoutAlign="center" routerLink="/registration">
+            <i class="fas fa-angle-double-left fa-fw"></i>
+            Not a member? Sign up now
+            <i class="fas fa-angle-double-right fa-fw"></i>
+          </a>
+        </div>
       </div>
     </form>
   </mat-card>

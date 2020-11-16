@@ -11,6 +11,7 @@ import { User } from 'src/app/shared/models';
 })
 export class LoginComponent implements OnInit {
   model = new User();
+  isLoading = false;
 
   constructor(public authService: AuthService, private alertService: AlertService, private router: Router) {}
 
@@ -21,12 +22,16 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     this.authService.login(this.model).subscribe(
       (next) => {
         this.alertService.success('Logged in successfully');
+        this.isLoading = false;
       },
       (error) => {
         this.alertService.error(error);
+        this.isLoading = false;
       },
       () => {
         this.router.navigate(['/home']);
