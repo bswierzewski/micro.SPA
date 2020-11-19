@@ -3,11 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoadGuard, AdminGuard } from './core/guards';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {
-    path: 'login',
-    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
-  },
   {
     path: 'settings',
     loadChildren: () => import('./modules/settings/settings.module').then((m) => m.SettingsModule),
@@ -22,6 +17,10 @@ export const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
     canLoad: [LoadGuard],
+  },
+  {
+    path: '',
+    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
