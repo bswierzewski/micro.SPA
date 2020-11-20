@@ -12,7 +12,7 @@ import { VersionActions } from '../../../../store/actions';
   styleUrls: ['./settings-version-list.component.scss'],
 })
 export class SettingsVersionListComponent implements OnInit {
-  autoColumns: string[] = ['id', 'created', 'name', 'major', 'minor', 'patch', 'kind', 'component', 'fileData'];
+  autoColumns: string[] = ['created', 'name', 'major', 'minor', 'patch', 'kind', 'component', 'fileData'];
   displayedColumns: string[] = ['action', ...this.autoColumns];
   versions$: Observable<Version[]>;
   isLoading$: Observable<boolean>;
