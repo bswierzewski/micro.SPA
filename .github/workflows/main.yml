@@ -20,7 +20,7 @@ jobs:
       - name: Run build Angular
         if: success()
         run: |
-          docker build --tag swierzewskibartosz/angular_spa:arm --build-arg IMAGE=node:15.8.0-alpine3.10 .
-          docker build --tag swierzewskibartosz/angular_spa:amd --build-arg IMAGE=arm32v7/node:15.8.0-alpine3.10 .
+          docker build --tag swierzewskibartosz/angular_spa:arm --build-arg IMAGE=arm32v7/node:15.8.0-alpine3.10 .
+          docker build --tag swierzewskibartosz/angular_spa:amd --build-arg IMAGE=node:15.8.0-alpine3.10 .
           docker push swierzewskibartosz/angular_spa:arm
           docker push swierzewskibartosz/angular_spa:amd
